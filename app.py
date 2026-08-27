@@ -4,7 +4,7 @@ from zoneinfo import ZoneInfo
 from core.db import init_db,get_matches,get_match,get_stats,get_players,get_diagnostics,usage_today
 from core.football import collect,enrich
 from core.engine import build_pre_match_analysis
-from core.normalizer import METRICS,manaos_time
+from core.normalizer import METRICS,manaos_time,status_label,diagnostic_status_label
 st.set_page_config(page_title='Arena 360 • Futebol',page_icon='⚽',layout='centered',initial_sidebar_state='collapsed');init_db();MANAUS=ZoneInfo('America/Manaus')
 st.markdown('''<style>.stApp{background:#060918}.block-container{max-width:760px;padding-top:1rem;padding-bottom:4rem}.brand{display:flex;gap:12px;align-items:center;margin-bottom:20px}.mark{width:46px;height:46px;border-radius:14px;background:#b7ff27;color:#081000;display:grid;place-items:center;font-size:25px}.eyebrow{font-size:11px;letter-spacing:2px;color:#b7ff27;font-weight:800}.brandname{font-size:21px;font-weight:850}.hero{font-size:31px;font-weight:850;line-height:1.08;margin:18px 0 10px}.hero span{color:#b7ff27}.small{font-size:12px;color:#858da7}.section{display:flex;justify-content:space-between;align-items:end;margin:26px 0 10px;font-weight:800;font-size:18px}.card{border:1px solid #20263b;border-radius:20px;padding:16px;margin:10px 0;background:#0c1021}.live{border-color:#a7ed37}.score{font-size:26px;font-weight:900}</style>''',unsafe_allow_html=True)
 st.markdown('<div class="brand"><div class="mark">🏟️</div><div><div class="eyebrow">PLACAR</div><div class="brandname">Arena 360 • Futebol</div></div></div>',unsafe_allow_html=True);st.markdown('<div class="hero">Toda a emoção, <span>em um só lugar.</span></div>',unsafe_allow_html=True);st.caption('Arquitetura: fontes → normalização → identidade canônica → banco → cache → enriquecimento → análise. A análise não consulta APIs.')
@@ -21,7 +21,7 @@ st.markdown(f'<div class="section"><span>Partidas</span><span class="small">{len
 if not matches:st.info('Nenhuma partida persistida ainda. Use “Coleta de dados”.')
 for m in matches:
     if st.button(f'{m["home_name"]}  {m.get("home_score") if m.get("home_score") is not None else "·"} × {m.get("away_score") if m.get("away_score") is not None else "·"}  {m["away_name"]}',key=f'm_{m["id"]}',use_container_width=True):st.session_state['selected']=m['id']
-    st.caption(f'{m.get("competition") or "Futebol"} • {manaos_time(m.get("start_time"))} • {m.get("status")} • fonte(s): {m.get("source")}')
+    st.caption(f'{m.get("competition") or "Futebol"} • {manaos_time(m.get("start_time"))} • {status_label(m.get("status"))} • fonte(s): {m.get("source")}')
 selected=st.session_state.get('selected')
 if selected:
     m=get_match(selected);st.divider();st.subheader(f'📊 {m["home_name"]} × {m["away_name"]}');stats=get_stats(selected)
@@ -52,7 +52,8 @@ with st.expander('🩺 Diagnóstico do sistema'):
     if not ds:st.info('Nenhum diagnóstico registrado ainda.')
     else:
         import pandas as pd
-        st.dataframe(pd.DataFrame(ds)[['created_at','stage','source','status','message']],hide_index=True,use_container_width=True)
+        ddf=pd.DataFrame(ds)[['created_at','stage','source','status','message']].copy();ddf['status']=ddf['status'].map(diagnostic_status_label)
+        st.dataframe(ddf,hide_index=True,use_container_width=True)
     st.caption('O diagnóstico diferencia chave ausente, erro de fonte, sucesso de coleta e sucesso de enriquecimento.')
 with st.expander('⚙️ Enriquecimento em lote'):
     choices=[m for m in matches if m['status'] in ('FINISHED','LIVE','PAUSED')];labels={f'{m["home_name"]} × {m["away_name"]} • {manaos_time(m["start_time"])}':m for m in choices};picked=st.multiselect('Selecione até 5 partidas',list(labels),max_selections=5)
