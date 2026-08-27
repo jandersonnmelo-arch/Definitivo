@@ -18,7 +18,7 @@ FIXED_COMPETITIONS = [
     ("🇪🇸 Primera División", ["primera division", "la liga", "laliga"]),
     ("🇫🇷 Ligue 1", ["ligue 1"]),
     ("🇵🇹 Primeira Liga", ["primeira liga", "liga portugal"]),
-    ("🇮🇹 Serie A", ["serie a"]),
+    ("🇮🇹 Serie A", ["serie a", "serie a italy", "italian serie a", "serie a italiana", "serie a enilive"]),
     ("🏴 Premier League", ["premier league"]),
     ("🇪🇺 European Championship", ["european championship", "uefa european championship", "euro"]),
 ]
@@ -45,6 +45,19 @@ def _norm(value):
     return " ".join(str(value or "").strip().lower().replace("-", " ").split())
 
 
+def _matches_alias(actual, alias):
+    """Matching conservador para evitar que nomes genéricos como 'serie a' cruzem ligas."""
+    a = _norm(actual)
+    n = _norm(alias)
+    if not a or not n:
+        return False
+    # Evita o antigo falso positivo: 'serie a' é substring de
+    # 'brasileirao serie a'. Para nomes curtos/genéricos, exige igualdade.
+    if n in {"serie a", "serie b", "paulista", "carioca", "gaucho", "mineiro"}:
+        return a == n
+    return a == n or n in a
+
+
 def competition_matches(actual, selected):
     """Compara o nome retornado pela fonte com os nomes canônicos selecionados."""
     a = _norm(actual)
@@ -54,9 +67,9 @@ def competition_matches(actual, selected):
         if label not in selected:
             continue
         for alias in aliases:
-            n = _norm(alias)
-            if a == n or n in a or a in n:
-                if label == "🇮🇹 Serie A" and ("serie b" in a or "serie c" in a):
+            if _matches_alias(a, alias):
+                # Proteções explícitas entre séries nacionais/italianas.
+                if label == "🇮🇹 Serie A" and any(x in a for x in ("serie b", "serie c")):
                     continue
                 if label == "🇧🇷 Campeonato Brasileiro Série A" and "serie b" in a:
                     continue
@@ -71,9 +84,8 @@ def canonical_competition_label(actual):
     a = _norm(actual)
     for label, aliases in FIXED_COMPETITIONS + OPTIONAL_COMPETITIONS:
         for alias in aliases:
-            n = _norm(alias)
-            if a == n or n in a or a in n:
-                if label == "🇮🇹 Serie A" and ("serie b" in a or "serie c" in a):
+            if _matches_alias(a, alias):
+                if label == "🇮🇹 Serie A" and any(x in a for x in ("serie b", "serie c")):
                     continue
                 if label == "🇧🇷 Campeonato Brasileiro Série A" and "serie b" in a:
                     continue
