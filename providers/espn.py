@@ -20,13 +20,23 @@ class ESPNProvider(FootballProvider):
                 c=(x.get('competitions') or [{}])[0]; teams=c.get('competitors') or []
                 home=next((t for t in teams if t.get('homeAway')=='home'),teams[0] if teams else {})
                 away=next((t for t in teams if t.get('homeAway')=='away'),teams[1] if len(teams)>1 else {})
-                st=x.get('status',{});typ=st.get('type',{})
-                out.append({'id':str(x.get('id')),'provider_match_id':str(x.get('id')),'sport':'Futebol','competition':comp,'season':str((x.get('season') or {}).get('year') or ''),'start_time':x.get('date'),'status':normalize_status(typ.get('name') or typ.get('state')),'minute':None,'home_id':(home.get('team') or {}).get('id'),'home_name':(home.get('team') or {}).get('displayName') or home.get('displayName',''),'home_short':(home.get('team') or {}).get('abbreviation'),'away_id':(away.get('team') or {}).get('id'),'away_name':(away.get('team') or {}).get('displayName') or away.get('displayName',''),'away_short':(away.get('team') or {}).get('abbreviation'),'home_score':self._score(home),'away_score':self._score(away),'source':self.name})
+                st=x.get('status') or {}; typ=st.get('type') or {}
+                status=normalize_status(typ.get('name') or typ.get('state') or typ.get('description'),typ.get('completed'))
+                out.append({'id':str(x.get('id')),'provider_match_id':str(x.get('id')),'sport':'Futebol','competition':comp,'season':str((x.get('season') or {}).get('year') or ''),'start_time':x.get('date'),'status':status,'minute':self._minute(st,status),'home_id':(home.get('team') or {}).get('id'),'home_name':(home.get('team') or {}).get('displayName') or home.get('displayName',''),'home_short':(home.get('team') or {}).get('abbreviation'),'away_id':(away.get('team') or {}).get('id'),'away_name':(away.get('team') or {}).get('displayName') or away.get('displayName',''),'away_short':(away.get('team') or {}).get('abbreviation'),'home_score':self._score(home) if status in ('LIVE','PAUSED','FINISHED') else None,'away_score':self._score(away) if status in ('LIVE','PAUSED','FINISHED') else None,'source':self.name})
             cur=cur.fromordinal(cur.toordinal()+1)
         return out
     @staticmethod
     def _score(t):
         try:return int(t.get('score')) if t.get('score') is not None else None
+        except Exception:return None
+    @staticmethod
+    def _minute(status_obj,status):
+        if status not in ('LIVE','PAUSED'): return None
+        clock=status_obj.get('displayClock')
+        if clock:
+            try:return int(float(str(clock).split(':')[0]))
+            except Exception:pass
+        try:return int(status_obj.get('period')) if status_obj.get('period') is not None else None
         except Exception:return None
     def match_details(self,match_id):
         data=get_json(f'{BASE}/{self.league}/summary',{'event':match_id},provider='ESPN');stats=[];players=[]
@@ -53,8 +63,7 @@ class ESPNProvider(FootballProvider):
                         try:num=float(str(val).replace('%',''))
                         except Exception:continue
                         players.append({'id':int(pid),'team_id':tid,'name':ath.get('displayName') or ath.get('fullName') or 'Sem nome','position':None,'_stat':{'metric':normalize_metric(labels[i]),'value':num}})
-        player_stats=[];clean_players=[]
-        seen=set()
+        player_stats=[];clean_players=[];seen=set()
         for p in players:
             if '_stat' in p:player_stats.append({'player_id':p['id'],'metric':p['_stat']['metric'],'value':p['_stat']['value'],'source':self.name})
             else:
