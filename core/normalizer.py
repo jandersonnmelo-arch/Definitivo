@@ -11,6 +11,26 @@ METRICS = {
     "goal_kicks":"Tiros de meta"
 }
 
+STATUS_LABELS = {
+    "SCHEDULED": "AGENDADO",
+    "LIVE": "EM ANDAMENTO",
+    "PAUSED": "INTERVALO",
+    "FINISHED": "FINALIZADO",
+    "POSTPONED": "ADIADO",
+    "SUSPENDED": "SUSPENSO",
+    "CANCELLED": "CANCELADO"
+}
+
+DIAGNOSTIC_STATUS_LABELS = {"OK":"OK", "ERROR":"ERRO", "WARNING":"AVISO"}
+
+
+def status_label(status):
+    return STATUS_LABELS.get(str(status or "").upper(), str(status or "—"))
+
+
+def diagnostic_status_label(status):
+    return DIAGNOSTIC_STATUS_LABELS.get(str(status or "").upper(), str(status or "—"))
+
 
 def clean_number(value):
     if value is None: return None
@@ -29,12 +49,7 @@ def manaos_time(iso):
 
 
 def normalize_status(status, completed=None):
-    """Map provider-specific states to one canonical football status.
-
-    A provider's explicit `completed` flag wins over a generic state name.
-    This prevents a future/scheduled event that happens to carry a score-like
-    field from being classified as FINISHED.
-    """
+    """Map provider-specific states to one canonical football status."""
     s=(status or '').upper().strip()
     if completed is True: return 'FINISHED'
     if s in {'LIVE','IN_PLAY','1H','2H','ET','P','INPROGRESS','IN_PROGRESS'}: return 'LIVE'
