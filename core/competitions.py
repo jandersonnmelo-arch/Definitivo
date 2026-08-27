@@ -56,7 +56,6 @@ def competition_matches(actual, selected):
         for alias in aliases:
             n = _norm(alias)
             if a == n or n in a or a in n:
-                # Evita que 'Serie A' case também com outras séries.
                 if label == "🇮🇹 Serie A" and ("serie b" in a or "serie c" in a):
                     continue
                 if label == "🇧🇷 Campeonato Brasileiro Série A" and "serie b" in a:
@@ -65,6 +64,23 @@ def competition_matches(actual, selected):
                     continue
                 return True
     return False
+
+
+def canonical_competition_label(actual):
+    """Retorna o nome amigável do catálogo para exibição, preservando nomes desconhecidos."""
+    a = _norm(actual)
+    for label, aliases in FIXED_COMPETITIONS + OPTIONAL_COMPETITIONS:
+        for alias in aliases:
+            n = _norm(alias)
+            if a == n or n in a or a in n:
+                if label == "🇮🇹 Serie A" and ("serie b" in a or "serie c" in a):
+                    continue
+                if label == "🇧🇷 Campeonato Brasileiro Série A" and "serie b" in a:
+                    continue
+                if label == "🇧🇷 Campeonato Brasileiro Série B" and "serie a" in a:
+                    continue
+                return label
+    return actual or "Futebol"
 
 
 def selected_labels(extra=None):
