@@ -1,38 +1,37 @@
 from providers.football_data import FootballDataProvider
+from providers.espn import ESPNProvider
+from providers.fotmob import FotMobProvider
 from providers.api_football import ApiFootballProvider
-from core.repository import canonical_id,upsert_match,upsert_match_stats,upsert_players,upsert_player_stats,add_diagnostic
-
+from core.repository import canonical_id,upsert_match,upsert_match_stats,upsert_players,upsert_player_stats,add_diagnostic,get_provider_id
 MAX_ENRICH_BATCH=5
-
-def providers():return [FootballDataProvider(),ApiFootballProvider()]
-
+def providers():return [FootballDataProvider(),ESPNProvider(),FotMobProvider(),ApiFootballProvider()]
+def collection_providers():return [FootballDataProvider(),ESPNProvider()]
 def collect(date_from,date_to,competition=None):
     result=[]
-    for p in providers():
-        if not p.available():
-            add_diagnostic('coleta','INFO',f'{p.name}: chave não configurada',p.name);continue
+    for p in collection_providers():
         try:
             rows=p.matches(date_from,date_to,competition)
-            for m in rows:
-                m['id']=canonical_id(p.name,m['provider_match_id'])
-                upsert_match(m);result.append(m)
+            for m in rows:m['id']=canonical_id(m);upsert_match(m);result.append(m)
             add_diagnostic('coleta','OK',f'{p.name}: {len(rows)} partidas recebidas e persistidas',p.name)
         except Exception as e:add_diagnostic('coleta','ERROR',f'{p.name}: {e}',p.name)
     return result
-
 def enrich(matches):
     if len(matches)>MAX_ENRICH_BATCH:raise ValueError('O enriquecimento é limitado a 5 partidas por operação.')
-    by_source={}
-    for m in matches:by_source.setdefault(m.get('source'),[]).append(m)
     total=0
-    for p in providers():
-        for m in by_source.get(p.name,[]):
+    for m in matches:
+        for p in providers():
             if not p.available():continue
             try:
-                d=p.match_details(m['provider_match_id'])
-                upsert_match_stats(m['id'],d.get('stats',[]))
-                upsert_players(d.get('players',[]));upsert_player_stats(m['id'],d.get('player_stats',[]))
-                total+=len(d.get('stats',[]))+len(d.get('player_stats',[]))
-                add_diagnostic('enriquecimento','OK',f'{p.name}: {len(d.get("stats",[]))} estatísticas e {len(d.get("player_stats",[]))} registros de jogador',p.name,m['id'])
+                if p.name=='API-Football':pid=p.resolve_match_id(m)
+                elif p.name=='FotMob':pid=m
+                else:pid=get_provider_id(m['id'],p.name)
+                if not pid:continue
+                d=p.match_details(pid)
+                for row in d.get('stats',[]):row['source']=p.name
+                for row in d.get('players',[]):row['source']=p.name;row['match_id']=m['id']
+                for row in d.get('player_stats',[]):row['source']=p.name
+                upsert_match_stats(m['id'],d.get('stats',[]));upsert_players(d.get('players',[]));upsert_player_stats(m['id'],d.get('player_stats',[]))
+                count=len(d.get('stats',[]))+len(d.get('player_stats',[]));total+=count
+                add_diagnostic('enriquecimento','OK',f'{p.name}: {count} registros processados',p.name,m['id'])
             except Exception as e:add_diagnostic('enriquecimento','ERROR',f'{p.name}: {e}',p.name,m['id'])
     return total

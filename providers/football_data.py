@@ -1,31 +1,30 @@
-import os,requests
+import os
 from .base import FootballProvider
+from core.http_cache import get_json
 from core.normalizer import normalize_status,normalize_metric
 BASE='https://api.football-data.org/v4'
 
 def _secret():
-    for n in ('CHAVE_FD','FOOTBALL_DATA_TOKEN','FOOTBALL_DATA_API_KEY'):
+    names=('CHAVE_DADOS_FUTEBOL','CHAVE_FD','FOOTBALL_DATA_TOKEN','FOOTBALL_DATA_API_KEY')
+    for n in names:
         v=os.getenv(n)
         if v:return v
     try:
         import streamlit as st
-        for n in ('CHAVE_FD','FOOTBALL_DATA_TOKEN','FOOTBALL_DATA_API_KEY'):
+        for n in names:
             try:
                 v=st.secrets.get(n)
                 if v:return v
             except Exception:pass
     except Exception:pass
     return None
-
 class FootballDataProvider(FootballProvider):
     name='Football-Data.org'
     def __init__(self):self.key=_secret()
     def available(self):return bool(self.key)
     def _get(self,path,params=None):
-        if not self.key:raise RuntimeError('CHAVE_FD não configurada')
-        r=requests.get(BASE+path,headers={'X-Auth-Token':self.key},params=params or {},timeout=20)
-        if r.status_code==429:raise RuntimeError('rate limit (429)')
-        r.raise_for_status();return r.json()
+        if not self.key:raise RuntimeError('CHAVE_DADOS_FUTEBOL não configurada')
+        return get_json(BASE+path,params or {},{'X-Auth-Token':self.key},provider=self.name)
     def matches(self,date_from,date_to,competition=None):
         p={'dateFrom':date_from,'dateTo':date_to}
         if competition:p['competitions']=competition
