@@ -5,7 +5,11 @@ import pandas as pd
 from core.db import init_db,get_matches,get_match,get_stats,get_players,get_diagnostics,usage_today
 from core.football import collect,enrich
 from core.engine import build_pre_match_analysis
-from core.normalizer import METRICS,manaos_time,status_label,diagnostic_status_label,metric_label,position_label,format_metric_value
+from core.normalizer import (
+    manaos_time,status_label,diagnostic_status_label,position_label,format_metric_value,
+    MATCH_DISPLAY_ORDER,MATCH_DISPLAY_LABELS,PLAYER_DISPLAY_ORDER,PLAYER_DISPLAY_LABELS,
+    canonical_match_metric,canonical_player_metric,choose_preferred_stat
+)
 
 st.set_page_config(page_title='Arena 360 • Futebol',page_icon='⚽',layout='centered',initial_sidebar_state='collapsed')
 init_db();MANAUS=ZoneInfo('America/Manaus')
@@ -39,16 +43,27 @@ if selected:
     m=get_match(selected);st.divider();st.subheader(f'📊 {m["home_name"]} × {m["away_name"]}')
     st.caption(f'{m.get("competition") or "Futebol"} • {manaos_time(m.get("start_time"))} • {status_label(m.get("status"))}')
     stats=get_stats(selected)
-    if stats:
+
+    # Estatísticas da partida: conjunto fechado, uma linha por indicador,
+    # Casa + Fora + Total. Valores de fontes diferentes nunca são somados.
+    st.markdown('### 📈 Estatísticas da partida')
+    if stats or m.get('home_score') is not None or m.get('away_score') is not None:
         rows=[]
-        for metric in sorted(set(x['metric'] for x in stats)):
-            def fmt(team_id):
-                vals=[f"{format_metric_value(metric,x['value'])} [{x['source']}]" for x in stats if x['metric']==metric and x['team_id']==team_id]
-                return ' | '.join(vals) if vals else '—'
-            rows.append({'Indicador':metric_label(metric),'Casa':fmt(m['home_id']),'Fora':fmt(m['away_id'])})
-        st.markdown('### 📈 Estatísticas da partida')
+        for canonical in MATCH_DISPLAY_ORDER:
+            if canonical=='goals':
+                home=m.get('home_score');away=m.get('away_score')
+            else:
+                home_rows=[r for r in stats if r.get('team_id')==m['home_id'] and canonical_match_metric(r.get('metric'))==canonical]
+                away_rows=[r for r in stats if r.get('team_id')==m['away_id'] and canonical_match_metric(r.get('metric'))==canonical]
+                home_row=choose_preferred_stat(home_rows);away_row=choose_preferred_stat(away_rows)
+                home=home_row.get('value') if home_row else None
+                away=away_row.get('value') if away_row else None
+            total=home+away if isinstance(home,(int,float)) and isinstance(away,(int,float)) else None
+            rows.append({'Indicador':MATCH_DISPLAY_LABELS[canonical],'Casa':format_metric_value(canonical,home),'Fora':format_metric_value(canonical,away),'Total':format_metric_value(canonical,total)})
         st.dataframe(pd.DataFrame(rows),hide_index=True,use_container_width=True)
-    else:st.info('Sem estatísticas persistidas para esta partida. O sistema não inventa valores.')
+        st.caption('Cada indicador aparece uma única vez. Quando existem várias fontes para a mesma métrica, o sistema escolhe uma fonte prioritária e não soma fontes diferentes.')
+    else:
+        st.info('Sem estatísticas persistidas para esta partida. O sistema não inventa valores.')
 
     if m['status']=='SCHEDULED':
         analysis=build_pre_match_analysis(m);st.subheader('🔮 Análise pré-jogo');c1,c2,c3=st.columns(3);c1.metric('Casa',f'{analysis["probabilities"]["home"] or 0}%');c2.metric('Empate',f'{analysis["probabilities"]["draw"] or 0}%');c3.metric('Fora',f'{analysis["probabilities"]["away"] or 0}%');st.caption(f'Amostra histórica: {analysis["sample_home"]} casa / {analysis["sample_away"]} fora. Gols esperados: {analysis["xg_home"] if analysis["xg_home"] is not None else "sem dados"} × {analysis["xg_away"] if analysis["xg_away"] is not None else "sem dados"}.')
@@ -65,9 +80,15 @@ if selected:
             team_name=m['home_name'] if tid==m['home_id'] else m['away_name'] if tid==m['away_id'] else 'Equipe'
             st.markdown(f'#### {team_name}')
             for pid in sorted({p['id'] for p in plist},key=lambda x: next((p['name'] for p in plist if p['id']==x),'')):
-                p0=next(p for p in plist if p['id']==pid);pstats=[p for p in plist if p['id']==pid]
+                p0=next(p for p in plist if p['id']==pid)
+                pstats=[p for p in plist if p['id']==pid]
                 with st.expander(f'👤 {p0["name"]}  •  {position_label(p0.get("position"))}',expanded=False):
-                    table=[{'Indicador':metric_label(ps['metric'],player=True),'Valor':format_metric_value(ps['metric'],ps['value']),'Fonte':ps['source']} for ps in sorted(pstats,key=lambda z:metric_label(z['metric'],player=True))]
+                    table=[]
+                    for canonical in PLAYER_DISPLAY_ORDER:
+                        candidates=[r for r in pstats if canonical_player_metric(r.get('metric'))==canonical]
+                        chosen=choose_preferred_stat(candidates)
+                        value=chosen.get('value') if chosen else None
+                        table.append({'Indicador':PLAYER_DISPLAY_LABELS[canonical],'Valor':format_metric_value(canonical,value)})
                     st.dataframe(pd.DataFrame(table),hide_index=True,use_container_width=True)
     else:st.info('Nenhum dado individual persistido para esta partida.')
 
