@@ -17,7 +17,7 @@ def clean_number(value):
     if isinstance(value,(int,float)): return float(value)
     s=str(value).strip().replace('%','').replace(',','.')
     try: return float(s)
-    except ValueError: return None
+    except (ValueError,TypeError): return None
 
 
 def manaos_time(iso):
@@ -28,12 +28,20 @@ def manaos_time(iso):
     except Exception: return iso
 
 
-def normalize_status(status):
-    s=(status or '').upper()
-    if s in {'LIVE','IN_PLAY','1H','2H','ET','P','LIVE'}: return 'LIVE'
-    if s in {'PAUSED','HT'}: return 'PAUSED'
-    if s in {'FINISHED','FT','AET','PEN'}: return 'FINISHED'
-    if s in {'POSTPONED','SUSPENDED','CANCELLED'}: return s
+def normalize_status(status, completed=None):
+    """Map provider-specific states to one canonical football status.
+
+    A provider's explicit `completed` flag wins over a generic state name.
+    This prevents a future/scheduled event that happens to carry a score-like
+    field from being classified as FINISHED.
+    """
+    s=(status or '').upper().strip()
+    if completed is True: return 'FINISHED'
+    if s in {'LIVE','IN_PLAY','1H','2H','ET','P','INPROGRESS','IN_PROGRESS'}: return 'LIVE'
+    if s in {'PAUSED','HT','HALFTIME','BREAK'}: return 'PAUSED'
+    if s in {'FINISHED','FT','AET','PEN','POSTGAME','FINAL'}: return 'FINISHED'
+    if s in {'POSTPONED','SUSPENDED','CANCELLED','CANCELED','ABANDONED'}:
+        return 'CANCELLED' if s in {'CANCELLED','CANCELED'} else s
     return 'SCHEDULED'
 
 
