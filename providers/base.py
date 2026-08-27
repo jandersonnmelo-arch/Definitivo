@@ -1,11 +1,9 @@
-from abc import ABC,abstractmethod
-class SportsProvider(ABC):
-    name='base'
+from abc import ABC, abstractmethod
+
+class FootballProvider(ABC):
+    name = "base"
     @abstractmethod
-    def list_matches(self,start,end,sport='football'): raise NotImplementedError
+    def available(self): ...
     @abstractmethod
-    def match_details(self,match_id): raise NotImplementedError
-    @abstractmethod
-    def match_stats(self,match_id): raise NotImplementedError
-    @abstractmethod
-    def lineups(self,match_id): raise NotImplementedError
+    def matches(self, date_from, date_to, competition=None): ...
+    def match_details(self, match_id): return {"stats":[],"players":[]}
