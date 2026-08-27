@@ -24,7 +24,7 @@ def _team_values(team_id,metric,before,limit=10):
 
 def _goals(team_id,before,limit=10):
     c=connect(); rows=c.execute('''SELECT id,home_id,away_id,home_score,away_score FROM matches WHERE sport='Futebol' AND status='FINISHED'
-      AND start_time < ? AND (home_id=? OR away_id=?) ORDER BY start_time DESC LIMIT ?''',(before,team_id,limit)).fetchall();c.close()
+      AND start_time < ? AND (home_id=? OR away_id=?) ORDER BY start_time DESC LIMIT ?''',(before,team_id,team_id,limit)).fetchall();c.close()
     scored=[];conceded=[]
     for r in rows:
         if r['home_id']==team_id:scored.append(r['home_score']);conceded.append(r['away_score'])
