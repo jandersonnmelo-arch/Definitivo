@@ -1,4 +1,4 @@
-import json,re,html
+import json,re,html,unicodedata
 from .base import FootballProvider
 from core.http_cache import get_json,get_html
 from core.normalizer import normalize_metric
@@ -7,13 +7,41 @@ class FotMobProvider(FootballProvider):
     name='FotMob'
     def available(self):return True
     def matches(self,date_from,date_to,competition=None):return []
+    @staticmethod
+    def _norm_name(value):
+        s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower()
+        s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol|calcio)\b',' ',s)
+        return re.sub(r'[^a-z0-9]+',' ',s).strip()
+    @staticmethod
+    def _date_match(payload,target_date):
+        if not target_date:return True
+        raw=str(payload.get('matchDate') or payload.get('utcTime') or payload.get('date') or '')
+        if target_date in raw:return True
+        return raw[:10]==target_date
     def _find_match_id(self,match):
-        data=get_json(SEARCH,{'term':f"{match.get('home_name','')} {match.get('away_name','')}",'lang':'en'},provider='FotMob');target_date=str(match.get('start_time') or '')[:10]
-        for group in data.get('matchSuggest',[]) or []:
-            for opt in group.get('options',[]) or []:
-                p=opt.get('payload') or {};hn=str(p.get('homeName','')).lower();an=str(p.get('awayName','')).lower();md=str(p.get('matchDate',''))[:10]
-                if p.get('id') and str(match.get('home_name','')).lower() in hn and str(match.get('away_name','')).lower() in an and (not target_date or not md or md==target_date):return str(p['id'])
-        return None
+        home=self._norm_name(match.get('home_name'));away=self._norm_name(match.get('away_name'))
+        target_date=str(match.get('start_time') or '')[:10]
+        terms=[f"{match.get('home_name','')} {match.get('away_name','')}",f"{match.get('away_name','')} {match.get('home_name','')}",str(match.get('home_name',''))]
+        candidates=[]
+        seen=set()
+        for term in terms:
+            data=get_json(SEARCH,{'term':term,'lang':'en'},provider='FotMob')
+            for group in data.get('matchSuggest',[]) or []:
+                for opt in group.get('options',[]) or []:
+                    p=opt.get('payload') or {};fid=p.get('id')
+                    if not fid or str(fid) in seen:continue
+                    seen.add(str(fid));hn=self._norm_name(p.get('homeName'));an=self._norm_name(p.get('awayName'))
+                    if not self._date_match(p,target_date):continue
+                    score=0
+                    if home and (home==hn or home in hn or hn in home):score+=4
+                    if away and (away==an or away in an or an in away):score+=4
+                    if home and away and home==an and away==hn:score-=8
+                    if p.get('leagueName'):score+=1
+                    candidates.append((score,str(fid),p))
+        if not candidates:return None
+        candidates.sort(key=lambda x:x[0],reverse=True)
+        best=candidates[0]
+        return best[1] if best[0]>=7 else None
     @staticmethod
     def _next_data(text):
         m=re.search(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>',text,re.S)
@@ -28,8 +56,11 @@ class FotMobProvider(FootballProvider):
         return None
     def match_details(self,match):
         fid=self._find_match_id(match)
-        if not fid:raise RuntimeError('partida não localizada por nome/data')
-        text,_=get_html(PAGE+fid);data=self._next_data(text);pp=((data.get('props') or {}).get('pageProps') or {});general=pp.get('general') or {};content=pp.get('content') or {};home=general.get('homeTeam') or {};away=general.get('awayTeam') or {};home_id=home.get('id');away_id=away.get('id');home_name=home.get('name');away_name=away.get('name');stats=[]
+        if not fid:raise RuntimeError('FotMob: partida não localizada por equipes/data')
+        text,_=get_html(PAGE+fid);data=self._next_data(text);pp=((data.get('props') or {}).get('pageProps') or {});general=pp.get('general') or {};content=pp.get('content') or {}
+        if not general or not content:
+            raise RuntimeError('FotMob: partida encontrada, mas os dados detalhados ainda não estão no HTML pré-renderizado')
+        home=general.get('homeTeam') or {};away=general.get('awayTeam') or {};home_id=home.get('id');away_id=away.get('id');home_name=home.get('name');away_name=away.get('name');stats=[]
         all_stats=(((content.get('stats') or {}).get('Periods') or {}).get('All') or {}).get('stats') or []
         for group in all_stats:
             for item in group.get('stats') or []:
