@@ -39,10 +39,16 @@ def enrich(matches):
                 if not pid:continue
                 d=p.match_details(pid)
                 for row in d.get('stats',[]):row['source']=p.name
-                for row in d.get('players',[]):row['source']=p.name;row['match_id']=m['id']
-                for row in d.get('player_stats',[]):row['source']=p.name
-                upsert_match_stats(m['id'],d.get('stats',[]));upsert_players(d.get('players',[]));upsert_player_stats(m['id'],d.get('player_stats',[]))
-                count=len(d.get('stats',[]))+len(d.get('player_stats',[]));total+=count
-                add_diagnostic('enriquecimento','OK',f'{p.name}: {count} registros processados',p.name,m['id'])
+                for row in d.get('players',[]):
+                    row['source']=p.name
+                    row['match_id']=m['id']
+                for row in d.get('player_stats',[]):
+                    row['source']=p.name
+                upsert_match_stats(m['id'],d.get('stats',[]))
+                upsert_players(d.get('players',[]))
+                upsert_player_stats(m['id'],d.get('player_stats',[]))
+                count=len(d.get('stats',[]))+len(d.get('player_stats',[]))+len(d.get('players',[]))
+                total+=count
+                add_diagnostic('enriquecimento','OK',f'{p.name}: {count} registros processados ({len(d.get("players",[]))} jogadores)',p.name,m['id'])
             except Exception as e:add_diagnostic('enriquecimento','ERROR',f'{p.name}: {e}',p.name,m['id'])
     return total
