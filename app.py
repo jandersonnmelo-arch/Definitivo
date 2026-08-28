@@ -13,6 +13,11 @@ st.set_page_config(page_title='Arena 360 • Futebol',page_icon='⚽',layout='ce
 init_db();MANAUS=ZoneInfo('America/Manaus');today=datetime.now(MANAUS).date()
 fixed_labels=[x[0] for x in FIXED_COMPETITIONS];optional_labels=[x[0] for x in OPTIONAL_COMPETITIONS]
 
+def player_avg(value,matches):
+    if value is None or matches in (None,0): return None
+    try:return round(float(value)/float(matches),2)
+    except (TypeError,ValueError,ZeroDivisionError):return None
+
 st.markdown('''<style>
 .stApp{background:#060918}.block-container{max-width:760px;padding-top:1rem;padding-bottom:4rem}
 .brand{display:flex;gap:12px;align-items:center;margin-bottom:20px}.mark{width:46px;height:46px;border-radius:14px;background:#b7ff27;color:#081000;display:grid;place-items:center;font-size:25px}
@@ -136,7 +141,8 @@ if selected:
                     if not tid:continue
                     summary=player_history_summary(tid,before,20);st.markdown(f'#### 👥 Jogadores da análise — {tname}')
                     if summary:
-                        st.dataframe(pd.DataFrame([{'Jogador':x['name'],'Posição':position_label(x.get('position')),'Jogos':x['matches'],'Gols':format_metric_value('goals',x.get('goals')),'Assistências':format_metric_value('assists',x.get('assists')),'Finalizações certas':format_metric_value('shots_on_target',x.get('shots_on_target')),'Finalizações no gol':format_metric_value('shots',x.get('shots')),'Passes certos':format_metric_value('passes_completed',x.get('passes_completed')),'Desarmes':format_metric_value('tackles',x.get('tackles')),'Faltas cometidas':format_metric_value('fouls',x.get('fouls')),'Faltas sofridas':format_metric_value('was_fouled',x.get('was_fouled'))} for x in summary]),hide_index=True,use_container_width=True)
+                        st.caption('Médias por jogo nos registros individuais disponíveis; Jogos = número de partidas com dados persistidos para o jogador.')
+                        st.dataframe(pd.DataFrame([{'Jogador':x['name'],'Posição':position_label(x.get('position')),'Jogos':x['matches'],'Gols':format_metric_value('goals',player_avg(x.get('goals'),x.get('matches'))),'Assistências':format_metric_value('assists',player_avg(x.get('assists'),x.get('matches'))),'Finalizações certas':format_metric_value('shots_on_target',player_avg(x.get('shots_on_target'),x.get('matches'))),'Finalizações no gol':format_metric_value('shots',player_avg(x.get('shots'),x.get('matches'))),'Passes certos':format_metric_value('passes_completed',player_avg(x.get('passes_completed'),x.get('matches'))),'Desarmes':format_metric_value('tackles',player_avg(x.get('tackles'),x.get('matches'))),'Faltas cometidas':format_metric_value('fouls',player_avg(x.get('fouls'),x.get('matches'))),'Faltas sofridas':format_metric_value('was_fouled',player_avg(x.get('was_fouled'),x.get('matches')))} for x in summary]),hide_index=True,use_container_width=True)
                     else:st.info('Nenhum dado individual histórico persistido para esta equipe.')
             players=get_players(selected);unique_players={x['id']:x for x in players};st.subheader(f'👥 Jogadores da partida • {len(unique_players)}')
             if players:
