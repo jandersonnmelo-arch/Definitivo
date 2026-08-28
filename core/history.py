@@ -3,11 +3,15 @@ import re, unicodedata
 from providers.football_data import FootballDataProvider
 from providers.fotmob import FotMobProvider
 from providers.espn import ESPNProvider
-from core.db import get_team_provider_id, upsert_match, team_history, history_coverage, add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats
+from core.db import get_team_provider_id, upsert_match, team_history, history_coverage, add_diagnostic as _db_add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats
 
 HISTORY_MATCHES_PER_TEAM = 10
 HISTORY_DAYS = 180
 PRESENCE_METRIC = '__player_presence__'
+
+def add_diagnostic(stage,status,message,source=None,match_id=None):
+    try:_db_add_diagnostic(stage,status,message,source,match_id)
+    except Exception:pass
 
 def _parse_start(value):
     if not value:return None
