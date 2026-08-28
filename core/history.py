@@ -15,7 +15,7 @@ PRESENCE_METRIC = '__player_presence__'
 TEAM_ALIASES = {
     'bayer leverkusen':'bayer 04 leverkusen','bayer 04':'bayer 04 leverkusen','bayern munich':'bayern munchen','bayern munchen fc':'bayern munchen','fc bayern munchen':'bayern munchen',
     'atletico mineiro':'atletico mineiro','atletico mg':'atletico mineiro','ca mineiro':'atletico mineiro','clube atletico mineiro':'atletico mineiro','cam':'atletico mineiro',
-    'atletico paranaense':'athletico paranaense','athletico paranaense':'athletico paranaense','athletico pr':'athletico paranaense','cap':'athletico paranaense',
+    'atletico paranaense':'athletico paranaense','athletico pr':'athletico paranaense','cap':'athletico paranaense',
     'flamengo':'flamengo','flamengo rj':'flamengo','cr flamengo':'flamengo','palmeiras':'palmeiras','se palmeiras':'palmeiras','sao paulo':'sao paulo','sao paulo fc':'sao paulo',
     'corinthians':'corinthians','corinthians paulista':'corinthians','sport corinthians paulista':'corinthians','sport club corinthians paulista':'corinthians',
     'santos':'santos','santos fc':'santos','gremio':'gremio','gremio fbpa':'gremio','internacional':'internacional','sport club internacional':'internacional',
@@ -38,8 +38,6 @@ def _parse_start(value):
 def _norm_name(value):
     s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower();s=re.sub(r'[^a-z0-9]+',' ',s).strip()
     if s in TEAM_ALIASES:return TEAM_ALIASES[s]
-    if s in {'ca mineiro','atletico mg','clube atletico mineiro','atletico mineiro'}:return 'atletico mineiro'
-    if s=='cam':return 'atletico mineiro'
     s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol)\b',' ',s);s=re.sub(r'[^a-z0-9]+',' ',s).strip();return TEAM_ALIASES.get(s,s)
 
 def _same_team(a,b):
@@ -93,7 +91,7 @@ def _presence_rows(players,pstats):
     out=list(pstats or []);existing={(str(r.get('player_id')),r.get('source')) for r in out if r.get('metric')!=PRESENCE_METRIC}
     for p in players or []:
         key=(str(p.get('id')),p.get('source','unknown'))
-        if p.get('id') is not None and key not in existing:out.append({'player_id':p['id'],'metric':PRESENCE_METRIC,'value':1.0,'source':p.get('source','unknown')});existing.add(key)
+        if p.get('id') is not None and key not in existing:out.append({'player_id':p['id'],'metric':PRESENCE_METRIC,'value':1.0,'source':p.get('source','unknown'),'team_id':p.get('team_id'),'team_name':p.get('team_name')});existing.add(key)
     return out
 
 def _real_player_stats(rows):return [r for r in (rows or []) if r.get('metric')!=PRESENCE_METRIC and r.get('value') is not None]
@@ -102,9 +100,17 @@ def _persist_detail(match,provider,d):
     stats=d.get('stats',[]) or [];players=[]
     for p in d.get('players',[]) or []:
         p=dict(p);p['source']=provider.name;p['match_id']=match['id'];players.append(p)
+    # Cada estatística individual recebe explicitamente a equipe do jogador.
+    # Isso impede que o resumo de uma equipe agregue jogadores de outro time
+    # quando a fonte devolve estruturas aninhadas de ambas as equipes.
+    player_team={(str(p.get('id')),p.get('source',provider.name)):(p.get('team_id'),p.get('team_name')) for p in players if p.get('id') is not None}
     pstats=[]
     for row in d.get('player_stats',[]) or []:
-        row=dict(row);row['source']=provider.name;pstats.append(row)
+        row=dict(row);row['source']=provider.name
+        key=(str(row.get('player_id')),provider.name)
+        if key in player_team:
+            row['team_id'],row['team_name']=player_team[key]
+            pstats.append(row)
     real_stats=_real_player_stats(pstats);pstats=_presence_rows(players,pstats)
     if stats:upsert_match_stats(match['id'],stats)
     if players:upsert_players(players)
@@ -147,44 +153,25 @@ def _has_required_team_metrics(match_id):
 
 def _save_ai_sample(match,training_ready):
     try:
-        analysis=build_pre_match_analysis(match)
-        save_match_sample(match,analysis,training_ready=training_ready)
-        return True
-    except Exception as e:
-        add_diagnostic('ia_dataset','ERROR',f'Falha ao salvar amostra da IA: {e}','SYSTEM',match.get('id'))
-        return False
+        analysis=build_pre_match_analysis(match);save_match_sample(match,analysis,training_ready=training_ready);return True
+    except Exception as e:add_diagnostic('ia_dataset','ERROR',f'Falha ao salvar amostra da IA: {e}','SYSTEM',match.get('id'));return False
 
 def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days=HISTORY_DAYS):
-    init_ai_db();reconcile_database()
-    before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat()
-    team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
+    init_ai_db();reconcile_database();before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat();team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
     for team_id in team_ids:
         if history_coverage(team_id,before_iso)<matches_per_team:_collect_team_history_from_football_data(team_id,before_iso,days)
         hist=_history_matches_for_team(team_id,before_iso,matches_per_team)
         if len(hist)<matches_per_team:
-            team_name=match['home_name'] if team_id==match.get('home_id') else match['away_name']
-            _collect_team_history_from_espn(team_name,before_iso,120)
-
-    reconciliation=reconcile_database(force=True)
-    add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-coleta: equipes={reconciliation.get("teams_merged",0)}, jogadores={reconciliation.get("players_merged",0)}, estatísticas migradas={reconciliation.get("stats_migrated",0)}, duplicadas removidas={reconciliation.get("stats_deduped",0)}','SYSTEM',match.get('id'))
-
-    # A reconciliação pode substituir os IDs das equipes. Nunca continue usando
-    # os IDs capturados antes dela: recarregamos a partida e trabalhamos com os
-    # IDs canônicos atualmente persistidos no banco.
-    fresh_match=get_match(match.get('id')) or match
-    before_iso=fresh_match.get('start_time') or before_iso
-    team_ids=[x for x in (fresh_match.get('home_id'),fresh_match.get('away_id')) if x]
+            team_name=match['home_name'] if team_id==match.get('home_id') else match['away_name'];_collect_team_history_from_espn(team_name,before_iso,120)
+    reconciliation=reconcile_database(force=True);add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-coleta: equipes={reconciliation.get("teams_merged",0)}, jogadores={reconciliation.get("players_merged",0)}, estatísticas migradas={reconciliation.get("stats_migrated",0)}, duplicadas removidas={reconciliation.get("stats_deduped",0)}','SYSTEM',match.get('id'))
+    fresh_match=get_match(match.get('id')) or match;before_iso=fresh_match.get('start_time') or before_iso;team_ids=[x for x in (fresh_match.get('home_id'),fresh_match.get('away_id')) if x]
     add_diagnostic('identidade_equipes','OK',f'IDs canônicos após reconciliação: casa={fresh_match.get("home_id")}, fora={fresh_match.get("away_id")}', 'SYSTEM',fresh_match.get('id'))
-
     historical_pool=[]
-    for team_id in team_ids:
-        historical_pool.extend(_history_matches_for_team(team_id,before_iso,matches_per_team))
+    for team_id in team_ids:historical_pool.extend(_history_matches_for_team(team_id,before_iso,matches_per_team))
     historical=[];seen=set()
     for h in sorted(historical_pool,key=lambda x:x.get('start_time') or '',reverse=True):
-        if h['id'] not in seen:
-            historical.append(h);seen.add(h['id'])
+        if h['id'] not in seen:historical.append(h);seen.add(h['id'])
     historical=historical[:matches_per_team*2]
-
     enriched=stats_records=player_records=player_matches=0
     for h in historical:
         if not (get_stats(h['id']) and _has_real_player_stats(h['id']) and _has_required_team_metrics(h['id'])):
@@ -193,22 +180,11 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
                 enriched+=1;stats_records+=r['stats'];player_records+=r['player_stats']
                 if r['players'] or r['player_stats']:player_matches+=1
         _save_ai_sample(h,training_ready=(h.get('status')=='FINISHED' and h.get('home_score') is not None and h.get('away_score') is not None))
-
     reconciliation2=reconcile_database(force=True)
     if any(reconciliation2.values()):add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-enriquecimento: equipes={reconciliation2.get("teams_merged",0)}, jogadores={reconciliation2.get("players_merged",0)}, estatísticas migradas={reconciliation2.get("stats_migrated",0)}, duplicadas removidas={reconciliation2.get("stats_deduped",0)}','SYSTEM',fresh_match.get('id'))
-
-    # Pode haver nova alteração de identidade após o enriquecimento. Recarrega
-    # novamente antes de enriquecer a partida selecionada e antes dos contadores.
-    fresh_match=get_match(fresh_match.get('id')) or fresh_match
-    current=_enrich_match_details(fresh_match,'partida')
-    player_records+=current['player_stats'];stats_records+=current['stats']
+    fresh_match=get_match(fresh_match.get('id')) or fresh_match;current=_enrich_match_details(fresh_match,'partida');player_records+=current['player_stats'];stats_records+=current['stats']
     if current['players']:player_matches+=1
-    _save_ai_sample(fresh_match,training_ready=(fresh_match.get('status')=='FINISHED' and fresh_match.get('home_score') is not None and fresh_match.get('away_score') is not None))
-    reconcile_database(force=True)
-
-    final_match=get_match(fresh_match.get('id')) or fresh_match
-    final_before=final_match.get('start_time') or before_iso
-    final_team_ids=[x for x in (final_match.get('home_id'),final_match.get('away_id')) if x]
-    home_n=len(_history_matches_for_team(final_team_ids[0],final_before,matches_per_team)) if len(final_team_ids)>0 else 0
-    away_n=len(_history_matches_for_team(final_team_ids[1],final_before,matches_per_team)) if len(final_team_ids)>1 else 0
+    _save_ai_sample(fresh_match,training_ready=(fresh_match.get('status')=='FINISHED' and fresh_match.get('home_score') is not None and fresh_match.get('away_score') is not None));reconcile_database(force=True)
+    final_match=get_match(fresh_match.get('id')) or fresh_match;final_before=final_match.get('start_time') or before_iso;final_team_ids=[x for x in (final_match.get('home_id'),final_match.get('away_id')) if x]
+    home_n=len(_history_matches_for_team(final_team_ids[0],final_before,matches_per_team)) if len(final_team_ids)>0 else 0;away_n=len(_history_matches_for_team(final_team_ids[1],final_before,matches_per_team)) if len(final_team_ids)>1 else 0
     return {'home_matches':home_n,'away_matches':away_n,'historical_matches':len(historical),'player_matches_enriched':player_matches,'stats_records':stats_records,'player_records':player_records,'current_players':current['players'],'current_stats':current['stats']}
