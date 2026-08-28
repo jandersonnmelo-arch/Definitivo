@@ -4,6 +4,7 @@ from providers.espn_calendar import ESPNCalendarProvider
 from providers.api_futebol_calendar_fixed import ApiFutebolCalendarProviderFixed
 from providers.fotmob import FotMobProvider
 from providers.api_football import ApiFootballProvider
+from providers.dados_futebol import DadosFutebolProvider
 from core.repository import canonical_id, upsert_match, upsert_match_stats, upsert_players, upsert_player_stats, add_diagnostic, get_provider_id
 from core.competitions import competition_matches
 from core.data_quality import reconcile_database
@@ -13,33 +14,29 @@ PRESENCE_METRIC = '__player_presence__'
 
 
 def providers():
-    return [FootballDataProvider(), ESPNProvider(), FotMobProvider(), ApiFootballProvider()]
+    return [DadosFutebolProvider(), FootballDataProvider(), ESPNProvider(), FotMobProvider(), ApiFootballProvider()]
 
 
 def collection_providers():
-    # Football-Data continua como fonte principal. A API Futebol entra
-    # somente para a Série B; ESPN permanece como fonte complementar.
-    return [FootballDataProvider(), ApiFutebolCalendarProviderFixed(), ESPNCalendarProvider()]
+    # A Dados Futebol é a fonte primária da Série B. As demais fontes continuam
+    # disponíveis para os outros campeonatos e como contingência.
+    return [DadosFutebolProvider(), FootballDataProvider(), ApiFutebolCalendarProviderFixed(), ESPNCalendarProvider()]
 
 
 def _with_player_presence(players, player_stats):
-    """Garante que um jogador sem estatística individual ainda seja persistido.
-    O marcador é técnico e nunca é exibido como estatística.
-    """
+    """Garante que um jogador sem estatística individual ainda seja persistido."""
     existing = {(str(r.get('player_id')), r.get('source')) for r in player_stats or []}
     out = list(player_stats or [])
     for p in players or []:
         pid, src = p.get('id'), p.get('source', 'unknown')
         key = (str(pid), src)
         if pid is not None and key not in existing:
-            out.append({'player_id': pid, 'metric': PRESENCE_METRIC, 'value': 1.0, 'source': src})
+            out.append({'player_id': pid, 'metric': PRESENCE_METRIC, 'value': 1.0, 'source': src, 'team_id': p.get('team_id'), 'team_name': p.get('team_name')})
             existing.add(key)
     return out
 
 
 def collect(date_from, date_to, competitions=None, competition=None):
-    # Antes de uma nova coleta, consolida registros legados de equipes/jogadores
-    # para que a nova rodada seja gravada sobre a mesma identidade canônica.
     reconcile_database()
     selected = list(competitions or [])
     if competition and competition not in selected:
@@ -66,11 +63,20 @@ def enrich(matches):
         raise ValueError('O enriquecimento é limitado a 5 partidas por operação.')
     total = 0
     for m in matches:
-        for p in providers():
+        is_serie_b = 'serie b' in str(m.get('competition') or '').lower()
+        ordered = providers()
+        # Na Série B, Dados Futebol é a fonte primária e exclusiva para o
+        # enriquecimento normal. Isso evita misturar o mesmo jogo com Espanha,
+        # ESPN ou outra competição por nomes semelhantes.
+        if is_serie_b:
+            ordered = [DadosFutebolProvider()]
+        for p in ordered:
             if not p.available():
                 continue
             try:
-                if p.name == 'API-Football':
+                if p.name == 'Dados Futebol':
+                    pid = m.get('provider_match_id') or m.get('id')
+                elif p.name == 'API-Football':
                     pid = p.resolve_match_id(m)
                 elif p.name == 'FotMob':
                     pid = m
@@ -94,6 +100,8 @@ def enrich(matches):
                 count = len(d.get('stats', [])) + len(player_stats) + len(players)
                 total += count
                 add_diagnostic('enriquecimento', 'OK', f'{p.name}: {count} registros processados ({len(players)} jogadores)', p.name, m['id'])
+                if is_serie_b:
+                    break
             except Exception as e:
                 add_diagnostic('enriquecimento', 'ERROR', f'{p.name}: {e}', p.name, m['id'])
     return total
