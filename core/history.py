@@ -3,6 +3,7 @@ import re, unicodedata
 from providers.football_data import FootballDataProvider
 from providers.fotmob import FotMobProvider
 from providers.espn import ESPNProvider
+from providers.api_football import ApiFootballProvider
 from core.db import get_team_provider_id, upsert_match, team_history, history_coverage, add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats
 
 HISTORY_MATCHES_PER_TEAM = 10
@@ -124,6 +125,7 @@ def _persist_detail(match, provider, d):
 def _enrich_match_details(match, stage='historico'):
     total_stats = total_players = total_pstats = 0
     success = False
+
     espn = ESPNProvider()
     try:
         eid = _resolve_espn_event_id(match)
@@ -135,6 +137,7 @@ def _enrich_match_details(match, stage='historico'):
             success |= bool(a or b or c)
     except Exception as e:
         add_diagnostic(stage, 'ERROR', f'ESPN detalhes: {e}', espn.name, match.get('id'))
+
     fotmob = FotMobProvider()
     try:
         d = fotmob.match_details(match)
@@ -144,6 +147,22 @@ def _enrich_match_details(match, stage='historico'):
         success |= bool(a or b or c)
     except Exception as e:
         add_diagnostic(stage, 'ERROR', f'FotMob detalhes: {e}', fotmob.name, match.get('id'))
+
+    api = ApiFootballProvider()
+    if api.available():
+        try:
+            fid = api.resolve_match_id(match)
+            if fid:
+                d = api.match_details(fid)
+                a, b, c = _persist_detail(match, api, d)
+                total_stats += a; total_players += b; total_pstats += c
+                add_diagnostic(stage, 'OK', f'API-Football: {a} estatísticas, {b} jogadores, {c} individuais', api.name, match['id'])
+                success |= bool(a or b or c)
+            else:
+                add_diagnostic(stage, 'INFO', 'API-Football: partida não localizada por equipes/data', api.name, match.get('id'))
+        except Exception as e:
+            add_diagnostic(stage, 'ERROR', f'API-Football detalhes: {e}', api.name, match.get('id'))
+
     return {'success': success, 'stats': total_stats, 'players': total_players, 'player_stats': total_pstats}
 
 
