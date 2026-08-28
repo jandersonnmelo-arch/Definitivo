@@ -2,40 +2,17 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 MANAUS = ZoneInfo('America/Manaus')
-
-# Métricas individuais prioritárias do projeto.
 PLAYER_DISPLAY_ORDER = ['goals','assists','shots','shots_on_target','passes_completed','tackles','fouls','was_fouled']
-PLAYER_DISPLAY_LABELS = {
-    'goals':'Gols','assists':'Assistências','shots':'Finalizações','shots_on_target':'Finalizações no gol',
-    'passes_completed':'Passes certos','tackles':'Desarmes','fouls':'Faltas cometidas','was_fouled':'Faltas sofridas'
-}
-
-PLAYER_METRIC_ALIASES = {
-    'goals':'goals','goal':'goals','goals_scored':'goals','total_goals':'goals',
-    'assists':'assists','assist':'assists',
-    'passes_completed':'passes_completed','accuratepasses':'passes_completed','accurate_passes':'passes_completed',
-    'passesaccurate':'passes_completed','passes_accurate':'passes_completed','total_passes_completed':'passes_completed',
-    'tackles':'tackles','total_tackles':'tackles','totaltackles':'tackles','matchstats.headers.tackles':'tackles',
-    'effectivetackles':'tackles','effective_tackles':'tackles',
-    'fouls':'fouls','foulscommitted':'fouls','fouls_committed':'fouls',
-    'was_fouled':'was_fouled','fouled':'was_fouled','fouls_suffered':'was_fouled','fouls_suffered_total':'was_fouled',
-    'shots':'shots','totalshots':'shots','total_shots':'shots','shots_total':'shots',
-    'shots_on_target':'shots_on_target','shotsontarget':'shots_on_target','shots_on_goal':'shots_on_target',
-    'shots_on_target_total':'shots_on_target'
-}
-
+PLAYER_DISPLAY_LABELS = {'goals':'Gols','assists':'Assistências','shots':'Finalizações','shots_on_target':'Finalizações no gol','passes_completed':'Passes certos','tackles':'Desarmes','fouls':'Faltas cometidas','was_fouled':'Faltas sofridas'}
+PLAYER_METRIC_ALIASES = {'goals':'goals','goal':'goals','goals_scored':'goals','total_goals':'goals','assists':'assists','assist':'assists','passes_completed':'passes_completed','accuratepasses':'passes_completed','accurate_passes':'passes_completed','passesaccurate':'passes_completed','passes_accurate':'passes_completed','total_passes_completed':'passes_completed','passes_completed_total':'passes_completed','tackles':'tackles','total_tackles':'tackles','totaltackles':'tackles','matchstats.headers.tackles':'tackles','effectivetackles':'tackles','effective_tackles':'tackles','fouls':'fouls','foulscommitted':'fouls','fouls_committed':'fouls','was_fouled':'was_fouled','fouled':'was_fouled','fouls_suffered':'was_fouled','fouls_suffered_total':'was_fouled','shots':'shots','totalshots':'shots','total_shots':'shots','shots_total':'shots','shots_on_target':'shots_on_target','shotsontarget':'shots_on_target','shots_on_goal':'shots_on_target','shots_on_target_total':'shots_on_target'}
 POSITION_LABELS = {0:'Goleiro',1:'Defensor',2:'Meio-campista',3:'Atacante'}
 PERCENT_METRICS = {'crosspct','longballpct','passpct','possessionpct','shotpct','tacklepct','shot_accuracy'}
 STATUS_LABELS = {'SCHEDULED':'AGENDADO','LIVE':'EM ANDAMENTO','PAUSED':'INTERVALO','FINISHED':'FINALIZADO','POSTPONED':'ADIADO','SUSPENDED':'SUSPENSO','CANCELLED':'CANCELADO'}
-
-# Mantém as métricas de partida existentes.
 MATCH_DISPLAY_ORDER=['goals','shots','shots_on_target','woodwork','effectivetackles','corners','fouls','saves','player_throws','yellow_cards','red_cards','offsides','goal_kicks','passes_completed']
 MATCH_DISPLAY_LABELS={'goals':'Gols','shots':'Finalizações totais','shots_on_target':'Finalizações no alvo','woodwork':'Finalizações na trave','effectivetackles':'Desarmes efetivos','corners':'Escanteios','fouls':'Faltas','saves':'Defesas do goleiro','player_throws':'Laterais','yellow_cards':'Cartões amarelos','red_cards':'Cartões vermelhos','offsides':'Impedimentos','goal_kicks':'Tiros de meta','passes_completed':'Passes certos'}
 MATCH_METRIC_ALIASES={'goals':'goals','shots':'shots','totalshots':'shots','total_shots':'shots','shots_total':'shots','shots_on_target':'shots_on_target','shotsontarget':'shots_on_target','shots_on_goal':'shots_on_target','woodwork':'woodwork','shots_woodwork':'woodwork','shotswoodwork':'woodwork','effectivetackles':'effectivetackles','effective_tackles':'effectivetackles','totaltackles':'effectivetackles','total_tackles':'effectivetackles','corners':'corners','corner_kicks':'corners','woncorners':'corners','fouls':'fouls','foulscommitted':'fouls','fouls_committed':'fouls','saves':'saves','keeper_saves':'saves','goalkeeper_saves':'saves','player_throws':'player_throws','throws':'player_throws','throw_ins':'player_throws','yellowcards':'yellow_cards','yellow_cards':'yellow_cards','redcards':'red_cards','red_cards':'red_cards','offsides':'offsides','goal_kicks':'goal_kicks','goalkicks':'goal_kicks','passes_completed':'passes_completed','accuratepasses':'passes_completed','accurate_passes':'passes_completed','passesaccurate':'passes_completed'}
-
-# Compatibilidade: nomes usados em outros módulos.
-PLAYER_METRICS = {k:v for k,v in PLAYER_DISPLAY_LABELS.items()}
-METRICS = {**MATCH_DISPLAY_LABELS}
+PLAYER_METRICS = dict(PLAYER_DISPLAY_LABELS)
+METRICS = dict(MATCH_DISPLAY_LABELS)
 SOURCE_PRIORITY={'FotMob':0,'ESPN':1,'API-Football':2,'Football-Data.org':3}
 
 def _key(name): return str(name or '').strip().lower().replace(' ','_').replace('-','_')
@@ -78,7 +55,15 @@ def normalize_status(status,completed=None):
     return 'SCHEDULED'
 def normalize_metric(name):
     s=_key(name)
-    return {'total_shots':'shots','shots_total':'shots','shots_on_goal':'shots_on_target','shotsontarget':'shots_on_target','corner_kicks':'corners','accurate_passes':'passes_completed','accuratepasses':'passes_completed','passesaccurate':'passes_completed','yellowcards':'yellow_cards','redcards':'red_cards','goalkeeper_saves':'saves','keeper_saves':'saves','shots_woodwork':'woodwork','shotswoodwork':'woodwork','effectivetackles':'effectivetackles','effective_tackles':'effectivetackles','totaltackles':'effectivetackles','total_tackles':'effectivetackles','goalkicks':'goal_kicks','goal_kicks':'goal_kicks','throws':'player_throws','throw_ins':'player_throws'}.get(s,s)
+    aliases = {
+        'total_shots':'shots','shots_total':'shots','shots_on_goal':'shots_on_target','shotsontarget':'shots_on_target','corner_kicks':'corners',
+        'accurate_passes':'passes_completed','accuratepasses':'passes_completed','passesaccurate':'passes_completed','passes_accurate':'passes_completed','total_passes_completed':'passes_completed','passes_completed_total':'passes_completed',
+        'yellowcards':'yellow_cards','redcards':'red_cards','goalkeeper_saves':'saves','keeper_saves':'saves','shots_woodwork':'woodwork','shotswoodwork':'woodwork',
+        'effectivetackles':'effectivetackles','effective_tackles':'effectivetackles','totaltackles':'effectivetackles','total_tackles':'effectivetackles',
+        'goalkicks':'goal_kicks','goal_kicks':'goal_kicks','throws':'player_throws','throw_ins':'player_throws',
+        'goal':'goals','goals_scored':'goals','total_goals':'goals','assist':'assists','foulscommitted':'fouls','fouls_committed':'fouls','fouled':'was_fouled','fouls_suffered':'was_fouled','fouls_suffered_total':'was_fouled'
+    }
+    return aliases.get(s, PLAYER_METRIC_ALIASES.get(s, s))
 def average(values):
     vals=[clean_number(v) for v in values];vals=[v for v in vals if v is not None]
     return round(sum(vals)/len(vals),2) if vals else None
