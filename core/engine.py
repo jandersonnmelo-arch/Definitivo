@@ -71,11 +71,19 @@ def team_profile(team_id,before,limit=10):
         vals=_team_values(team_id,key,before,limit);out[key]=average(vals);out[key+'_sample']=len(vals)
     out['xg']=out.get('expected_goals');out['xg_sample']=out.get('expected_goals_sample',0);return out
 
+def _reference_line(lam,lines):
+    if lam is None or not lines:return None
+    # Choose the available market line closest to the historical projection.
+    return min(lines,key=lambda x:abs(float(x)-lam))
+
 def _metric_market(home,away,key,lines):
     hv,av=home.get(key),away.get(key)
     if hv is None and av is None:return None
     lam=sum(v for v in (hv,av) if isinstance(v,(int,float)))
-    return {'home':hv,'away':av,'total_expected':round(lam,2),'lines':{str(line):poisson_over(lam,line) for line in lines},'under_lines':{str(line):poisson_under(lam,line) for line in lines}}
+    line=_reference_line(lam,lines)
+    over=poisson_over(lam,line) if line is not None else None
+    under=poisson_under(lam,line) if line is not None else None
+    return {'home':hv,'away':av,'total_expected':round(lam,2),'line':line,'over':over,'under':under,'lines':{str(line):over} if line is not None else {},'under_lines':{str(line):under} if line is not None else {}}
 
 def _projected_value(home,away,key):
     hv,av=home.get(key),away.get(key)
@@ -85,10 +93,13 @@ def build_pre_match_analysis(match,limit=10):
     h=team_profile(match['home_id'],match.get('start_time') or '',limit) if match.get('home_id') else {'sample':0};a=team_profile(match['away_id'],match.get('start_time') or '',limit) if match.get('away_id') else {'sample':0}
     h_attack=h.get('xg') if h.get('xg_sample',0)>0 else h.get('goals_for');a_attack=a.get('xg') if a.get('xg_sample',0)>0 else a.get('goals_for');hxg=average([h_attack,a.get('goals_against')]);axg=average([a_attack,h.get('goals_against')]);total_xg=round(sum(x for x in (hxg,axg) if isinstance(x,(int,float))),2) if hxg is not None or axg is not None else None;p=outcome_probabilities(hxg,axg);btts=round((1-poisson(0,hxg))*(1-poisson(0,axg))*100,1) if hxg is not None and axg is not None else None
     market_specs={'finalizacoes':('shots',(9.5,19.5,23.5,27.5,31.5)),'finalizacoes_no_alvo':('shots_on_target',(5.5,7.5,9.5,11.5)),'finalizacoes_na_trave':('woodwork',(0.5,1.5,2.5)),'desarmes_efetivos':('effectivetackles',(19.5,24.5,29.5,34.5)),'escanteios':('corners',(7.5,8.5,9.5,10.5,11.5)),'faltas':('fouls',(19.5,22.5,25.5,28.5)),'defesas':('saves',(4.5,6.5,8.5,10.5)),'laterais':('player_throws',(25.5,29.5,33.5,37.5)),'cartoes_amarelos':('yellow_cards',(2.5,3.5,4.5,5.5)),'cartoes_vermelhos':('red_cards',(0.5,1.5)),'impedimentos':('offsides',(1.5,2.5,3.5,4.5)),'tiros_de_meta':('goal_kicks',(5.5,7.5,9.5,11.5)),'passes_certos':('passes_completed',(500.5,700.5,900.5,1100.5))}
-    markets={'gols':{'expected':total_xg,'total_expected':total_xg,'lines':{str(line):poisson_over(total_xg,line) for line in (0.5,1.5,2.5,3.5)} if total_xg is not None else {},'under_lines':{str(line):poisson_under(total_xg,line) for line in (0.5,1.5,2.5,3.5)} if total_xg is not None else {},'over':{str(line):poisson_over(total_xg,line) for line in (0.5,1.5,2.5,3.5)} if total_xg is not None else {},'under':{str(line):poisson_under(total_xg,line) for line in (0.5,1.5,2.5,3.5)} if total_xg is not None else {},'exact_total':exact_total_goals(total_xg,4)},'ambas_marcam':btts}
+    goal_lines=(0.5,1.5,2.5,3.5)
+    markets={'gols':{'expected':total_xg,'total_expected':total_xg,'line':_reference_line(total_xg,goal_lines),'lines':{},'over':{},'under':{},'under_lines':{},'exact_total':exact_total_goals(total_xg,4),'ambas_marcam':btts}
+    if total_xg is not None:
+        gl=markets['gols']['line'];markets['gols']['lines']={str(gl):poisson_over(total_xg,gl)};markets['gols']['under_lines']={str(gl):poisson_under(total_xg,gl)};markets['gols']['over']=markets['gols']['lines'];markets['gols']['under']=markets['gols']['under_lines']
     for name,(key,lines) in market_specs.items():markets[name]=_metric_market(h,a,key,lines)
     projection_keys=['shots','shots_on_target','woodwork','effectivetackles','corners','fouls','saves','player_throws','yellow_cards','red_cards','offsides','goal_kicks','passes_completed']
-    projections={'goals':{'home':hxg,'away':axg,'total':total_xg,'sample_home':h.get('sample',0),'sample_away':a.get('sample',0)} }
+    projections={'goals':{'home':hxg,'away':axg,'total':total_xg,'sample_home':h.get('sample',0),'sample_away':a.get('sample',0)}}
     for key in projection_keys:projections[key]=_projected_value(h,a,key)
     coverage={key:{'home':h.get(key+'_sample',0),'away':a.get(key+'_sample',0)} for key in METRICS}
     return {'home':h,'away':a,'xg_home':hxg,'xg_away':axg,'probabilities':p,'coverage':coverage,'sample_home':h.get('sample',0),'sample_away':a.get('sample',0),'markets':markets,'btts':btts,'projections':projections}
