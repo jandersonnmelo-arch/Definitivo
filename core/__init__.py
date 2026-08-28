@@ -119,3 +119,57 @@ try:
 except Exception:
     # O patch é defensivo: qualquer falha mantém o comportamento original.
     pass
+
+# Proteção contra colisão de provider_match_id durante a coleta do histórico.
+# Alguns provedores podem reenviar a mesma partida com um id canônico diferente.
+# Nesse caso reutilizamos o match_id já associado ao provider, evitando
+# IntegrityError na UNIQUE(source, provider_match_id) de match_sources.
+try:
+    import sqlite3 as _sqlite3
+    import core.db as _db
+
+    _original_db_upsert_match = _db.upsert_match
+
+    def _safe_db_upsert_match(match):
+        source = match.get('source', 'unknown')
+        provider_id = str(match.get('provider_match_id', match.get('id') or ''))
+        try:
+            c = _db.connect()
+            row = c.execute(
+                'SELECT match_id FROM match_sources WHERE source=? AND provider_match_id=?',
+                (source, provider_id),
+            ).fetchone()
+            c.close()
+            if row and row['match_id']:
+                existing_id = str(row['match_id'])
+                incoming_id = str(match.get('id') or '')
+                if existing_id != incoming_id:
+                    match = dict(match)
+                    match['id'] = existing_id
+        except Exception:
+            pass
+        try:
+            return _original_db_upsert_match(match)
+        except _sqlite3.IntegrityError:
+            # Última proteção: se a restrição UNIQUE(source, provider_match_id)
+            # ainda for atingida por uma condição de corrida, reaproveita o id
+            # que já está registrado e tenta novamente uma única vez.
+            try:
+                c = _db.connect()
+                row = c.execute(
+                    'SELECT match_id FROM match_sources WHERE source=? AND provider_match_id=?',
+                    (source, provider_id),
+                ).fetchone()
+                c.close()
+                if row and row['match_id']:
+                    retry = dict(match)
+                    retry['id'] = str(row['match_id'])
+                    return _original_db_upsert_match(retry)
+            except Exception:
+                pass
+            raise
+
+    _db.upsert_match = _safe_db_upsert_match
+    _history.upsert_match = _safe_db_upsert_match
+except Exception:
+    pass
