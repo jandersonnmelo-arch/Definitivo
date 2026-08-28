@@ -6,6 +6,7 @@ from providers.fotmob import FotMobProvider
 from providers.api_football import ApiFootballProvider
 from core.repository import canonical_id, upsert_match, upsert_match_stats, upsert_players, upsert_player_stats, add_diagnostic, get_provider_id
 from core.competitions import competition_matches
+from core.data_quality import reconcile_database
 
 MAX_ENRICH_BATCH = 5
 PRESENCE_METRIC = '__player_presence__'
@@ -37,6 +38,9 @@ def _with_player_presence(players, player_stats):
 
 
 def collect(date_from, date_to, competitions=None, competition=None):
+    # Antes de uma nova coleta, consolida registros legados de equipes/jogadores
+    # para que a nova rodada seja gravada sobre a mesma identidade canônica.
+    reconcile_database()
     selected = list(competitions or [])
     if competition and competition not in selected:
         selected.append(competition)
@@ -57,6 +61,7 @@ def collect(date_from, date_to, competitions=None, competition=None):
 
 
 def enrich(matches):
+    reconcile_database()
     if len(matches) > MAX_ENRICH_BATCH:
         raise ValueError('O enriquecimento é limitado a 5 partidas por operação.')
     total = 0
