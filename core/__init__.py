@@ -48,6 +48,17 @@ try:
     _history = importlib.import_module('core.history')
     _original_build_history = _history.build_history_for_match
 
+    def _serie_b_competition(m):
+        text=str(m.get('competition') or '').strip().lower()
+        if _history._is_serie_b(text):
+            return True
+        # A ESPN pode devolver apenas "Brasileirão" no campo league.name.
+        # Neste fallback o time-alvo já foi identificado como Série B, então
+        # esse nome genérico é aceito, mas copas e Série A continuam excluídas.
+        generic_brazilian = ('brasileirao' in text or 'campeonato brasileiro' in text)
+        excluded = ('serie a' in text or 'copa do brasil' in text or 'libertadores' in text or 'sul americana' in text or 'sul-americana' in text)
+        return generic_brazilian and not excluded
+
     def _bounded_espn_history(team_name, before_iso, days=120, serie_b=False):
         provider = _history.ESPNProvider()
         before = _history._parse_start(before_iso) or _dt.datetime.now(_dt.timezone.utc)
@@ -60,7 +71,7 @@ try:
             try:
                 found=provider.matches(cur.isoformat(),cur.isoformat(),None)
                 for m in found:
-                    if serie_b and not _history._is_serie_b(m.get('competition')):
+                    if serie_b and not _serie_b_competition(m):
                         continue
                     if _history._same_team(team_name,m.get('home_name')) or _history._same_team(team_name,m.get('away_name')):
                         mid=str(m.get('id'))
