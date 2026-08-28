@@ -135,17 +135,11 @@ if selected:
                     for line,prob in lines.items():
                         try:more=float(prob);less=round(100.0-more,1)
                         except (TypeError,ValueError):more=prob;less='—'
-                        rows.append({'Mercado':label,'Linha':f'+{line} / -{line}','Mais':f'{more:g}%' if isinstance(more,float) else str(more),'Menos':f'{less:g}%' if isinstance(less,float) else str(less),'Média':obj.get('total_expected')})
+                        rows.append({'Mercado':label,'Linha':f'+{line} / -{line}','Mais':f'{more:g}%' if isinstance(more,float) else str(more),'Menos':f'{less:g}%' if isinstance(less,float) else '—','Média':obj.get('total_expected')})
                 if rows:
                     market_df=pd.DataFrame(rows)
                     st.markdown('<div class="market-caption">+ Mais • − Menos</div>',unsafe_allow_html=True)
-                    st.dataframe(market_df,hide_index=True,use_container_width=False,width=500,height=min(480,58+len(market_df)*35),column_config={
-                        'Mercado':st.column_config.TextColumn('Mercado',width=145),
-                        'Linha':st.column_config.TextColumn('Linha',width=85),
-                        'Mais':st.column_config.TextColumn('+ Mais',width=70),
-                        'Menos':st.column_config.TextColumn('− Menos',width=70),
-                        'Média':st.column_config.NumberColumn('Média',width=75,format='%.2f')
-                    })
+                    st.dataframe(market_df,hide_index=True,use_container_width=False,width=500,height=min(480,58+len(market_df)*35),column_config={'Mercado':st.column_config.TextColumn('Mercado',width=145),'Linha':st.column_config.TextColumn('Linha',width=85),'Mais':st.column_config.TextColumn('+ Mais',width=70),'Menos':st.column_config.TextColumn('− Menos',width=70),'Média':st.column_config.NumberColumn('Média',width=75,format='%.2f')})
                 else:st.info('Sem amostra estatística suficiente para os mercados solicitados.')
                 if mk.get('ambas_marcam') is not None:st.metric('🤝 Ambas marcam — SIM',f'{mk["ambas_marcam"]}%')
                 exact=(mk.get('gols') or {}).get('exact_total') or {}
@@ -154,7 +148,7 @@ if selected:
                 st.caption('Probabilidades de mercados estatísticos usam Poisson sobre médias históricas persistidas. Ausência de dado não vira zero.')
                 for tid,tname in ((m.get('home_id'),m.get('home_name')),(m.get('away_id'),m.get('away_name'))):
                     if not tid:continue
-                    summary=player_history_summary(tid,before,20);st.markdown(f'#### 👥 Jogadores da análise — {tname}')
+                    summary=player_history_summary(tid,before,limit=20);st.markdown(f'#### 👥 Jogadores da análise — {tname}')
                     if summary:
                         st.caption('Médias por jogo nos registros individuais disponíveis; Jogos = número de partidas com dados persistidos para o jogador.')
                         st.dataframe(pd.DataFrame([{'Jogador':x['name'],'Posição':position_label(x.get('position')),'Jogos':x['matches'],'Gols':format_metric_value('goals',player_avg(x.get('goals'),x.get('matches'))),'Assistências':format_metric_value('assists',player_avg(x.get('assists'),x.get('matches'))),'Finalizações certas':format_metric_value('shots_on_target',player_avg(x.get('shots_on_target'),x.get('matches'))),'Finalizações no gol':format_metric_value('shots',player_avg(x.get('shots'),x.get('matches'))),'Passes certos':format_metric_value('passes_completed',player_avg(x.get('passes_completed'),x.get('matches'))),'Desarmes':format_metric_value('tackles',player_avg(x.get('tackles'),x.get('matches'))),'Faltas cometidas':format_metric_value('fouls',player_avg(x.get('fouls'),x.get('matches'))),'Faltas sofridas':format_metric_value('was_fouled',player_avg(x.get('was_fouled'),x.get('matches')))} for x in summary]),hide_index=True,use_container_width=True)
@@ -178,11 +172,4 @@ if selected:
             else:st.info('Nenhum dado individual persistido para esta partida. Execute o enriquecimento/histórico para carregar os jogadores.')
             if m['status']!='SCHEDULED' and st.button('🧩 Enriquecer esta partida',key=f'e_{selected}',use_container_width=True):
                 with st.spinner('Enriquecendo com fontes disponíveis...'):n=enrich([m])
-                st.success(f'Enriquecimento concluído: {n} registros.');st.rerun()
-
-st.divider()
-with st.expander('🩺 Diagnóstico do sistema'):
-    u=usage_today('API-Football');st.caption(f'API-Football: {u.get("calls",0)} chamadas hoje • proteção 80/dia e 8/min • cache ativo.')
-    ds=get_diagnostics(50)
-    if ds:st.dataframe(pd.DataFrame(ds)[['created_at','stage','source','status','message']],hide_index=True,use_container_width=True)
-    else:st.info('Nenhum diagnóstico registrado ainda.')
+                st.success(f'{n} registros processados.');st.rerun()
