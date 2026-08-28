@@ -3,7 +3,7 @@ import re, unicodedata
 from providers.football_data import FootballDataProvider
 from providers.fotmob import FotMobProvider
 from providers.espn import ESPNProvider
-from core.db import get_team_provider_id, upsert_match, team_history, history_coverage, add_diagnostic as _db_add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats
+from core.db import get_team_provider_id, get_provider_id, upsert_match, team_history, history_coverage, add_diagnostic as _db_add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats
 from core.data_quality import reconcile_database
 
 HISTORY_MATCHES_PER_TEAM = 10
@@ -50,14 +50,23 @@ def _collect_team_history_from_espn(team_name,before_iso,days=120):
     add_diagnostic('historico','OK',f'ESPN: {len(rows)} partidas históricas coletadas para {team_name}',provider.name);return rows
 
 def _resolve_espn_event_id(match):
-    provider=ESPNProvider();dt=_parse_start(match.get('start_time'))
+    provider=ESPNProvider();existing=get_provider_id(match.get('id'),provider.name)
+    if existing:
+        add_diagnostic('diagnostico_jogadores','OK',f'ESPN: ID do evento recuperado do banco ({existing})',provider.name,match.get('id'));return existing
+    dt=_parse_start(match.get('start_time'))
     if not dt:return None
+    dates=[]
+    for delta in (-1,0,1):
+        d=(dt+timedelta(days=delta)).date().isoformat()
+        if d not in dates:dates.append(d)
     try:
-        rows=provider.matches(dt.date().isoformat(),dt.date().isoformat(),None)
-        for m in rows:
-            if _same_team(match.get('home_name'),m.get('home_name')) and _same_team(match.get('away_name'),m.get('away_name')):return m.get('provider_match_id')
-        for m in rows:
-            if _same_team(match.get('home_name'),m.get('away_name')) and _same_team(match.get('away_name'),m.get('home_name')):return m.get('provider_match_id')
+        candidates=0
+        for d in dates:
+            rows=provider.matches(d,d,None);candidates+=len(rows)
+            for m in rows:
+                if _same_team(match.get('home_name'),m.get('home_name')) and _same_team(match.get('away_name'),m.get('away_name')):return m.get('provider_match_id')
+                if _same_team(match.get('home_name'),m.get('away_name')) and _same_team(match.get('away_name'),m.get('home_name')):return m.get('provider_match_id')
+        add_diagnostic('diagnostico_jogadores','INFO',f'ESPN: nenhum evento encontrado em +/-1 dia; candidatos={candidates} para {match.get("home_name")} x {match.get("away_name")}',provider.name,match.get('id'))
     except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'ESPN resolver: {e}',provider.name,match.get('id'))
     return None
 
@@ -99,7 +108,7 @@ def _enrich_match_details(match,stage='historico'):
     fotmob=FotMobProvider()
     try:
         d=fotmob.match_details(match);_diagnose_source_players(match,fotmob,d);a,b,c,presence=_persist_detail(match,fotmob,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'FotMob: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',fotmob.name,match['id']);success|=bool(a or b or c or presence)
-    except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'FotMob detalhes: {e}',fotmob.name,match.get('id'))
+    except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'FotMob detalhes: {e}',fotmob.name,match['id'])
     return {'success':success,'stats':total_stats,'players':total_players,'player_stats':total_pstats}
 
 def _enrich_historical_match(match):return _enrich_match_details(match,'historico')
