@@ -4,6 +4,7 @@ from core.http_cache import get_json
 from core.normalizer import normalize_status,normalize_metric
 
 BASE='https://site.api.espn.com/apis/site/v2/sports/soccer'
+CDN='https://cdn.espn.com/core/soccer/game'
 
 class ESPNProvider(FootballProvider):
     name='ESPN'
@@ -49,18 +50,9 @@ class ESPNProvider(FootballProvider):
             except Exception:return None
         return None
 
-    def match_details(self,match_id):
-        data=get_json(f'{BASE}/{self.league}/summary',{'event':match_id},provider='ESPN')
-        stats=[]; players=[]; player_stats=[]
-        box=data.get('boxscore') or {}
-        for team_block in box.get('teams') or []:
-            tid=(team_block.get('team') or {}).get('id')
-            tname=(team_block.get('team') or {}).get('displayName') or (team_block.get('team') or {}).get('name')
-            for s in team_block.get('statistics') or []:
-                metric=normalize_metric(s.get('name') or s.get('displayName'))
-                val=self._num(s.get('displayValue',s.get('value')))
-                if val is not None: stats.append({'team_id':tid,'team_name':tname,'metric':metric,'value':val,'source':self.name})
-
+    @classmethod
+    def _extract_players(cls, box):
+        players=[]; player_stats=[]; seen=set()
         for team_block in box.get('players') or []:
             team=(team_block.get('team') or {}); tid=team.get('id'); tname=team.get('displayName') or team.get('name')
             groups=team_block.get('statistics') or []
@@ -73,26 +65,54 @@ class ESPNProvider(FootballProvider):
                 for p in athletes:
                     if not isinstance(p,dict): continue
                     ath=p.get('athlete') or p.get('player') or {}
-                    pid=ath.get('id') or p.get('id')
+                    pid=ath.get('id') or p.get('id') or p.get('playerId')
                     if not pid: continue
                     try: pid=int(pid)
                     except Exception: continue
-                    name=ath.get('displayName') or ath.get('fullName') or ath.get('shortName') or 'Sem nome'
-                    pos=ath.get('position')
+                    name=ath.get('displayName') or ath.get('fullName') or ath.get('shortName') or p.get('displayName') or 'Sem nome'
+                    pos=ath.get('position') or p.get('position')
                     if isinstance(pos,dict): pos=pos.get('abbreviation') or pos.get('displayName')
                     key=(pid,tid)
-                    if not any(z.get('_key')==key for z in players):
-                        players.append({'id':pid,'team_id':tid,'team_name':tname,'name':name,'position':pos,'source':self.name,'_key':key})
+                    if key not in seen:
+                        players.append({'id':pid,'team_id':tid,'team_name':tname,'name':name,'position':pos,'source':'ESPN'})
+                        seen.add(key)
                     vals=p.get('statistics')
                     if vals is None: vals=p.get('stats')
                     if isinstance(vals,dict): vals=list(vals.values())
                     if not isinstance(vals,list): continue
                     for i,val in enumerate(vals):
                         if i>=len(labels) or val in (None,'--','-'): continue
-                        n=self._num(val)
+                        n=cls._num(val)
                         if n is None: continue
                         label=labels[i]
                         if isinstance(label,dict): label=label.get('name') or label.get('displayName') or label.get('key')
-                        player_stats.append({'player_id':pid,'metric':normalize_metric(label),'value':n,'source':self.name})
-        for p in players: p.pop('_key',None)
+                        player_stats.append({'player_id':pid,'metric':normalize_metric(label),'value':n,'source':'ESPN'})
+        return players,player_stats
+
+    def match_details(self,match_id):
+        data=get_json(f'{BASE}/{self.league}/summary',{'event':match_id},provider='ESPN')
+        stats=[]; players=[]; player_stats=[]
+        box=data.get('boxscore') or {}
+        for team_block in box.get('teams') or []:
+            tid=(team_block.get('team') or {}).get('id')
+            tname=(team_block.get('team') or {}).get('displayName') or (team_block.get('team') or {}).get('name')
+            for s in team_block.get('statistics') or []:
+                metric=normalize_metric(s.get('name') or s.get('displayName'))
+                val=self._num(s.get('displayValue',s.get('value')))
+                if val is not None: stats.append({'team_id':tid,'team_name':tname,'metric':metric,'value':val,'source':self.name})
+
+        players,player_stats=self._extract_players(box)
+
+        if not players:
+            try:
+                pkg=get_json(CDN,{'xhr':'1','gameId':match_id},provider='ESPN')
+                game=pkg.get('gamepackageJSON') if isinstance(pkg,dict) else None
+                if isinstance(game,dict):
+                    alt_box=game.get('boxscore') or {}
+                    alt_players,alt_stats=self._extract_players(alt_box)
+                    if alt_players:
+                        players=alt_players;player_stats=alt_stats
+            except Exception:
+                pass
+
         return {'stats':stats,'players':players,'player_stats':player_stats}
