@@ -1,5 +1,6 @@
 from providers.football_data import FootballDataProvider
 from providers.espn import ESPNProvider
+from providers.espn_calendar import ESPNCalendarProvider
 from providers.fotmob import FotMobProvider
 from providers.api_football import ApiFootballProvider
 from core.repository import canonical_id, upsert_match, upsert_match_stats, upsert_players, upsert_player_stats, add_diagnostic, get_provider_id
@@ -14,7 +15,7 @@ def providers():
 
 
 def collection_providers():
-    return [FootballDataProvider(), ESPNProvider()]
+    return [FootballDataProvider(), ESPNCalendarProvider()]
 
 
 def _with_player_presence(players, player_stats):
