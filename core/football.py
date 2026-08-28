@@ -4,7 +4,7 @@ from providers.espn_calendar import ESPNCalendarProvider
 from providers.api_futebol_calendar_fixed import ApiFutebolCalendarProviderFixed
 from providers.fotmob import FotMobProvider
 from providers.api_football import ApiFootballProvider
-from providers.dados_futebol import DadosFutebolProvider
+from providers.dados_futebol_fixed import DadosFutebolProviderFixed
 from core.repository import canonical_id, upsert_match, upsert_match_stats, upsert_players, upsert_player_stats, add_diagnostic, get_provider_id
 from core.competitions import competition_matches
 from core.data_quality import reconcile_database
@@ -14,17 +14,14 @@ PRESENCE_METRIC = '__player_presence__'
 
 
 def providers():
-    return [DadosFutebolProvider(), FootballDataProvider(), ESPNProvider(), FotMobProvider(), ApiFootballProvider()]
+    return [DadosFutebolProviderFixed(), FootballDataProvider(), ESPNProvider(), FotMobProvider(), ApiFootballProvider()]
 
 
 def collection_providers():
-    # A Dados Futebol é a fonte primária da Série B. As demais fontes continuam
-    # disponíveis para os outros campeonatos e como contingência.
-    return [DadosFutebolProvider(), FootballDataProvider(), ApiFutebolCalendarProviderFixed(), ESPNCalendarProvider()]
+    return [DadosFutebolProviderFixed(), FootballDataProvider(), ApiFutebolCalendarProviderFixed(), ESPNCalendarProvider()]
 
 
 def _with_player_presence(players, player_stats):
-    """Garante que um jogador sem estatística individual ainda seja persistido."""
     existing = {(str(r.get('player_id')), r.get('source')) for r in player_stats or []}
     out = list(player_stats or [])
     for p in players or []:
@@ -65,17 +62,14 @@ def enrich(matches):
     for m in matches:
         is_serie_b = 'serie b' in str(m.get('competition') or '').lower()
         ordered = providers()
-        # Na Série B, Dados Futebol é a fonte primária e exclusiva para o
-        # enriquecimento normal. Isso evita misturar o mesmo jogo com Espanha,
-        # ESPN ou outra competição por nomes semelhantes.
         if is_serie_b:
-            ordered = [DadosFutebolProvider()]
+            ordered = [DadosFutebolProviderFixed()]
         for p in ordered:
             if not p.available():
                 continue
             try:
                 if p.name == 'Dados Futebol':
-                    pid = m.get('provider_match_id') or m.get('id')
+                    pid = m
                 elif p.name == 'API-Football':
                     pid = p.resolve_match_id(m)
                 elif p.name == 'FotMob':
@@ -85,13 +79,9 @@ def enrich(matches):
                 if not pid:
                     continue
                 d = p.match_details(pid)
-                for row in d.get('stats', []):
-                    row['source'] = p.name
-                for row in d.get('players', []):
-                    row['source'] = p.name
-                    row['match_id'] = m['id']
-                for row in d.get('player_stats', []):
-                    row['source'] = p.name
+                for row in d.get('stats', []): row['source'] = p.name
+                for row in d.get('players', []): row['source'] = p.name; row['match_id'] = m['id']
+                for row in d.get('player_stats', []): row['source'] = p.name
                 players = d.get('players', []) or []
                 player_stats = _with_player_presence(players, d.get('player_stats', []))
                 upsert_match_stats(m['id'], d.get('stats', []))
@@ -100,8 +90,7 @@ def enrich(matches):
                 count = len(d.get('stats', [])) + len(player_stats) + len(players)
                 total += count
                 add_diagnostic('enriquecimento', 'OK', f'{p.name}: {count} registros processados ({len(players)} jogadores)', p.name, m['id'])
-                if is_serie_b:
-                    break
+                if is_serie_b: break
             except Exception as e:
                 add_diagnostic('enriquecimento', 'ERROR', f'{p.name}: {e}', p.name, m['id'])
     return total
