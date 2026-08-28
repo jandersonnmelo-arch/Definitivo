@@ -1,12 +1,20 @@
-from math import exp, factorial
+from math import exp, log, lgamma
 from core.db import connect
 from core.normalizer import METRICS, average, source_rank
 
 
 def poisson(k, lam):
-    if lam is None or lam < 0:
+    if lam is None or not isinstance(lam, (int, float)) or lam < 0 or k < 0:
         return 0.0
-    return exp(-lam) * lam**k / factorial(k)
+    if lam == 0:
+        return 1.0 if k == 0 else 0.0
+    try:
+        log_p = -lam + k * log(lam) - lgamma(k + 1)
+        if log_p < -745:
+            return 0.0
+        return exp(log_p)
+    except (OverflowError, ValueError):
+        return 0.0
 
 
 def poisson_over(lam, line):
