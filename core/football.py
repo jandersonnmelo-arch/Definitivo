@@ -37,12 +37,7 @@ def _with_player_presence(players, player_stats):
 
 
 def _attach_player_teams(players, player_stats):
-    """Propaga equipe dos jogadores para seus stats.
-
-    A ESPN retorna frequentemente player_stats sem team_id. O banco usa
-    team_id no JOIN da tela da partida; sem esta associação os stats eram
-    persistidos, mas ficavam invisíveis para get_players().
-    """
+    """Propaga equipe dos jogadores para seus stats."""
     by_player = {}
     for p in players or []:
         by_player[(str(p.get('id')), p.get('source'))] = p
@@ -57,6 +52,56 @@ def _attach_player_teams(players, player_stats):
             if row.get('team_name') is None:
                 row['team_name'] = p.get('team_name')
         out.append(row)
+    return out
+
+
+def _merge_players(existing, incoming):
+    """Mescla identidades do mesmo jogador vindas de fontes diferentes."""
+    out = list(existing or [])
+    index = {(str(p.get('id')), str(p.get('team_id'))): i for i, p in enumerate(out)}
+    for p in incoming or []:
+        key = (str(p.get('id')), str(p.get('team_id')))
+        if key not in index:
+            index[key] = len(out)
+            out.append(dict(p))
+            continue
+        cur = out[index[key]]
+        # Mantém a melhor informação disponível sem trocar a identidade.
+        for field in ('name', 'position', 'team_name', 'team_id'):
+            if cur.get(field) in (None, '', '—') and p.get(field) not in (None, '', '—'):
+                cur[field] = p.get(field)
+    return out
+
+
+def _stat_key(row):
+    return (str(row.get('player_id')), canonical_player_metric_safe(row.get('metric')), row.get('value'), str(row.get('source') or ''))
+
+
+def canonical_player_metric_safe(metric):
+    try:
+        from core.normalizer import canonical_player_metric
+        return canonical_player_metric(metric) or str(metric or '')
+    except Exception:
+        return str(metric or '')
+
+
+def _merge_player_stats(existing, incoming):
+    """Mescla stats, nunca substitui uma fonte completa por outra parcial.
+
+    Este era o ponto que estava causando o sintoma dos prints: ESPN podia
+    trazer passes/desarmes, depois FotMob respondia com outros dados e o
+    fluxo gravava apenas o pacote FotMob. Agora todas as fontes contribuem.
+    """
+    out = list(existing or [])
+    seen = {_stat_key(r) for r in out}
+    # Preserva também a primeira ocorrência de uma métrica/valor equivalente.
+    for r in incoming or []:
+        row = dict(r)
+        key = _stat_key(row)
+        if key in seen:
+            continue
+        out.append(row)
+        seen.add(key)
     return out
 
 
@@ -117,10 +162,9 @@ def collect(date_from, date_to, competitions=None, competition=None):
 def enrich(matches):
     """Enriquece diretamente a partida selecionada, sem exigir histórico.
 
-    Um provider que só entrega estatísticas de equipe não encerra o fluxo:
-    continuamos para ESPN/FotMob para obter jogadores e stats individuais.
-    Isso é especialmente importante porque Football-Data.org não fornece
-    jogadores no endpoint de detalhes.
+    Cada provider pode contribuir com uma parte diferente dos dados. O fluxo
+    agora acumula e mescla os jogadores/stats individuais entre as fontes,
+    em vez de substituir o pacote anterior pelo último provider consultado.
     """
     dedupe_existing_matches()
     reconcile_database()
@@ -131,6 +175,10 @@ def enrich(matches):
         is_serie_b = 'serie b' in str(m.get('competition') or '').lower()
         ordered = [DadosFutebolProviderFixed(), FotMobProvider(), ESPNProvider()] if is_serie_b else providers()
         primary_ok = False
+        accumulated_players = []
+        accumulated_player_stats = []
+        any_player_data = False
+
         for p in ordered:
             if not p.available():
                 continue
@@ -145,10 +193,12 @@ def enrich(matches):
                     pid = get_provider_id(m['id'], p.name)
                 if not pid:
                     continue
+
                 d = p.match_details(pid)
                 stats_rows = d.get('stats', []) or []
                 players = d.get('players', []) or []
                 player_stats = d.get('player_stats', []) or []
+
                 for row in stats_rows:
                     row['source'] = p.name
                 for row in players:
@@ -163,26 +213,32 @@ def enrich(matches):
                 if is_serie_b and p.name != 'Dados Futebol':
                     missing_before = _missing_metric_names(m)
                     filtered_stats = [row for row in stats_rows if canonical_match_metric(row.get('metric')) in missing_before]
-                    upsert_match_stats(m['id'], filtered_stats)
+                    if filtered_stats:
+                        upsert_match_stats(m['id'], filtered_stats)
                     filled = len(filtered_stats)
                     total += filled
-                    add_diagnostic('enriquecimento_fallback', 'OK', f'{p.name}: {filled} métricas ausentes recuperadas; restantes: {sorted(_missing_metric_names(m))}', p.name, m['id'])
-                    if not _missing_metric_names(m) and players:
-                        upsert_players(players)
-                        upsert_player_stats(m['id'], player_stats)
+                    if players:
+                        accumulated_players = _merge_players(accumulated_players, players)
+                        accumulated_player_stats = _merge_player_stats(accumulated_player_stats, player_stats)
+                        any_player_data = True
+                    add_diagnostic('enriquecimento_fallback', 'OK', f'{p.name}: {filled} métricas ausentes recuperadas; jogadores acumulados: {len(accumulated_players)}; stats individuais acumulados: {len(accumulated_player_stats)}', p.name, m['id'])
+                    if not _missing_metric_names(m) and accumulated_players:
+                        upsert_players(accumulated_players)
+                        upsert_player_stats(m['id'], accumulated_player_stats)
                         primary_ok = True
                         break
-                    if players:
-                        upsert_players(players)
-                        upsert_player_stats(m['id'], player_stats)
                     continue
 
                 if stats_rows:
                     upsert_match_stats(m['id'], stats_rows)
+
                 if players:
-                    upsert_players(players)
-                if player_stats:
-                    upsert_player_stats(m['id'], player_stats)
+                    accumulated_players = _merge_players(accumulated_players, players)
+                    accumulated_player_stats = _merge_player_stats(accumulated_player_stats, player_stats)
+                    any_player_data = True
+                    # Persiste incrementalmente, mas nunca substitui a fonte anterior.
+                    upsert_players(accumulated_players)
+                    upsert_player_stats(m['id'], accumulated_player_stats)
 
                 if p.name in ('Football-Data.org','ESPN'):
                     espn_id = pid if p.name == 'ESPN' else get_provider_id(m['id'], 'ESPN')
@@ -193,21 +249,23 @@ def enrich(matches):
 
                 count = len(stats_rows) + len(player_stats) + len(players)
                 total += count
-                has_player_data = bool(players) and bool(player_stats)
                 missing_team_stats = bool(_missing_metric_names(m))
                 primary_ok = True
-                add_diagnostic('enriquecimento', 'OK', f'{p.name}: {count} registros processados ({len(players)} jogadores); stats individuais: {len(player_stats)}', p.name, m['id'])
+                add_diagnostic('enriquecimento', 'OK', f'{p.name}: {count} registros processados ({len(players)} jogadores); stats individuais: {len(player_stats)}; acumulado: {len(accumulated_players)} jogadores / {len(accumulated_player_stats)} stats', p.name, m['id'])
 
-                # Não pare só porque a primeira fonte respondeu. Continue se
-                # ainda faltam jogadores/stats individuais ou métricas de equipe.
-                if has_player_data and not missing_team_stats:
-                    break
-                if has_player_data and not players:
+                # Continua enquanto houver métricas de equipe faltando. Os
+                # jogadores/stats acumulados são preservados entre providers.
+                if any_player_data and not missing_team_stats:
                     break
             except Exception as e:
                 add_diagnostic('enriquecimento', 'ERROR', f'{p.name}: {e}', p.name, m['id'])
                 if is_serie_b:
                     continue
+
+        # Garante uma gravação final com a união de todas as fontes.
+        if accumulated_players:
+            upsert_players(accumulated_players)
+            upsert_player_stats(m['id'], accumulated_player_stats)
         if not primary_ok:
             add_diagnostic('enriquecimento', 'WARNING', 'Nenhum provider conseguiu concluir o enriquecimento direto.', None, m['id'])
     return total
