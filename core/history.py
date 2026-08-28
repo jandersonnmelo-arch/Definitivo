@@ -4,6 +4,7 @@ from providers.football_data import FootballDataProvider
 from providers.fotmob import FotMobProvider
 from providers.espn import ESPNProvider
 from core.db import get_team_provider_id, upsert_match, team_history, history_coverage, add_diagnostic as _db_add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats
+from core.data_quality import reconcile_database
 
 HISTORY_MATCHES_PER_TEAM = 10
 HISTORY_DAYS = 180
@@ -117,6 +118,7 @@ def _has_required_team_metrics(match_id):
     return bool(values.get('passes_completed')) and any(v>0 for v in values['passes_completed']) and bool(values.get('effectivetackles')) and any(v>0 for v in values['effectivetackles'])
 
 def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days=HISTORY_DAYS):
+    reconcile_database()
     before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat();team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x];all_selected={}
     for team_id in team_ids:
         if history_coverage(team_id,before_iso)<matches_per_team:_collect_team_history_from_football_data(team_id,before_iso,days)
