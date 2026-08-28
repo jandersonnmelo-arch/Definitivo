@@ -1,10 +1,31 @@
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 from .dados_futebol import DadosFutebolProvider, _find_match_records
+
+MANAUS = ZoneInfo('America/Manaus')
 
 
 class DadosFutebolProviderFixed(DadosFutebolProvider):
-    """Adaptador final: preserva os IDs canônicos dos times na escalação."""
+    """Adaptador final: IDs dos times/jogadores e janela em horário de Manaus."""
 
     name = 'Dados Futebol'
+
+    def matches(self, date_from, date_to, competition=None):
+        # Consulta uma borda de ±1 dia e aplica o filtro final no fuso oficial do app.
+        start = datetime.fromisoformat(date_from) - timedelta(days=1)
+        end = datetime.fromisoformat(date_to) + timedelta(days=1)
+        rows = super().matches(start.date().isoformat(), end.date().isoformat(), competition)
+        wanted_start = datetime.fromisoformat(date_from).date()
+        wanted_end = datetime.fromisoformat(date_to).date()
+        out = []
+        for row in rows:
+            try:
+                local_date = datetime.fromisoformat(str(row.get('start_time')).replace('Z', '+00:00')).astimezone(MANAUS).date()
+            except Exception:
+                continue
+            if wanted_start <= local_date <= wanted_end:
+                out.append(row)
+        return out
 
     def match_details(self, match_id):
         metadata = match_id if isinstance(match_id, dict) else {}
@@ -39,8 +60,4 @@ class DadosFutebolProviderFixed(DadosFutebolProvider):
         stats = self._team_stats(detail, match_stub)
         player_stats = self._player_stats(detail, players)
 
-        return {
-            'stats': stats,
-            'players': players,
-            'player_stats': player_stats,
-        }
+        return {'stats': stats, 'players': players, 'player_stats': player_stats}
