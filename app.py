@@ -101,9 +101,12 @@ if selected:
             else:st.warning('Há jogos históricos, mas as métricas detalhadas ainda não foram persistidas.')
             mk=analysis['markets'];st.markdown('### 🎯 Estatísticas de palpites');rows=[]
             market_specs=[('Gols','gols'),('Finalizações totais','finalizacoes'),('Finalizações no gol','finalizacoes_no_alvo'),('Desarmes','desarmes_efetivos'),('Escanteios','escanteios'),('Faltas','faltas'),('Passes','passes_certos'),('Defesa do goleiro','defesas'),('Cartão amarelo','cartoes_amarelos'),('Cartão vermelho','cartoes_vermelhos'),('Laterais','laterais'),('Finalizações na trave','finalizacoes_na_trave'),('Impedimento','impedimentos'),('Tiro de metas','tiros_de_meta')]
+            always_show={'desarmes_efetivos','passes_certos','cartoes_amarelos','cartoes_vermelhos'}
             for label,key in market_specs:
                 obj=mk.get(key) or {};lines=obj.get('lines') or {}
-                if obj.get('total_expected') is None and not lines:continue
+                if obj.get('total_expected') is None and not lines:
+                    if key in always_show:rows.append({'Mercado':label,'Linha':'—','Probabilidade':'Sem dados','Média projetada':'—'})
+                    continue
                 for line,prob in lines.items():rows.append({'Mercado':label,'Linha':f'Over {line}','Probabilidade':f'{prob}%','Média projetada':obj.get('total_expected')})
             if rows:st.dataframe(pd.DataFrame(rows),hide_index=True,use_container_width=True)
             else:st.info('Sem amostra estatística suficiente para os mercados solicitados.')
