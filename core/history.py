@@ -10,8 +10,6 @@ HISTORY_MATCHES_PER_TEAM = 10
 HISTORY_DAYS = 180
 PRESENCE_METRIC = '__player_presence__'
 
-# Aliases usados SOMENTE para resolver identidade textual antes da persistência.
-# As chaves abaixo consideram a normalização feita por _norm_name().
 TEAM_ALIASES = {
     'bayer leverkusen':'bayer 04 leverkusen',
     'bayer 04':'bayer 04 leverkusen',
@@ -35,6 +33,8 @@ TEAM_ALIASES = {
     'sao paulo':'sao paulo',
     'sao paulo fc':'sao paulo',
     'corinthians':'corinthians',
+    'corinthians paulista':'corinthians',
+    'sport corinthians paulista':'corinthians',
     'sport club corinthians paulista':'corinthians',
     'santos':'santos',
     'santos fc':'santos',
@@ -73,9 +73,6 @@ def _parse_start(value):
 def _norm_name(value):
     s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower()
     s=re.sub(r'[^a-z0-9]+',' ',s).strip()
-    # Variantes compostas precisam ser reconhecidas antes de remover
-    # abreviações genéricas como CA/AC/EC; caso contrário "CA Mineiro"
-    # vira apenas "mineiro" e perde a identidade do Atletico Mineiro.
     if s in {'ca mineiro','atletico mg','clube atletico mineiro','atletico mineiro'}:
         return 'atletico mineiro'
     if s == 'cam':
@@ -194,10 +191,8 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
         if history_coverage(team_id,before_iso)<matches_per_team:_collect_team_history_from_football_data(team_id,before_iso,days)
         hist=_history_matches_for_team(team_id,before_iso,matches_per_team)
         if len(hist)<matches_per_team:_collect_team_history_from_espn(match['home_name'] if team_id==match.get('home_id') else match['away_name'],before_iso,120)
-
     reconciliation=reconcile_database(force=True)
     add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-coleta: equipes={reconciliation.get("teams_merged",0)}, jogadores={reconciliation.get("players_merged",0)}, estatísticas migradas={reconciliation.get("stats_migrated",0)}, duplicadas removidas={reconciliation.get("stats_deduped",0)}','SYSTEM',match.get('id'))
-
     team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
     historical_pool=[]
     for team_id in team_ids:historical_pool.extend(_history_matches_for_team(team_id,before_iso,matches_per_team))
@@ -205,7 +200,6 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
     for h in sorted(historical_pool,key=lambda x:x.get('start_time') or '',reverse=True):
         if h['id'] not in seen:historical.append(h);seen.add(h['id'])
     historical=historical[:matches_per_team*2]
-
     enriched=stats_records=player_records=player_matches=0
     for h in historical:
         if get_stats(h['id']) and _has_real_player_stats(h['id']) and _has_required_team_metrics(h['id']):continue
@@ -213,13 +207,10 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
         if r['success']:
             enriched+=1;stats_records+=r['stats'];player_records+=r['player_stats']
             if r['players'] or r['player_stats']:player_matches+=1
-
     reconciliation2=reconcile_database(force=True)
     if any(reconciliation2.values()):add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-enriquecimento: equipes={reconciliation2.get("teams_merged",0)}, jogadores={reconciliation2.get("players_merged",0)}, estatísticas migradas={reconciliation2.get("stats_migrated",0)}, duplicadas removidas={reconciliation2.get("stats_deduped",0)}','SYSTEM',match.get('id'))
-
     current=_enrich_match_details(match,'partida');player_records+=current['player_stats'];stats_records+=current['stats']
     if current['players']:player_matches+=1
     reconcile_database(force=True)
-
     home_n=len(_history_matches_for_team(team_ids[0],before_iso,matches_per_team)) if team_ids else 0;away_n=len(_history_matches_for_team(team_ids[-1],before_iso,matches_per_team)) if team_ids else 0
     return {'home_matches':home_n,'away_matches':away_n,'historical_matches':len(historical),'player_matches_enriched':player_matches,'stats_records':stats_records,'player_records':player_records,'current_players':current['players'],'current_stats':current['stats']}
