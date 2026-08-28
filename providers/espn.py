@@ -1,186 +1,311 @@
 from datetime import datetime
+import re
 from .base import FootballProvider
 from core.http_cache import get_json
-from core.normalizer import normalize_status,normalize_metric
+from core.normalizer import normalize_status, normalize_metric, canonical_player_metric
 
-BASE='https://site.api.espn.com/apis/site/v2/sports/soccer'
-CDN='https://cdn.espn.com/core/soccer/game'
+BASE = 'https://site.api.espn.com/apis/site/v2/sports/soccer'
+CDN = 'https://cdn.espn.com/core/soccer/game'
+
 
 class ESPNProvider(FootballProvider):
-    name='ESPN'
-    def __init__(self,league='all'): self.league=league
-    def available(self): return True
+    name = 'ESPN'
 
-    def matches(self,date_from,date_to,competition=None):
-        out=[]; cur=datetime.fromisoformat(date_from); end=datetime.fromisoformat(date_to)
-        while cur<=end:
-            ds=cur.strftime('%Y%m%d')
-            data=get_json(f'{BASE}/{self.league}/scoreboard',{'dates':ds},provider='ESPN')
-            for x in data.get('events',[]):
-                comp=((x.get('competitions') or [{}])[0].get('league') or {}).get('name') or ((x.get('season') or {}).get('displayName'))
-                if competition and competition.lower() not in str(comp).lower(): continue
-                c=(x.get('competitions') or [{}])[0]; teams=c.get('competitors') or []
-                home=next((t for t in teams if t.get('homeAway')=='home'),teams[0] if teams else {})
-                away=next((t for t in teams if t.get('homeAway')=='away'),teams[1] if len(teams)>1 else {})
-                st=x.get('status') or {}; typ=st.get('type') or {}
-                status=normalize_status(typ.get('name') or typ.get('state') or typ.get('description'),typ.get('completed'))
-                out.append({'id':str(x.get('id')),'provider_match_id':str(x.get('id')),'sport':'Futebol','competition':comp,'season':str((x.get('season') or {}).get('year') or ''),'start_time':x.get('date'),'status':status,'minute':self._minute(st,status),'home_id':(home.get('team') or {}).get('id'),'home_name':(home.get('team') or {}).get('displayName') or home.get('displayName',''),'home_short':(home.get('team') or {}).get('abbreviation'),'away_id':(away.get('team') or {}).get('id'),'away_name':(away.get('team') or {}).get('displayName') or away.get('displayName',''),'away_short':(away.get('team') or {}).get('abbreviation'),'home_score':self._score(home) if status in ('LIVE','PAUSED','FINISHED') else None,'away_score':self._score(away) if status in ('LIVE','PAUSED','FINISHED') else None,'source':self.name})
-            cur=cur.fromordinal(cur.toordinal()+1)
+    def __init__(self, league='all'):
+        self.league = league
+
+    def available(self):
+        return True
+
+    def matches(self, date_from, date_to, competition=None):
+        out = []
+        cur = datetime.fromisoformat(date_from)
+        end = datetime.fromisoformat(date_to)
+        while cur <= end:
+            ds = cur.strftime('%Y%m%d')
+            data = get_json(f'{BASE}/{self.league}/scoreboard', {'dates': ds}, provider='ESPN')
+            for x in data.get('events', []):
+                comp = ((x.get('competitions') or [{}])[0].get('league') or {}).get('name') or ((x.get('season') or {}).get('displayName'))
+                if competition and competition.lower() not in str(comp).lower():
+                    continue
+                c = (x.get('competitions') or [{}])[0]
+                teams = c.get('competitors') or []
+                home = next((t for t in teams if t.get('homeAway') == 'home'), teams[0] if teams else {})
+                away = next((t for t in teams if t.get('homeAway') == 'away'), teams[1] if len(teams) > 1 else {})
+                st = x.get('status') or {}
+                typ = st.get('type') or {}
+                status = normalize_status(typ.get('name') or typ.get('state') or typ.get('description'), typ.get('completed'))
+                out.append({
+                    'id': str(x.get('id')), 'provider_match_id': str(x.get('id')), 'sport': 'Futebol',
+                    'competition': comp, 'season': str((x.get('season') or {}).get('year') or ''),
+                    'start_time': x.get('date'), 'status': status, 'minute': self._minute(st, status),
+                    'home_id': (home.get('team') or {}).get('id'),
+                    'home_name': (home.get('team') or {}).get('displayName') or home.get('displayName', ''),
+                    'home_short': (home.get('team') or {}).get('abbreviation'),
+                    'away_id': (away.get('team') or {}).get('id'),
+                    'away_name': (away.get('team') or {}).get('displayName') or away.get('displayName', ''),
+                    'away_short': (away.get('team') or {}).get('abbreviation'),
+                    'home_score': self._score(home) if status in ('LIVE', 'PAUSED', 'FINISHED') else None,
+                    'away_score': self._score(away) if status in ('LIVE', 'PAUSED', 'FINISHED') else None,
+                    'source': self.name,
+                })
+            cur = cur.fromordinal(cur.toordinal() + 1)
         return out
 
     @staticmethod
     def _score(t):
-        try:return int(t.get('score')) if t.get('score') is not None else None
-        except Exception:return None
-    @staticmethod
-    def _minute(status_obj,status):
-        if status not in ('LIVE','PAUSED'): return None
-        clock=status_obj.get('displayClock')
-        if clock:
-            try:return int(float(str(clock).split(':')[0]))
-            except Exception: pass
-        try:return int(status_obj.get('period')) if status_obj.get('period') is not None else None
-        except Exception:return None
+        try:
+            return int(t.get('score')) if t.get('score') is not None else None
+        except Exception:
+            return None
 
     @staticmethod
-    def _num(v):
-        if isinstance(v,(int,float)): return float(v)
-        if isinstance(v,str):
-            try:return float(v.replace('%','').replace(',','.'))
-            except Exception:return None
+    def _minute(status_obj, status):
+        if status not in ('LIVE', 'PAUSED'):
+            return None
+        clock = status_obj.get('displayClock')
+        if clock:
+            try:
+                return int(float(str(clock).split(':')[0]))
+            except Exception:
+                pass
+        try:
+            return int(status_obj.get('period')) if status_obj.get('period') is not None else None
+        except Exception:
+            return None
+
+    @staticmethod
+    def _key(value):
+        s = str(value or '').strip()
+        s = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s)
+        return re.sub(r'[^A-Za-z0-9]+', '_', s).strip('_').lower()
+
+    @classmethod
+    def _num(cls, value):
+        if isinstance(value, bool):
+            return None
+        if isinstance(value, (int, float)):
+            return float(value)
+        if isinstance(value, dict):
+            for key in ('value', 'displayValue', 'numericValue', 'total'):
+                if key in value:
+                    n = cls._num(value.get(key))
+                    if n is not None:
+                        return n
+            return None
+        if value is None:
+            return None
+        s = str(value).strip()
+        if not s or s in {'--', '-', 'N/A', 'null'}:
+            return None
+        try:
+            return float(s.replace('%', '').replace(',', '.'))
+        except Exception:
+            pass
+        m = re.fullmatch(r'(\d+):(\d{1,2})', s)
+        if m:
+            return float(m.group(1)) + float(m.group(2)) / 60.0
         return None
 
     @classmethod
+    def _player_metric(cls, label):
+        key = cls._key(label)
+        aliases = {
+            'goal': 'goals', 'goals_scored': 'goals', 'total_goals': 'goals',
+            'assist': 'assists', 'accurate_passes': 'passes_completed', 'accuratepasses': 'passes_completed',
+            'passes_accurate': 'passes_completed', 'total_passes_completed': 'passes_completed',
+            'total_shots': 'shots', 'shots_total': 'shots', 'shots_on_goal': 'shots_on_target',
+            'shots_on_target_total': 'shots_on_target', 'shots_woodwork': 'shots_woodwork',
+            'total_tackles': 'tackles', 'effective_tackles': 'tackles',
+            'fouls_committed': 'fouls', 'fouled': 'was_fouled', 'fouls_suffered': 'was_fouled',
+            'minutes': 'minutes_played', 'minutes_played_total': 'minutes_played',
+            'yellow_cards': 'yellow_cards', 'red_cards': 'red_cards',
+        }
+        key = aliases.get(key, key)
+        return canonical_player_metric(key) or key
+
+    @classmethod
+    def _stat_pairs(cls, group, athlete):
+        keys = group.get('keys') or group.get('labels') or group.get('names') or group.get('descriptions') or []
+        values = athlete.get('statistics')
+        if values is None:
+            values = athlete.get('stats')
+        if values is None:
+            values = athlete.get('values')
+        if values is None:
+            values = athlete.get('totals')
+        rows = []
+        if isinstance(values, dict):
+            for k, v in values.items():
+                n = cls._num(v)
+                if n is not None:
+                    rows.append((k, n))
+            return rows
+        if not isinstance(values, list):
+            return rows
+        for i, value in enumerate(values):
+            label = keys[i] if i < len(keys) else None
+            if isinstance(value, dict):
+                label = value.get('name') or value.get('key') or value.get('label') or value.get('displayName') or label
+                raw = value.get('value', value.get('displayValue', value.get('numericValue', value.get('total'))))
+            else:
+                raw = value
+            n = cls._num(raw)
+            if label is not None and n is not None:
+                rows.append((label, n))
+        return rows
+
+    @classmethod
     def _extract_players(cls, box):
-        players=[]; player_stats=[]; seen=set()
+        players, player_stats = [], []
+        seen_players, seen_stats = set(), set()
         for team_block in box.get('players') or []:
-            if not isinstance(team_block,dict): continue
-            team=(team_block.get('team') or {}); tid=team.get('id'); tname=team.get('displayName') or team.get('name')
-            groups=team_block.get('statistics') or []
-            if not isinstance(groups,list): continue
+            if not isinstance(team_block, dict):
+                continue
+            team = team_block.get('team') or {}
+            tid = team.get('id')
+            tname = team.get('displayName') or team.get('name')
+            groups = team_block.get('statistics') or []
+            if not isinstance(groups, list):
+                continue
             for group in groups:
-                if not isinstance(group,dict): continue
-                labels=group.get('labels') or group.get('names') or group.get('descriptions') or []
-                athletes=group.get('athletes') or group.get('players') or []
-                if not isinstance(athletes,list): continue
-                for p in athletes:
-                    if not isinstance(p,dict): continue
-                    ath=p.get('athlete') or p.get('player') or {}
-                    if not isinstance(ath,dict): continue
-                    pid=ath.get('id') or p.get('id') or p.get('playerId')
-                    if not pid: continue
-                    try: pid=int(pid)
-                    except Exception: continue
-                    name=ath.get('displayName') or ath.get('fullName') or ath.get('shortName') or p.get('displayName') or 'Sem nome'
-                    pos=ath.get('position') or p.get('position')
-                    if isinstance(pos,dict): pos=pos.get('abbreviation') or pos.get('displayName')
-                    key=(pid,tid)
-                    if key not in seen:
-                        players.append({'id':pid,'team_id':tid,'team_name':tname,'name':name,'position':pos,'source':'ESPN'});seen.add(key)
-                    vals=p.get('statistics')
-                    if vals is None: vals=p.get('stats')
-                    if isinstance(vals,dict): vals=list(vals.values())
-                    if not isinstance(vals,list): continue
-                    for i,val in enumerate(vals):
-                        if i>=len(labels) or val in (None,'--','-'): continue
-                        n=cls._num(val)
-                        if n is None: continue
-                        label=labels[i]
-                        if isinstance(label,dict): label=label.get('name') or label.get('displayName') or label.get('key')
-                        player_stats.append({'player_id':pid,'metric':normalize_metric(label),'value':n,'source':'ESPN'})
-        return players,player_stats
+                if not isinstance(group, dict):
+                    continue
+                athletes = group.get('athletes') or group.get('players') or []
+                if not isinstance(athletes, list):
+                    continue
+                for item in athletes:
+                    if not isinstance(item, dict):
+                        continue
+                    ath = item.get('athlete') or item.get('player') or item
+                    if not isinstance(ath, dict):
+                        continue
+                    pid = ath.get('id') or item.get('id') or item.get('playerId')
+                    if not pid:
+                        continue
+                    try:
+                        pid = int(pid)
+                    except Exception:
+                        continue
+                    name = ath.get('displayName') or ath.get('fullName') or ath.get('shortName') or item.get('displayName') or 'Sem nome'
+                    pos = ath.get('position') or item.get('position')
+                    if isinstance(pos, dict):
+                        pos = pos.get('abbreviation') or pos.get('displayName')
+                    pkey = (pid, str(tid))
+                    if pkey not in seen_players:
+                        players.append({'id': pid, 'team_id': tid, 'team_name': tname, 'name': name, 'position': pos, 'source': cls.name})
+                        seen_players.add(pkey)
+                    for label, value in cls._stat_pairs(group, item):
+                        metric = cls._player_metric(label)
+                        if metric == '__player_presence__':
+                            continue
+                        skey = (pid, metric, value)
+                        if skey not in seen_stats:
+                            player_stats.append({'player_id': pid, 'metric': metric, 'value': value, 'source': cls.name})
+                            seen_stats.add(skey)
+        return players, player_stats
 
     @classmethod
     def _extract_players_recursive(cls, node, team_id=None, team_name=None, depth=0):
-        """Fallback for ESPN payloads whose player data is outside boxscore.players."""
-        players=[]; stats=[]; seen=set(); stat_seen=set()
-        if node is None or depth>10: return players,stats
-        if isinstance(node,list):
+        if node is None or depth > 10:
+            return [], []
+        players, stats = [], []
+        if isinstance(node, list):
             for item in node:
-                p,s=cls._extract_players_recursive(item,team_id,team_name,depth+1)
-                for x in p:
-                    if x['id'] not in seen: players.append(x);seen.add(x['id'])
-                stats.extend(s)
-            return players,stats
-        if not isinstance(node,dict): return players,stats
-        local_team=node.get('team') if isinstance(node.get('team'),dict) else {}
-        tid=node.get('teamId') or local_team.get('id') or team_id
-        tname=node.get('teamName') or local_team.get('displayName') or local_team.get('name') or team_name
-        ath=node.get('athlete') or node.get('player')
-        if isinstance(ath,dict):
-            pid=ath.get('id') or node.get('id') or node.get('playerId')
-            name=ath.get('displayName') or ath.get('fullName') or ath.get('shortName') or node.get('displayName') or node.get('fullName')
+                p, s = cls._extract_players_recursive(item, team_id, team_name, depth + 1)
+                players.extend(p); stats.extend(s)
+            return cls._dedupe(players, stats)
+        if not isinstance(node, dict):
+            return [], []
+        local_team = node.get('team') if isinstance(node.get('team'), dict) else {}
+        tid = node.get('teamId') or local_team.get('id') or team_id
+        tname = node.get('teamName') or local_team.get('displayName') or local_team.get('name') or team_name
+        ath = node.get('athlete') or node.get('player')
+        if isinstance(ath, dict):
+            pid = ath.get('id') or node.get('id') or node.get('playerId')
+            name = ath.get('displayName') or ath.get('fullName') or ath.get('shortName') or node.get('displayName') or node.get('fullName')
             if pid and name:
-                try: pid=int(pid)
-                except Exception: pid=None
+                try:
+                    pid = int(pid)
+                except Exception:
+                    pid = None
                 if pid:
-                    pos=ath.get('position') or node.get('position')
-                    if isinstance(pos,dict): pos=pos.get('abbreviation') or pos.get('displayName')
-                    players.append({'id':pid,'team_id':tid,'team_name':tname,'name':name,'position':pos,'source':'ESPN'})
-                    labels=node.get('labels') or node.get('names') or []
-                    vals=node.get('statistics') or node.get('stats') or []
-                    if isinstance(vals,dict): vals=list(vals.values())
-                    if isinstance(vals,list) and isinstance(labels,list):
-                        for i,val in enumerate(vals):
-                            if i>=len(labels) or val in (None,'--','-'): continue
-                            n=cls._num(val)
-                            if n is None: continue
-                            label=labels[i]
-                            if isinstance(label,dict): label=label.get('name') or label.get('displayName') or label.get('key')
-                            stats.append({'player_id':pid,'metric':normalize_metric(label),'value':n,'source':'ESPN'})
-        # Direct athlete/player objects can also occur under roster/starter/substitute keys.
-        for key,value in node.items():
-            if key in {'plays','leaders','notes','odds'}: continue
-            if isinstance(value,(dict,list)):
-                p,s=cls._extract_players_recursive(value,tid,tname,depth+1)
-                for x in p:
-                    if x['id'] not in seen: players.append(x);seen.add(x['id'])
-                stats.extend(s)
-        # De-duplicate stats.
-        clean=[]
+                    pos = ath.get('position') or node.get('position')
+                    if isinstance(pos, dict):
+                        pos = pos.get('abbreviation') or pos.get('displayName')
+                    players.append({'id': pid, 'team_id': tid, 'team_name': tname, 'name': name, 'position': pos, 'source': cls.name})
+                    for label, value in cls._stat_pairs(node, node):
+                        metric = cls._player_metric(label)
+                        if metric != '__player_presence__':
+                            stats.append({'player_id': pid, 'metric': metric, 'value': value, 'source': cls.name})
+        for key, value in node.items():
+            if key in {'plays', 'leaders', 'notes', 'odds'}:
+                continue
+            if isinstance(value, (dict, list)):
+                p, s = cls._extract_players_recursive(value, tid, tname, depth + 1)
+                players.extend(p); stats.extend(s)
+        return cls._dedupe(players, stats)
+
+    @staticmethod
+    def _dedupe(players, stats):
+        p_out, p_seen = [], set()
+        for p in players:
+            key = (p.get('id'), p.get('team_id'))
+            if key not in p_seen:
+                p_out.append(p); p_seen.add(key)
+        s_out, s_seen = [], set()
         for s in stats:
-            k=(s.get('player_id'),s.get('metric'),s.get('value'))
-            if k not in stat_seen: stat_seen.add(k);clean.append(s)
-        return players,clean
+            key = (s.get('player_id'), s.get('metric'), s.get('value'))
+            if key not in s_seen:
+                s_out.append(s); s_seen.add(key)
+        return p_out, s_out
 
-    def match_details(self,match_id):
-        data=get_json(f'{BASE}/{self.league}/summary',{'event':match_id},provider='ESPN')
-        stats=[]; players=[]; player_stats=[]
-        box=data.get('boxscore') or {}
+    def match_details(self, match_id):
+        data = get_json(f'{BASE}/{self.league}/summary', {'event': match_id}, provider='ESPN')
+        stats, players, player_stats = [], [], []
+        box = data.get('boxscore') or {}
         for team_block in box.get('teams') or []:
-            if not isinstance(team_block,dict): continue
-            tid=(team_block.get('team') or {}).get('id')
-            tname=(team_block.get('team') or {}).get('displayName') or (team_block.get('team') or {}).get('name')
+            if not isinstance(team_block, dict):
+                continue
+            team = team_block.get('team') or {}
+            tid = team.get('id')
+            tname = team.get('displayName') or team.get('name')
             for s in team_block.get('statistics') or []:
-                if not isinstance(s,dict): continue
-                metric=normalize_metric(s.get('name') or s.get('displayName'))
-                val=self._num(s.get('displayValue',s.get('value')))
-                if val is not None: stats.append({'team_id':tid,'team_name':tname,'metric':metric,'value':val,'source':self.name})
+                if not isinstance(s, dict):
+                    continue
+                metric = normalize_metric(s.get('name') or s.get('displayName'))
+                val = self._num(s.get('displayValue', s.get('value')))
+                if val is not None:
+                    stats.append({'team_id': tid, 'team_name': tname, 'metric': metric, 'value': val, 'source': self.name})
 
-        players,player_stats=self._extract_players(box)
+        players, player_stats = self._extract_players(box)
 
-        if not players:
+        if not players or not player_stats:
             try:
-                pkg=get_json(CDN,{'xhr':'1','gameId':match_id},provider='ESPN')
-                game=pkg.get('gamepackageJSON') if isinstance(pkg,dict) else None
-                if isinstance(game,dict):
-                    alt_box=game.get('boxscore') or {}
-                    alt_players,alt_stats=self._extract_players(alt_box)
+                pkg = get_json(CDN, {'xhr': '1', 'gameId': match_id}, provider='ESPN')
+                game = pkg.get('gamepackageJSON') if isinstance(pkg, dict) else None
+                if isinstance(game, dict):
+                    alt_box = game.get('boxscore') or {}
+                    alt_players, alt_stats = self._extract_players(alt_box)
+                    if not alt_players or not alt_stats:
+                        rec_players, rec_stats = self._extract_players_recursive(game)
+                        alt_players = alt_players or rec_players
+                        alt_stats = alt_stats or rec_stats
                     if alt_players:
-                        players=alt_players;player_stats=alt_stats
-                    else:
-                        alt_players,alt_stats=self._extract_players_recursive(game)
-                        if alt_players: players=alt_players;player_stats=alt_stats
+                        players = alt_players
+                    if alt_stats:
+                        player_stats = alt_stats
             except Exception:
                 pass
 
-        # Last fallback: inspect the summary payload itself for roster/athlete structures.
-        if not players:
+        if not players or not player_stats:
             try:
-                fb_players,fb_stats=self._extract_players_recursive(data)
+                fb_players, fb_stats = self._extract_players_recursive(data)
                 if fb_players:
-                    players=fb_players;player_stats=fb_stats
+                    players = fb_players
+                if fb_stats:
+                    player_stats = fb_stats
             except Exception:
                 pass
 
-        return {'stats':stats,'players':players,'player_stats':player_stats}
+        return {'stats': stats, 'players': players, 'player_stats': player_stats}
