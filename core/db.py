@@ -30,14 +30,11 @@ def _ensure_column(c,table,column,definition):
     if column not in cols:c.execute(f"ALTER TABLE {table} ADD COLUMN {column} {definition}")
 
 def _backup_after_write():
-    """Gera snapshot local sem falhar a gravação principal."""
-    if os.getenv("DEFINITIVO_AUTO_SNAPSHOT", "1") != "1":
-        return
+    if os.getenv("DEFINITIVO_AUTO_SNAPSHOT", "1") != "1": return
     try:
         from core.persistence import export_snapshot
         export_snapshot()
-    except Exception:
-        pass
+    except Exception: pass
 
 def init_db():
     with _DB_WRITE_LOCK:
@@ -119,77 +116,3 @@ def get_team_provider_id(team_id,source):
     c=connect()
     try:r=c.execute("SELECT provider_team_id FROM team_sources WHERE team_id=? AND source=?",(team_id,source)).fetchone();return r["provider_team_id"] if r else None
     finally:c.close()
-def _canonical_stat_team(c,match_id,source,provider_team_id,team_name):
-    r=c.execute("SELECT team_id FROM team_sources WHERE source=? AND provider_team_id=?",(source,str(provider_team_id))).fetchone()
-    if r:return r["team_id"]
-    m=c.execute("SELECT sport FROM matches WHERE id=?",(match_id,)).fetchone();return _team_id(c,m["sport"] if m else "Futebol",team_name or str(provider_team_id),source,provider_team_id)
-def upsert_match_stats(match_id,rows):
-    if not rows:return
-    with _DB_WRITE_LOCK:
-        c=connect()
-        try:
-            for r in rows:
-                if r.get("team_id") is None or r.get("value") is None:continue
-                tid=_canonical_stat_team(c,match_id,r["source"],r["team_id"],r.get("team_name"));c.execute("INSERT INTO match_stats(match_id,team_id,metric,value,source,observed_at) VALUES(?,?,?,?,?,?) ON CONFLICT(match_id,team_id,metric,source) DO UPDATE SET value=excluded.value,observed_at=excluded.observed_at",(match_id,tid,r["metric"],r["value"],r["source"],now_iso()))
-            c.commit();_backup_after_write()
-        finally:c.close()
-def upsert_players(players):
-    if not players:return
-    with _DB_WRITE_LOCK:
-        c=connect()
-        try:
-            for p in players:
-                src=p.get("source","unknown");cid=canonical_player_id(src,p["id"]);team=p.get("team_id");team_cid=_canonical_stat_team(c,p.get("match_id",""),src,team,p.get("team_name")) if team is not None and p.get("match_id") else team
-                c.execute("INSERT INTO players(id,team_id,name,position,source,provider_player_id,updated_at) VALUES(?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET team_id=excluded.team_id,name=excluded.name,position=excluded.position,updated_at=excluded.updated_at",(cid,team_cid,p["name"],p.get("position"),src,str(p["id"]),now_iso()))
-            c.commit();_backup_after_write()
-        finally:c.close()
-def upsert_player_stats(match_id,rows):
-    if not rows:return
-    with _DB_WRITE_LOCK:
-        c=connect()
-        try:
-            for r in rows:
-                if r.get("value") is None:continue
-                src=r.get("source","unknown");cid=canonical_player_id(src,r["player_id"]);raw_team=r.get("team_id");team_cid=_canonical_stat_team(c,match_id,src,raw_team,r.get("team_name")) if raw_team is not None else None
-                c.execute("INSERT INTO player_stats(match_id,player_id,team_id,metric,value,source,observed_at) VALUES(?,?,?,?,?,?,?) ON CONFLICT(match_id,player_id,metric,source) DO UPDATE SET team_id=excluded.team_id,value=excluded.value,observed_at=excluded.observed_at",(match_id,cid,team_cid,r["metric"],r["value"],src,now_iso()))
-            c.commit();_backup_after_write()
-        finally:c.close()
-def add_diagnostic(stage,status,message,source=None,match_id=None):
-    with _DB_WRITE_LOCK:
-        c=connect()
-        try:c.execute("INSERT INTO diagnostics(match_id,source,stage,status,message,created_at) VALUES(?,?,?,?,?,?)",(match_id,source,stage,status,message,now_iso()));c.commit()
-        finally:c.close()
-def get_matches(sport="Futebol",limit=100):
-    c=connect()
-    try:return [dict(r) for r in c.execute("SELECT * FROM matches WHERE sport=? ORDER BY CASE status WHEN 'LIVE' THEN 0 WHEN 'PAUSED' THEN 0 ELSE 1 END,start_time LIMIT ?",(sport,limit)).fetchall()]
-    finally:c.close()
-def get_match(mid):
-    c=connect()
-    try:r=c.execute("SELECT * FROM matches WHERE id=?",(mid,)).fetchone();return dict(r) if r else None
-    finally:c.close()
-def get_stats(mid):
-    c=connect()
-    try:return [dict(x) for x in c.execute("SELECT * FROM match_stats WHERE match_id=? ORDER BY metric,team_id,source",(mid,)).fetchall()]
-    finally:c.close()
-def get_players(mid):
-    c=connect()
-    try:
-        m=c.execute("SELECT home_id,away_id FROM matches WHERE id=?",(mid,)).fetchone()
-        if not m:return []
-        return [dict(x) for x in c.execute("SELECT p.id,p.team_id,p.name,p.position,ps.metric,ps.value,ps.source FROM players p JOIN player_stats ps ON ps.player_id=p.id WHERE ps.match_id=? AND ps.team_id IN (?,?) ORDER BY ps.team_id,p.name,ps.metric",(mid,m["home_id"],m["away_id"])).fetchall()]
-    finally:c.close()
-
-def get_diagnostics(limit=100):
-    c=connect()
-    try:return [dict(x) for x in c.execute("SELECT * FROM diagnostics ORDER BY id DESC LIMIT ?",(limit,)).fetchall()]
-    finally:c.close()
-def team_history(team_id,before_iso=None,limit=10):
-    c=connect()
-    try:
-        sql="SELECT * FROM matches WHERE (home_id=? OR away_id=?) AND status='FINISHED'"
-        params=[team_id,team_id]
-        if before_iso:sql+=" AND start_time<?";params.append(before_iso)
-        sql+=" ORDER BY start_time DESC LIMIT ?";params.append(limit)
-        return [dict(r) for r in c.execute(sql,params).fetchall()]
-    finally:c.close()
-def history_coverage(team_id,before_iso=None):return len(team_history(team_id,before_iso,10))
