@@ -5,11 +5,12 @@ from providers.api_futebol_calendar_fixed import ApiFutebolCalendarProviderFixed
 from providers.fotmob import FotMobProvider
 from providers.api_football import ApiFootballProvider
 from providers.dados_futebol_fixed import DadosFutebolProviderFixed
-from core.repository import canonical_id, upsert_match, upsert_match_stats, upsert_players, upsert_player_stats, add_diagnostic, get_provider_id
+from core.repository import canonical_id, upsert_match, upsert_match_stats, upsert_players, upsert_player_stats, add_diagnostic, get_provider_id, dedupe_existing_matches
 from core.db import get_stats
 from core.competitions import competition_matches
 from core.data_quality import reconcile_database
 from core.normalizer import MATCH_DISPLAY_ORDER, canonical_match_metric
+from core.espn_team_stats import fetch_team_stats
 
 MAX_ENRICH_BATCH = 5
 PRESENCE_METRIC = '__player_presence__'
@@ -36,7 +37,6 @@ def _with_player_presence(players, player_stats):
 
 
 def _missing_match_metrics(match):
-    """Return match-level metrics still missing for either canonical team."""
     stats = get_stats(match['id'])
     expected = set(MATCH_DISPLAY_ORDER) - {'goals'}
     missing = {}
@@ -55,7 +55,25 @@ def _missing_metric_names(match):
     return set().union(*(v for v in missing.values())) if missing else set()
 
 
+def _fill_missing_from_espn_cdn(match, event_id):
+    if not event_id:
+        return 0
+    try:
+        missing = _missing_metric_names(match)
+        if not missing:
+            return 0
+        rows = fetch_team_stats(event_id)
+        rows = [r for r in rows if canonical_match_metric(r.get('metric')) in missing]
+        if rows:
+            upsert_match_stats(match['id'], rows)
+        return len(rows)
+    except Exception as e:
+        add_diagnostic('enriquecimento_espn_cdn','WARNING',f'ESPN CDN: {e}','ESPN',match.get('id'))
+        return 0
+
+
 def collect(date_from, date_to, competitions=None, competition=None):
+    dedupe_existing_matches()
     reconcile_database()
     selected = list(competitions or [])
     if competition and competition not in selected:
@@ -77,6 +95,7 @@ def collect(date_from, date_to, competitions=None, competition=None):
 
 
 def enrich(matches):
+    dedupe_existing_matches()
     reconcile_database()
     if len(matches) > MAX_ENRICH_BATCH:
         raise ValueError('O enriquecimento é limitado a 5 partidas por operação.')
@@ -113,10 +132,7 @@ def enrich(matches):
 
                 if is_serie_b and p.name != 'Dados Futebol':
                     missing_before = _missing_metric_names(m)
-                    filtered_stats = [
-                        row for row in stats_rows
-                        if canonical_match_metric(row.get('metric')) in missing_before
-                    ]
+                    filtered_stats = [row for row in stats_rows if canonical_match_metric(row.get('metric')) in missing_before]
                     upsert_match_stats(m['id'], filtered_stats)
                     filled = len(filtered_stats)
                     total += filled
@@ -128,6 +144,16 @@ def enrich(matches):
                 upsert_match_stats(m['id'], stats_rows)
                 upsert_players(players)
                 upsert_player_stats(m['id'], player_stats)
+
+                # A summary da ESPN/Football-Data pode omitir métricas de futebol
+                # que existem no pacote completo da ESPN. Preenche apenas o que
+                # ainda falta, sem duplicar estatísticas ou jogadores.
+                if p.name in ('Football-Data.org','ESPN'):
+                    filled = _fill_missing_from_espn_cdn(m, pid)
+                    total += filled
+                    if filled:
+                        add_diagnostic('enriquecimento_espn_cdn','OK',f'ESPN CDN: {filled} métricas ausentes recuperadas; restantes: {sorted(_missing_metric_names(m))}','ESPN',m['id'])
+
                 count = len(stats_rows) + len(player_stats) + len(players)
                 total += count
                 primary_ok = True
