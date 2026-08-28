@@ -57,7 +57,7 @@ class ApiFootballProvider(FootballProvider):
             for item in block.get('players') or []:
                 p=item.get('player') or {};pid=p.get('id')
                 if pid is None:continue
-                name=p.get('name') or 'Sem nome'; stats=item.get('statistics') or {}
+                name=p.get('name') or 'Sem nome';stats=item.get('statistics') or {}
                 if isinstance(stats,list):stats=stats[0] if stats else {}
                 games=stats.get('games') or {}
                 pos=games.get('position') or games.get('pos')
@@ -67,13 +67,11 @@ class ApiFootballProvider(FootballProvider):
                     try:value=float(value)
                     except Exception:return
                     player_stats.append({'player_id':pid,'metric':metric,'value':value,'source':self.name})
-                add('minutes',games.get('minutes'))
-                add('rating',games.get('rating'))
-                add('starts',games.get('captain') if games.get('captain') is not None else None)
+                add('minutes',games.get('minutes'));add('rating',games.get('rating'))
                 shots=stats.get('shots') or {};goals=stats.get('goals') or {};passes=stats.get('passes') or {};tackles=stats.get('tackles') or {};fouls=stats.get('fouls') or {};cards=stats.get('cards') or {}
                 add('shots',shots.get('total'));add('shots_on_target',shots.get('on'))
                 add('goals',goals.get('total'));add('assists',goals.get('assists'))
-                add('passes_completed',passes.get('accuracy'));add('key_passes',passes.get('key'))
+                add('passes_completed',passes.get('total'));add('key_passes',passes.get('key'))
                 add('tackles',tackles.get('total'));add('interceptions',tackles.get('interceptions'))
                 add('fouls',fouls.get('committed'));add('was_fouled',fouls.get('drawn'))
                 add('yellow_cards',cards.get('yellow'));add('red_cards',cards.get('red'))
@@ -90,7 +88,7 @@ class ApiFootballProvider(FootballProvider):
                     players.append({'id':pid,'team_id':tid,'team_name':tname,'name':p.get('name') or 'Sem nome','position':p.get('pos'),'source':self.name})
         return players
     def match_details(self,match_id):
-        data=self._get('/fixtures/statistics',{'fixture':match_id});stats=[];names=self._fixture_teams.get(match_id,{})
+        data=self._get('/fixtures/statistics',{'fixture':match_id});stats=[]
         for b in data:
             tid=(b.get('team') or {}).get('id');tname=(b.get('team') or {}).get('name')
             for item in b.get('statistics') or []:
