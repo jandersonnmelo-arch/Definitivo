@@ -66,15 +66,14 @@ def _collect_team_history_from_football_data(team_id,before_iso,days=HISTORY_DAY
     for m in rows:upsert_match(m)
     add_diagnostic('historico','OK',f'{provider.name}: {len(rows)} partidas históricas coletadas para a equipe',provider.name);return rows
 
-def _collect_team_history_from_espn(team_name,before_iso,days=120):
+def _collect_team_history_from_espn(team_name,before_iso,days=120,serie_b=False):
     provider=ESPNProvider();before=_parse_start(before_iso) or datetime.now(timezone.utc);cur,end,rows=before.date()-timedelta(days=days),before.date(),[]
-    is_sb=_is_serie_b(team_name)
     while cur<=end:
         try:
             for m in provider.matches(cur.isoformat(),cur.isoformat(),None):
                 md=_parse_start(m.get('start_time'))
                 if md and md>before:continue
-                if is_sb and not _is_serie_b(m.get('competition')):continue
+                if serie_b and not _is_serie_b(m.get('competition')):continue
                 if _same_team(team_name,m.get('home_name')) or _same_team(team_name,m.get('away_name')):upsert_match(m);rows.append(m)
         except Exception as e:add_diagnostic('historico','ERROR',f'{provider.name} fixtures: {e}',provider.name)
         cur+=timedelta(days=1)
@@ -170,11 +169,12 @@ def _save_ai_sample(match,training_ready):
 
 def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days=HISTORY_DAYS):
     init_ai_db();_reconcile_for_history(match);before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat();team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
+    serie_b=_is_serie_b(match.get('competition'))
     for team_id in team_ids:
         if history_coverage(team_id,before_iso)<matches_per_team:_collect_team_history_from_football_data(team_id,before_iso,days)
         hist=_history_matches_for_team(team_id,before_iso,matches_per_team)
         if len(hist)<matches_per_team:
-            team_name=match['home_name'] if team_id==match.get('home_id') else match['away_name'];_collect_team_history_from_espn(team_name,before_iso,120)
+            team_name=match['home_name'] if team_id==match.get('home_id') else match['away_name'];_collect_team_history_from_espn(team_name,before_iso,120,serie_b=serie_b)
     reconciliation=_reconcile_for_history(match);add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-coleta: equipes={reconciliation.get("teams_merged",0)}, jogadores={reconciliation.get("players_merged",0)}, estatísticas migradas={reconciliation.get("stats_migrated",0)}, duplicadas removidas={reconciliation.get("stats_deduped",0)}, partidas Série B consolidadas={reconciliation.get("matches_merged",0)}','SYSTEM',match.get('id'))
     fresh_match=get_match(match.get('id')) or match;before_iso=fresh_match.get('start_time') or before_iso;team_ids=[x for x in (fresh_match.get('home_id'),fresh_match.get('away_id')) if x]
     add_diagnostic('identidade_equipes','OK',f'IDs canônicos após reconciliação: casa={fresh_match.get("home_id")}, fora={fresh_match.get("away_id")}', 'SYSTEM',fresh_match.get('id'))
