@@ -101,6 +101,7 @@ if selected:
                         hr=choose_preferred_stat([r for r in stats if r.get('team_id')==m['home_id'] and canonical_match_metric(r.get('metric'))==canonical]);ar=choose_preferred_stat([r for r in stats if r.get('team_id')==m['away_id'] and canonical_match_metric(r.get('metric'))==canonical]);home=hr.get('value') if hr else None;away=ar.get('value') if ar else None
                     total=home+away if isinstance(home,(int,float)) and isinstance(away,(int,float)) else None;rows.append({'Indicador':MATCH_DISPLAY_LABELS[canonical],'Casa':format_metric_value(canonical,home),'Fora':format_metric_value(canonical,away),'Total':format_metric_value(canonical,total)})
                 st.dataframe(pd.DataFrame(rows),hide_index=True,use_container_width=True)
+                st.caption('— = a fonte não informou o dado. O sistema não converte ausência em zero.')
             else:st.info('Sem estatísticas persistidas para esta partida. O sistema não inventa valores.')
             st.markdown('### 📚 Histórico das equipes');c1,c2=st.columns(2);c1.metric(m['home_name'],len(home_hist));c2.metric(m['away_name'],len(away_hist))
             for tname,hist in ((m['home_name'],home_hist),(m['away_name'],away_hist)):
@@ -165,15 +166,15 @@ if selected:
                 for tid in [m['home_id'],m['away_id']]+[x for x in teams if x not in (m['home_id'],m['away_id'])]:
                     plist=teams.get(tid,[])
                     if not plist:continue
-                    team_name=m['home_name'] if tid==m['home_id'] else m['away_name'] if tid==m['away_id'] else 'Equipe';st.markdown(f'#### {team_name}')
-                    for pid in sorted({p['id'] for p in plist},key=lambda x:next((p['name'] for p in plist if p['id']==x),'')):
-                        p0=next(p for p in plist if p['id']==pid);pstats=[p for p in plist if p['id']==pid]
-                        with st.container(border=True):
-                            st.markdown(f'**👤 {p0["name"]} • {position_label(p0.get("position"))}**')
-                            table=[]
-                            for canonical in PLAYER_DISPLAY_ORDER:
-                                chosen=choose_preferred_stat([r for r in pstats if canonical_player_metric(r.get('metric'))==canonical]);value=chosen.get('value') if chosen else None;table.append({'Indicador':PLAYER_DISPLAY_LABELS[canonical],'Valor':format_metric_value(canonical,value)})
-                            st.dataframe(pd.DataFrame(table),hide_index=True,use_container_width=True)
+                    team_name=m['home_name'] if tid==m['home_id'] else m['away_name'] if tid==m['away_id'] else 'Equipe'
+                    with st.expander(f'👥 {team_name} • {len({p["id"] for p in plist})} jogadores',expanded=False):
+                        for pid in sorted({p['id'] for p in plist},key=lambda x:next((p['name'] for p in plist if p['id']==x),'')):
+                            p0=next(p for p in plist if p['id']==pid);pstats=[p for p in plist if p['id']==pid]
+                            with st.expander(f'👤 {p0["name"]} • {position_label(p0.get("position"))}',expanded=False):
+                                table=[]
+                                for canonical in PLAYER_DISPLAY_ORDER:
+                                    chosen=choose_preferred_stat([r for r in pstats if canonical_player_metric(r.get('metric'))==canonical]);value=chosen.get('value') if chosen else None;table.append({'Indicador':PLAYER_DISPLAY_LABELS[canonical],'Valor':format_metric_value(canonical,value)})
+                                st.dataframe(pd.DataFrame(table),hide_index=True,use_container_width=True)
             else:st.info('Nenhum dado individual persistido para esta partida. Execute o enriquecimento/histórico para carregar os jogadores.')
             if m['status']!='SCHEDULED' and st.button('🧩 Enriquecer esta partida',key=f'e_{selected}',use_container_width=True):
                 with st.spinner('Enriquecendo com fontes disponíveis...'):n=enrich([m])
