@@ -17,7 +17,13 @@ def _valid_position(position):return str(position or '').strip() not in {'','-',
 
 def reconcile_database(force=False):
     from core.db import connect,now_iso,init_db
-    init_db();c=connect();marker=c.execute("SELECT value FROM schema_meta WHERE key='data_quality_v4'").fetchone()
+    init_db()
+    try:
+        from core.repository import dedupe_existing_matches
+        dedupe_existing_matches()
+    except Exception:
+        pass
+    c=connect();marker=c.execute("SELECT value FROM schema_meta WHERE key='data_quality_v4'").fetchone()
     if marker and not force:c.close();return {'teams_merged':0,'players_merged':0,'stats_migrated':0,'stats_deduped':0,'matches_merged':0}
     teams_merged=players_merged=stats_migrated=stats_deduped=0
     team_rows=c.execute('SELECT id,sport,name,normalized_name,updated_at FROM teams ORDER BY updated_at DESC').fetchall();team_groups={}
