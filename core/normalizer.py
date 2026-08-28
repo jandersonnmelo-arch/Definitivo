@@ -55,8 +55,7 @@ def normalize_status(status,completed=None):
 def normalize_player_metric(name):return canonical_player_metric(name) or _key(name)
 def normalize_match_metric(name):return canonical_match_metric(name) or _key(name)
 def normalize_metric(name):
- key=_key(name)
- if key in PLAYER_METRIC_ALIASES:return PLAYER_METRIC_ALIASES[key]
- return MATCH_METRIC_ALIASES.get(key,key)
+ # Legacy callers are team-stat callers. Player providers use normalize_player_metric explicitly.
+ return normalize_match_metric(name)
 def average(values):
  vals=[clean_number(v) for v in values];vals=[v for v in vals if v is not None];return round(sum(vals)/len(vals),2) if vals else None
