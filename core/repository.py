@@ -11,7 +11,8 @@ from core.db import (
     canonical_player_id, canonical_team_id, connect, init_db,
     record_api_usage, usage_today, calls_last_minute,
     upsert_match as _db_upsert_match, get_provider_id,
-    upsert_match_stats, upsert_players, upsert_player_stats,
+    upsert_match_stats, upsert_players as _db_upsert_players,
+    upsert_player_stats as _db_upsert_player_stats,
     add_diagnostic, get_matches, get_match, get_stats, get_players,
     get_diagnostics, team_history,
 )
@@ -21,6 +22,21 @@ def _norm_name(value):
     s = unicodedata.normalize('NFKD', str(value or '')).encode('ascii','ignore').decode().lower()
     s = re.sub(r'\b(cr|ec|sc|se|ca|fc|cf|ac|club|football|futbol)\b', ' ', s)
     return re.sub(r'[^a-z0-9]+', ' ', s).strip()
+
+
+def _same_team_name(a, b):
+    a = _norm_name(a)
+    b = _norm_name(b)
+    if not a or not b:
+        return False
+    if a == b or a in b or b in a:
+        return True
+    # Some providers use short forms such as "Racing Santander" while the
+    # canonical source stores "Real Racing Club de Santander".
+    ta = set(a.split()) - {'real', 'de', 'da', 'do', 'dos', 'das'}
+    tb = set(b.split()) - {'real', 'de', 'da', 'do', 'dos', 'das'}
+    common = ta & tb
+    return len(common) >= 2 or (len(ta) == 1 and len(tb) == 1 and common)
 
 
 def _utc_minute(value):
@@ -120,6 +136,60 @@ def upsert_match(match):
                     pass
         c.commit()
     return _db_upsert_match(m)
+
+
+def _canonical_team_for_match(c, match_id, team_name=None, raw_team_id=None):
+    """Map provider team IDs back to the canonical home/away IDs of a match.
+
+    This is important when providers use different names for the same team,
+    e.g. "Racing Santander" vs "Real Racing Club de Santander". Without this
+    bridge the player_stats rows are valid but get_players() filters them out
+    because their team_id belongs to a second canonical team record.
+    """
+    if match_id:
+        m = c.execute('SELECT home_id,home_name,away_id,away_name FROM matches WHERE id=?',(match_id,)).fetchone()
+        if m:
+            if _same_team_name(team_name, m['home_name']):
+                return m['home_id']
+            if _same_team_name(team_name, m['away_name']):
+                return m['away_id']
+    return None
+
+
+def upsert_players(players):
+    """Persist players while aligning provider team IDs with match teams.
+
+    The database layer historically accepted the provider team ID directly.
+    For player enrichment that can create a second team identity when a source
+    uses a different display name. Normalize that identity before the write.
+    """
+    if not players:
+        return
+    normalized=[]
+    with connect() as c:
+        for p in players:
+            row=dict(p)
+            match_id=row.get('match_id')
+            mapped=_canonical_team_for_match(c,match_id,row.get('team_name'),row.get('team_id'))
+            if mapped is not None:
+                row['team_id']=mapped
+            normalized.append(row)
+    return _db_upsert_players(normalized)
+
+
+def upsert_player_stats(match_id, rows):
+    """Persist individual stats using the canonical match home/away teams."""
+    if not rows:
+        return
+    normalized=[]
+    with connect() as c:
+        for r in rows:
+            row=dict(r)
+            mapped=_canonical_team_for_match(c,match_id,row.get('team_name'),row.get('team_id'))
+            if mapped is not None:
+                row['team_id']=mapped
+            normalized.append(row)
+    return _db_upsert_player_stats(match_id,normalized)
 
 
 def dedupe_existing_matches():
