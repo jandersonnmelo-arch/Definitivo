@@ -26,18 +26,15 @@ with st.sidebar:
     if st.button('🔄 Atualizar jogos',use_container_width=True,type='primary'):
         with st.spinner('Coletando partidas...'):rows=collect(date_from.isoformat(),date_to.isoformat(),competitions=selected_labels(st.session_state.get('optional_competitions',[])))
         st.session_state['last_collection_count']=len(rows);st.success(f'{len(rows)} partidas encontradas.');st.rerun()
-
     st.markdown('### 📅 Janela de jogos')
     days=st.slider('Dias a partir de hoje',7,14,7,1,key='match_days')
     date_from=today;date_to=today+timedelta(days=days)
     st.markdown(f'<div class="window"><b>{date_from:%d/%m/%Y}</b> → <b>{date_to:%d/%m/%Y}</b><br><span class="small">Horários em Manaus • America/Manaus</span></div>',unsafe_allow_html=True)
-
     with st.expander('🏆 Campeonatos fixos',expanded=False):
         st.caption('Lista fixa monitorada')
         with st.container(border=True):
             for label in fixed_labels:st.markdown(f'<div class="fixed-comp">{label}</div>',unsafe_allow_html=True)
         st.caption('Copa do Brasil reconhece também Copa Betano do Brasil.')
-
     st.markdown('#### ➕ Outros campeonatos')
     optional_selected=st.multiselect('Adicionar ao monitoramento',optional_labels,default=[],key='optional_competitions')
 
@@ -53,16 +50,12 @@ for m in all_matches:
     if date_from<=local_date<=date_to and canonical_competition_label(m.get('competition')) in selected_competitions:window_matches.append(m)
 window_matches.sort(key=lambda x:(x.get('start_time') or '',x.get('competition') or '',x.get('home_name') or ''))
 st.markdown(f'### Partidas <span class="small">{len(window_matches)} eventos • {days} dias</span>',unsafe_allow_html=True)
-
 matches_by_day={}
 for m in window_matches:
     try:
-        local_dt=datetime.fromisoformat((m.get('start_time') or '').replace('Z','+00:00')).astimezone(MANAUS)
-        day_key=local_dt.date()
-    except Exception:
-        continue
+        local_dt=datetime.fromisoformat((m.get('start_time') or '').replace('Z','+00:00')).astimezone(MANAUS);day_key=local_dt.date()
+    except Exception:continue
     matches_by_day.setdefault(day_key,[]).append(m)
-
 day_names=['segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado','domingo']
 for day_key,day_matches in sorted(matches_by_day.items()):
     day_label=f'{day_names[day_key.weekday()].capitalize()} • {day_key:%d/%m/%Y}'
@@ -78,15 +71,12 @@ if selected:
         st.divider()
         with st.expander(f'📊 {m["home_name"]} × {m["away_name"]}',expanded=True):
             st.caption(f'🏆 {canonical_competition_label(m.get("competition"))} • 🕐 {manaos_time(m.get("start_time"))} • {status_label(m.get("status"))}')
-
             before=m.get('start_time') or ''
             home_hist=team_history(m['home_id'],before,10) if m.get('home_id') else []
             away_hist=team_history(m['away_id'],before,10) if m.get('away_id') else []
-
             if m.get('status')=='SCHEDULED':
                 if st.button('📚 Atualizar histórico + estatísticas + jogadores',key=f'h_{selected}',use_container_width=True,type='primary'):
-                    with st.spinner('Preparando 10 jogos de cada equipe, estatísticas e jogadores...'):
-                        result=build_history_for_match(m)
+                    with st.spinner('Preparando 10 jogos de cada equipe, estatísticas e jogadores...'):result=build_history_for_match(m)
                     if not isinstance(result,dict):st.error('O enriquecimento do histórico não retornou um resultado válido. Verifique o diagnóstico do sistema.')
                     else:
                         home_n=result.get('home_matches') or 0;away_n=result.get('away_matches') or 0;stats_n=result.get('stats_records') or 0;player_n=result.get('player_records') or 0;current_players=result.get('current_players') or []
@@ -95,7 +85,6 @@ if selected:
             elif len(home_hist)<10 or len(away_hist)<10:
                 if st.button('📚 Completar histórico',key=f'h_{selected}',use_container_width=True):
                     result=build_history_for_match(m);st.success(f'Histórico atualizado: {(result or {}).get("stats_records") or 0} estatísticas e {(result or {}).get("player_records") or 0} individuais.');st.rerun()
-
             stats=get_stats(selected);st.markdown('### 📈 Estatísticas da partida')
             if stats or m.get('home_score') is not None or m.get('away_score') is not None:
                 rows=[]
@@ -106,13 +95,12 @@ if selected:
                     total=home+away if isinstance(home,(int,float)) and isinstance(away,(int,float)) else None;rows.append({'Indicador':MATCH_DISPLAY_LABELS[canonical],'Casa':format_metric_value(canonical,home),'Fora':format_metric_value(canonical,away),'Total':format_metric_value(canonical,total)})
                 st.dataframe(pd.DataFrame(rows),hide_index=True,use_container_width=True)
             else:st.info('Sem estatísticas persistidas para esta partida. O sistema não inventa valores.')
-
             st.markdown('### 📚 Histórico das equipes');c1,c2=st.columns(2);c1.metric(m['home_name'],len(home_hist));c2.metric(m['away_name'],len(away_hist))
             for tname,hist in ((m['home_name'],home_hist),(m['away_name'],away_hist)):
-                with st.expander(f'⚽ Últimos {len(hist)} jogos — {tname}',expanded=False):
+                with st.container(border=True):
+                    st.markdown(f'**⚽ Últimos {len(hist)} jogos — {tname}**')
                     if hist:st.dataframe(pd.DataFrame([{'Data':manaos_time(x.get('start_time')),'Competição':canonical_competition_label(x.get('competition')),'Jogo':f'{x["home_name"]} {x.get("home_score","-")} × {x.get("away_score","-")} {x["away_name"]}'} for x in hist]),hide_index=True,use_container_width=True)
                     else:st.info('Nenhum jogo histórico persistido.')
-
             if m.get('status')=='SCHEDULED':
                 analysis=build_pre_match_analysis(m);p=analysis['probabilities'];st.subheader('🔮 Análise pré-jogo')
                 if p['home'] is None:st.info('Ainda não há histórico suficiente. Atualize o histórico acima.')
@@ -150,7 +138,6 @@ if selected:
                     if summary:
                         st.dataframe(pd.DataFrame([{'Jogador':x['name'],'Posição':position_label(x.get('position')),'Jogos':x['matches'],'Gols':format_metric_value('goals',x.get('goals')),'Assistências':format_metric_value('assists',x.get('assists')),'Finalizações certas':format_metric_value('shots_on_target',x.get('shots_on_target')),'Finalizações no gol':format_metric_value('shots',x.get('shots')),'Passes certos':format_metric_value('passes_completed',x.get('passes_completed')),'Desarmes':format_metric_value('tackles',x.get('tackles')),'Faltas cometidas':format_metric_value('fouls',x.get('fouls')),'Faltas sofridas':format_metric_value('was_fouled',x.get('was_fouled'))} for x in summary]),hide_index=True,use_container_width=True)
                     else:st.info('Nenhum dado individual histórico persistido para esta equipe.')
-
             players=get_players(selected);unique_players={x['id']:x for x in players};st.subheader(f'👥 Jogadores da partida • {len(unique_players)}')
             if players:
                 teams={}
@@ -161,7 +148,8 @@ if selected:
                     team_name=m['home_name'] if tid==m['home_id'] else m['away_name'] if tid==m['away_id'] else 'Equipe';st.markdown(f'#### {team_name}')
                     for pid in sorted({p['id'] for p in plist},key=lambda x:next((p['name'] for p in plist if p['id']==x),'')):
                         p0=next(p for p in plist if p['id']==pid);pstats=[p for p in plist if p['id']==pid]
-                        with st.expander(f'👤 {p0["name"]} • {position_label(p0.get("position"))}',expanded=False):
+                        with st.container(border=True):
+                            st.markdown(f'**👤 {p0["name"]} • {position_label(p0.get("position"))}**')
                             table=[]
                             for canonical in PLAYER_DISPLAY_ORDER:
                                 chosen=choose_preferred_stat([r for r in pstats if canonical_player_metric(r.get('metric'))==canonical]);value=chosen.get('value') if chosen else None;table.append({'Indicador':PLAYER_DISPLAY_LABELS[canonical],'Valor':format_metric_value(canonical,value)})
