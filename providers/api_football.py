@@ -2,7 +2,7 @@ import os,re
 from .base import FootballProvider
 from core.http_cache import get_json
 from core.db import usage_today,calls_last_minute
-from core.normalizer import normalize_metric
+from core.normalizer import normalize_match_metric
 BASE='https://v3.football.api-sports.io'
 def _secret():
     names=('API_SPORTS_KEY','API_FOOTBALL_KEY','API_FOOTBALL_TOKEN','APISPORTS_KEY')
@@ -45,9 +45,7 @@ class ApiFootballProvider(FootballProvider):
         for x in candidates:
             t=x.get('teams') or {};h=_norm((t.get('home') or {}).get('name'));a=_norm((t.get('away') or {}).get('name'))
             if (hn in h or h in hn) and (an in a or a in an):
-                fid=x.get('fixture',{}).get('id')
-                self._fixture_teams[fid]={ 'home':(t.get('home') or {}).get('name'),'away':(t.get('away') or {}).get('name') }
-                return fid
+                fid=x.get('fixture',{}).get('id');self._fixture_teams[fid]={'home':(t.get('home') or {}).get('name'),'away':(t.get('away') or {}).get('name')};return fid
         return None
     def _parse_player_stats(self,fixture_id):
         players=[];player_stats=[]
@@ -59,8 +57,7 @@ class ApiFootballProvider(FootballProvider):
                 if pid is None:continue
                 name=p.get('name') or 'Sem nome';stats=item.get('statistics') or {}
                 if isinstance(stats,list):stats=stats[0] if stats else {}
-                games=stats.get('games') or {}
-                pos=games.get('position') or games.get('pos')
+                games=stats.get('games') or {};pos=games.get('position') or games.get('pos')
                 players.append({'id':pid,'team_id':tid,'team_name':tname,'name':name,'position':pos,'source':self.name})
                 def add(metric,value):
                     if isinstance(value,bool) or value is None:return
@@ -69,16 +66,12 @@ class ApiFootballProvider(FootballProvider):
                     player_stats.append({'player_id':pid,'metric':metric,'value':value,'source':self.name})
                 add('minutes',games.get('minutes'));add('rating',games.get('rating'))
                 shots=stats.get('shots') or {};goals=stats.get('goals') or {};passes=stats.get('passes') or {};tackles=stats.get('tackles') or {};fouls=stats.get('fouls') or {};cards=stats.get('cards') or {}
-                add('shots',shots.get('total'));add('shots_on_target',shots.get('on'))
-                add('goals',goals.get('total'));add('assists',goals.get('assists'))
-                add('passes_completed',passes.get('total'));add('key_passes',passes.get('key'))
-                add('tackles',tackles.get('total'));add('interceptions',tackles.get('interceptions'))
-                add('fouls',fouls.get('committed'));add('was_fouled',fouls.get('drawn'))
-                add('yellow_cards',cards.get('yellow'));add('red_cards',cards.get('red'))
+                add('shots',shots.get('total'));add('shots_on_target',shots.get('on'));add('goals',goals.get('total'));add('assists',goals.get('assists'))
+                add('passes_completed',passes.get('total'));add('key_passes',passes.get('key'));add('tackles',tackles.get('total'));add('interceptions',tackles.get('interceptions'))
+                add('fouls',fouls.get('committed'));add('was_fouled',fouls.get('drawn'));add('yellow_cards',cards.get('yellow'));add('red_cards',cards.get('red'))
         return players,player_stats
     def _parse_lineups(self,fixture_id):
-        players=[]
-        rows=self._get('/fixtures/lineups',{'fixture':fixture_id})
+        players=[];rows=self._get('/fixtures/lineups',{'fixture':fixture_id})
         for block in rows:
             team=block.get('team') or {};tid=team.get('id');tname=team.get('name')
             for section in ('startXI','substitutes'):
@@ -92,7 +85,7 @@ class ApiFootballProvider(FootballProvider):
         for b in data:
             tid=(b.get('team') or {}).get('id');tname=(b.get('team') or {}).get('name')
             for item in b.get('statistics') or []:
-                metric=normalize_metric(item.get('type'));val=item.get('value')
+                metric=normalize_match_metric(item.get('type'));val=item.get('value')
                 if isinstance(val,str) and val.endswith('%'):val=val[:-1]
                 try:val=float(val) if val is not None else None
                 except Exception:val=None
