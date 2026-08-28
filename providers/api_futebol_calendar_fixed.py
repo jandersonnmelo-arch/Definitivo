@@ -3,7 +3,7 @@ from zoneinfo import ZoneInfo
 
 from .api_futebol_calendar import ApiFutebolCalendarProvider
 from .api_futebol_calendar import _team, _id, _norm
-from core.db import add_diagnostic
+from core.db import add_diagnostic, canonical_id
 
 MANAUS = ZoneInfo('America/Manaus')
 SAO_PAULO = ZoneInfo('America/Sao_Paulo')
@@ -132,17 +132,17 @@ class ApiFutebolCalendarProviderFixed(ApiFutebolCalendarProvider):
             if round_value is None or str(round_value) not in candidate_rounds:
                 continue
 
-            mid = _id(item, ('partida_id', 'jogo_id', 'match_id', 'id'))
-            if mid is None:
+            provider_match_id = _id(item, ('partida_id', 'jogo_id', 'match_id', 'id'))
+            if provider_match_id is None:
                 continue
 
             try:
-                detail = self._get(f'/partidas/{mid}')
+                detail = self._get(f'/partidas/{provider_match_id}')
                 exact_dt, _ = self._extract_detail_datetime(detail, home['name'], away['name'])
                 detail_checked += 1
 
                 if exact_dt is not None:
-                    exact[str(mid)] = exact_dt
+                    exact[str(provider_match_id)] = exact_dt
                     if exact_dt.astimezone(MANAUS).date() != phase_dt.astimezone(MANAUS).date():
                         detail_corrected += 1
                         add_diagnostic(
@@ -150,25 +150,25 @@ class ApiFutebolCalendarProviderFixed(ApiFutebolCalendarProvider):
                             'INFO',
                             f'Série B: data corrigida {home["name"]} x {away["name"]}: fase={phase_dt.isoformat()} detalhe={exact_dt.isoformat()}',
                             self.name,
-                            str(mid),
+                            str(provider_match_id),
                         )
             except Exception as exc:
                 add_diagnostic(
                     'coleta',
                     'WARNING',
-                    f'Série B: detalhe {mid} indisponível; usando data da fase: {exc}',
+                    f'Série B: detalhe {provider_match_id} indisponível; usando data da fase: {exc}',
                     self.name,
-                    str(mid),
+                    str(provider_match_id),
                 )
 
         out, seen = [], set()
 
         for item, home, away, phase_dt, round_value in parsed:
-            mid = str(_id(item, ('partida_id', 'jogo_id', 'match_id', 'id')) or f"{home['id']}-{away['id']}-{phase_dt.isoformat()}")
-            dt = exact.get(mid, phase_dt)
+            provider_match_id = str(_id(item, ('partida_id', 'jogo_id', 'match_id', 'id')) or '')
+            dt = exact.get(provider_match_id, phase_dt)
             local_date = dt.astimezone(MANAUS).date()
 
-            if not (start <= local_date <= end) or mid in seen:
+            if not (start <= local_date <= end) or provider_match_id in seen:
                 continue
 
             status = _norm(item.get('status') or item.get('situacao') or item.get('estado') or '')
@@ -181,9 +181,19 @@ class ApiFutebolCalendarProviderFixed(ApiFutebolCalendarProvider):
             else:
                 normalized_status = 'SCHEDULED'
 
+            # Mantém o ID canônico baseado na data do resumo da fase.
+            # Assim, se a partida já foi persistida com a data antiga, o upsert
+            # atualiza o mesmo registro em vez de criar um duplicado.
+            legacy_id = canonical_id({
+                'sport': 'Futebol',
+                'home_name': home['name'],
+                'away_name': away['name'],
+                'start_time': phase_dt.isoformat(),
+            })
+
             out.append({
-                'id': mid,
-                'provider_match_id': mid,
+                'id': legacy_id,
+                'provider_match_id': provider_match_id,
                 'sport': 'Futebol',
                 'competition': 'Campeonato Brasileiro Série B',
                 'season': '2026',
@@ -200,7 +210,7 @@ class ApiFutebolCalendarProviderFixed(ApiFutebolCalendarProvider):
                 'away_score': item.get('placar_visitante') if item.get('placar_visitante') is not None else item.get('away_score'),
                 'source': self.name,
             })
-            seen.add(mid)
+            seen.add(provider_match_id)
 
         add_diagnostic(
             'coleta',
