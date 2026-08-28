@@ -2,7 +2,7 @@ import re
 import unicodedata
 from datetime import datetime, timezone
 
-SOURCE_PRIORITY = {'API-Futebol': 0, 'API-Football': 1, 'ESPN': 2, 'FotMob': 3, 'Football-Data.org': 4, 'LEGACY': 99}
+SOURCE_PRIORITY = {'ESPN': 0, 'FotMob': 1, 'API-Futebol': 2, 'API-Football': 3, 'Football-Data.org': 4, 'LEGACY': 99}
 
 
 def _norm(value):
@@ -23,98 +23,101 @@ def _source_rank(source):
     return SOURCE_PRIORITY.get(str(source or ''), 50)
 
 
+def _valid_position(position):
+    return str(position or '').strip() not in {'', '-', '—', 'None', 'null'}
+
+
 def reconcile_database():
-    """Unifica registros históricos sem apagar os valores brutos das partidas.
+    """Consolida identidades sem apagar os valores brutos por partida.
 
-    Executa uma vez por versão. Jogadores iguais de fontes diferentes passam a
-    compartilhar um ID interno por equipe/nome normalizado; as linhas de
-    player_stats são migradas e posições válidas são preservadas.
+    A consolidação é versionada no schema_meta. Jogadores iguais de fontes
+    diferentes passam a compartilhar um ID interno por equipe/nome normalizado;
+    posições são preenchidas pela melhor fonte disponível e, quando duas fontes
+    trazem a mesma métrica para a mesma partida, somente a fonte prioritária é
+    usada para evitar dupla contagem nas médias históricas.
     """
-    from core.db import connect, now_iso
-
+    from core.db import connect, now_iso, init_db
+    init_db()
     c = connect()
     marker = c.execute("SELECT value FROM schema_meta WHERE key='data_quality_v1'").fetchone()
     if marker:
         c.close()
-        return {'teams_merged': 0, 'players_merged': 0, 'stats_migrated': 0}
+        return {'teams_merged': 0, 'players_merged': 0, 'stats_migrated': 0, 'stats_deduped': 0}
 
-    teams_merged = 0
-    players_merged = 0
-    stats_migrated = 0
+    teams_merged = players_merged = stats_migrated = stats_deduped = 0
 
-    # 1) Unifica equipes que chegaram com variações de nome.
-    team_rows = c.execute('SELECT id,sport,name,normalized_name FROM teams ORDER BY updated_at DESC').fetchall()
+    # Equipes: consolida somente nomes realmente equivalentes.
+    team_rows = c.execute('SELECT id,sport,name,normalized_name,updated_at FROM teams ORDER BY updated_at DESC').fetchall()
     team_groups = {}
     for r in team_rows:
         key = (str(r['sport']), _norm(r['name']))
-        if not key[1]:
-            continue
-        team_groups.setdefault(key, []).append(dict(r))
-
+        if key[1]: team_groups.setdefault(key, []).append(dict(r))
     team_map = {}
     for _, rows in team_groups.items():
-        if len(rows) < 2:
-            continue
-        canonical = rows[0]['id']
-        for r in rows[1:]:
-            old = r['id']
-            if old == canonical:
-                continue
-            team_map[old] = canonical
+        if len(rows) >= 2:
+            canonical = rows[0]['id']
+            for r in rows[1:]:
+                if r['id'] != canonical: team_map[r['id']] = canonical
 
     for old, new in team_map.items():
         c.execute('UPDATE matches SET home_id=? WHERE home_id=?', (new, old))
         c.execute('UPDATE matches SET away_id=? WHERE away_id=?', (new, old))
-        c.execute('UPDATE match_stats SET team_id=? WHERE team_id=?', (new, old))
-        c.execute('UPDATE players SET team_id=? WHERE team_id=?', (new, old))
-        # team_sources tem PK (team_id,source), então migramos linha a linha.
-        rows = c.execute('SELECT source,provider_team_id,updated_at FROM team_sources WHERE team_id=?', (old,)).fetchall()
-        for r in rows:
+        # Evita colisão de PK quando duas fontes já gravaram a mesma métrica.
+        old_stats = c.execute('SELECT match_id,metric,value,source,observed_at FROM match_stats WHERE team_id=?', (old,)).fetchall()
+        for s in old_stats:
             try:
-                c.execute('INSERT INTO team_sources(team_id,source,provider_team_id,updated_at) VALUES(?,?,?,?)', (new, r['source'], r['provider_team_id'], r['updated_at']))
+                c.execute('INSERT INTO match_stats(match_id,team_id,metric,value,source,observed_at) VALUES(?,?,?,?,?,?)', (s['match_id'],new,s['metric'],s['value'],s['source'],s['observed_at']))
             except Exception:
                 pass
+        c.execute('DELETE FROM match_stats WHERE team_id=?', (old,))
+        c.execute('UPDATE players SET team_id=? WHERE team_id=?', (new, old))
+        rows = c.execute('SELECT source,provider_team_id,updated_at FROM team_sources WHERE team_id=?', (old,)).fetchall()
+        for r in rows:
+            try: c.execute('INSERT INTO team_sources(team_id,source,provider_team_id,updated_at) VALUES(?,?,?,?)', (new,r['source'],r['provider_team_id'],r['updated_at']))
+            except Exception: pass
         c.execute('DELETE FROM team_sources WHERE team_id=?', (old,))
         c.execute('DELETE FROM teams WHERE id=?', (old,))
         teams_merged += 1
 
-    # 2) Unifica jogadores por equipe + nome normalizado, preservando cada fonte
-    #    em player_stats e escolhendo a melhor posição disponível.
+    # Jogadores: consolida por equipe + nome normalizado e recupera posição.
     player_rows = c.execute('SELECT id,team_id,name,position,source,provider_player_id,updated_at FROM players ORDER BY updated_at DESC').fetchall()
     groups = {}
     for r in player_rows:
         key = _player_key(r['name'], r['team_id'])
-        if not key[1]:
-            continue
-        groups.setdefault(key, []).append(dict(r))
+        if key[1]: groups.setdefault(key, []).append(dict(r))
 
     for _, rows in groups.items():
-        if len(rows) < 2:
-            continue
-        rows.sort(key=lambda r: (_source_rank(r.get('source')), -_position_quality(r.get('position')), str(r.get('updated_at') or '')), reverse=False)
-        canonical = rows[0]
-        canonical_id = canonical['id']
-        # Prefere uma posição não vazia; em empate, prioridade da fonte.
+        if len(rows) < 2: continue
+        rows.sort(key=lambda r: (_source_rank(r.get('source')), -_position_quality(r.get('position'))))
+        canonical = rows[0]; canonical_id = canonical['id']
         position_candidates = sorted(rows, key=lambda r: (-_position_quality(r.get('position')), _source_rank(r.get('source'))))
         best_position = position_candidates[0].get('position')
-        if best_position and best_position not in {'-', '—', 'None', 'null'}:
-            c.execute('UPDATE players SET position=?,updated_at=? WHERE id=?', (best_position, now_iso(), canonical_id))
-
+        if _valid_position(best_position):
+            c.execute('UPDATE players SET position=?,updated_at=? WHERE id=?', (best_position,now_iso(),canonical_id))
         for dup in rows[1:]:
             old_id = dup['id']
             stat_rows = c.execute('SELECT match_id,metric,value,source,observed_at FROM player_stats WHERE player_id=?', (old_id,)).fetchall()
             for s in stat_rows:
                 try:
-                    c.execute('INSERT INTO player_stats(match_id,player_id,metric,value,source,observed_at) VALUES(?,?,?,?,?,?)', (s['match_id'], canonical_id, s['metric'], s['value'], s['source'], s['observed_at']))
+                    c.execute('INSERT INTO player_stats(match_id,player_id,metric,value,source,observed_at) VALUES(?,?,?,?,?,?)', (s['match_id'],canonical_id,s['metric'],s['value'],s['source'],s['observed_at']))
                     stats_migrated += 1
-                except Exception:
-                    # Já existe a mesma observação para o jogador canônico.
-                    pass
+                except Exception: pass
             c.execute('DELETE FROM player_stats WHERE player_id=?', (old_id,))
             c.execute('DELETE FROM players WHERE id=?', (old_id,))
             players_merged += 1
 
+    # Uma única fonte efetiva por jogador/partida/métrica evita que ESPN+FotMob
+    # somem o mesmo dado duas vezes no cálculo das médias.
+    dup_rows = c.execute('''SELECT match_id,player_id,metric FROM player_stats
+                            WHERE metric != '__player_presence__'
+                            GROUP BY match_id,player_id,metric HAVING COUNT(*) > 1''').fetchall()
+    for d in dup_rows:
+        rows = c.execute('SELECT source FROM player_stats WHERE match_id=? AND player_id=? AND metric=?', (d['match_id'],d['player_id'],d['metric'])).fetchall()
+        ranked = sorted(rows, key=lambda r: _source_rank(r['source']))
+        for r in ranked[1:]:
+            c.execute('DELETE FROM player_stats WHERE match_id=? AND player_id=? AND metric=? AND source=?', (d['match_id'],d['player_id'],d['metric'],r['source']))
+            stats_deduped += 1
+
     c.execute("INSERT INTO schema_meta(key,value) VALUES('data_quality_v1',?)", (datetime.now(timezone.utc).isoformat(),))
-    c.commit()
-    c.close()
-    return {'teams_merged': teams_merged, 'players_merged': players_merged, 'stats_migrated': stats_migrated}
+    c.commit();c.close()
+    return {'teams_merged':teams_merged,'players_merged':players_merged,'stats_migrated':stats_migrated,'stats_deduped':stats_deduped}
