@@ -36,7 +36,7 @@ ESPN_CALENDAR_LEAGUES = [
     'arg.1',
     'usa.1',
     'mex.1',
-    'sau.1',
+    'ksa.1',
     'tur.1',
     'col.1',
     'jpn.1',
