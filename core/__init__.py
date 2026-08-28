@@ -48,7 +48,7 @@ try:
     _history = importlib.import_module('core.history')
     _original_build_history = _history.build_history_for_match
 
-    def _bounded_espn_history(team_name, before_iso, days=120):
+    def _bounded_espn_history(team_name, before_iso, days=120, serie_b=False):
         provider = _history.ESPNProvider()
         before = _history._parse_start(before_iso) or _dt.datetime.now(_dt.timezone.utc)
         days = min(int(days or 120), 35)
@@ -60,6 +60,8 @@ try:
             try:
                 found=provider.matches(cur.isoformat(),cur.isoformat(),None)
                 for m in found:
+                    if serie_b and not _history._is_serie_b(m.get('competition')):
+                        continue
                     if _history._same_team(team_name,m.get('home_name')) or _history._same_team(team_name,m.get('away_name')):
                         mid=str(m.get('id'))
                         if mid not in seen:
@@ -69,7 +71,7 @@ try:
             except Exception as exc:
                 _history.add_diagnostic('historico','ERROR',f'ESPN fixtures: {exc}',provider.name)
             cur += _dt.timedelta(days=1)
-        _history.add_diagnostic('historico','OK',f'ESPN fallback limitado: {len(rows)} partidas para {team_name} em {days} dias',provider.name)
+        _history.add_diagnostic('historico','OK',f'ESPN fallback limitado: {len(rows)} partidas para {team_name} em {days} dias; serie_b={serie_b}',provider.name)
         return rows
 
     _history._collect_team_history_from_espn = _bounded_espn_history
