@@ -7,6 +7,13 @@ ALIASES = {
     "racing santander": "real racing club de santander",
     "racing club de santander": "real racing club de santander",
     "real racing": "real racing club de santander",
+    "real racing club de santander": "real racing club de santander",
+    "real racing de santander": "real racing club de santander",
+    "sporting clube de portugal": "sporting portugal",
+    "clube de portugal": "sporting portugal",
+    "sporting portugal": "sporting portugal",
+    "sporting cp": "sporting portugal",
+    "sporting lisbon": "sporting portugal",
     "athletic": "athletic club",
     "athletic club bilbao": "athletic club",
     "sc corinthians paulista": "corinthians",
@@ -17,6 +24,9 @@ ALIASES = {
 
 def norm_team(name):
     s = unicodedata.normalize("NFKD", str(name or "")).encode("ascii", "ignore").decode().lower()
+    s = re.sub(r"[^a-z0-9]+", " ", s).strip()
+    if s in ALIASES:
+        return ALIASES[s]
     s = re.sub(r"\b(club|sport|soccer|fc|sc|ec|se|ca|cf|ac)\b", " ", s)
     s = re.sub(r"[^a-z0-9]+", " ", s).strip()
     return ALIASES.get(s, s)
