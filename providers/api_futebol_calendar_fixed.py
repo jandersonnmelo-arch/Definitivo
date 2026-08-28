@@ -181,14 +181,14 @@ class ApiFutebolCalendarProviderFixed(ApiFutebolCalendarProvider):
             else:
                 normalized_status = 'SCHEDULED'
 
-            # Mantém o ID canônico baseado na data do resumo da fase.
-            # Assim, se a partida já foi persistida com a data antiga, o upsert
-            # atualiza o mesmo registro em vez de criar um duplicado.
+            # Mantém o ID canônico baseado na data/hora que o resumo da fase
+            # usava antes da correção. Assim o upsert atualiza o registro antigo
+            # em vez de criar uma segunda partida.
             legacy_id = canonical_id({
                 'sport': 'Futebol',
                 'home_name': home['name'],
                 'away_name': away['name'],
-                'start_time': phase_dt.isoformat(),
+                'start_time': phase_dt.astimezone(UTC).isoformat(),
             })
 
             out.append({
