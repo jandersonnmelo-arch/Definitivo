@@ -3,6 +3,7 @@ from providers.espn import ESPNProvider
 from providers.espn_calendar import ESPNCalendarProvider
 from providers.api_futebol_calendar_fixed import ApiFutebolCalendarProviderFixed
 from providers.fotmob import FotMobProvider
+from providers.tribuna import TribunaProvider
 from providers.api_football import ApiFootballProvider
 from providers.dados_futebol_fixed import DadosFutebolProviderFixed
 from core.repository import canonical_id, upsert_match, upsert_match_stats, upsert_players, upsert_player_stats, add_diagnostic, get_provider_id, dedupe_existing_matches
@@ -17,7 +18,7 @@ PRESENCE_METRIC = '__player_presence__'
 
 
 def providers():
-    return [DadosFutebolProviderFixed(), FootballDataProvider(), ESPNProvider(), FotMobProvider(), ApiFootballProvider()]
+    return [DadosFutebolProviderFixed(), FootballDataProvider(), ESPNProvider(), FotMobProvider(), TribunaProvider(), ApiFootballProvider()]
 
 
 def collection_providers():
@@ -137,6 +138,36 @@ def _fill_missing_from_espn_cdn(match, event_id):
         return 0
 
 
+def _fill_missing_from_tribuna(match):
+    """Preenche somente métricas de equipe ainda ausentes usando Tribuna."""
+    try:
+        missing = _missing_metric_names(match)
+        wanted = {'player_throws', 'goal_kicks'} & missing
+        if not wanted:
+            return 0
+        provider = TribunaProvider()
+        if not provider.available():
+            return 0
+        d = provider.match_details(match)
+        rows = [
+            dict(r) for r in (d.get('stats') or [])
+            if canonical_match_metric(r.get('metric')) in wanted and r.get('value') is not None
+        ]
+        if rows:
+            upsert_match_stats(match['id'], rows)
+            add_diagnostic(
+                'enriquecimento_tribuna',
+                'OK',
+                f'Tribuna: {len(rows)} métricas ausentes recuperadas; restantes: {sorted(_missing_metric_names(match))}',
+                'Tribuna',
+                match['id'],
+            )
+        return len(rows)
+    except Exception as e:
+        add_diagnostic('enriquecimento_tribuna','WARNING',f'Tribuna: {e}','Tribuna',match.get('id'))
+        return 0
+
+
 def collect(date_from, date_to, competitions=None, competition=None):
     dedupe_existing_matches()
     reconcile_database()
@@ -173,7 +204,7 @@ def enrich(matches):
     total = 0
     for m in matches:
         is_serie_b = 'serie b' in str(m.get('competition') or '').lower()
-        ordered = [DadosFutebolProviderFixed(), FotMobProvider(), ESPNProvider()] if is_serie_b else providers()
+        ordered = [DadosFutebolProviderFixed(), FotMobProvider(), ESPNProvider(), TribunaProvider()] if is_serie_b else providers()
         primary_ok = False
         accumulated_players = []
         accumulated_player_stats = []
@@ -188,6 +219,8 @@ def enrich(matches):
                 elif p.name == 'API-Football':
                     pid = p.resolve_match_id(m)
                 elif p.name == 'FotMob':
+                    pid = m
+                elif p.name == 'Tribuna':
                     pid = m
                 else:
                     pid = get_provider_id(m['id'], p.name)
@@ -210,7 +243,7 @@ def enrich(matches):
                 player_stats = _attach_player_teams(players, player_stats)
                 player_stats = _with_player_presence(players, player_stats)
 
-                if is_serie_b and p.name != 'Dados Futebol':
+                if is_serie_b and p.name not in ('Dados Futebol', 'Tribuna'):
                     missing_before = _missing_metric_names(m)
                     filtered_stats = [row for row in stats_rows if canonical_match_metric(row.get('metric')) in missing_before]
                     if filtered_stats:
@@ -268,4 +301,10 @@ def enrich(matches):
             upsert_player_stats(m['id'], accumulated_player_stats)
         if not primary_ok:
             add_diagnostic('enriquecimento', 'WARNING', 'Nenhum provider conseguiu concluir o enriquecimento direto.', None, m['id'])
+
+        # Último fallback, independente da competição. Nunca substitui dados
+        # existentes: só grava Laterais/Tiros de meta que ainda estiverem faltando.
+        filled_tribuna = _fill_missing_from_tribuna(m)
+        total += filled_tribuna
+
     return total
