@@ -75,14 +75,9 @@ if selected:
             if st.button('📚 Atualizar histórico + estatísticas + jogadores',key=f'h_{selected}',use_container_width=True,type='primary'):
                 with st.spinner('Preparando 10 jogos de cada equipe, estatísticas e jogadores...'):
                     result=build_history_for_match(m)
-                if not isinstance(result,dict):
-                    st.error('O enriquecimento do histórico não retornou um resultado válido. Verifique o diagnóstico do sistema.')
+                if not isinstance(result,dict):st.error('O enriquecimento do histórico não retornou um resultado válido. Verifique o diagnóstico do sistema.')
                 else:
-                    home_n=result.get('home_matches') or 0
-                    away_n=result.get('away_matches') or 0
-                    stats_n=result.get('stats_records') or 0
-                    player_n=result.get('player_records') or 0
-                    current_players=result.get('current_players') or []
+                    home_n=result.get('home_matches') or 0;away_n=result.get('away_matches') or 0;stats_n=result.get('stats_records') or 0;player_n=result.get('player_records') or 0;current_players=result.get('current_players') or []
                     st.success(f'Histórico: {home_n} + {away_n} jogos • {stats_n} estatísticas • {player_n} registros individuais • {len(current_players)} jogadores da partida.')
                 st.rerun()
         elif len(home_hist)<10 or len(away_hist)<10:
@@ -95,14 +90,8 @@ if selected:
             else:
                 c1,c2,c3=st.columns(3);c1.metric('Casa',f'{p["home"]}%');c2.metric('Empate',f'{p["draw"]}%');c3.metric('Fora',f'{p["away"]}%')
             st.caption(f'Amostra: {analysis["sample_home"]} casa / {analysis["sample_away"]} fora • xG projetado: {analysis["xg_home"] if analysis["xg_home"] is not None else "—"} × {analysis["xg_away"] if analysis["xg_away"] is not None else "—"}.')
-
             st.markdown('### 📊 Base estatística do palpite')
-            base_specs=[
-                ('goals_for','Gols feitos'),('goals_against','Gols sofridos'),('shots','Finalizações totais'),
-                ('shots_on_target','Finalizações no gol'),('effectivetackles','Desarmes'),('corners','Escanteios'),
-                ('fouls','Faltas'),('passes_completed','Passes'),('saves','Defesa do goleiro'),
-                ('yellow_cards','Cartão amarelo'),('red_cards','Cartão vermelho'),('player_throws','Laterais'),
-                ('woodwork','Finalizações na trave'),('offsides','Impedimento'),('goal_kicks','Tiro de metas')]
+            base_specs=[('goals_for','Gols feitos'),('goals_against','Gols sofridos'),('shots','Finalizações totais'),('shots_on_target','Finalizações no gol'),('effectivetackles','Desarmes'),('corners','Escanteios'),('fouls','Faltas'),('passes_completed','Passes'),('saves','Defesa do goleiro'),('yellow_cards','Cartão amarelo'),('red_cards','Cartão vermelho'),('player_throws','Laterais'),('woodwork','Finalizações na trave'),('offsides','Impedimento'),('goal_kicks','Tiro de metas')]
             metric_rows=[]
             for key,label in base_specs:
                 hv=analysis['home'].get(key);av=analysis['away'].get(key)
@@ -110,13 +99,8 @@ if selected:
                 metric_rows.append({'Indicador':label,'Casa — média':format_metric_value(key,hv),'Fora — média':format_metric_value(key,av),'Amostra':f'{analysis["home"].get(key+"_sample",0)}/{analysis["away"].get(key+"_sample",0)}'})
             if metric_rows:st.dataframe(pd.DataFrame(metric_rows),hide_index=True,use_container_width=True)
             else:st.warning('Há jogos históricos, mas as métricas detalhadas ainda não foram persistidas.')
-
             mk=analysis['markets'];st.markdown('### 🎯 Estatísticas de palpites');rows=[]
-            market_specs=[
-                ('Gols','gols'),('Finalizações totais','finalizacoes'),('Finalizações no gol','finalizacoes_no_alvo'),
-                ('Desarmes','desarmes_efetivos'),('Escanteios','escanteios'),('Faltas','faltas'),('Passes','passes_certos'),
-                ('Defesa do goleiro','defesas'),('Cartão amarelo','cartoes_amarelos'),('Cartão vermelho','cartoes_vermelhos'),
-                ('Laterais','laterais'),('Finalizações na trave','finalizacoes_na_trave'),('Impedimento','impedimentos'),('Tiro de metas','tiros_de_meta')]
+            market_specs=[('Gols','gols'),('Finalizações totais','finalizacoes'),('Finalizações no gol','finalizacoes_no_alvo'),('Desarmes','desarmes_efetivos'),('Escanteios','escanteios'),('Faltas','faltas'),('Passes','passes_certos'),('Defesa do goleiro','defesas'),('Cartão amarelo','cartoes_amarelos'),('Cartão vermelho','cartoes_vermelhos'),('Laterais','laterais'),('Finalizações na trave','finalizacoes_na_trave'),('Impedimento','impedimentos'),('Tiro de metas','tiros_de_meta')]
             for label,key in market_specs:
                 obj=mk.get(key) or {};lines=obj.get('lines') or {}
                 if obj.get('total_expected') is None and not lines:continue
@@ -128,11 +112,11 @@ if selected:
             if exact:
                 st.markdown('#### ⚽ Distribuição de gols');st.dataframe(pd.DataFrame([{'Total de gols':k,'Probabilidade':f'{v}%'} for k,v in exact.items()]),hide_index=True,use_container_width=True)
             st.caption('Probabilidades de mercados estatísticos usam Poisson sobre médias históricas persistidas. Ausência de dado não vira zero.')
-
             for tid,tname in ((m.get('home_id'),m.get('home_name')),(m.get('away_id'),m.get('away_name'))):
                 if not tid:continue
                 summary=player_history_summary(tid,before,20);st.markdown(f'#### 👥 Jogadores da análise — {tname}')
-                if summary:st.dataframe(pd.DataFrame([{'Jogador':x['name'],'Jogos':x['matches'],'Gols':format_metric_value('goals',x['goals']),'Assistências':format_metric_value('assists',x['assists']),'Finalizações':format_metric_value('shots',x['shots']),'No alvo':format_metric_value('shots_on_target',x['shots_on_target']),'Passes certos':format_metric_value('passes_completed',x['passes_completed']),'Desarmes':format_metric_value('tackles',x['tackles'])} for x in summary]),hide_index=True,use_container_width=True)
+                if summary:
+                    st.dataframe(pd.DataFrame([{'Jogador':x['name'],'Posição':position_label(x.get('position')),'Jogos':x['matches'],'Gols':format_metric_value('goals',x.get('goals')),'Assistências':format_metric_value('assists',x.get('assists')),'Finalizações certas':format_metric_value('shots_on_target',x.get('shots_on_target')),'Finalizações no gol':format_metric_value('shots',x.get('shots')),'Passes certos':format_metric_value('passes_completed',x.get('passes_completed')),'Desarmes':format_metric_value('tackles',x.get('tackles')),'Faltas cometidas':format_metric_value('fouls',x.get('fouls')),'Faltas sofridas':format_metric_value('was_fouled',x.get('was_fouled'))} for x in summary]),hide_index=True,use_container_width=True)
                 else:st.info('Nenhum dado individual histórico persistido para esta equipe.')
 
         players=get_players(selected);unique_players={x['id']:x for x in players};st.subheader(f'👥 Jogadores da partida • {len(unique_players)}')
