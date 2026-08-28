@@ -117,22 +117,23 @@ def _enrich_match_details(match,stage='historico'):
     total_stats=total_players=total_pstats=0;success=False
     if _is_serie_b(match.get('competition')):
         provider=DadosFutebolProviderFixed()
-        if not provider.available():add_diagnostic('diagnostico_jogadores','ERROR','Dados Futebol: chave não configurada para a Série B.',provider.name,match.get('id'));return {'success':False,'stats':0,'players':0,'player_stats':0}
+        if not provider.available():add_diagnostic('diagnostico_jogadores','ERROR','Dados Futebol: chave não configurada para a Série B.',provider.name,match.get('id'));return {'success':False,'stats':0,'players':[],'player_count':0,'player_stats':0}
+        players=[]
         try:
-            d=provider.match_details(match);_diagnose_source_players(match,provider,d);a,b,c,presence=_persist_detail(match,provider,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'Dados Futebol: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',provider.name,match['id']);success|=bool(a or b or c or presence)
+            d=provider.match_details(match);players=d.get('players',[]) or [];_diagnose_source_players(match,provider,d);a,b,c,presence=_persist_detail(match,provider,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'Dados Futebol: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',provider.name,match['id']);success|=bool(a or b or c or presence)
         except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'Dados Futebol detalhes: {e}',provider.name,match.get('id'))
-        return {'success':success,'stats':total_stats,'players':total_players,'player_stats':total_pstats}
-    espn=ESPNProvider()
+        return {'success':success,'stats':total_stats,'players':players,'player_count':total_players,'player_stats':total_pstats}
+    espn=ESPNProvider();players=[]
     try:
         eid=_resolve_espn_event_id(match)
         if eid:
-            d=espn.match_details(eid);_diagnose_source_players(match,espn,d);a,b,c,presence=_persist_detail(match,espn,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'ESPN: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',espn.name,match['id']);success|=bool(a or b or c or presence)
+            d=espn.match_details(eid);players=d.get('players',[]) or [];_diagnose_source_players(match,espn,d);a,b,c,presence=_persist_detail(match,espn,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'ESPN: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',espn.name,match['id']);success|=bool(a or b or c or presence)
     except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'ESPN detalhes: {e}',espn.name,match.get('id'))
     fotmob=FotMobProvider()
     try:
-        d=fotmob.match_details(match);_diagnose_source_players(match,fotmob,d);a,b,c,presence=_persist_detail(match,fotmob,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'FotMob: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',fotmob.name,match['id']);success|=bool(a or b or c or presence)
+        d=fotmob.match_details(match);players=d.get('players',[]) or [];_diagnose_source_players(match,fotmob,d);a,b,c,presence=_persist_detail(match,fotmob,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'FotMob: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',fotmob.name,match['id']);success|=bool(a or b or c or presence)
     except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'FotMob detalhes: {e}',fotmob.name,match.get('id'))
-    return {'success':success,'stats':total_stats,'players':total_players,'player_stats':total_pstats}
+    return {'success':success,'stats':total_stats,'players':players,'player_count':total_players,'player_stats':total_pstats}
 
 def _enrich_historical_match(match):return _enrich_match_details(match,'historico')
 def _has_real_player_stats(match_id):return any(r.get('metric')!=PRESENCE_METRIC and r.get('value') is not None for r in get_players(match_id))
@@ -167,8 +168,8 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
     for h in historical:
         if not(get_stats(h['id']) and _has_real_player_stats(h['id']) and _has_required_team_metrics(h['id'])):
             r=_enrich_historical_match(h)
-            if r['success']:stats_records+=r['stats'];player_records+=r['player_stats'];player_matches+=1 if r['players'] or r['player_stats'] else 0
+            if r['success']:stats_records+=r['stats'];player_records+=r['player_stats'];player_matches+=1 if r.get('player_count') or r.get('player_stats') else 0
         _save_ai_sample(h,training_ready=(h.get('status')=='FINISHED' and h.get('home_score') is not None and h.get('away_score') is not None))
-    fresh_match=get_match(fresh_match.get('id')) or fresh_match;current=_enrich_match_details(fresh_match,'partida');player_records+=current['player_stats'];stats_records+=current['stats'];player_matches+=1 if current['players'] else 0;_save_ai_sample(fresh_match,training_ready=(fresh_match.get('status')=='FINISHED' and fresh_match.get('home_score') is not None and fresh_match.get('away_score') is not None));_reconcile_for_history(match)
+    fresh_match=get_match(fresh_match.get('id')) or fresh_match;current=_enrich_match_details(fresh_match,'partida');player_records+=current['player_stats'];stats_records+=current['stats'];player_matches+=1 if current.get('player_count') or current.get('player_stats') else 0;_save_ai_sample(fresh_match,training_ready=(fresh_match.get('status')=='FINISHED' and fresh_match.get('home_score') is not None and fresh_match.get('away_score') is not None));_reconcile_for_history(match)
     final_match=get_match(fresh_match.get('id')) or fresh_match;final_before=final_match.get('start_time') or before_iso;final_team_ids=[x for x in (final_match.get('home_id'),final_match.get('away_id')) if x];home_n=len(_history_matches_for_team(final_team_ids[0],final_before,matches_per_team)) if final_team_ids else 0;away_n=len(_history_matches_for_team(final_team_ids[1],final_before,matches_per_team)) if len(final_team_ids)>1 else 0
-    return {'home_matches':home_n,'away_matches':away_n,'historical_matches':len(historical),'player_matches_enriched':player_matches,'stats_records':stats_records,'player_records':player_records,'current_players':current['players'],'current_stats':current['stats']}
+    return {'home_matches':home_n,'away_matches':away_n,'historical_matches':len(historical),'player_matches_enriched':player_matches,'stats_records':stats_records,'player_records':player_records,'current_players':current.get('players',[]),'current_stats':current.get('stats',[])}
