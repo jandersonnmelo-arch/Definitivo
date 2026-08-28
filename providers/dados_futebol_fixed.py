@@ -1,14 +1,38 @@
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from .dados_futebol import DadosFutebolProvider, _find_match_records
+from core.persistent_api_cache import get_json_persistent
 
 MANAUS = ZoneInfo('America/Manaus')
 
 
 class DadosFutebolProviderFixed(DadosFutebolProvider):
-    """Adaptador final: IDs dos times/jogadores e janela em horário de Manaus."""
+    """Adaptador final da Série B com cache persistente e limite de 10 chamadas/minuto."""
 
     name = 'Dados Futebol'
+
+    def _cache_ttl(self, path):
+        # O campeonato muda raramente; partidas e estatísticas podem ser atualizadas.
+        if path == '/campeonatos':
+            return 7 * 24 * 3600
+        if path.endswith('/partidas'):
+            return 15 * 60
+        if '/estatisticas' in path:
+            return 30 * 60
+        if '/escalacao' in path or '/escalação' in path:
+            return 6 * 3600
+        return 30 * 60
+
+    def _get(self, path):
+        if not self.token:
+            raise RuntimeError('chave [api_futebol] não configurada')
+        return get_json_persistent(
+            url='https://api.dadosfutebol.com.br/v1' + path,
+            path=path,
+            provider=self.name,
+            token=self.token,
+            ttl_seconds=self._cache_ttl(path),
+        )
 
     def matches(self, date_from, date_to, competition=None):
         # Consulta uma borda de ±1 dia e aplica o filtro final no fuso oficial do app.
@@ -37,6 +61,7 @@ class DadosFutebolProviderFixed(DadosFutebolProvider):
         try:
             lineup = self._get(f'/partidas/{mid}/escalacao')
         except Exception:
+            # Compatibilidade com instalações que expõem o caminho acentuado.
             try:
                 lineup = self._get(f'/partidas/{mid}/escalação')
             except Exception:
