@@ -3,6 +3,29 @@ from core.http_cache import get_json
 from core.normalizer import normalize_match_metric
 
 CDN = 'https://cdn.espn.com/core/soccer/game'
+ALIASES = {
+    'shots_off_woodwork':'woodwork',
+    'shots_off_the_woodwork':'woodwork',
+    'shots_woodwork':'woodwork',
+    'woodwork':'woodwork',
+    'throw_ins':'player_throws',
+    'throwin':'player_throws',
+    'throw_ins_total':'player_throws',
+    'goal_kicks':'goal_kicks',
+    'goalkicks':'goal_kicks',
+    'goal_kicks_total':'goal_kicks',
+    'corners_total':'corners',
+}
+
+
+def _key(value):
+    s = str(value or '').strip()
+    s = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s)
+    return re.sub(r'[^A-Za-z0-9]+', '_', s).strip('_').lower()
+
+
+def _metric(label):
+    return ALIASES.get(_key(label), normalize_match_metric(label))
 
 
 def _num(value):
@@ -53,7 +76,7 @@ def _team_rows(box):
             if not isinstance(stat, dict):
                 continue
             label = stat.get('name') or stat.get('displayName') or stat.get('label') or stat.get('description')
-            metric = normalize_match_metric(label)
+            metric = _metric(label)
             value = _stat_value(stat)
             if tid is not None and metric and value is not None:
                 out.append({'team_id': tid, 'team_name': tname, 'metric': metric, 'value': value, 'source': 'ESPN'})
