@@ -1,0 +1,107 @@
+{
+  "format": "definitivo-db-snapshot-v3",
+  "created_at": "2026-08-28T23:57:35.420756+00:00",
+  "tables": {
+    "schema_meta": [
+      {
+        "key": "data_quality_v4",
+        "value": "2026-08-28T23:57:32.182020+00:00"
+      },
+      {
+        "key": "schema",
+        "value": "15"
+      }
+    ],
+    "teams": [
+      {
+        "id": "78f7aceccec7234876",
+        "sport": "Futebol",
+        "name": "Real Racing Club de Santander",
+        "normalized_name": "real racing club de santander",
+        "updated_at": "2026-08-28T23:57:35.409535+00:00"
+      },
+      {
+        "id": "fae656c369933673eb",
+        "sport": "Futebol",
+        "name": "Elche CF",
+        "normalized_name": "elche",
+        "updated_at": "2026-08-28T23:57:35.409776+00:00"
+      }
+    ],
+    "team_sources": [
+      {
+        "team_id": "78f7aceccec7234876",
+        "source": "Football-Data.org",
+        "provider_team_id": "5335",
+        "updated_at": "2026-08-28T23:57:35.409670+00:00"
+      },
+      {
+        "team_id": "fae656c369933673eb",
+        "source": "Football-Data.org",
+        "provider_team_id": "285",
+        "updated_at": "2026-08-28T23:57:35.409794+00:00"
+      }
+    ],
+    "matches": [
+      {
+        "id": "61b0aa5428ff9c9c1f48",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-28T17:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "78f7aceccec7234876",
+        "home_name": "Real Racing Club de Santander",
+        "home_short": "SAN",
+        "away_id": "fae656c369933673eb",
+        "away_name": "Elche CF",
+        "away_short": "ELC",
+        "home_score": 3,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "564654",
+        "updated_at": "2026-08-28T23:57:35.409852+00:00"
+      }
+    ],
+    "match_sources": [
+      {
+        "match_id": "61b0aa5428ff9c9c1f48",
+        "source": "Football-Data.org",
+        "provider_match_id": "564654",
+        "updated_at": "2026-08-28T23:57:35.409990+00:00"
+      }
+    ],
+    "match_stats": [],
+    "players": [],
+    "player_stats": [],
+    "diagnostics": [
+      {
+        "id": 1,
+        "match_id": null,
+        "source": "Dados Futebol",
+        "stage": "coleta",
+        "status": "ERROR",
+        "message": "Dados Futebol: HTTP 401: {'erro': 'Não autorizado', 'mensagem': 'API Key inválida ou inativa'}",
+        "created_at": "2026-08-28T23:57:33.351413+00:00"
+      }
+    ],
+    "api_usage": [
+      {
+        "provider": "Football-Data.org",
+        "day_utc": "2026-08-28",
+        "calls": 1,
+        "last_call": "2026-08-28T23:57:35.383564+00:00",
+        "remaining_day": null,
+        "remaining_minute": null
+      }
+    ],
+    "api_call_log": [
+      {
+        "id": 1,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-28T23:57:35.383564+00:00"
+      }
+    ]
+  }
+}
