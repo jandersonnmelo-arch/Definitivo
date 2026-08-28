@@ -60,6 +60,11 @@ TEAM_ALIASES = {
     'paris saint germain': 'paris saint germain',
     'paris saint germain fc': 'paris saint germain',
     'psg': 'paris saint germain',
+    'racing santander': 'real racing club de santander',
+    'racing club de santander': 'real racing club de santander',
+    'real racing': 'real racing club de santander',
+    'real racing club de santander': 'real racing club de santander',
+    'real racing de santander': 'real racing club de santander',
     'sporting clube de portugal': 'sporting portugal',
     'clube de portugal': 'sporting portugal',
     'sporting portugal': 'sporting portugal',
@@ -70,6 +75,8 @@ TEAM_ALIASES = {
 def _norm(value):
     s = unicodedata.normalize('NFKD', str(value or '')).encode('ascii', 'ignore').decode().lower()
     s = re.sub(r'[^a-z0-9]+', ' ', s).strip()
+    if s in TEAM_ALIASES:
+        return TEAM_ALIASES[s]
     if s in {'ca mineiro', 'atletico mg', 'clube atletico mineiro', 'atletico mineiro'}:
         return 'atletico mineiro'
     if s == 'cam':
