@@ -23,7 +23,6 @@ def _date_only(value):
 
 
 def _parse_api_match_datetime(item):
-    # Primeiro tenta campos que já contêm data + hora.
     for key in ('data_hora', 'datetime', 'start_time', 'date'):
         value = item.get(key)
         if value and (':' in str(value) or 'T' in str(value)):
@@ -59,16 +58,45 @@ def _parse_api_match_datetime(item):
             except Exception:
                 pass
 
-    # O endpoint da fase pode fornecer somente a data do jogo.
-    # Meio-dia em Manaus é usado apenas como fallback técnico para impedir
-    # que uma data sem horário seja deslocada para o dia anterior.
     return datetime.combine(d, time(12, 0), tzinfo=MANAUS)
 
 
 class ApiFutebolCalendarProviderFixed(ApiFutebolCalendarProvider):
-    """Série B via API Futebol com tratamento correto de datas sem horário."""
+    """Série B via API Futebol usando o detalhe oficial para data/hora."""
 
     name = 'API-Futebol'
+
+    def _extract_detail_datetime(self, detail, home_name, away_name):
+        """Busca a data/hora oficial no detalhe da partida."""
+        candidates = self._extract_matches(detail)
+        for item in candidates:
+            home = _team(item.get('mandante') or item.get('home') or item.get('time_mandante') or item.get('equipe_mandante'))
+            away = _team(item.get('visitante') or item.get('away') or item.get('time_visitante') or item.get('equipe_visitante'))
+            if home_name and away_name and home['name'] != home_name and away['name'] != away_name:
+                continue
+            dt = _parse_api_match_datetime(item)
+            if dt is not None:
+                return dt, item
+
+        def walk(value):
+            if isinstance(value, dict):
+                keys = {str(k).lower() for k in value.keys()}
+                if keys.intersection({'data_realizacao', 'data_hora', 'horario_realizacao', 'horario', 'hora_realizacao', 'date', 'datetime'}):
+                    dt = _parse_api_match_datetime(value)
+                    if dt is not None:
+                        return dt, value
+                for child in value.values():
+                    result = walk(child)
+                    if result:
+                        return result
+            elif isinstance(value, list):
+                for child in value:
+                    result = walk(child)
+                    if result:
+                        return result
+            return None
+
+        return walk(detail) or (None, None)
 
     def matches(self, date_from, date_to, competition=None):
         championship = self._find_championship()
@@ -77,30 +105,70 @@ class ApiFutebolCalendarProviderFixed(ApiFutebolCalendarProvider):
         start = datetime.fromisoformat(date_from).date()
         end = datetime.fromisoformat(date_to).date()
 
-        out, seen = [], set()
-        valid = 0
+        parsed = []
         invalid = 0
-        examples = []
+        candidate_rounds = set()
 
         for item in raw:
             home = _team(item.get('mandante') or item.get('home') or item.get('time_mandante') or item.get('equipe_mandante'))
             away = _team(item.get('visitante') or item.get('away') or item.get('time_visitante') or item.get('equipe_visitante'))
             dt = _parse_api_match_datetime(item)
-
             if dt is None or not home['name'] or not away['name']:
                 invalid += 1
                 continue
 
-            valid += 1
-            if len(examples) < 5:
-                examples.append(f"{home['name']} x {away['name']} = {dt.isoformat()}")
+            round_value = item.get('rodada') or item.get('round') or item.get('rodada_id') or item.get('round_id')
+            parsed.append((item, home, away, dt, round_value))
+            if start <= dt.astimezone(MANAUS).date() <= end and round_value is not None:
+                candidate_rounds.add(str(round_value))
 
-            local_date = dt.astimezone(MANAUS).date()
-            if not (start <= local_date <= end):
+        # O resumo da fase pode conter a data/hora antiga da tabela básica.
+        # Para as rodadas candidatas, consulta o detalhe oficial de cada partida.
+        detail_checked = 0
+        detail_corrected = 0
+        exact = {}
+
+        for item, home, away, phase_dt, round_value in parsed:
+            if round_value is None or str(round_value) not in candidate_rounds:
                 continue
 
-            mid = str(_id(item, ('partida_id', 'jogo_id', 'match_id', 'id')) or f"{home['id']}-{away['id']}-{dt.isoformat()}")
-            if mid in seen:
+            mid = _id(item, ('partida_id', 'jogo_id', 'match_id', 'id'))
+            if mid is None:
+                continue
+
+            try:
+                detail = self._get(f'/partidas/{mid}')
+                exact_dt, _ = self._extract_detail_datetime(detail, home['name'], away['name'])
+                detail_checked += 1
+
+                if exact_dt is not None:
+                    exact[str(mid)] = exact_dt
+                    if exact_dt.astimezone(MANAUS).date() != phase_dt.astimezone(MANAUS).date():
+                        detail_corrected += 1
+                        add_diagnostic(
+                            'coleta',
+                            'INFO',
+                            f'Série B: data corrigida {home["name"]} x {away["name"]}: fase={phase_dt.isoformat()} detalhe={exact_dt.isoformat()}',
+                            self.name,
+                            str(mid),
+                        )
+            except Exception as exc:
+                add_diagnostic(
+                    'coleta',
+                    'WARNING',
+                    f'Série B: detalhe {mid} indisponível; usando data da fase: {exc}',
+                    self.name,
+                    str(mid),
+                )
+
+        out, seen = [], set()
+
+        for item, home, away, phase_dt, round_value in parsed:
+            mid = str(_id(item, ('partida_id', 'jogo_id', 'match_id', 'id')) or f"{home['id']}-{away['id']}-{phase_dt.isoformat()}")
+            dt = exact.get(mid, phase_dt)
+            local_date = dt.astimezone(MANAUS).date()
+
+            if not (start <= local_date <= end) or mid in seen:
                 continue
 
             status = _norm(item.get('status') or item.get('situacao') or item.get('estado') or '')
@@ -134,6 +202,11 @@ class ApiFutebolCalendarProviderFixed(ApiFutebolCalendarProvider):
             })
             seen.add(mid)
 
-        add_diagnostic('coleta', 'INFO', f"Série B FIX: datas válidas={valid}; inválidas={invalid}; exemplos={' | '.join(examples) or '—'}", self.name)
-        add_diagnostic('coleta', 'INFO', f'Série B FIX: partidas no período={len(out)}', self.name)
+        add_diagnostic(
+            'coleta',
+            'INFO',
+            f'Série B DATA FIX: brutas={len(raw)}; válidas={len(parsed)}; inválidas={invalid}; rodadas candidatas={len(candidate_rounds)}; detalhes consultados={detail_checked}; datas corrigidas={detail_corrected}',
+            self.name,
+        )
+        add_diagnostic('coleta', 'INFO', f'Série B DATA FIX: partidas no período={len(out)}', self.name)
         return out
