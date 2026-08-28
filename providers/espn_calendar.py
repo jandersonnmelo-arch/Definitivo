@@ -4,13 +4,13 @@ from .espn import ESPNProvider
 from core.http_cache import get_json
 from core.normalizer import normalize_status
 
-BASE = 'https://site.api.espn.com/apis/site/v2/sports/soccer'
+BASES = [
+    'https://site.api.espn.com/apis/site/v2/sports/soccer',
+    'https://site.web.api.espn.com/apis/site/v2/sports/soccer',
+]
 
-# O endpoint /all nao garante todas as competicoes. Estas ligas sao consultadas
-# explicitamente para cobrir principalmente o futebol brasileiro e CONMEBOL,
-# alem das principais ligas que fazem parte do catalogo do aplicativo.
+# Cobertura explícita para não depender do /all, que não garante todas as ligas.
 ESPN_CALENDAR_LEAGUES = [
-    'all',
     'bra.1',
     'bra.2',
     'bra.copa_do_brazil',
@@ -45,9 +45,31 @@ ESPN_CALENDAR_LEAGUES = [
 
 
 class ESPNCalendarProvider(ESPNProvider):
-    """ESPN dedicada ao calendario, consultando ligas explicitamente."""
+    """ESPN dedicada ao calendário, consultando cada liga explicitamente."""
 
     name = 'ESPN'
+
+    def _fetch_scoreboard(self, league, date_param):
+        params = {
+            'dates': date_param,
+            'limit': 1000,
+            'lang': 'pt-BR',
+        }
+        last_error = None
+        for base in BASES:
+            try:
+                data = get_json(
+                    f'{base}/{league}/scoreboard',
+                    params,
+                    provider='ESPN',
+                )
+                if isinstance(data, dict):
+                    return data
+            except Exception as exc:
+                last_error = exc
+        if last_error:
+            raise last_error
+        return {}
 
     def matches(self, date_from, date_to, competition=None):
         out = []
@@ -58,14 +80,9 @@ class ESPNCalendarProvider(ESPNProvider):
 
         for league in ESPN_CALENDAR_LEAGUES:
             try:
-                data = get_json(
-                    f'{BASE}/{league}/scoreboard',
-                    {'dates': date_param},
-                    provider='ESPN',
-                )
+                data = self._fetch_scoreboard(league, date_param)
             except Exception:
-                # Uma liga eventualmente inexistente/sem cobertura nao pode
-                # impedir as demais fontes e competicoes de serem coletadas.
+                # Uma liga indisponível não pode impedir as demais.
                 continue
 
             for x in data.get('events', []):
@@ -73,14 +90,12 @@ class ESPNCalendarProvider(ESPNProvider):
                 if not event_id or event_id in seen:
                     continue
 
-                comp = (
-                    ((x.get('competitions') or [{}])[0].get('league') or {}).get('name')
-                    or ((x.get('season') or {}).get('displayName'))
-                )
+                c = (x.get('competitions') or [{}])[0]
+                league_obj = c.get('league') or {}
+                comp = league_obj.get('name') or league_obj.get('abbreviation') or ((x.get('season') or {}).get('displayName'))
                 if competition and competition.lower() not in str(comp).lower():
                     continue
 
-                c = (x.get('competitions') or [{}])[0]
                 teams = c.get('competitors') or []
                 home = next((t for t in teams if t.get('homeAway') == 'home'), teams[0] if teams else {})
                 away = next((t for t in teams if t.get('homeAway') == 'away'), teams[1] if len(teams) > 1 else {})
