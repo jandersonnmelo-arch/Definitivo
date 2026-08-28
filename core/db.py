@@ -13,6 +13,7 @@ DB_TIMEOUT = int(os.getenv("DEFINITIVO_DB_TIMEOUT", "60"))
 DB_BUSY_TIMEOUT_MS = int(os.getenv("DEFINITIVO_DB_BUSY_TIMEOUT_MS", "60000"))
 _DB_WRITE_LOCK = threading.RLock()
 
+
 def connect():
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     c=sqlite3.connect(DB_PATH,timeout=DB_TIMEOUT,isolation_level="DEFERRED",check_same_thread=False);c.row_factory=sqlite3.Row
@@ -27,6 +28,16 @@ def canonical_team_id(sport,name):return hashlib.sha1(f"{sport}:{_norm(name)}".e
 def _ensure_column(c,table,column,definition):
     cols={r["name"] for r in c.execute(f"PRAGMA table_info({table})").fetchall()}
     if column not in cols:c.execute(f"ALTER TABLE {table} ADD COLUMN {column} {definition}")
+
+def _backup_after_write():
+    """Gera snapshot local sem falhar a gravação principal."""
+    if os.getenv("DEFINITIVO_AUTO_SNAPSHOT", "1") != "1":
+        return
+    try:
+        from core.persistence import export_snapshot
+        export_snapshot()
+    except Exception:
+        pass
 
 def init_db():
     with _DB_WRITE_LOCK:
@@ -56,8 +67,6 @@ def init_db():
             """)
             _ensure_column(c,"players","source","TEXT");_ensure_column(c,"players","provider_player_id","TEXT");_ensure_column(c,"players","updated_at","TEXT");_ensure_column(c,"player_stats","team_id","TEXT")
             c.execute("UPDATE players SET source=COALESCE(source,'LEGACY'),provider_player_id=COALESCE(provider_player_id,CAST(id AS TEXT)),updated_at=COALESCE(updated_at,?)",(now_iso(),))
-            # Migração conservadora: registros antigos que não tinham equipe recebem a equipe
-            # atualmente associada ao jogador. Novos registros sempre gravam a equipe da partida.
             c.execute("UPDATE player_stats SET team_id=(SELECT p.team_id FROM players p WHERE p.id=player_stats.player_id) WHERE team_id IS NULL")
             c.execute("INSERT OR REPLACE INTO schema_meta(key,value) VALUES('schema','15')");c.commit()
         finally:c.close()
@@ -94,7 +103,7 @@ def upsert_match(m):
                 old=c.execute("SELECT source FROM matches WHERE id=?",(mid,)).fetchone();source=m.get("source","unknown")
                 if old and old["source"] and old["source"]!=source:source="multi"
                 c.execute("INSERT INTO matches(id,sport,competition,season,start_time,status,minute,home_id,home_name,home_short,away_id,away_name,away_short,home_score,away_score,source,provider_match_id,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET competition=COALESCE(excluded.competition,matches.competition),season=COALESCE(excluded.season,matches.season),start_time=COALESCE(excluded.start_time,matches.start_time),status=COALESCE(excluded.status,matches.status),minute=excluded.minute,home_id=excluded.home_id,home_name=excluded.home_name,home_short=COALESCE(excluded.home_short,matches.home_short),away_id=excluded.away_id,away_name=excluded.away_name,away_short=COALESCE(excluded.away_short,matches.away_short),home_score=excluded.home_score,away_score=excluded.away_score,source=excluded.source,provider_match_id=excluded.provider_match_id,updated_at=excluded.updated_at",(mid,m.get("sport","Futebol"),m.get("competition"),m.get("season"),m.get("start_time"),m.get("status"),m.get("minute"),home_cid,m["home_name"],m.get("home_short"),away_cid,m["away_name"],m.get("away_short"),m.get("home_score"),m.get("away_score"),source,str(m.get("provider_match_id",mid)),now_iso()))
-                c.execute("INSERT INTO match_sources(match_id,source,provider_match_id,updated_at) VALUES(?,?,?,?) ON CONFLICT(match_id,source) DO UPDATE SET provider_match_id=excluded.provider_match_id,updated_at=excluded.updated_at",(mid,m.get("source","unknown"),str(m.get("provider_match_id",mid)),now_iso()));c.commit();return mid
+                c.execute("INSERT INTO match_sources(match_id,source,provider_match_id,updated_at) VALUES(?,?,?,?) ON CONFLICT(match_id,source) DO UPDATE SET provider_match_id=excluded.provider_match_id,updated_at=excluded.updated_at",(mid,m.get("source","unknown"),str(m.get("provider_match_id",mid)),now_iso()));c.commit();_backup_after_write();return mid
             except sqlite3.OperationalError as exc:
                 c.rollback();last_error=exc
                 if "locked" not in str(exc).lower() and "busy" not in str(exc).lower():raise
@@ -122,7 +131,7 @@ def upsert_match_stats(match_id,rows):
             for r in rows:
                 if r.get("team_id") is None or r.get("value") is None:continue
                 tid=_canonical_stat_team(c,match_id,r["source"],r["team_id"],r.get("team_name"));c.execute("INSERT INTO match_stats(match_id,team_id,metric,value,source,observed_at) VALUES(?,?,?,?,?,?) ON CONFLICT(match_id,team_id,metric,source) DO UPDATE SET value=excluded.value,observed_at=excluded.observed_at",(match_id,tid,r["metric"],r["value"],r["source"],now_iso()))
-            c.commit()
+            c.commit();_backup_after_write()
         finally:c.close()
 def upsert_players(players):
     if not players:return
@@ -132,7 +141,7 @@ def upsert_players(players):
             for p in players:
                 src=p.get("source","unknown");cid=canonical_player_id(src,p["id"]);team=p.get("team_id");team_cid=_canonical_stat_team(c,p.get("match_id",""),src,team,p.get("team_name")) if team is not None and p.get("match_id") else team
                 c.execute("INSERT INTO players(id,team_id,name,position,source,provider_player_id,updated_at) VALUES(?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET team_id=excluded.team_id,name=excluded.name,position=excluded.position,updated_at=excluded.updated_at",(cid,team_cid,p["name"],p.get("position"),src,str(p["id"]),now_iso()))
-            c.commit()
+            c.commit();_backup_after_write()
         finally:c.close()
 def upsert_player_stats(match_id,rows):
     if not rows:return
@@ -143,7 +152,7 @@ def upsert_player_stats(match_id,rows):
                 if r.get("value") is None:continue
                 src=r.get("source","unknown");cid=canonical_player_id(src,r["player_id"]);raw_team=r.get("team_id");team_cid=_canonical_stat_team(c,match_id,src,raw_team,r.get("team_name")) if raw_team is not None else None
                 c.execute("INSERT INTO player_stats(match_id,player_id,team_id,metric,value,source,observed_at) VALUES(?,?,?,?,?,?,?) ON CONFLICT(match_id,player_id,metric,source) DO UPDATE SET team_id=excluded.team_id,value=excluded.value,observed_at=excluded.observed_at",(match_id,cid,team_cid,r["metric"],r["value"],src,now_iso()))
-            c.commit()
+            c.commit();_backup_after_write()
         finally:c.close()
 def add_diagnostic(stage,status,message,source=None,match_id=None):
     with _DB_WRITE_LOCK:
@@ -169,6 +178,7 @@ def get_players(mid):
         if not m:return []
         return [dict(x) for x in c.execute("SELECT p.id,p.team_id,p.name,p.position,ps.metric,ps.value,ps.source FROM players p JOIN player_stats ps ON ps.player_id=p.id WHERE ps.match_id=? AND ps.team_id IN (?,?) ORDER BY ps.team_id,p.name,ps.metric",(mid,m["home_id"],m["away_id"])).fetchall()]
     finally:c.close()
+
 def get_diagnostics(limit=100):
     c=connect()
     try:return [dict(x) for x in c.execute("SELECT * FROM diagnostics ORDER BY id DESC LIMIT ?",(limit,)).fetchall()]
@@ -176,45 +186,10 @@ def get_diagnostics(limit=100):
 def team_history(team_id,before_iso=None,limit=10):
     c=connect()
     try:
-        sql="SELECT * FROM matches WHERE sport='Futebol' AND status='FINISHED' AND (home_id=? OR away_id=?)";p=[team_id,team_id]
-        if before_iso:sql+=" AND start_time < ?";p.append(before_iso)
-        sql+=" ORDER BY start_time DESC LIMIT ?";p.append(limit);return [dict(x) for x in c.execute(sql,p).fetchall()]
+        sql="SELECT * FROM matches WHERE (home_id=? OR away_id=?) AND status='FINISHED'"
+        params=[team_id,team_id]
+        if before_iso:sql+=" AND start_time<?";params.append(before_iso)
+        sql+=" ORDER BY start_time DESC LIMIT ?";params.append(limit)
+        return [dict(r) for r in c.execute(sql,params).fetchall()]
     finally:c.close()
-def metric_history(team_id,metric,before_iso=None,limit=10):
-    c=connect()
-    try:
-        sql="SELECT m.start_time,s.value FROM match_stats s JOIN matches m ON m.id=s.match_id WHERE s.team_id=? AND s.metric=? AND m.status='FINISHED'";p=[team_id,metric]
-        if before_iso:sql+=" AND m.start_time < ?";p.append(before_iso)
-        sql+=" ORDER BY m.start_time DESC LIMIT ?";p.append(limit);return [dict(x) for x in c.execute(sql,p).fetchall()]
-    finally:c.close()
-def player_history(player_id,before_iso=None,limit=20):
-    c=connect()
-    try:
-        sql="SELECT ps.match_id,ps.metric,ps.value,ps.source,m.start_time,m.home_name,m.away_name FROM player_stats ps JOIN matches m ON m.id=ps.match_id WHERE ps.player_id=? AND m.status='FINISHED'";p=[player_id]
-        if before_iso:sql+=" AND m.start_time < ?";p.append(before_iso)
-        sql+=" ORDER BY m.start_time DESC LIMIT ?";p.append(limit);return [dict(x) for x in c.execute(sql,p).fetchall()]
-    finally:c.close()
-def player_history_summary(team_id,before_iso=None,limit=20):
-    c=connect()
-    try:
-        sql="""SELECT p.id,p.name,p.position,COUNT(DISTINCT ps.match_id) matches,
-        SUM(CASE WHEN ps.metric='goals' THEN ps.value ELSE 0 END) goals,
-        SUM(CASE WHEN ps.metric='assists' THEN ps.value ELSE 0 END) assists,
-        SUM(CASE WHEN ps.metric='passes_completed' THEN ps.value ELSE 0 END) passes_completed,
-        SUM(CASE WHEN ps.metric='tackles' THEN ps.value ELSE 0 END) tackles,
-        SUM(CASE WHEN ps.metric='fouls' THEN ps.value ELSE 0 END) fouls,
-        SUM(CASE WHEN ps.metric='was_fouled' THEN ps.value ELSE 0 END) was_fouled,
-        SUM(CASE WHEN ps.metric='shots_on_target' THEN ps.value ELSE 0 END) shots_on_target,
-        SUM(CASE WHEN ps.metric='shots' THEN ps.value ELSE 0 END) shots
-        FROM players p JOIN player_stats ps ON ps.player_id=p.id JOIN matches m ON m.id=ps.match_id
-        WHERE ps.team_id=? AND m.status='FINISHED'""";p=[team_id]
-        if before_iso:sql+=" AND m.start_time < ?";p.append(before_iso)
-        sql+=" GROUP BY p.id,p.name,p.position ORDER BY matches DESC,p.name LIMIT ?";p.append(limit);return [dict(x) for x in c.execute(sql,p).fetchall()]
-    finally:c.close()
-def history_coverage(team_id,before_iso=None):
-    c=connect()
-    try:
-        sql="SELECT COUNT(*) FROM matches WHERE sport='Futebol' AND status='FINISHED' AND (home_id=? OR away_id=?)";p=[team_id,team_id]
-        if before_iso:sql+=" AND start_time < ?";p.append(before_iso)
-        return int(c.execute(sql,p).fetchone()[0])
-    finally:c.close()
+def history_coverage(team_id,before_iso=None):return len(team_history(team_id,before_iso,10))
