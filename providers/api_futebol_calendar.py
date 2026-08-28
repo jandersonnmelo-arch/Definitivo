@@ -1,6 +1,6 @@
 import re
 import unicodedata
-from datetime import datetime
+from datetime import datetime, date, timezone
 
 import streamlit as st
 
@@ -67,23 +67,68 @@ def _team(value):
 
 
 def _parse_datetime(value):
-    """Aceita ISO e os formatos de data usados pela API Futebol."""
+    """Aceita ISO, datas brasileiras, datas somente com dia e timestamps Unix."""
     if isinstance(value, datetime):
         return value
-    if not value:
+    if isinstance(value, date):
+        return datetime.combine(value, datetime.min.time())
+    if value is None or value == '':
         return None
+
+    # Algumas respostas podem encapsular a data em um objeto.
+    if isinstance(value, dict):
+        for key in ('date', 'datetime', 'data', 'data_realizacao', 'data_hora', 'timestamp', 'unix'):
+            if key in value:
+                parsed = _parse_datetime(value.get(key))
+                if parsed is not None:
+                    return parsed
+        return None
+
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        try:
+            number = float(value)
+            # Unix em segundos; timestamps em milissegundos também são aceitos.
+            if number > 10_000_000_000:
+                number /= 1000.0
+            return datetime.fromtimestamp(number, tz=timezone.utc).replace(tzinfo=None)
+        except Exception:
+            return None
+
     text = str(value).strip()
-    for candidate in (text, text.replace('Z', '+00:00')):
+    candidates = [text, text.replace('Z', '+00:00'), text.replace('z', '+00:00')]
+    for candidate in candidates:
         try:
             return datetime.fromisoformat(candidate)
         except Exception:
             pass
-    for fmt in ('%d/%m/%Y %H:%M', '%d/%m/%Y %H:%M:%S', '%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M'):
+
+    formats = (
+        '%d/%m/%Y %H:%M:%S',
+        '%d/%m/%Y %H:%M',
+        '%d/%m/%Y',
+        '%Y-%m-%d %H:%M:%S',
+        '%Y-%m-%d %H:%M',
+        '%Y-%m-%d',
+    )
+    for fmt in formats:
         try:
             return datetime.strptime(text, fmt)
         except Exception:
             pass
+
+    # Aceita strings com espaço antes do timezone ou segundos fracionários incomuns.
+    compact = text.replace(' UTC', '+00:00').replace(' BRT', '-03:00')
+    if compact != text:
+        try:
+            return datetime.fromisoformat(compact)
+        except Exception:
+            pass
     return None
+
+
+def _raw_date_sample(value):
+    text = repr(value)
+    return text[:180]
 
 
 class ApiFutebolCalendarProvider(FootballProvider):
@@ -228,6 +273,10 @@ class ApiFutebolCalendarProvider(FootballProvider):
         start = datetime.fromisoformat(date_from).date()
         end = datetime.fromisoformat(date_to).date()
         out, seen = [], set()
+        invalid_dates = 0
+        first_invalid_sample = None
+        first_valid_sample = None
+
         for item in raw:
             home = _team(item.get('mandante') or item.get('home') or item.get('time_mandante') or item.get('equipe_mandante'))
             away = _team(item.get('visitante') or item.get('away') or item.get('time_visitante') or item.get('equipe_visitante'))
@@ -236,7 +285,12 @@ class ApiFutebolCalendarProvider(FootballProvider):
                 continue
             dt = _parse_datetime(date_value)
             if dt is None:
+                invalid_dates += 1
+                if first_invalid_sample is None:
+                    first_invalid_sample = _raw_date_sample(date_value)
                 continue
+            if first_valid_sample is None:
+                first_valid_sample = _raw_date_sample(date_value)
             if not (start <= dt.date() <= end):
                 continue
             mid = str(_id(item, ('partida_id', 'jogo_id', 'match_id', 'id')) or f"{home['id']}-{away['id']}-{dt.isoformat()}")
@@ -271,5 +325,7 @@ class ApiFutebolCalendarProvider(FootballProvider):
                 'source': self.name,
             })
             seen.add(mid)
+
+        add_diagnostic('coleta', 'INFO', f'Série B: datas válidas={len(raw)-invalid_dates}; datas inválidas={invalid_dates}; exemplo válido={first_valid_sample or "—"}; exemplo inválido={first_invalid_sample or "—"}', self.name)
         add_diagnostic('coleta', 'INFO', f'Série B: partidas no período={len(out)}', self.name)
         return out
