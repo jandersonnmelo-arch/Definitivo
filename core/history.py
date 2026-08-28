@@ -5,60 +5,23 @@ from providers.fotmob import FotMobProvider
 from providers.espn import ESPNProvider
 from core.db import get_team_provider_id, get_provider_id, upsert_match, team_history, history_coverage, add_diagnostic as _db_add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats
 from core.data_quality import reconcile_database
+from core.ai_db import init_ai_db, save_match_sample
+from core.engine import build_pre_match_analysis
 
 HISTORY_MATCHES_PER_TEAM = 10
 HISTORY_DAYS = 180
 PRESENCE_METRIC = '__player_presence__'
 
 TEAM_ALIASES = {
-    'bayer leverkusen':'bayer 04 leverkusen',
-    'bayer 04':'bayer 04 leverkusen',
-    'bayern munich':'bayern munchen',
-    'bayern munchen fc':'bayern munchen',
-    'fc bayern munchen':'bayern munchen',
-    'atletico mineiro':'atletico mineiro',
-    'atletico mg':'atletico mineiro',
-    'ca mineiro':'atletico mineiro',
-    'clube atletico mineiro':'atletico mineiro',
-    'cam':'atletico mineiro',
-    'atletico paranaense':'athletico paranaense',
-    'athletico paranaense':'athletico paranaense',
-    'athletico pr':'athletico paranaense',
-    'cap':'athletico paranaense',
-    'flamengo':'flamengo',
-    'flamengo rj':'flamengo',
-    'cr flamengo':'flamengo',
-    'palmeiras':'palmeiras',
-    'se palmeiras':'palmeiras',
-    'sao paulo':'sao paulo',
-    'sao paulo fc':'sao paulo',
-    'corinthians':'corinthians',
-    'corinthians paulista':'corinthians',
-    'sport corinthians paulista':'corinthians',
-    'sport club corinthians paulista':'corinthians',
-    'santos':'santos',
-    'santos fc':'santos',
-    'gremio':'gremio',
-    'gremio fbpa':'gremio',
-    'internacional':'internacional',
-    'sport club internacional':'internacional',
-    'cruzeiro':'cruzeiro',
-    'cruzeiro esporte clube':'cruzeiro',
-    'botafogo':'botafogo',
-    'botafogo fr':'botafogo',
-    'fluminense':'fluminense',
-    'vasco da gama':'vasco da gama',
-    'vasco':'vasco da gama',
-    'bahia':'bahia',
-    'ec bahia':'bahia',
-    'vitoria':'vitoria',
-    'fortaleza':'fortaleza',
-    'ceara':'ceara',
-    'sport recife':'sport recife',
-    'sport':'sport recife',
-    'bragantino':'red bull bragantino',
-    'red bull bragantino':'red bull bragantino',
-    'red bull brasil':'red bull bragantino',
+    'bayer leverkusen':'bayer 04 leverkusen','bayer 04':'bayer 04 leverkusen','bayern munich':'bayern munchen','bayern munchen fc':'bayern munchen','fc bayern munchen':'bayern munchen',
+    'atletico mineiro':'atletico mineiro','atletico mg':'atletico mineiro','ca mineiro':'atletico mineiro','clube atletico mineiro':'atletico mineiro','cam':'atletico mineiro',
+    'atletico paranaense':'athletico paranaense','athletico paranaense':'athletico paranaense','athletico pr':'athletico paranaense','cap':'athletico paranaense',
+    'flamengo':'flamengo','flamengo rj':'flamengo','cr flamengo':'flamengo','palmeiras':'palmeiras','se palmeiras':'palmeiras','sao paulo':'sao paulo','sao paulo fc':'sao paulo',
+    'corinthians':'corinthians','corinthians paulista':'corinthians','sport corinthians paulista':'corinthians','sport club corinthians paulista':'corinthians',
+    'santos':'santos','santos fc':'santos','gremio':'gremio','gremio fbpa':'gremio','internacional':'internacional','sport club internacional':'internacional',
+    'cruzeiro':'cruzeiro','cruzeiro esporte clube':'cruzeiro','botafogo':'botafogo','botafogo fr':'botafogo','fluminense':'fluminense','vasco da gama':'vasco da gama','vasco':'vasco da gama',
+    'bahia':'bahia','ec bahia':'bahia','vitoria':'vitoria','fortaleza':'fortaleza','ceara':'ceara','sport recife':'sport recife','sport':'sport recife',
+    'bragantino':'red bull bragantino','red bull bragantino':'red bull bragantino','red bull brasil':'red bull bragantino',
 }
 
 def add_diagnostic(stage,status,message,source=None,match_id=None):
@@ -71,15 +34,10 @@ def _parse_start(value):
     except Exception:return None
 
 def _norm_name(value):
-    s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower()
-    s=re.sub(r'[^a-z0-9]+',' ',s).strip()
-    if s in {'ca mineiro','atletico mg','clube atletico mineiro','atletico mineiro'}:
-        return 'atletico mineiro'
-    if s == 'cam':
-        return 'atletico mineiro'
-    s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol)\b',' ',s)
-    s=re.sub(r'[^a-z0-9]+',' ',s).strip()
-    return TEAM_ALIASES.get(s,s)
+    s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower();s=re.sub(r'[^a-z0-9]+',' ',s).strip()
+    if s in {'ca mineiro','atletico mg','clube atletico mineiro','atletico mineiro'}:return 'atletico mineiro'
+    if s=='cam':return 'atletico mineiro'
+    s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol)\b',' ',s);s=re.sub(r'[^a-z0-9]+',' ',s).strip();return TEAM_ALIASES.get(s,s)
 
 def _same_team(a,b):
     a,b=_norm_name(a),_norm_name(b);return bool(a and b and (a==b or a in b or b in a))
@@ -155,7 +113,7 @@ def _diagnose_source_players(match,provider,detail,stage='diagnostico_jogadores'
     add_diagnostic(stage,'OK' if players else 'INFO',f'{provider.name}: jogadores={len(players)}, estatísticas individuais reais={len(real_stats)}, presença={presence}, amostra=[{sample}]',provider.name,match.get('id'))
 
 def _enrich_match_details(match,stage='historico'):
-    total_stats=total_players=total_pstats=player_matches=0;success=False
+    total_stats=total_players=total_pstats=0;success=False
     espn=ESPNProvider()
     try:
         eid=_resolve_espn_event_id(match)
@@ -184,8 +142,17 @@ def _has_required_team_metrics(match_id):
         values.setdefault(metric,[]).append(value)
     return bool(values.get('passes_completed')) and any(v>0 for v in values['passes_completed']) and bool(values.get('effectivetackles')) and any(v>0 for v in values['effectivetackles'])
 
+def _save_ai_sample(match,training_ready):
+    try:
+        analysis=build_pre_match_analysis(match)
+        save_match_sample(match,analysis,training_ready=training_ready)
+        return True
+    except Exception as e:
+        add_diagnostic('ia_dataset','ERROR',f'Falha ao salvar amostra da IA: {e}','SYSTEM',match.get('id'))
+        return False
+
 def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days=HISTORY_DAYS):
-    reconcile_database()
+    init_ai_db();reconcile_database()
     before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat();team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
     for team_id in team_ids:
         if history_coverage(team_id,before_iso)<matches_per_team:_collect_team_history_from_football_data(team_id,before_iso,days)
@@ -193,8 +160,7 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
         if len(hist)<matches_per_team:_collect_team_history_from_espn(match['home_name'] if team_id==match.get('home_id') else match['away_name'],before_iso,120)
     reconciliation=reconcile_database(force=True)
     add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-coleta: equipes={reconciliation.get("teams_merged",0)}, jogadores={reconciliation.get("players_merged",0)}, estatísticas migradas={reconciliation.get("stats_migrated",0)}, duplicadas removidas={reconciliation.get("stats_deduped",0)}','SYSTEM',match.get('id'))
-    team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
-    historical_pool=[]
+    team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x];historical_pool=[]
     for team_id in team_ids:historical_pool.extend(_history_matches_for_team(team_id,before_iso,matches_per_team))
     historical=[];seen=set()
     for h in sorted(historical_pool,key=lambda x:x.get('start_time') or '',reverse=True):
@@ -202,15 +168,17 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
     historical=historical[:matches_per_team*2]
     enriched=stats_records=player_records=player_matches=0
     for h in historical:
-        if get_stats(h['id']) and _has_real_player_stats(h['id']) and _has_required_team_metrics(h['id']):continue
-        r=_enrich_historical_match(h)
-        if r['success']:
-            enriched+=1;stats_records+=r['stats'];player_records+=r['player_stats']
-            if r['players'] or r['player_stats']:player_matches+=1
+        if not (get_stats(h['id']) and _has_real_player_stats(h['id']) and _has_required_team_metrics(h['id'])):
+            r=_enrich_historical_match(h)
+            if r['success']:
+                enriched+=1;stats_records+=r['stats'];player_records+=r['player_stats']
+                if r['players'] or r['player_stats']:player_matches+=1
+        _save_ai_sample(h,training_ready=(h.get('status')=='FINISHED' and h.get('home_score') is not None and h.get('away_score') is not None))
     reconciliation2=reconcile_database(force=True)
     if any(reconciliation2.values()):add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-enriquecimento: equipes={reconciliation2.get("teams_merged",0)}, jogadores={reconciliation2.get("players_merged",0)}, estatísticas migradas={reconciliation2.get("stats_migrated",0)}, duplicadas removidas={reconciliation2.get("stats_deduped",0)}','SYSTEM',match.get('id'))
     current=_enrich_match_details(match,'partida');player_records+=current['player_stats'];stats_records+=current['stats']
     if current['players']:player_matches+=1
+    _save_ai_sample(match,training_ready=(match.get('status')=='FINISHED' and match.get('home_score') is not None and match.get('away_score') is not None))
     reconcile_database(force=True)
     home_n=len(_history_matches_for_team(team_ids[0],before_iso,matches_per_team)) if team_ids else 0;away_n=len(_history_matches_for_team(team_ids[-1],before_iso,matches_per_team)) if team_ids else 0
     return {'home_matches':home_n,'away_matches':away_n,'historical_matches':len(historical),'player_matches_enriched':player_matches,'stats_records':stats_records,'player_records':player_records,'current_players':current['players'],'current_stats':current['stats']}
