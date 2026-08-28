@@ -20,6 +20,7 @@ TEAM_ALIASES = {
     'fc bayern munchen':'bayern munchen',
     'atletico mineiro':'atletico mineiro',
     'atletico mg':'atletico mineiro',
+    'ca mineiro':'atletico mineiro',
     'clube atletico mineiro':'atletico mineiro',
     'cam':'atletico mineiro',
     'atletico paranaense':'athletico paranaense',
@@ -70,7 +71,18 @@ def _parse_start(value):
     except Exception:return None
 
 def _norm_name(value):
-    s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower();s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol)\b',' ',s);s=re.sub(r'[^a-z0-9]+',' ',s).strip();return TEAM_ALIASES.get(s,s)
+    s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower()
+    s=re.sub(r'[^a-z0-9]+',' ',s).strip()
+    # Variantes compostas precisam ser reconhecidas antes de remover
+    # abreviações genéricas como CA/AC/EC; caso contrário "CA Mineiro"
+    # vira apenas "mineiro" e perde a identidade do Atletico Mineiro.
+    if s in {'ca mineiro','atletico mg','clube atletico mineiro','atletico mineiro'}:
+        return 'atletico mineiro'
+    if s == 'cam':
+        return 'atletico mineiro'
+    s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol)\b',' ',s)
+    s=re.sub(r'[^a-z0-9]+',' ',s).strip()
+    return TEAM_ALIASES.get(s,s)
 
 def _same_team(a,b):
     a,b=_norm_name(a),_norm_name(b);return bool(a and b and (a==b or a in b or b in a))
