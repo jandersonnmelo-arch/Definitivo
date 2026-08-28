@@ -116,24 +116,61 @@ class ESPNProvider(FootballProvider):
             'passes_accurate': 'passes_completed', 'total_passes_completed': 'passes_completed',
             'total_shots': 'shots', 'shots_total': 'shots', 'shots_on_goal': 'shots_on_target',
             'shots_on_target_total': 'shots_on_target', 'shots_woodwork': 'shots_woodwork',
+            'shots_on_target': 'shots_on_target', 'shots_off_target': 'shotsofftarget',
             'total_tackles': 'tackles', 'effective_tackles': 'tackles',
             'fouls_committed': 'fouls', 'fouled': 'was_fouled', 'fouls_suffered': 'was_fouled',
-            'minutes': 'minutes_played', 'minutes_played_total': 'minutes_played',
-            'yellow_cards': 'yellow_cards', 'red_cards': 'red_cards',
+            'fouls_suffered_total': 'was_fouled', 'minutes': 'minutes_played', 'minutes_played_total': 'minutes_played',
+            'minutes_played': 'minutes_played', 'yellow_cards': 'yellow_cards', 'red_cards': 'red_cards',
+            'yellowcards': 'yellow_cards', 'redcards': 'red_cards',
+            'saves': 'saves', 'keeper_saves': 'saves', 'goalkeeper_saves': 'saves',
+            'shots_woodwork': 'shots_woodwork', 'woodwork': 'shots_woodwork',
+            'offsides': 'offsides', 'tackles': 'tackles', 'passes': 'passes',
+            'total_passes': 'passes', 'appearances': 'appearances',
         }
         key = aliases.get(key, key)
         return canonical_player_metric(key) or key
 
     @classmethod
     def _stat_pairs(cls, group, athlete):
-        keys = group.get('keys') or group.get('labels') or group.get('names') or group.get('descriptions') or []
-        values = athlete.get('statistics')
+        """Extract ESPN player statistics without assuming one fixed response shape.
+
+        ESPN has returned player stats in several shapes over time. In particular,
+        the metric identifiers can live in `keys`, `labels`, `names` or
+        `descriptions`, while the actual values can live in `statistics`, `stats`,
+        `values` or `totals`. Some payloads put the statistics on the nested
+        athlete object rather than on the athlete-list item. Handle all of them.
+        """
+        group = group if isinstance(group, dict) else {}
+        athlete = athlete if isinstance(athlete, dict) else {}
+
+        keys = (
+            group.get('keys')
+            or group.get('labels')
+            or group.get('names')
+            or group.get('descriptions')
+            or athlete.get('keys')
+            or athlete.get('labels')
+            or athlete.get('names')
+            or athlete.get('descriptions')
+            or []
+        )
+        if isinstance(keys, str):
+            keys = [keys]
+
+        def values_from(obj):
+            for field in ('statistics', 'stats', 'values', 'totals'):
+                if field in obj and obj.get(field) is not None:
+                    return obj.get(field)
+            return None
+
+        values = values_from(athlete)
         if values is None:
-            values = athlete.get('stats')
-        if values is None:
-            values = athlete.get('values')
-        if values is None:
-            values = athlete.get('totals')
+            nested = athlete.get('athlete') or athlete.get('player')
+            if isinstance(nested, dict):
+                values = values_from(nested)
+                if not keys:
+                    keys = nested.get('keys') or nested.get('labels') or nested.get('names') or nested.get('descriptions') or []
+
         rows = []
         if isinstance(values, dict):
             for k, v in values.items():
@@ -143,10 +180,14 @@ class ESPNProvider(FootballProvider):
             return rows
         if not isinstance(values, list):
             return rows
+
         for i, value in enumerate(values):
             label = keys[i] if i < len(keys) else None
             if isinstance(value, dict):
-                label = value.get('name') or value.get('key') or value.get('label') or value.get('displayName') or label
+                label = (
+                    value.get('key') or value.get('name') or value.get('label')
+                    or value.get('displayName') or value.get('description') or label
+                )
                 raw = value.get('value', value.get('displayValue', value.get('numericValue', value.get('total'))))
             else:
                 raw = value
@@ -195,7 +236,13 @@ class ESPNProvider(FootballProvider):
                     if pkey not in seen_players:
                         players.append({'id': pid, 'team_id': tid, 'team_name': tname, 'name': name, 'position': pos, 'source': cls.name})
                         seen_players.add(pkey)
-                    for label, value in cls._stat_pairs(group, item):
+
+                    # First try the list item, then the nested athlete. This is
+                    # the critical compatibility fix for ESPN payload variants.
+                    pairs = cls._stat_pairs(group, item)
+                    if not pairs and ath is not item:
+                        pairs = cls._stat_pairs(group, ath)
+                    for label, value in pairs:
                         metric = cls._player_metric(label)
                         if metric == '__player_presence__':
                             continue
@@ -234,7 +281,10 @@ class ESPNProvider(FootballProvider):
                     if isinstance(pos, dict):
                         pos = pos.get('abbreviation') or pos.get('displayName')
                     players.append({'id': pid, 'team_id': tid, 'team_name': tname, 'name': name, 'position': pos, 'source': cls.name})
-                    for label, value in cls._stat_pairs(node, node):
+                    pairs = cls._stat_pairs(node, node)
+                    if not pairs and ath is not node:
+                        pairs = cls._stat_pairs(node, ath)
+                    for label, value in pairs:
                         metric = cls._player_metric(label)
                         if metric != '__player_presence__':
                             stats.append({'player_id': pid, 'metric': metric, 'value': value, 'source': cls.name})
