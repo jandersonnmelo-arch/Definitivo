@@ -23,8 +23,7 @@ st.markdown('''<style>
 .brand{display:flex;gap:12px;align-items:center;margin-bottom:20px}.mark{width:46px;height:46px;border-radius:14px;background:#b7ff27;color:#081000;display:grid;place-items:center;font-size:25px}
 .eyebrow{font-size:11px;letter-spacing:2px;color:#b7ff27;font-weight:800}.brandname{font-size:21px;font-weight:850}.hero{font-size:31px;font-weight:850;line-height:1.08;margin:18px 0 10px}.hero span{color:#b7ff27}.small{font-size:12px;color:#858da7}
 .fixed-comp{padding:7px 10px;margin:4px 0;border:1px solid #252c42;border-radius:10px;background:#10162a;font-size:12px}.window{padding:10px 12px;border:1px solid #252c42;border-radius:12px;background:#0d1325;font-size:12px;margin:8px 0 14px}
-/* Tabelas de mercados: largura suficiente para leitura no celular + rolagem horizontal natural */
-[data-testid="stDataFrame"]{max-width:100%;overflow:hidden}
+[data-testid="stDataFrame"]{max-width:100%}
 .market-caption{font-size:11px;color:#858da7;margin:-6px 0 8px}
 </style>''',unsafe_allow_html=True)
 
@@ -116,7 +115,7 @@ if selected:
                     c1,c2,c3=st.columns(3);c1.metric('Casa',f'{p["home"]}%');c2.metric('Empate',f'{p["draw"]}%');c3.metric('Fora',f'{p["away"]}%')
                 st.caption(f'Amostra: {analysis["sample_home"]} casa / {analysis["sample_away"]} fora • xG projetado: {analysis["xg_home"] if analysis["xg_home"] is not None else "—"} × {analysis["xg_away"] if analysis["xg_away"] is not None else "—"}.')
                 st.markdown('### 📊 Base estatística do palpite')
-                base_specs=[('goals_for','Gols feitos'),('goals_against','Gols sofridos'),('shots','Finalizações totais'),('shots_on_target','Finalizações no gol'),('effectivetackles','Desarmes'),('corners','Escanteios'),('fouls','Faltas'),('passes_completed','Passes'),('saves','Defesa do goleiro'),('yellow_cards','Cartão amarelo'),('red_cards','Cartão vermelho'),('player_throws','Laterais'),('woodwork','Finalizações na trave'),('offsides','Impedimento'),('goal_kicks','Tiro de metas')]
+                base_specs=[('goals_for','Gols feitos'),('goals_against','Gols sofridos'),('shots','Finalizações totais'),('shots_on_target','Finalizações no alvo'),('effectivetackles','Desarmes'),('corners','Escanteios'),('fouls','Faltas'),('passes_completed','Passes'),('saves','Defesa do goleiro'),('yellow_cards','Cartão amarelo'),('red_cards','Cartão vermelho'),('player_throws','Laterais'),('woodwork','Finalizações na trave'),('offsides','Impedimento'),('goal_kicks','Tiro de metas')]
                 metric_rows=[]
                 for key,label in base_specs:
                     hv=analysis['home'].get(key);av=analysis['away'].get(key)
@@ -125,7 +124,7 @@ if selected:
                 if metric_rows:st.dataframe(pd.DataFrame(metric_rows),hide_index=True,use_container_width=True)
                 else:st.warning('Há jogos históricos, mas as métricas detalhadas ainda não foram persistidas.')
                 mk=analysis['markets'];st.markdown('### 🎯 Estatísticas de palpites');rows=[]
-                market_specs=[('Gols','gols'),('Finalizações totais','finalizacoes'),('Finalizações no gol','finalizacoes_no_alvo'),('Desarmes','desarmes_efetivos'),('Escanteios','escanteios'),('Faltas','faltas'),('Passes','passes_certos'),('Defesa do goleiro','defesas'),('Cartão amarelo','cartoes_amarelos'),('Cartão vermelho','cartoes_vermelhos'),('Laterais','laterais'),('Finalizações na trave','finalizacoes_na_trave'),('Impedimento','impedimentos'),('Tiro de metas','tiros_de_meta')]
+                market_specs=[('Gols','gols'),('Finalizações','finalizacoes'),('No alvo','finalizacoes_no_alvo'),('Desarmes','desarmes_efetivos'),('Escanteios','escanteios'),('Faltas','faltas'),('Passes','passes_certos'),('Defesas','defesas'),('Cartões amarelos','cartoes_amarelos'),('Cartões vermelhos','cartoes_vermelhos'),('Laterais','laterais'),('Na trave','finalizacoes_na_trave'),('Impedimentos','impedimentos'),('Tiros de meta','tiros_de_meta')]
                 always_show={'desarmes_efetivos','passes_certos','cartoes_amarelos','cartoes_vermelhos'}
                 for label,key in market_specs:
                     obj=mk.get(key) or {};lines=obj.get('lines') or {}
@@ -138,13 +137,13 @@ if selected:
                         rows.append({'Mercado':label,'Linha':f'+{line} / -{line}','Mais':f'{more:g}%' if isinstance(more,float) else str(more),'Menos':f'{less:g}%' if isinstance(less,float) else str(less),'Média':obj.get('total_expected')})
                 if rows:
                     market_df=pd.DataFrame(rows)
-                    st.markdown('<div class="market-caption">+ Mais • − Menos • valores completos podem ser vistos deslizando a tabela horizontalmente no celular.</div>',unsafe_allow_html=True)
-                    st.dataframe(market_df,hide_index=True,use_container_width=True,height=min(480,58+len(market_df)*35),column_config={
-                        'Mercado':st.column_config.TextColumn('Mercado',width='large'),
-                        'Linha':st.column_config.TextColumn('Linha',width='medium'),
-                        'Mais':st.column_config.TextColumn('Mais',width='medium'),
-                        'Menos':st.column_config.TextColumn('Menos',width='medium'),
-                        'Média':st.column_config.NumberColumn('Média',width='medium',format='%.2f')
+                    st.markdown('<div class="market-caption">+ Mais • − Menos</div>',unsafe_allow_html=True)
+                    st.dataframe(market_df,hide_index=True,use_container_width=False,width=500,height=min(480,58+len(market_df)*35),column_config={
+                        'Mercado':st.column_config.TextColumn('Mercado',width=145),
+                        'Linha':st.column_config.TextColumn('Linha',width=85),
+                        'Mais':st.column_config.TextColumn('+ Mais',width=70),
+                        'Menos':st.column_config.TextColumn('− Menos',width=70),
+                        'Média':st.column_config.NumberColumn('Média',width=75,format='%.2f')
                     })
                 else:st.info('Sem amostra estatística suficiente para os mercados solicitados.')
                 if mk.get('ambas_marcam') is not None:st.metric('🤝 Ambas marcam — SIM',f'{mk["ambas_marcam"]}%')
