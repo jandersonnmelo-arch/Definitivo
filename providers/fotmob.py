@@ -99,33 +99,87 @@ class FotMobProvider(FootballProvider):
         walk(lineup,default_team_id,default_team_name);return out
     @classmethod
     def _extract_player_stats(cls,raw,default_team_id=None,default_team_name=None):
-        players=[];player_stats=[];seen=set()
+        """Extrai playerStats do formato atual do FotMob.
+
+        playerStats é um dicionário indexado pelo ID do jogador. Cada jogador
+        possui groups em ``stats`` e cada grupo normalmente contém um dicionário
+        de estatísticas. Em algumas respostas o grupo aparece como lista ou o
+        valor fica dentro de ``stat``; tratamos todas essas formas.
+        """
+        players=[];player_stats=[];seen=set();seen_stats=set()
+
+        def add_stat(pid,p, label, item):
+            if label is None:return
+            key = item.get('key') if isinstance(item,dict) else None
+            raw_value = item
+            if isinstance(item,dict):
+                # Formato FotMob: {key, stat:{value,total,...}}
+                if isinstance(item.get('stat'),dict):
+                    raw_value=item.get('stat')
+                elif any(k in item for k in ('value','total','number')):
+                    raw_value=item
+            metric_key = key or label
+            metric = normalize_player_metric(metric_key)
+            if metric not in {'passes_completed','tackles','tackles_won','goals','assists','shots','shots_on_target','fouls','was_fouled','yellow_cards','red_cards'}:
+                return
+            n=cls._stat_value(raw_value)
+            if n is None:return
+            skey=(pid,metric,n)
+            if skey in seen_stats:return
+            seen_stats.add(skey)
+            player_stats.append({'player_id':pid,'metric':metric,'value':n,'source':cls.name,'team_id':p.get('team_id'),'team_name':p.get('team_name')})
+
+        def process_group(pid,p,group):
+            if not isinstance(group,dict):
+                if isinstance(group,list):
+                    for item in group:process_group(pid,p,item)
+                return
+            gstats=group.get('stats')
+            if isinstance(gstats,dict):
+                for label,item in gstats.items():
+                    if label in {'player','athlete','stats','statistics'}:continue
+                    add_stat(pid,p,label,item)
+                return
+            if isinstance(gstats,list):
+                for item in gstats:
+                    if not isinstance(item,dict):continue
+                    label=item.get('key') or item.get('name') or item.get('title') or item.get('label') or item.get('displayName')
+                    if label is not None:add_stat(pid,p,label,item)
+                return
+            # Alguns payloads colocam as métricas diretamente no grupo.
+            for label,item in group.items():
+                if label in {'player','athlete','stats','statistics','shotmap'}:continue
+                if isinstance(item,(dict,int,float,str)):
+                    add_stat(pid,p,label,item)
+
         def visit(node,tid=None,tname=None,depth=0):
-            if node is None or depth>10:return
+            if node is None or depth>12:return
             if isinstance(node,list):
                 for item in node:visit(item,tid,tname,depth+1)
                 return
             if not isinstance(node,dict):return
-            local_tid=node.get('teamId') or node.get('team_id') or tid;local_tname=node.get('teamName') or node.get('team_name') or tname
+            local_tid=node.get('teamId') or node.get('team_id') or tid
+            local_tname=node.get('teamName') or node.get('team_name') or tname
             p=cls._player_from_obj(node,local_tid,local_tname)
             if p:
                 pid=p['id']
-                if pid not in seen:players.append(p);seen.add(pid)
+                if pid not in seen:
+                    players.append(p);seen.add(pid)
                 groups=node.get('stats') or node.get('statistics') or []
                 if isinstance(groups,dict):groups=list(groups.values())
                 if isinstance(groups,list):
-                    for group in groups:
-                        if not isinstance(group,dict):continue
-                        gstats=group.get('stats') if isinstance(group.get('stats'),dict) else group
-                        if isinstance(gstats,dict):
-                            for label,item in gstats.items():
-                                if label in {'player','athlete','stats','statistics'}:continue
-                                key=item.get('key') if isinstance(item,dict) else label;n=cls._stat_value(item)
-                                if n is not None:player_stats.append({'player_id':pid,'metric':normalize_player_metric(key or label),'value':n,'source':cls.name,'team_id':p.get('team_id'),'team_name':p.get('team_name')})
+                    for group in groups:process_group(pid,p,group)
+                # Estatísticas podem aparecer diretamente no objeto do jogador.
+                for label,item in node.items():
+                    if label in {'player','athlete','stats','statistics','shotmap'}:continue
+                    if label in {'accuratePasses','accurate_passes','successfulPasses','successful_passes','passesCompleted','passes_completed','totalTackles','total_tackles','tackles','tacklesWon','tackles_won','effectiveTackles','effective_tackles'}:
+                        add_stat(pid,p,label,item)
             for key,value in node.items():
-                if key in {'formation','coach','events'}:continue
+                if key in {'formation','coach','events','shotmap'}:continue
                 if isinstance(value,(dict,list)):visit(value,local_tid,local_tname,depth+1)
-        visit(raw,default_team_id,default_team_name);return players,player_stats
+
+        visit(raw,default_team_id,default_team_name)
+        return players,player_stats
     def match_details(self,match):
         fid=self._find_match_id(match)
         if not fid:raise RuntimeError('FotMob: partida não localizada por equipes/data')
@@ -144,7 +198,8 @@ class FotMobProvider(FootballProvider):
                     for tid,tname,val in ((home_id,home_name,vals[0]),(away_id,away_name,vals[1])):
                         n=self._num(val)
                         if n is not None:stats.append({'team_id':tid,'team_name':tname,'metric':metric,'value':n,'source':self.name})
-        raw_players=content.get('playerStats');players,player_stats=self._extract_player_stats(raw_players,None,None)
+        raw_players=content.get('playerStats')
+        players,player_stats=self._extract_player_stats(raw_players,None,None)
         if not players:
             lineup=content.get('lineup') or content.get('lineups') or content.get('playerLineups') or {};players=self._extract_lineup_players(lineup)
         if not players:
@@ -153,14 +208,11 @@ class FotMobProvider(FootballProvider):
                     p2,s2=self._extract_player_stats(content.get(key),None,None)
                     if p2:players.extend(p2);player_stats.extend(s2)
         valid_team_ids={str(x) for x in (home_id,away_id) if x is not None}
-        # Filtra jogadores e, principalmente, suas estatísticas pelo time do evento.
-        # Antes, jogadores excluídos eram removidos da lista, mas os player_stats
-        # correspondentes continuavam sendo persistidos e contaminavam o histórico.
-        clean=[];allowed_player_ids=set();seen=set()
+        clean=[];allowed_player_ids=set();seen_clean=set()
         for p in players:
-            if p['id'] in seen:continue
+            if p['id'] in seen_clean:continue
             if p.get('team_id') is not None and valid_team_ids and str(p['team_id']) not in valid_team_ids:continue
-            seen.add(p['id']);allowed_player_ids.add(p['id']);clean.append(p)
+            seen_clean.add(p['id']);allowed_player_ids.add(p['id']);clean.append(p)
         player_stats=[r for r in player_stats if r.get('player_id') in allowed_player_ids and (not valid_team_ids or r.get('team_id') is None or str(r.get('team_id')) in valid_team_ids)]
         return {'stats':stats,'players':clean,'player_stats':player_stats}
 
