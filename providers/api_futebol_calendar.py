@@ -31,7 +31,6 @@ def _norm(value):
 
 
 def _records(obj):
-    """Percorre respostas da API sem assumir que a lista está na raiz."""
     out = []
     if isinstance(obj, list):
         for item in obj:
@@ -67,6 +66,26 @@ def _team(value):
     }
 
 
+def _parse_datetime(value):
+    """Aceita ISO e os formatos de data usados pela API Futebol."""
+    if isinstance(value, datetime):
+        return value
+    if not value:
+        return None
+    text = str(value).strip()
+    for candidate in (text, text.replace('Z', '+00:00')):
+        try:
+            return datetime.fromisoformat(candidate)
+        except Exception:
+            pass
+    for fmt in ('%d/%m/%Y %H:%M', '%d/%m/%Y %H:%M:%S', '%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M'):
+        try:
+            return datetime.strptime(text, fmt)
+        except Exception:
+            pass
+    return None
+
+
 class ApiFutebolCalendarProvider(FootballProvider):
     """Calendário da API Futebol, usado exclusivamente para a Série B."""
 
@@ -83,7 +102,7 @@ class ApiFutebolCalendarProvider(FootballProvider):
             raise RuntimeError('chave [api_futebol] não configurada')
         return get_json(
             BASE + path,
-            headers={'Authorization': f'Bearer {self.token}'},
+            headers={'Authorization': f'Bearer {self.token}', 'Accept': 'application/json'},
             provider=self.name,
         )
 
@@ -122,7 +141,6 @@ class ApiFutebolCalendarProvider(FootballProvider):
         for p in records:
             fid = _id(p, ('fase_id', 'id'))
             name = p.get('nome') or p.get('name') or p.get('descricao') or ''
-            # Evita tratar o próprio campeonato/time como fase.
             if fid is None or not (name or p.get('status') or p.get('rodadas') or p.get('rodada')):
                 continue
             text = _norm(name)
@@ -143,7 +161,6 @@ class ApiFutebolCalendarProvider(FootballProvider):
     def _extract_matches(self, obj):
         found = []
         seen = set()
-
         def walk(value):
             if isinstance(value, list):
                 for item in value:
@@ -151,24 +168,18 @@ class ApiFutebolCalendarProvider(FootballProvider):
                 return
             if not isinstance(value, dict):
                 return
-
             home = value.get('mandante') or value.get('home') or value.get('time_mandante') or value.get('equipe_mandante')
             away = value.get('visitante') or value.get('away') or value.get('time_visitante') or value.get('equipe_visitante')
-            date_value = (
-                value.get('data_realizacao') or value.get('data_hora') or value.get('data') or
-                value.get('start_time') or value.get('datetime') or value.get('date')
-            )
+            date_value = value.get('data_realizacao') or value.get('data_hora') or value.get('data') or value.get('start_time') or value.get('datetime') or value.get('date')
             match_id = _id(value, ('partida_id', 'jogo_id', 'match_id'))
             if (isinstance(home, dict) or isinstance(away, dict)) and date_value:
                 key = str(match_id or f'{date_value}|{home}|{away}')
                 if key not in seen:
                     found.append(value)
                     seen.add(key)
-
             for child in value.values():
                 if isinstance(child, (dict, list)):
                     walk(child)
-
         walk(obj)
         return found
 
@@ -179,8 +190,6 @@ class ApiFutebolCalendarProvider(FootballProvider):
         matches = self._extract_matches(detail)
         if matches:
             return matches
-
-        # A API pode expor somente as rodadas no detalhe da fase.
         round_ids = []
         for item in _records(detail):
             rid = _id(item, ('rodada_id', 'id'))
@@ -188,8 +197,6 @@ class ApiFutebolCalendarProvider(FootballProvider):
             if rid is not None and ('rodada' in _norm(name) or 'round' in _norm(name) or 'jornada' in _norm(name)):
                 if str(rid) not in {str(x) for x in round_ids}:
                     round_ids.append(rid)
-
-        # Tenta explicitamente o endpoint de rodadas da fase.
         try:
             rounds_data = self._get(f'/campeonatos/{cid}/fases/{fid}/rodadas')
             for item in _records(rounds_data):
@@ -198,17 +205,13 @@ class ApiFutebolCalendarProvider(FootballProvider):
                     round_ids.append(rid)
         except Exception:
             pass
-
         add_diagnostic('coleta', 'INFO', f'Série B: fase sem partidas diretas; rodadas identificadas={len(round_ids)}', self.name)
-
         for rid in round_ids:
             try:
                 rd = self._get(f'/campeonatos/{cid}/fases/{fid}/rodadas/{rid}')
                 matches.extend(self._extract_matches(rd))
             except Exception as exc:
                 add_diagnostic('coleta', 'ERROR', f'Série B: erro na rodada {rid}: {exc}', self.name)
-
-        # Último fallback: alguns formatos colocam a rodada no campeonato.
         if not matches:
             try:
                 champ_detail = self._get(f'/campeonatos/{cid}')
@@ -222,32 +225,23 @@ class ApiFutebolCalendarProvider(FootballProvider):
         phase = self._find_phase(championship)
         raw = self._phase_matches(championship, phase)
         add_diagnostic('coleta', 'INFO', f'Série B: partidas brutas encontradas={len(raw)}; período={date_from}→{date_to}', self.name)
-
         start = datetime.fromisoformat(date_from).date()
         end = datetime.fromisoformat(date_to).date()
         out, seen = [], set()
-
         for item in raw:
             home = _team(item.get('mandante') or item.get('home') or item.get('time_mandante') or item.get('equipe_mandante'))
             away = _team(item.get('visitante') or item.get('away') or item.get('time_visitante') or item.get('equipe_visitante'))
             date_value = item.get('data_realizacao') or item.get('data_hora') or item.get('data') or item.get('start_time') or item.get('datetime') or item.get('date')
             if not date_value or not home['name'] or not away['name']:
                 continue
-            try:
-                dt = datetime.fromisoformat(str(date_value).replace('Z', '+00:00'))
-            except Exception:
-                # Trata data brasileira simples quando a API não usa ISO.
-                try:
-                    dt = datetime.strptime(str(date_value)[:16], '%d/%m/%Y %H:%M')
-                except Exception:
-                    continue
+            dt = _parse_datetime(date_value)
+            if dt is None:
+                continue
             if not (start <= dt.date() <= end):
                 continue
-
             mid = str(_id(item, ('partida_id', 'jogo_id', 'match_id', 'id')) or f"{home['id']}-{away['id']}-{dt.isoformat()}")
             if mid in seen:
                 continue
-
             status = _norm(item.get('status') or item.get('situacao') or item.get('estado') or '')
             if any(x in status for x in ('final', 'encerr', 'fim')):
                 normalized_status = 'FINISHED'
@@ -257,7 +251,6 @@ class ApiFutebolCalendarProvider(FootballProvider):
                 normalized_status = 'POSTPONED'
             else:
                 normalized_status = 'SCHEDULED'
-
             out.append({
                 'id': mid,
                 'provider_match_id': mid,
@@ -278,6 +271,5 @@ class ApiFutebolCalendarProvider(FootballProvider):
                 'source': self.name,
             })
             seen.add(mid)
-
         add_diagnostic('coleta', 'INFO', f'Série B: partidas no período={len(out)}', self.name)
         return out
