@@ -21,16 +21,27 @@ st.markdown('''<style>
 </style>''',unsafe_allow_html=True)
 
 with st.sidebar:
-    st.markdown('### 🏆 Campeonatos');st.caption('Lista fixa monitorada')
-    with st.container(border=True):
-        for label in fixed_labels:st.markdown(f'<div class="fixed-comp">{label}</div>',unsafe_allow_html=True)
-    st.caption('Copa do Brasil reconhece também Copa Betano do Brasil.')
-    st.markdown('#### ➕ Outros principais');optional_selected=st.multiselect('Adicionar ao monitoramento',optional_labels,default=[],key='optional_competitions')
-    st.markdown('#### 📅 Janela de jogos');days=st.slider('Dias a partir de hoje',7,14,7,1,key='match_days');date_from=today;date_to=today+timedelta(days=days)
-    st.markdown(f'<div class="window"><b>{date_from:%d/%m/%Y}</b> → <b>{date_to:%d/%m/%Y}</b><br><span class="small">Horários em Manaus • America/Manaus</span></div>',unsafe_allow_html=True)
+    # O botão de atualização fica no topo. O valor do slider é lido do estado
+    # antes de o widget ser renderizado, permitindo manter o botão visualmente acima.
+    days=st.session_state.get('match_days',7)
+    date_from=today;date_to=today+timedelta(days=days)
     if st.button('🔄 Atualizar jogos',use_container_width=True,type='primary'):
-        with st.spinner('Coletando partidas...'):rows=collect(date_from.isoformat(),date_to.isoformat(),competitions=selected_labels(optional_selected))
+        with st.spinner('Coletando partidas...'):rows=collect(date_from.isoformat(),date_to.isoformat(),competitions=selected_labels(st.session_state.get('optional_competitions',[])))
         st.session_state['last_collection_count']=len(rows);st.success(f'{len(rows)} partidas encontradas.');st.rerun()
+
+    st.markdown('### 📅 Janela de jogos')
+    days=st.slider('Dias a partir de hoje',7,14,7,1,key='match_days')
+    date_from=today;date_to=today+timedelta(days=days)
+    st.markdown(f'<div class="window"><b>{date_from:%d/%m/%Y}</b> → <b>{date_to:%d/%m/%Y}</b><br><span class="small">Horários em Manaus • America/Manaus</span></div>',unsafe_allow_html=True)
+
+    with st.expander('🏆 Campeonatos fixos',expanded=False):
+        st.caption('Lista fixa monitorada')
+        with st.container(border=True):
+            for label in fixed_labels:st.markdown(f'<div class="fixed-comp">{label}</div>',unsafe_allow_html=True)
+        st.caption('Copa do Brasil reconhece também Copa Betano do Brasil.')
+
+    st.markdown('#### ➕ Outros campeonatos')
+    optional_selected=st.multiselect('Adicionar ao monitoramento',optional_labels,default=[],key='optional_competitions')
 
 selected_competitions=selected_labels(optional_selected)
 st.markdown('<div class="brand"><div class="mark">🏟️</div><div><div class="eyebrow">PLACAR</div><div class="brandname">Arena 360 • Futebol</div></div></div>',unsafe_allow_html=True)
