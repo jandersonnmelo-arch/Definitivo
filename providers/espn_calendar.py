@@ -51,7 +51,6 @@ LEAGUE_CANONICAL = {
     'bra.copa_do_brazil': '🏆 Copa do Brasil',
     'conmebol.libertadores': '🏆 Copa Libertadores',
     'conmebol.sudamericana': '🏆 Copa Sudamericana',
-    'conmebol.recopa': '🏆 Copa Sudamericana',
 }
 
 
