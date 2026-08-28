@@ -8,7 +8,7 @@ FIXED_COMPETITIONS = [
     ("🇳🇱 Eredivisie", ["eredivisie"]),
     ("🇧🇷 Campeonato Brasileiro Série A", ["campeonato brasileiro série a", "campeonato brasileiro serie a", "brazilian serie a", "brasileirao serie a", "brasileirao"]),
     ("🇧🇷 Campeonato Brasileiro Série B", ["campeonato brasileiro série b", "campeonato brasileiro serie b", "brazilian serie b", "brasileirao serie b"]),
-    ("🏆 Copa do Brasil", ["copa do brasil", "copa do brasil de futebol"]),
+    ("🏆 Copa do Brasil", ["copa do brasil", "copa do brasil de futebol", "copa betano do brasil", "copa betano brasil", "copa betano"]),
     ("🏆 Copa Libertadores", ["copa libertadores", "conmebol libertadores", "libertadores"]),
     ("🏆 Copa Sudamericana", ["copa sudamericana", "copa sul-americana", "copa sul americana", "conmebol sudamericana", "sudamericana"]),
     ("🇧🇷 Campeonato Paulista", ["campeonato paulista", "paulista"]),
@@ -46,55 +46,38 @@ def _norm(value):
 
 
 def _matches_alias(actual, alias):
-    """Matching conservador para evitar que nomes genéricos como 'serie a' cruzem ligas."""
-    a = _norm(actual)
-    n = _norm(alias)
-    if not a or not n:
-        return False
-    # Evita o antigo falso positivo: 'serie a' é substring de
-    # 'brasileirao serie a'. Para nomes curtos/genéricos, exige igualdade.
-    if n in {"serie a", "serie b", "paulista", "carioca", "gaucho", "mineiro"}:
-        return a == n
+    a = _norm(actual); n = _norm(alias)
+    if not a or not n:return False
+    if n in {"serie a", "serie b", "paulista", "carioca", "gaucho", "mineiro"}:return a == n
     return a == n or n in a
 
 
 def competition_matches(actual, selected):
-    """Compara o nome retornado pela fonte com os nomes canônicos selecionados."""
-    a = _norm(actual)
-    if not a or a in EXCLUDED_COMPETITIONS:
-        return False
-    for label, aliases in FIXED_COMPETITIONS + OPTIONAL_COMPETITIONS:
-        if label not in selected:
-            continue
+    a=_norm(actual)
+    if not a or a in EXCLUDED_COMPETITIONS:return False
+    for label,aliases in FIXED_COMPETITIONS+OPTIONAL_COMPETITIONS:
+        if label not in selected:continue
         for alias in aliases:
-            if _matches_alias(a, alias):
-                # Proteções explícitas entre séries nacionais/italianas.
-                if label == "🇮🇹 Serie A" and any(x in a for x in ("serie b", "serie c")):
-                    continue
-                if label == "🇧🇷 Campeonato Brasileiro Série A" and "serie b" in a:
-                    continue
-                if label == "🇧🇷 Campeonato Brasileiro Série B" and "serie a" in a:
-                    continue
+            if _matches_alias(a,alias):
+                if label=="🇮🇹 Serie A" and any(x in a for x in ("serie b","serie c")):continue
+                if label=="🇧🇷 Campeonato Brasileiro Série A" and "serie b" in a:continue
+                if label=="🇧🇷 Campeonato Brasileiro Série B" and "serie a" in a:continue
                 return True
     return False
 
 
 def canonical_competition_label(actual):
-    """Retorna o nome amigável do catálogo para exibição, preservando nomes desconhecidos."""
-    a = _norm(actual)
-    for label, aliases in FIXED_COMPETITIONS + OPTIONAL_COMPETITIONS:
+    a=_norm(actual)
+    for label,aliases in FIXED_COMPETITIONS+OPTIONAL_COMPETITIONS:
         for alias in aliases:
-            if _matches_alias(a, alias):
-                if label == "🇮🇹 Serie A" and any(x in a for x in ("serie b", "serie c")):
-                    continue
-                if label == "🇧🇷 Campeonato Brasileiro Série A" and "serie b" in a:
-                    continue
-                if label == "🇧🇷 Campeonato Brasileiro Série B" and "serie a" in a:
-                    continue
+            if _matches_alias(a,alias):
+                if label=="🇮🇹 Serie A" and any(x in a for x in ("serie b","serie c")):continue
+                if label=="🇧🇷 Campeonato Brasileiro Série A" and "serie b" in a:continue
+                if label=="🇧🇷 Campeonato Brasileiro Série B" and "serie a" in a:continue
                 return label
     return actual or "Futebol"
 
 
 def selected_labels(extra=None):
-    fixed = [x[0] for x in FIXED_COMPETITIONS]
-    return fixed + [x for x in (extra or []) if x not in fixed]
+    fixed=[x[0] for x in FIXED_COMPETITIONS]
+    return fixed+[x for x in (extra or []) if x not in fixed]
