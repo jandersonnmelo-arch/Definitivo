@@ -5,7 +5,8 @@ from datetime import datetime, timezone
 SOURCE_PRIORITY = {'ESPN': 0, 'FotMob': 1, 'API-Futebol': 2, 'API-Football': 3, 'Football-Data.org': 4, 'LEGACY': 99}
 
 # Chaves correspondem ao resultado de _norm(): sem acentos e sem sufixos
-# genéricos como FC/EC/SC/CA. Isso evita criar IDs diferentes para o mesmo clube.
+# genéricos como FC/EC/SC/CA. Variantes compostas são tratadas antes da
+# remoção dessas abreviações para não perder a identidade do clube.
 TEAM_ALIASES = {
     'bayer leverkusen': 'bayer 04 leverkusen',
     'bayer 04': 'bayer 04 leverkusen',
@@ -16,6 +17,7 @@ TEAM_ALIASES = {
     'fc bayern munchen': 'bayern munchen',
     'atletico mineiro': 'atletico mineiro',
     'atletico mg': 'atletico mineiro',
+    'ca mineiro': 'atletico mineiro',
     'clube atletico mineiro': 'atletico mineiro',
     'cam': 'atletico mineiro',
     'atletico paranaense': 'athletico paranaense',
@@ -68,6 +70,12 @@ TEAM_ALIASES = {
 
 def _norm(value):
     s = unicodedata.normalize('NFKD', str(value or '')).encode('ascii', 'ignore').decode().lower()
+    s = re.sub(r'[^a-z0-9]+', ' ', s).strip()
+    # Reconhece variantes compostas antes de retirar abreviações genéricas.
+    if s in {'ca mineiro', 'atletico mg', 'clube atletico mineiro', 'atletico mineiro'}:
+        return 'atletico mineiro'
+    if s == 'cam':
+        return 'atletico mineiro'
     s = re.sub(r'\b(fc|cf|sc|ec|ac|se|ca|cr|club|football|futbol|sporting|deportivo|esporte)\b', ' ', s)
     return re.sub(r'[^a-z0-9]+', ' ', s).strip()
 
