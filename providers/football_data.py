@@ -1,7 +1,7 @@
 import os
 from .base import FootballProvider
 from core.http_cache import get_json
-from core.normalizer import normalize_status,normalize_metric
+from core.normalizer import normalize_status,normalize_match_metric
 BASE='https://api.football-data.org/v4'
 def _secret():
     names=('CHAVE_DADOS_FUTEBOL','CHAVE_FD','FOOTBALL_DATA_TOKEN','FOOTBALL_DATA_API_KEY')
@@ -44,5 +44,5 @@ class FootballDataProvider(FootballProvider):
             team=x.get(side,{})
             for key,val in (team.get('statistics') or {}).items():
                 v=val.get('value') if isinstance(val,dict) else val
-                if v is not None:stats.append({'team_id':team.get('id'),'team_name':team.get('name'),'metric':normalize_metric(key),'value':v,'source':self.name})
+                if v is not None:stats.append({'team_id':team.get('id'),'team_name':team.get('name'),'metric':normalize_match_metric(key),'value':v,'source':self.name})
         return {'stats':stats,'players':[],'player_stats':[]}
