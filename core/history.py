@@ -3,6 +3,7 @@ import re, unicodedata
 from providers.football_data import FootballDataProvider
 from providers.fotmob import FotMobProvider
 from providers.espn import ESPNProvider
+from providers.dados_futebol import DadosFutebolProvider
 from core.db import get_team_provider_id, get_provider_id, upsert_match, team_history, history_coverage, add_diagnostic as _db_add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats, get_match
 from core.data_quality import reconcile_database
 from core.series_b_quality import reconcile_serie_b_matches
@@ -54,6 +55,25 @@ def _reconcile_for_history(match):
     return reconcile_database(force=True)
 
 def _history_matches_for_team(team_id,before_iso,limit=HISTORY_MATCHES_PER_TEAM):return team_history(team_id,before_iso,limit)
+
+def _collect_team_history_from_dados_futebol(team_id,team_name,before_iso,days=HISTORY_DAYS):
+    provider=DadosFutebolProvider()
+    if not provider.available():
+        add_diagnostic('historico','WARNING','Dados Futebol: chave não configurada; Série B não será desviada para ESPN/FotMob.',provider.name)
+        return []
+    before=_parse_start(before_iso) or datetime.now(timezone.utc)
+    start=(before-timedelta(days=days)).date().isoformat();end=before.date().isoformat()
+    try:
+        rows=provider.matches(start,end,'Campeonato Brasileiro Série B')
+        matched=[]
+        for m in rows:
+            if _same_team(team_name,m.get('home_name')) or _same_team(team_name,m.get('away_name')):
+                upsert_match(m);matched.append(m)
+        add_diagnostic('historico','OK',f'Dados Futebol: {len(matched)} partidas históricas de {team_name} persistidas na Série B',provider.name)
+        return matched
+    except Exception as e:
+        add_diagnostic('historico','ERROR',f'Dados Futebol histórico: {e}',provider.name)
+        return []
 
 def _collect_team_history_from_football_data(team_id,before_iso,days=HISTORY_DAYS):
     provider=FootballDataProvider()
@@ -134,17 +154,26 @@ def _diagnose_source_players(match,provider,detail,stage='diagnostico_jogadores'
 
 def _enrich_match_details(match,stage='historico'):
     total_stats=total_players=total_pstats=0;success=False
+    if _is_serie_b(match.get('competition')):
+        provider=DadosFutebolProvider()
+        if not provider.available():
+            add_diagnostic('diagnostico_jogadores','ERROR','Dados Futebol: chave não configurada para a Série B.',provider.name,match.get('id'))
+            return {'success':False,'stats':0,'players':0,'player_stats':0}
+        try:
+            pid=match.get('provider_match_id') or match.get('id')
+            d=provider.match_details(pid);_diagnose_source_players(match,provider,d);a,b,c,presence=_persist_detail(match,provider,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'Dados Futebol: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',provider.name,match['id']);success|=bool(a or b or c or presence)
+        except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'Dados Futebol detalhes: {e}',provider.name,match.get('id'))
+        return {'success':success,'stats':total_stats,'players':total_players,'player_stats':total_pstats}
     espn=ESPNProvider()
     try:
         eid=_resolve_espn_event_id(match)
         if eid:
             d=espn.match_details(eid);_diagnose_source_players(match,espn,d);a,b,c,presence=_persist_detail(match,espn,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'ESPN: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',espn.name,match['id']);success|=bool(a or b or c or presence)
-        else:add_diagnostic('diagnostico_jogadores','INFO','ESPN: partida não localizada para o teste isolado',espn.name,match.get('id'))
     except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'ESPN detalhes: {e}',espn.name,match.get('id'))
     fotmob=FotMobProvider()
     try:
         d=fotmob.match_details(match);_diagnose_source_players(match,fotmob,d);a,b,c,presence=_persist_detail(match,fotmob,d);total_stats+=a;total_players+=b;total_pstats+=c;add_diagnostic(stage,'OK',f'FotMob: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',fotmob.name,match['id']);success|=bool(a or b or c or presence)
-    except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'FotMob detalhes: {e}',fotmob.name,match.get('id'))
+    except Exception as e:add_diagnostic('diagnostico_jogadores','ERROR',f'FotMob detalhes: {e}',fotmob.name,match['id'])
     return {'success':success,'stats':total_stats,'players':total_players,'player_stats':total_pstats}
 
 def _enrich_historical_match(match):return _enrich_match_details(match,'historico')
@@ -171,10 +200,14 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
     init_ai_db();_reconcile_for_history(match);before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat();team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
     serie_b=_is_serie_b(match.get('competition'))
     for team_id in team_ids:
-        if history_coverage(team_id,before_iso)<matches_per_team:_collect_team_history_from_football_data(team_id,before_iso,days)
+        team_name=match['home_name'] if team_id==match.get('home_id') else match['away_name']
+        if serie_b:
+            _collect_team_history_from_dados_futebol(team_id,team_name,before_iso,days)
+        elif history_coverage(team_id,before_iso)<matches_per_team:
+            _collect_team_history_from_football_data(team_id,before_iso,days)
         hist=_history_matches_for_team(team_id,before_iso,matches_per_team)
-        if len(hist)<matches_per_team:
-            team_name=match['home_name'] if team_id==match.get('home_id') else match['away_name'];_collect_team_history_from_espn(team_name,before_iso,120,serie_b=serie_b)
+        if len(hist)<matches_per_team and not serie_b:
+            _collect_team_history_from_espn(team_name,before_iso,120,serie_b=False)
     reconciliation=_reconcile_for_history(match);add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-coleta: equipes={reconciliation.get("teams_merged",0)}, jogadores={reconciliation.get("players_merged",0)}, estatísticas migradas={reconciliation.get("stats_migrated",0)}, duplicadas removidas={reconciliation.get("stats_deduped",0)}, partidas Série B consolidadas={reconciliation.get("matches_merged",0)}','SYSTEM',match.get('id'))
     fresh_match=get_match(match.get('id')) or match;before_iso=fresh_match.get('start_time') or before_iso;team_ids=[x for x in (fresh_match.get('home_id'),fresh_match.get('away_id')) if x]
     add_diagnostic('identidade_equipes','OK',f'IDs canônicos após reconciliação: casa={fresh_match.get("home_id")}, fora={fresh_match.get("away_id")}', 'SYSTEM',fresh_match.get('id'))
