@@ -61,7 +61,7 @@ def reconcile_database():
     from core.db import connect, now_iso, init_db
     init_db()
     c = connect()
-    marker = c.execute("SELECT value FROM schema_meta WHERE key='data_quality_v2'").fetchone()
+    marker = c.execute("SELECT value FROM schema_meta WHERE key='data_quality_v3'").fetchone()
     if marker:
         c.close()
         return {'teams_merged': 0, 'players_merged': 0, 'stats_migrated': 0, 'stats_deduped': 0}
@@ -145,7 +145,7 @@ def reconcile_database():
             c.execute('DELETE FROM player_stats WHERE match_id=? AND player_id=? AND metric=? AND source=?', (d['match_id'],d['player_id'],d['metric'],r['source']))
             stats_deduped += 1
 
-    c.execute("INSERT INTO schema_meta(key,value) VALUES('data_quality_v2',?)", (datetime.now(timezone.utc).isoformat(),))
+    c.execute("INSERT INTO schema_meta(key,value) VALUES('data_quality_v3',?)", (datetime.now(timezone.utc).isoformat(),))
     c.commit()
     c.close()
     return {'teams_merged':teams_merged,'players_merged':players_merged,'stats_migrated':stats_migrated,'stats_deduped':stats_deduped}
