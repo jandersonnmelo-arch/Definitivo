@@ -66,6 +66,7 @@ def _collect_team_history_from_espn(team_name, before_iso, days=120):
         except Exception as e:
             add_diagnostic('historico', 'ERROR', f'ESPN fixtures: {e}', provider.name)
         cur += timedelta(days=1)
+    add_diagnostic('historico', 'OK', f'ESPN: {len(rows)} partidas históricas coletadas para {team_name}', provider.name)
     return rows
 
 
@@ -89,13 +90,17 @@ def _resolve_espn_event_id(match):
 
 def _presence_rows(players, pstats):
     out = list(pstats or [])
-    existing = {(str(r.get('player_id')), r.get('source')) for r in out}
+    existing = {(str(r.get('player_id')), r.get('source')) for r in out if r.get('metric') != PRESENCE_METRIC}
     for p in players or []:
         key = (str(p.get('id')), p.get('source', 'unknown'))
         if p.get('id') is not None and key not in existing:
             out.append({'player_id': p['id'], 'metric': PRESENCE_METRIC, 'value': 1.0, 'source': p.get('source', 'unknown')})
             existing.add(key)
     return out
+
+
+def _real_player_stats(rows):
+    return [r for r in (rows or []) if r.get('metric') != PRESENCE_METRIC and r.get('value') is not None]
 
 
 def _persist_detail(match, provider, d):
@@ -111,6 +116,7 @@ def _persist_detail(match, provider, d):
         row = dict(row)
         row['source'] = provider.name
         pstats.append(row)
+    real_stats = _real_player_stats(pstats)
     pstats = _presence_rows(players, pstats)
     if stats:
         upsert_match_stats(match['id'], stats)
@@ -118,56 +124,65 @@ def _persist_detail(match, provider, d):
         upsert_players(players)
     if pstats:
         upsert_player_stats(match['id'], pstats)
-    return len(stats), len(players), len(pstats)
+    return len(stats), len(players), len(real_stats), len([r for r in pstats if r.get('metric') == PRESENCE_METRIC])
 
 
 def _diagnose_source_players(match, provider, detail, stage='diagnostico_jogadores'):
     players = detail.get('players', []) or []
     pstats = detail.get('player_stats', []) or []
+    real_stats = _real_player_stats(pstats)
+    presence = len([r for r in pstats if r.get('metric') == PRESENCE_METRIC])
     names = [str(p.get('name') or 'Sem nome') for p in players[:8]]
     sample = ', '.join(names) if names else 'nenhum nome retornado'
-    add_diagnostic(stage, 'OK' if players else 'INFO', f'{provider.name}: jogadores={len(players)}, estatísticas individuais={len(pstats)}, amostra=[{sample}]', provider.name, match.get('id'))
+    add_diagnostic(
+        stage,
+        'OK' if players else 'INFO',
+        f'{provider.name}: jogadores={len(players)}, estatísticas individuais reais={len(real_stats)}, presença={presence}, amostra=[{sample}]',
+        provider.name,
+        match.get('id'),
+    )
 
 
 def _enrich_match_details(match, stage='historico'):
     total_stats = total_players = total_pstats = 0
     success = False
 
-    # Teste isolado da ESPN: resolver a partida e consultar somente esta fonte.
     espn = ESPNProvider()
     try:
         eid = _resolve_espn_event_id(match)
         if eid:
             d = espn.match_details(eid)
             _diagnose_source_players(match, espn, d)
-            a, b, c = _persist_detail(match, espn, d)
+            a, b, c, presence = _persist_detail(match, espn, d)
             total_stats += a; total_players += b; total_pstats += c
-            add_diagnostic(stage, 'OK', f'ESPN: {a} estatísticas, {b} jogadores, {c} individuais', espn.name, match['id'])
-            success |= bool(a or b or c)
+            add_diagnostic(stage, 'OK', f'ESPN: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças', espn.name, match['id'])
+            success |= bool(a or b or c or presence)
         else:
             add_diagnostic('diagnostico_jogadores', 'INFO', 'ESPN: partida não localizada para o teste isolado', espn.name, match.get('id'))
     except Exception as e:
         add_diagnostic('diagnostico_jogadores', 'ERROR', f'ESPN detalhes: {e}', espn.name, match.get('id'))
 
-    # Teste isolado do FotMob: consulta somente esta fonte.
     fotmob = FotMobProvider()
     try:
         d = fotmob.match_details(match)
         _diagnose_source_players(match, fotmob, d)
-        a, b, c = _persist_detail(match, fotmob, d)
+        a, b, c, presence = _persist_detail(match, fotmob, d)
         total_stats += a; total_players += b; total_pstats += c
-        add_diagnostic(stage, 'OK', f'FotMob: {a} estatísticas, {b} jogadores, {c} individuais', fotmob.name, match['id'])
-        success |= bool(a or b or c)
+        add_diagnostic(stage, 'OK', f'FotMob: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças', fotmob.name, match['id'])
+        success |= bool(a or b or c or presence)
     except Exception as e:
         add_diagnostic('diagnostico_jogadores', 'ERROR', f'FotMob detalhes: {e}', fotmob.name, match.get('id'))
 
-    # API-Football não participa mais do histórico/jogadores históricos.
-    # Ela fica reservada ao enriquecimento operacional dentro da janela suportada.
     return {'success': success, 'stats': total_stats, 'players': total_players, 'player_stats': total_pstats}
 
 
 def _enrich_historical_match(match):
     return _enrich_match_details(match, 'historico')
+
+
+def _has_real_player_stats(match_id):
+    rows = get_players(match_id)
+    return any(r.get('metric') != PRESENCE_METRIC and r.get('value') is not None for r in rows)
 
 
 def build_history_for_match(match, matches_per_team=HISTORY_MATCHES_PER_TEAM, days=HISTORY_DAYS):
@@ -187,8 +202,9 @@ def build_history_for_match(match, matches_per_team=HISTORY_MATCHES_PER_TEAM, da
     historical = sorted(all_selected.values(), key=lambda x: x.get('start_time') or '', reverse=True)[:matches_per_team * 2]
     enriched = stats_records = player_records = player_matches = 0
     for h in historical:
-        # Se ainda não temos jogadores, o jogo será reprocessado mesmo que já tenha estatísticas.
-        if get_stats(h['id']) and get_players(h['id']):
+        # Presence-only records are deliberately not considered complete; this allows a failed
+        # previous extraction to be retried after the ESPN parser is corrected.
+        if get_stats(h['id']) and _has_real_player_stats(h['id']):
             continue
         r = _enrich_historical_match(h)
         if r['success']:
@@ -198,8 +214,6 @@ def build_history_for_match(match, matches_per_team=HISTORY_MATCHES_PER_TEAM, da
             if r['players'] or r['player_stats']:
                 player_matches += 1
 
-    # Para a partida futura, jogadores da partida só existem se a fonte já publicar escalação/lineup.
-    # O teste isolado ainda é executado, mas não usamos API-Football para tentar forçar dados.
     current = _enrich_match_details(match, 'partida')
     player_records += current['player_stats']
     stats_records += current['stats']
