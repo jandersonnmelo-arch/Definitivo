@@ -73,8 +73,13 @@ def team_profile(team_id,before,limit=10):
 
 def _reference_line(lam,lines):
     if lam is None or not lines:return None
-    # Choose the available market line closest to the historical projection.
     return min(lines,key=lambda x:abs(float(x)-lam))
+
+def _compact_market_lines(line,over,under):
+    if line is None:return {}
+    # The existing UI prefixes the line with "Over" and the probability with "%".
+    # Keep one compact row while exposing both directions explicitly.
+    return {f'+{line:g} / -{line:g}':f'Mais {over:.1f}% • Menos {under:.1f}' if over is not None and under is not None else 'Sem dados'}
 
 def _metric_market(home,away,key,lines):
     hv,av=home.get(key),away.get(key)
@@ -83,7 +88,7 @@ def _metric_market(home,away,key,lines):
     line=_reference_line(lam,lines)
     over=poisson_over(lam,line) if line is not None else None
     under=poisson_under(lam,line) if line is not None else None
-    return {'home':hv,'away':av,'total_expected':round(lam,2),'line':line,'over':over,'under':under,'lines':{str(line):over} if line is not None else {},'under_lines':{str(line):under} if line is not None else {}}
+    return {'home':hv,'away':av,'total_expected':round(lam,2),'line':line,'over':over,'under':under,'lines':_compact_market_lines(line,over,under),'under_lines':{str(line):under} if line is not None else {}}
 
 def _projected_value(home,away,key):
     hv,av=home.get(key),away.get(key)
@@ -96,7 +101,7 @@ def build_pre_match_analysis(match,limit=10):
     goal_lines=(0.5,1.5,2.5,3.5)
     markets={'gols':{'expected':total_xg,'total_expected':total_xg,'line':_reference_line(total_xg,goal_lines),'lines':{},'over':{},'under':{},'under_lines':{},'exact_total':exact_total_goals(total_xg,4),'ambas_marcam':btts}
     if total_xg is not None:
-        gl=markets['gols']['line'];markets['gols']['lines']={str(gl):poisson_over(total_xg,gl)};markets['gols']['under_lines']={str(gl):poisson_under(total_xg,gl)};markets['gols']['over']=markets['gols']['lines'];markets['gols']['under']=markets['gols']['under_lines']
+        gl=markets['gols']['line'];go=poisson_over(total_xg,gl);gu=poisson_under(total_xg,gl);markets['gols']['lines']=_compact_market_lines(gl,go,gu);markets['gols']['under_lines']={str(gl):gu};markets['gols']['over']={str(gl):go};markets['gols']['under']={str(gl):gu};markets['gols']['over_probability']=go;markets['gols']['under_probability']=gu
     for name,(key,lines) in market_specs.items():markets[name]=_metric_market(h,a,key,lines)
     projection_keys=['shots','shots_on_target','woodwork','effectivetackles','corners','fouls','saves','player_throws','yellow_cards','red_cards','offsides','goal_kicks','passes_completed']
     projections={'goals':{'home':hxg,'away':axg,'total':total_xg,'sample_home':h.get('sample',0),'sample_away':a.get('sample',0)}}
