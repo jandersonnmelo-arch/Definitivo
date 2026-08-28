@@ -21,48 +21,39 @@ TEAM_ALIASES = {
     'psg': 'paris saint germain',
 }
 
-
 def _norm(value):
     s = unicodedata.normalize('NFKD', str(value or '')).encode('ascii', 'ignore').decode().lower()
     s = re.sub(r'\b(fc|cf|sc|ec|ac|se|ca|cr|club|football|futbol|sporting|deportivo|esporte)\b', ' ', s)
     return re.sub(r'[^a-z0-9]+', ' ', s).strip()
 
-
 def _team_key(value):
     raw = _norm(value)
     return TEAM_ALIASES.get(raw, raw)
 
-
 def _player_key(name, team_id):
     return (str(team_id or ''), _norm(name))
-
 
 def _position_quality(position):
     return 0 if str(position or '').strip() in {'', '-', '—', 'None', 'null'} else 1
 
-
 def _source_rank(source):
     return SOURCE_PRIORITY.get(str(source or ''), 50)
-
 
 def _valid_position(position):
     return str(position or '').strip() not in {'', '-', '—', 'None', 'null'}
 
-
-def reconcile_database():
+def reconcile_database(force=False):
     """Consolida identidades sem apagar os valores brutos por partida.
 
-    A consolidação é versionada. Equipes equivalentes por nome/alias passam a
-    compartilhar o mesmo ID interno; jogadores iguais de fontes diferentes
-    compartilham identidade por equipe/nome; posições válidas prevalecem sobre
-    posições vazias; e estatísticas individuais duplicadas por fonte não são
-    somadas duas vezes nas médias.
+    ``force=True`` permite repetir a reconciliação depois que uma nova coleta
+    histórica introduziu nomes/IDs adicionais. Isso é importante porque a
+    coleta e a consolidação acontecem em etapas diferentes.
     """
     from core.db import connect, now_iso, init_db
     init_db()
     c = connect()
-    marker = c.execute("SELECT value FROM schema_meta WHERE key='data_quality_v3'").fetchone()
-    if marker:
+    marker = c.execute("SELECT value FROM schema_meta WHERE key='data_quality_v4'").fetchone()
+    if marker and not force:
         c.close()
         return {'teams_merged': 0, 'players_merged': 0, 'stats_migrated': 0, 'stats_deduped': 0}
 
@@ -145,7 +136,7 @@ def reconcile_database():
             c.execute('DELETE FROM player_stats WHERE match_id=? AND player_id=? AND metric=? AND source=?', (d['match_id'],d['player_id'],d['metric'],r['source']))
             stats_deduped += 1
 
-    c.execute("INSERT INTO schema_meta(key,value) VALUES('data_quality_v3',?)", (datetime.now(timezone.utc).isoformat(),))
+    c.execute("INSERT OR REPLACE INTO schema_meta(key,value) VALUES('data_quality_v4',?)", (datetime.now(timezone.utc).isoformat(),))
     c.commit()
     c.close()
     return {'teams_merged':teams_merged,'players_merged':players_merged,'stats_migrated':stats_migrated,'stats_deduped':stats_deduped}
