@@ -3,7 +3,7 @@ import re, unicodedata
 from providers.football_data import FootballDataProvider
 from providers.fotmob import FotMobProvider
 from providers.espn import ESPNProvider
-from core.db import get_team_provider_id, get_provider_id, upsert_match, team_history, history_coverage, add_diagnostic as _db_add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats
+from core.db import get_team_provider_id, get_provider_id, upsert_match, team_history, history_coverage, add_diagnostic as _db_add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats, get_match
 from core.data_quality import reconcile_database
 from core.ai_db import init_ai_db, save_match_sample
 from core.engine import build_pre_match_analysis
@@ -156,19 +156,35 @@ def _save_ai_sample(match,training_ready):
 
 def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days=HISTORY_DAYS):
     init_ai_db();reconcile_database()
-    before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat();team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
+    before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat()
+    team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
     for team_id in team_ids:
         if history_coverage(team_id,before_iso)<matches_per_team:_collect_team_history_from_football_data(team_id,before_iso,days)
         hist=_history_matches_for_team(team_id,before_iso,matches_per_team)
-        if len(hist)<matches_per_team:_collect_team_history_from_espn(match['home_name'] if team_id==match.get('home_id') else match['away_name'],before_iso,120)
+        if len(hist)<matches_per_team:
+            team_name=match['home_name'] if team_id==match.get('home_id') else match['away_name']
+            _collect_team_history_from_espn(team_name,before_iso,120)
+
     reconciliation=reconcile_database(force=True)
     add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-coleta: equipes={reconciliation.get("teams_merged",0)}, jogadores={reconciliation.get("players_merged",0)}, estatísticas migradas={reconciliation.get("stats_migrated",0)}, duplicadas removidas={reconciliation.get("stats_deduped",0)}','SYSTEM',match.get('id'))
-    team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x];historical_pool=[]
-    for team_id in team_ids:historical_pool.extend(_history_matches_for_team(team_id,before_iso,matches_per_team))
+
+    # A reconciliação pode substituir os IDs das equipes. Nunca continue usando
+    # os IDs capturados antes dela: recarregamos a partida e trabalhamos com os
+    # IDs canônicos atualmente persistidos no banco.
+    fresh_match=get_match(match.get('id')) or match
+    before_iso=fresh_match.get('start_time') or before_iso
+    team_ids=[x for x in (fresh_match.get('home_id'),fresh_match.get('away_id')) if x]
+    add_diagnostic('identidade_equipes','OK',f'IDs canônicos após reconciliação: casa={fresh_match.get("home_id")}, fora={fresh_match.get("away_id")}', 'SYSTEM',fresh_match.get('id'))
+
+    historical_pool=[]
+    for team_id in team_ids:
+        historical_pool.extend(_history_matches_for_team(team_id,before_iso,matches_per_team))
     historical=[];seen=set()
     for h in sorted(historical_pool,key=lambda x:x.get('start_time') or '',reverse=True):
-        if h['id'] not in seen:historical.append(h);seen.add(h['id'])
+        if h['id'] not in seen:
+            historical.append(h);seen.add(h['id'])
     historical=historical[:matches_per_team*2]
+
     enriched=stats_records=player_records=player_matches=0
     for h in historical:
         if not (get_stats(h['id']) and _has_real_player_stats(h['id']) and _has_required_team_metrics(h['id'])):
@@ -177,11 +193,22 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
                 enriched+=1;stats_records+=r['stats'];player_records+=r['player_stats']
                 if r['players'] or r['player_stats']:player_matches+=1
         _save_ai_sample(h,training_ready=(h.get('status')=='FINISHED' and h.get('home_score') is not None and h.get('away_score') is not None))
+
     reconciliation2=reconcile_database(force=True)
-    if any(reconciliation2.values()):add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-enriquecimento: equipes={reconciliation2.get("teams_merged",0)}, jogadores={reconciliation2.get("players_merged",0)}, estatísticas migradas={reconciliation2.get("stats_migrated",0)}, duplicadas removidas={reconciliation2.get("stats_deduped",0)}','SYSTEM',match.get('id'))
-    current=_enrich_match_details(match,'partida');player_records+=current['player_stats'];stats_records+=current['stats']
+    if any(reconciliation2.values()):add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-enriquecimento: equipes={reconciliation2.get("teams_merged",0)}, jogadores={reconciliation2.get("players_merged",0)}, estatísticas migradas={reconciliation2.get("stats_migrated",0)}, duplicadas removidas={reconciliation2.get("stats_deduped",0)}','SYSTEM',fresh_match.get('id'))
+
+    # Pode haver nova alteração de identidade após o enriquecimento. Recarrega
+    # novamente antes de enriquecer a partida selecionada e antes dos contadores.
+    fresh_match=get_match(fresh_match.get('id')) or fresh_match
+    current=_enrich_match_details(fresh_match,'partida')
+    player_records+=current['player_stats'];stats_records+=current['stats']
     if current['players']:player_matches+=1
-    _save_ai_sample(match,training_ready=(match.get('status')=='FINISHED' and match.get('home_score') is not None and match.get('away_score') is not None))
+    _save_ai_sample(fresh_match,training_ready=(fresh_match.get('status')=='FINISHED' and fresh_match.get('home_score') is not None and fresh_match.get('away_score') is not None))
     reconcile_database(force=True)
-    home_n=len(_history_matches_for_team(team_ids[0],before_iso,matches_per_team)) if team_ids else 0;away_n=len(_history_matches_for_team(team_ids[-1],before_iso,matches_per_team)) if team_ids else 0
+
+    final_match=get_match(fresh_match.get('id')) or fresh_match
+    final_before=final_match.get('start_time') or before_iso
+    final_team_ids=[x for x in (final_match.get('home_id'),final_match.get('away_id')) if x]
+    home_n=len(_history_matches_for_team(final_team_ids[0],final_before,matches_per_team)) if len(final_team_ids)>0 else 0
+    away_n=len(_history_matches_for_team(final_team_ids[1],final_before,matches_per_team)) if len(final_team_ids)>1 else 0
     return {'home_matches':home_n,'away_matches':away_n,'historical_matches':len(historical),'player_matches_enriched':player_matches,'stats_records':stats_records,'player_records':player_records,'current_players':current['players'],'current_stats':current['stats']}
