@@ -122,9 +122,6 @@ class TribunaProvider(FootballProvider):
                             'source': self.name,
                         },
                     ])
-                    # Evita duplicar Throw-ins se a página usar as duas grafias.
-                    if metric == 'player_throws':
-                        break
 
                 if stats:
                     return {'stats': stats, 'players': [], 'player_stats': []}
