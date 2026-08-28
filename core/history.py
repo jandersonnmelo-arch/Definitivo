@@ -172,4 +172,8 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
         _save_ai_sample(h,training_ready=(h.get('status')=='FINISHED' and h.get('home_score') is not None and h.get('away_score') is not None))
     fresh_match=get_match(fresh_match.get('id')) or fresh_match;current=_enrich_match_details(fresh_match,'partida');player_records+=current['player_stats'];stats_records+=current['stats'];player_matches+=1 if current.get('player_count') or current.get('player_stats') else 0;_save_ai_sample(fresh_match,training_ready=(fresh_match.get('status')=='FINISHED' and fresh_match.get('home_score') is not None and fresh_match.get('away_score') is not None));_reconcile_for_history(match)
     final_match=get_match(fresh_match.get('id')) or fresh_match;final_before=final_match.get('start_time') or before_iso;final_team_ids=[x for x in (final_match.get('home_id'),final_match.get('away_id')) if x];home_n=len(_history_matches_for_team(final_team_ids[0],final_before,matches_per_team)) if final_team_ids else 0;away_n=len(_history_matches_for_team(final_team_ids[1],final_before,matches_per_team)) if len(final_team_ids)>1 else 0
+    try:
+        from core.remote_persistence import push
+        push(force=True)
+    except Exception:pass
     return {'home_matches':home_n,'away_matches':away_n,'historical_matches':len(historical),'player_matches_enriched':player_matches,'stats_records':stats_records,'player_records':player_records,'current_players':current.get('players',[]),'current_stats':current.get('stats',[])}
