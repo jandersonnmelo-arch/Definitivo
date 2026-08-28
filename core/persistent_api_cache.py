@@ -1,5 +1,4 @@
 import json
-import sqlite3
 import threading
 import time
 from datetime import datetime, timedelta, timezone
@@ -82,12 +81,13 @@ def set_cached(provider, path, payload, ttl_seconds):
         c.close()
 
 
-def _oldest_call(provider):
+def _oldest_recent_call(provider):
+    cutoff = (datetime.now(timezone.utc) - timedelta(seconds=60)).isoformat()
     c = connect()
     try:
         row = c.execute(
-            "SELECT created_at FROM api_call_log WHERE provider=? ORDER BY created_at ASC LIMIT 1",
-            (provider,),
+            "SELECT created_at FROM api_call_log WHERE provider=? AND created_at>=? ORDER BY created_at ASC LIMIT 1",
+            (provider, cutoff),
         ).fetchone()
         if not row:
             return None
@@ -128,7 +128,7 @@ def wait_for_slot(provider):
 
             count = calls_last_minute(provider)
             if count >= MAX_CALLS_PER_MINUTE:
-                oldest = _oldest_call(provider)
+                oldest = _oldest_recent_call(provider)
                 if oldest:
                     wait = 60.0 - (datetime.now(timezone.utc) - oldest).total_seconds()
                     if wait > 0:
