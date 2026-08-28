@@ -1,7 +1,7 @@
 from providers.football_data import FootballDataProvider
 from providers.espn import ESPNProvider
 from providers.espn_calendar import ESPNCalendarProvider
-from providers.api_futebol_calendar import ApiFutebolCalendarProvider
+from providers.api_futebol_calendar_fixed import ApiFutebolCalendarProviderFixed
 from providers.fotmob import FotMobProvider
 from providers.api_football import ApiFootballProvider
 from core.repository import canonical_id, upsert_match, upsert_match_stats, upsert_players, upsert_player_stats, add_diagnostic, get_provider_id
@@ -18,7 +18,7 @@ def providers():
 def collection_providers():
     # Football-Data continua como fonte principal. A API Futebol entra
     # somente para a Série B; ESPN permanece como fonte complementar.
-    return [FootballDataProvider(), ApiFutebolCalendarProvider(), ESPNCalendarProvider()]
+    return [FootballDataProvider(), ApiFutebolCalendarProviderFixed(), ESPNCalendarProvider()]
 
 
 def _with_player_presence(players, player_stats):
