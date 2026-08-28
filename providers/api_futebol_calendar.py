@@ -6,6 +6,7 @@ import streamlit as st
 
 from .base import FootballProvider
 from core.http_cache import get_json
+from core.db import add_diagnostic
 
 BASE = 'https://api.api-futebol.com.br/v1'
 
@@ -29,19 +30,45 @@ def _norm(value):
     return re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()
 
 
-def _items(data):
-    if isinstance(data, list):
-        return data
-    if isinstance(data, dict):
-        for key in ('campeonatos', 'fases', 'rodadas', 'partidas', 'jogos', 'results', 'data'):
-            value = data.get(key)
-            if isinstance(value, list):
-                return value
-    return []
+def _records(obj):
+    """Percorre respostas da API sem assumir que a lista está na raiz."""
+    out = []
+    if isinstance(obj, list):
+        for item in obj:
+            out.extend(_records(item))
+    elif isinstance(obj, dict):
+        out.append(obj)
+        for value in obj.values():
+            if isinstance(value, (dict, list)):
+                out.extend(_records(value))
+    return out
+
+
+def _top_keys(obj):
+    return ', '.join(list(obj.keys())[:15]) if isinstance(obj, dict) else type(obj).__name__
+
+
+def _id(obj, keys):
+    if not isinstance(obj, dict):
+        return None
+    for key in keys:
+        value = obj.get(key)
+        if value is not None:
+            return value
+    return None
+
+
+def _team(value):
+    if not isinstance(value, dict):
+        return {'id': None, 'name': str(value or '')}
+    return {
+        'id': _id(value, ('time_id', 'team_id', 'id')),
+        'name': value.get('nome_popular') or value.get('nome') or value.get('name') or value.get('apelido') or '',
+    }
 
 
 class ApiFutebolCalendarProvider(FootballProvider):
-    """Calendário da API Futebol. Nesta fase é usado exclusivamente para Série B."""
+    """Calendário da API Futebol, usado exclusivamente para a Série B."""
 
     name = 'API-Futebol'
 
@@ -62,12 +89,15 @@ class ApiFutebolCalendarProvider(FootballProvider):
 
     def _find_championship(self):
         data = self._get('/campeonatos')
-        candidates = _items(data)
+        records = _records(data)
         ranked = []
-        for c in candidates:
-            name = c.get('nome') or c.get('nome_popular') or c.get('name') or ''
-            season = c.get('temporada') or c.get('ano') or c.get('season') or ''
+        for c in records:
+            cid = _id(c, ('campeonato_id', 'id'))
+            name = c.get('nome') or c.get('nome_popular') or c.get('name') or c.get('nome_completo') or ''
+            season = c.get('temporada') or c.get('ano') or c.get('season') or c.get('temporada_id') or ''
             text = _norm(name)
+            if cid is None:
+                continue
             score = 0
             if 'serie b' in text or 'brasileirao b' in text or 'brasileiro b' in text:
                 score += 100
@@ -75,113 +105,150 @@ class ApiFutebolCalendarProvider(FootballProvider):
                 score += 10
             if str(season) == '2026':
                 score += 50
-            cid = c.get('campeonato_id') or c.get('id')
-            if cid is not None and score:
+            if score:
                 ranked.append((score, c))
         if not ranked:
-            raise RuntimeError('Campeonato Brasileiro Série B 2026 não encontrado na API Futebol')
+            raise RuntimeError(f'Série B 2026 não encontrada. Resposta /campeonatos: {_top_keys(data)}')
         ranked.sort(key=lambda x: x[0], reverse=True)
-        return ranked[0][1]
+        championship = ranked[0][1]
+        add_diagnostic('coleta', 'INFO', f'Série B: campeonato encontrado id={_id(championship, ("campeonato_id", "id"))} nome={championship.get("nome") or championship.get("nome_popular") or championship.get("name")}', self.name)
+        return championship
 
     def _find_phase(self, championship):
-        cid = championship.get('campeonato_id') or championship.get('id')
+        cid = _id(championship, ('campeonato_id', 'id'))
         data = self._get(f'/campeonatos/{cid}/fases')
-        phases = _items(data)
-        if not phases:
-            detail = self._get(f'/campeonatos/{cid}')
-            phases = _items(detail)
-        if not phases:
-            raise RuntimeError('Fases da Série B não encontradas')
-        # Prioriza fase em andamento e, em seguida, fase principal/primeira fase.
-        ranked = []
-        for phase in phases:
-            name = _norm(phase.get('nome') or phase.get('name'))
-            status = _norm(phase.get('status'))
-            fid = phase.get('fase_id') or phase.get('id')
-            if fid is None:
+        records = _records(data)
+        phases = []
+        for p in records:
+            fid = _id(p, ('fase_id', 'id'))
+            name = p.get('nome') or p.get('name') or p.get('descricao') or ''
+            # Evita tratar o próprio campeonato/time como fase.
+            if fid is None or not (name or p.get('status') or p.get('rodadas') or p.get('rodada')):
                 continue
+            text = _norm(name)
             score = 0
+            status = _norm(p.get('status') or p.get('situacao') or '')
             if 'andamento' in status or 'em andamento' in status:
                 score += 100
-            if 'unica' in name or 'primeira' in name or 'fase unica' in name:
+            if 'unica' in text or 'primeira' in text or 'fase unica' in text:
                 score += 20
-            ranked.append((score, phase))
-        if not ranked:
-            raise RuntimeError('Nenhuma fase válida encontrada para a Série B')
-        ranked.sort(key=lambda x: x[0], reverse=True)
-        return ranked[0][1]
+            phases.append((score, p))
+        if not phases:
+            raise RuntimeError(f'Fases da Série B não encontradas. Resposta /fases: {_top_keys(data)}')
+        phases.sort(key=lambda x: x[0], reverse=True)
+        phase = phases[0][1]
+        add_diagnostic('coleta', 'INFO', f'Série B: fase encontrada id={_id(phase, ("fase_id", "id"))} nome={phase.get("nome") or phase.get("name")}', self.name)
+        return phase
 
     def _extract_matches(self, obj):
         found = []
-        if isinstance(obj, list):
-            for item in obj:
-                found.extend(self._extract_matches(item))
-            return found
-        if not isinstance(obj, dict):
-            return found
-        # Estrutura direta de partida.
-        home = obj.get('mandante') or obj.get('home') or obj.get('time_mandante')
-        away = obj.get('visitante') or obj.get('away') or obj.get('time_visitante')
-        date_value = obj.get('data_realizacao') or obj.get('data') or obj.get('start_time') or obj.get('date')
-        if (isinstance(home, dict) or isinstance(away, dict)) and date_value:
-            found.append(obj)
-        for key, value in obj.items():
-            if key not in ('mandante', 'visitante', 'home', 'away', 'time_mandante', 'time_visitante'):
-                found.extend(self._extract_matches(value))
+        seen = set()
+
+        def walk(value):
+            if isinstance(value, list):
+                for item in value:
+                    walk(item)
+                return
+            if not isinstance(value, dict):
+                return
+
+            home = value.get('mandante') or value.get('home') or value.get('time_mandante') or value.get('equipe_mandante')
+            away = value.get('visitante') or value.get('away') or value.get('time_visitante') or value.get('equipe_visitante')
+            date_value = (
+                value.get('data_realizacao') or value.get('data_hora') or value.get('data') or
+                value.get('start_time') or value.get('datetime') or value.get('date')
+            )
+            match_id = _id(value, ('partida_id', 'jogo_id', 'match_id'))
+            if (isinstance(home, dict) or isinstance(away, dict)) and date_value:
+                key = str(match_id or f'{date_value}|{home}|{away}')
+                if key not in seen:
+                    found.append(value)
+                    seen.add(key)
+
+            for child in value.values():
+                if isinstance(child, (dict, list)):
+                    walk(child)
+
+        walk(obj)
         return found
 
     def _phase_matches(self, championship, phase):
-        cid = championship.get('campeonato_id') or championship.get('id')
-        fid = phase.get('fase_id') or phase.get('id')
+        cid = _id(championship, ('campeonato_id', 'id'))
+        fid = _id(phase, ('fase_id', 'id'))
         detail = self._get(f'/campeonatos/{cid}/fases/{fid}')
         matches = self._extract_matches(detail)
         if matches:
             return matches
-        # Algumas versões da API expõem as rodadas dentro da fase.
-        rounds = _items(detail)
-        for item in rounds:
-            rid = item.get('rodada_id') or item.get('id') if isinstance(item, dict) else None
-            if rid is None:
-                continue
+
+        # A API pode expor somente as rodadas no detalhe da fase.
+        round_ids = []
+        for item in _records(detail):
+            rid = _id(item, ('rodada_id', 'id'))
+            name = item.get('nome') or item.get('name') or item.get('descricao') or ''
+            if rid is not None and ('rodada' in _norm(name) or 'round' in _norm(name) or 'jornada' in _norm(name)):
+                if str(rid) not in {str(x) for x in round_ids}:
+                    round_ids.append(rid)
+
+        # Tenta explicitamente o endpoint de rodadas da fase.
+        try:
+            rounds_data = self._get(f'/campeonatos/{cid}/fases/{fid}/rodadas')
+            for item in _records(rounds_data):
+                rid = _id(item, ('rodada_id', 'id'))
+                if rid is not None and str(rid) not in {str(x) for x in round_ids}:
+                    round_ids.append(rid)
+        except Exception:
+            pass
+
+        add_diagnostic('coleta', 'INFO', f'Série B: fase sem partidas diretas; rodadas identificadas={len(round_ids)}', self.name)
+
+        for rid in round_ids:
             try:
                 rd = self._get(f'/campeonatos/{cid}/fases/{fid}/rodadas/{rid}')
                 matches.extend(self._extract_matches(rd))
-            except Exception:
-                continue
-        return matches
+            except Exception as exc:
+                add_diagnostic('coleta', 'ERROR', f'Série B: erro na rodada {rid}: {exc}', self.name)
 
-    @staticmethod
-    def _team(value):
-        if not isinstance(value, dict):
-            return {'id': None, 'name': str(value or '')}
-        return {
-            'id': value.get('time_id') or value.get('id') or value.get('team_id'),
-            'name': value.get('nome_popular') or value.get('nome') or value.get('name') or '',
-        }
+        # Último fallback: alguns formatos colocam a rodada no campeonato.
+        if not matches:
+            try:
+                champ_detail = self._get(f'/campeonatos/{cid}')
+                matches = self._extract_matches(champ_detail)
+            except Exception:
+                pass
+        return matches
 
     def matches(self, date_from, date_to, competition=None):
         championship = self._find_championship()
         phase = self._find_phase(championship)
         raw = self._phase_matches(championship, phase)
+        add_diagnostic('coleta', 'INFO', f'Série B: partidas brutas encontradas={len(raw)}; período={date_from}→{date_to}', self.name)
+
         start = datetime.fromisoformat(date_from).date()
         end = datetime.fromisoformat(date_to).date()
         out, seen = [], set()
+
         for item in raw:
-            home = self._team(item.get('mandante') or item.get('home') or item.get('time_mandante'))
-            away = self._team(item.get('visitante') or item.get('away') or item.get('time_visitante'))
-            date_value = item.get('data_realizacao') or item.get('data') or item.get('start_time') or item.get('date')
+            home = _team(item.get('mandante') or item.get('home') or item.get('time_mandante') or item.get('equipe_mandante'))
+            away = _team(item.get('visitante') or item.get('away') or item.get('time_visitante') or item.get('equipe_visitante'))
+            date_value = item.get('data_realizacao') or item.get('data_hora') or item.get('data') or item.get('start_time') or item.get('datetime') or item.get('date')
             if not date_value or not home['name'] or not away['name']:
                 continue
             try:
                 dt = datetime.fromisoformat(str(date_value).replace('Z', '+00:00'))
             except Exception:
-                continue
+                # Trata data brasileira simples quando a API não usa ISO.
+                try:
+                    dt = datetime.strptime(str(date_value)[:16], '%d/%m/%Y %H:%M')
+                except Exception:
+                    continue
             if not (start <= dt.date() <= end):
                 continue
-            mid = str(item.get('partida_id') or item.get('id') or f"{home['id']}-{away['id']}-{dt.isoformat()}")
+
+            mid = str(_id(item, ('partida_id', 'jogo_id', 'match_id', 'id')) or f"{home['id']}-{away['id']}-{dt.isoformat()}")
             if mid in seen:
                 continue
-            status = _norm(item.get('status') or item.get('situacao') or '')
+
+            status = _norm(item.get('status') or item.get('situacao') or item.get('estado') or '')
             if any(x in status for x in ('final', 'encerr', 'fim')):
                 normalized_status = 'FINISHED'
             elif any(x in status for x in ('andamento', 'ao vivo', 'live')):
@@ -190,6 +257,7 @@ class ApiFutebolCalendarProvider(FootballProvider):
                 normalized_status = 'POSTPONED'
             else:
                 normalized_status = 'SCHEDULED'
+
             out.append({
                 'id': mid,
                 'provider_match_id': mid,
@@ -205,9 +273,11 @@ class ApiFutebolCalendarProvider(FootballProvider):
                 'away_id': away['id'],
                 'away_name': away['name'],
                 'away_short': None,
-                'home_score': item.get('placar_mandante') or item.get('home_score'),
-                'away_score': item.get('placar_visitante') or item.get('away_score'),
+                'home_score': item.get('placar_mandante') if item.get('placar_mandante') is not None else item.get('home_score'),
+                'away_score': item.get('placar_visitante') if item.get('placar_visitante') is not None else item.get('away_score'),
                 'source': self.name,
             })
             seen.add(mid)
+
+        add_diagnostic('coleta', 'INFO', f'Série B: partidas no período={len(out)}', self.name)
         return out
