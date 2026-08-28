@@ -23,7 +23,9 @@ class FotMobProvider(FootballProvider):
     @staticmethod
     def _norm_name(value):
         s = unicodedata.normalize('NFKD', str(value or '')).encode('ascii', 'ignore').decode().lower()
-        s = re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol|calcio)\b', ' ', s)
+        s = re.sub(r'\b(fc|cf|sc|ec|ac|club|clube|football|futbol|calcio)\b', ' ', s)
+        s = re.sub(r'\b(real)\b', ' ', s)
+        s = re.sub(r'\b(de|da|do|dos|das)\b', ' ', s)
         return re.sub(r'[^a-z0-9]+', ' ', s).strip()
 
     @staticmethod
@@ -216,4 +218,17 @@ class FotMobProvider(FootballProvider):
             seen.add(p['id']);clean.append(p)
         return {'stats':stats,'players':clean,'player_stats':player_stats}
 
-def _same_names(a,b):return bool(a and b and (a==b or a in b or b in a))
+def _same_names(a,b):
+    if not a or not b:
+        return False
+    if a == b or a in b or b in a:
+        return True
+    def tokens(value):
+        return {x for x in str(value).split() if x not in {'real','de','da','do','dos','das'}}
+    ta, tb = tokens(a), tokens(b)
+    if not ta or not tb:
+        return False
+    common = ta & tb
+    if len(common) >= 2:
+        return len(common) >= min(len(ta), len(tb))
+    return len(common) == 1 and len(ta) == 1 and len(tb) == 1
