@@ -1,7 +1,7 @@
 import json, re, html, unicodedata
 from .base import FootballProvider
 from core.http_cache import get_json, get_html
-from core.normalizer import normalize_metric
+from core.normalizer import normalize_match_metric, normalize_player_metric
 
 SEARCH = 'https://www.fotmob.com/api/data/search/suggest'
 PAGE = 'https://www.fotmob.com/match/'
@@ -131,128 +131,89 @@ class FotMobProvider(FootballProvider):
     @classmethod
     def _extract_lineup_players(cls, lineup, default_team_id=None, default_team_name=None):
         out, seen = [], set()
-
         def add(obj, tid=None, tname=None):
             p = cls._player_from_obj(obj, tid, tname)
             if p and p['id'] not in seen:
                 seen.add(p['id']); out.append(p)
-
         def walk(node, tid=None, tname=None, depth=0):
-            if node is None or depth > 10:
-                return
+            if node is None or depth > 10:return
             if isinstance(node, list):
                 for item in node: walk(item, tid, tname, depth + 1)
                 return
-            if not isinstance(node, dict):
-                return
+            if not isinstance(node, dict):return
             local_tid = node.get('teamId') or node.get('team_id') or tid
             local_tname = node.get('teamName') or node.get('team_name') or tname
-            if node.get('player') or node.get('athlete') or (node.get('id') and (node.get('name') or node.get('fullName') or node.get('displayName'))):
-                add(node, local_tid, local_tname)
+            if node.get('player') or node.get('athlete') or (node.get('id') and (node.get('name') or node.get('fullName') or node.get('displayName'))):add(node, local_tid, local_tname)
             for key, value in node.items():
-                if key in {'formation', 'coach', 'events'}:
-                    continue
-                if isinstance(value, (dict, list)):
-                    walk(value, local_tid, local_tname, depth + 1)
-
+                if key in {'formation', 'coach', 'events'}:continue
+                if isinstance(value, (dict, list)):walk(value, local_tid, local_tname, depth + 1)
         walk(lineup, default_team_id, default_team_name)
         return out
 
     @classmethod
     def _extract_player_stats(cls, raw, default_team_id=None, default_team_name=None):
         players, player_stats, seen = [], [], set()
-
         def visit(node, tid=None, tname=None, depth=0):
-            if node is None or depth > 10:
-                return
+            if node is None or depth > 10:return
             if isinstance(node, list):
                 for item in node: visit(item, tid, tname, depth + 1)
                 return
-            if not isinstance(node, dict):
-                return
+            if not isinstance(node, dict):return
             local_tid = node.get('teamId') or node.get('team_id') or tid
             local_tname = node.get('teamName') or node.get('team_name') or tname
             p = cls._player_from_obj(node, local_tid, local_tname)
             if p:
                 pid = p['id']
-                if pid not in seen:
-                    players.append(p); seen.add(pid)
+                if pid not in seen:players.append(p); seen.add(pid)
                 groups = node.get('stats') or node.get('statistics') or []
-                if isinstance(groups, dict):
-                    groups = list(groups.values())
+                if isinstance(groups, dict):groups = list(groups.values())
                 if isinstance(groups, list):
                     for group in groups:
-                        if not isinstance(group, dict): continue
+                        if not isinstance(group, dict):continue
                         gstats = group.get('stats') if isinstance(group.get('stats'), dict) else group
                         if isinstance(gstats, dict):
                             for label, item in gstats.items():
-                                if label in {'player','athlete','stats','statistics'}: continue
+                                if label in {'player','athlete','stats','statistics'}:continue
                                 key = item.get('key') if isinstance(item, dict) else label
                                 n = cls._stat_value(item)
-                                if n is not None:
-                                    player_stats.append({'player_id': pid, 'metric': normalize_metric(key or label), 'value': n, 'source': cls.name})
+                                if n is not None:player_stats.append({'player_id': pid, 'metric': normalize_player_metric(key or label), 'value': n, 'source': cls.name})
             for key, value in node.items():
-                if key in {'formation', 'coach', 'events'}: continue
-                if isinstance(value, (dict, list)):
-                    visit(value, local_tid, local_tname, depth + 1)
-
+                if key in {'formation', 'coach', 'events'}:continue
+                if isinstance(value, (dict, list)):visit(value, local_tid, local_tname, depth + 1)
         visit(raw, default_team_id, default_team_name)
         return players, player_stats
 
     def match_details(self, match):
         fid = self._find_match_id(match)
-        if not fid:
-            raise RuntimeError('FotMob: partida não localizada por equipes/data')
-        text, _ = get_html(PAGE + fid, HEADERS)
-        data = self._next_data(text)
-        pp = ((data.get('props') or {}).get('pageProps') or {})
-        general = pp.get('general') or {}
-        content = pp.get('content') or {}
-        if not isinstance(general, dict) or not isinstance(content, dict) or not content:
-            raise RuntimeError('FotMob: página encontrada, mas sem dados detalhados pré-renderizados')
-
-        home = general.get('homeTeam') or {}; away = general.get('awayTeam') or {}
-        home_id, away_id = home.get('id'), away.get('id')
-        home_name, away_name = home.get('name'), away.get('name')
-        stats = []
+        if not fid:raise RuntimeError('FotMob: partida não localizada por equipes/data')
+        text, _ = get_html(PAGE + fid, HEADERS);data = self._next_data(text);pp = ((data.get('props') or {}).get('pageProps') or {});general = pp.get('general') or {};content = pp.get('content') or {}
+        if not isinstance(general, dict) or not isinstance(content, dict) or not content:raise RuntimeError('FotMob: página encontrada, mas sem dados detalhados pré-renderizados')
+        home = general.get('homeTeam') or {};away = general.get('awayTeam') or {};home_id, away_id = home.get('id'), away.get('id');home_name, away_name = home.get('name'), away.get('name');stats=[]
         all_stats = (((content.get('stats') or {}).get('Periods') or {}).get('All') or {}).get('stats') or []
         if isinstance(all_stats, list):
             for group in all_stats:
-                if not isinstance(group, dict): continue
+                if not isinstance(group, dict):continue
                 for item in group.get('stats') or []:
-                    if not isinstance(item, dict): continue
-                    vals = item.get('stats')
-                    if not isinstance(vals, list) or len(vals) < 2: continue
-                    metric = normalize_metric(item.get('key') or item.get('title'))
-                    for tid, tname, val in ((home_id, home_name, vals[0]), (away_id, away_name, vals[1])):
-                        n = self._num(val)
-                        if n is not None:
-                            stats.append({'team_id': tid, 'team_name': tname, 'metric': metric, 'value': n, 'source': self.name})
-
-        raw_players = content.get('playerStats')
-        players, player_stats = self._extract_player_stats(raw_players, None, None)
+                    if not isinstance(item, dict):continue
+                    vals=item.get('stats')
+                    if not isinstance(vals,list) or len(vals)<2:continue
+                    metric=normalize_match_metric(item.get('key') or item.get('title'))
+                    for tid,tname,val in ((home_id,home_name,vals[0]),(away_id,away_name,vals[1])):
+                        n=self._num(val)
+                        if n is not None:stats.append({'team_id':tid,'team_name':tname,'metric':metric,'value':n,'source':self.name})
+        raw_players=content.get('playerStats');players,player_stats=self._extract_player_stats(raw_players,None,None)
         if not players:
-            lineup = content.get('lineup') or content.get('lineups') or content.get('playerLineups') or {}
-            players = self._extract_lineup_players(lineup)
+            lineup=content.get('lineup') or content.get('lineups') or content.get('playerLineups') or {};players=self._extract_lineup_players(lineup)
         if not players:
-            for key in ('lineup', 'lineups', 'playerLineups', 'playerStats', 'rosters'):
+            for key in ('lineup','lineups','playerLineups','playerStats','rosters'):
                 if key in content:
-                    p2, s2 = self._extract_player_stats(content.get(key), None, None)
-                    if p2:
-                        players.extend(p2)
-                        player_stats.extend(s2)
-
-        # Remove duplicate player IDs and retain only players belonging to the two teams when team_id is available.
-        clean, seen = [], set()
-        valid_team_ids = {str(x) for x in (home_id, away_id) if x is not None}
+                    p2,s2=self._extract_player_stats(content.get(key),None,None)
+                    if p2:players.extend(p2);player_stats.extend(s2)
+        clean=[];seen=set();valid_team_ids={str(x) for x in (home_id,away_id) if x is not None}
         for p in players:
-            if p['id'] in seen: continue
-            if p.get('team_id') is not None and valid_team_ids and str(p['team_id']) not in valid_team_ids:
-                continue
-            seen.add(p['id']); clean.append(p)
-        players = clean
-        return {'stats': stats, 'players': players, 'player_stats': player_stats}
+            if p['id'] in seen:continue
+            if p.get('team_id') is not None and valid_team_ids and str(p['team_id']) not in valid_team_ids:continue
+            seen.add(p['id']);clean.append(p)
+        return {'stats':stats,'players':clean,'player_stats':player_stats}
 
-
-def _same_names(a, b):
-    return bool(a and b and (a == b or a in b or b in a))
+def _same_names(a,b):return bool(a and b and (a==b or a in b or b in a))
