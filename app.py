@@ -23,6 +23,9 @@ st.markdown('''<style>
 .brand{display:flex;gap:12px;align-items:center;margin-bottom:20px}.mark{width:46px;height:46px;border-radius:14px;background:#b7ff27;color:#081000;display:grid;place-items:center;font-size:25px}
 .eyebrow{font-size:11px;letter-spacing:2px;color:#b7ff27;font-weight:800}.brandname{font-size:21px;font-weight:850}.hero{font-size:31px;font-weight:850;line-height:1.08;margin:18px 0 10px}.hero span{color:#b7ff27}.small{font-size:12px;color:#858da7}
 .fixed-comp{padding:7px 10px;margin:4px 0;border:1px solid #252c42;border-radius:10px;background:#10162a;font-size:12px}.window{padding:10px 12px;border:1px solid #252c42;border-radius:12px;background:#0d1325;font-size:12px;margin:8px 0 14px}
+/* Tabelas de mercados: largura suficiente para leitura no celular + rolagem horizontal natural */
+[data-testid="stDataFrame"]{max-width:100%;overflow:hidden}
+.market-caption{font-size:11px;color:#858da7;margin:-6px 0 8px}
 </style>''',unsafe_allow_html=True)
 
 with st.sidebar:
@@ -127,10 +130,22 @@ if selected:
                 for label,key in market_specs:
                     obj=mk.get(key) or {};lines=obj.get('lines') or {}
                     if obj.get('total_expected') is None and not lines:
-                        if key in always_show:rows.append({'Mercado':label,'Linha':'—','Probabilidade':'Sem dados','Média projetada':'—'})
+                        if key in always_show:rows.append({'Mercado':label,'Linha':'—','Mais':'Sem dados','Menos':'Sem dados','Média':'—'})
                         continue
-                    for line,prob in lines.items():rows.append({'Mercado':label,'Linha':f'Over {line}','Probabilidade':f'{prob}%','Média projetada':obj.get('total_expected')})
-                if rows:st.dataframe(pd.DataFrame(rows),hide_index=True,use_container_width=True)
+                    for line,prob in lines.items():
+                        try:more=float(prob);less=round(100.0-more,1)
+                        except (TypeError,ValueError):more=prob;less='—'
+                        rows.append({'Mercado':label,'Linha':f'+{line} / -{line}','Mais':f'{more:g}%' if isinstance(more,float) else str(more),'Menos':f'{less:g}%' if isinstance(less,float) else str(less),'Média':obj.get('total_expected')})
+                if rows:
+                    market_df=pd.DataFrame(rows)
+                    st.markdown('<div class="market-caption">+ Mais • − Menos • valores completos podem ser vistos deslizando a tabela horizontalmente no celular.</div>',unsafe_allow_html=True)
+                    st.dataframe(market_df,hide_index=True,use_container_width=True,height=min(480,58+len(market_df)*35),column_config={
+                        'Mercado':st.column_config.TextColumn('Mercado',width='large'),
+                        'Linha':st.column_config.TextColumn('Linha',width='medium'),
+                        'Mais':st.column_config.TextColumn('Mais',width='medium'),
+                        'Menos':st.column_config.TextColumn('Menos',width='medium'),
+                        'Média':st.column_config.NumberColumn('Média',width='medium',format='%.2f')
+                    })
                 else:st.info('Sem amostra estatística suficiente para os mercados solicitados.')
                 if mk.get('ambas_marcam') is not None:st.metric('🤝 Ambas marcam — SIM',f'{mk["ambas_marcam"]}%')
                 exact=(mk.get('gols') or {}).get('exact_total') or {}
