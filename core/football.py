@@ -41,11 +41,7 @@ def _missing_match_metrics(match):
     expected = set(MATCH_DISPLAY_ORDER) - {'goals'}
     missing = {}
     for team_id in (match.get('home_id'), match.get('away_id')):
-        present = {
-            canonical_match_metric(r.get('metric'))
-            for r in stats
-            if r.get('team_id') == team_id and canonical_match_metric(r.get('metric'))
-        }
+        present = {canonical_match_metric(r.get('metric')) for r in stats if r.get('team_id') == team_id and canonical_match_metric(r.get('metric'))}
         missing[team_id] = expected - present
     return missing
 
@@ -145,11 +141,9 @@ def enrich(matches):
                 upsert_players(players)
                 upsert_player_stats(m['id'], player_stats)
 
-                # A summary da ESPN/Football-Data pode omitir métricas de futebol
-                # que existem no pacote completo da ESPN. Preenche apenas o que
-                # ainda falta, sem duplicar estatísticas ou jogadores.
                 if p.name in ('Football-Data.org','ESPN'):
-                    filled = _fill_missing_from_espn_cdn(m, pid)
+                    espn_id = pid if p.name == 'ESPN' else get_provider_id(m['id'], 'ESPN')
+                    filled = _fill_missing_from_espn_cdn(m, espn_id)
                     total += filled
                     if filled:
                         add_diagnostic('enriquecimento_espn_cdn','OK',f'ESPN CDN: {filled} métricas ausentes recuperadas; restantes: {sorted(_missing_metric_names(m))}','ESPN',m['id'])
@@ -158,9 +152,8 @@ def enrich(matches):
                 total += count
                 primary_ok = True
                 add_diagnostic('enriquecimento', 'OK', f'{p.name}: {count} registros processados ({len(players)} jogadores)', p.name, m['id'])
-                if is_serie_b:
-                    if not _missing_metric_names(m):
-                        break
+                if is_serie_b and not _missing_metric_names(m):
+                    break
                 else:
                     break
             except Exception as e:
