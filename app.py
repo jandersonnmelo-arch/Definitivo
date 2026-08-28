@@ -44,9 +44,24 @@ for m in all_matches:
     if date_from<=local_date<=date_to and canonical_competition_label(m.get('competition')) in selected_competitions:window_matches.append(m)
 window_matches.sort(key=lambda x:(x.get('start_time') or '',x.get('competition') or '',x.get('home_name') or ''))
 st.markdown(f'### Partidas <span class="small">{len(window_matches)} eventos • {days} dias</span>',unsafe_allow_html=True)
+
+# Agrupa visualmente as partidas por data local de Manaus. Cada dia e retratil.
+matches_by_day={}
 for m in window_matches:
-    if st.button(f'{m["home_name"]}  {m.get("home_score") if m.get("home_score") is not None else "·"} × {m.get("away_score") if m.get("away_score") is not None else "·"}  {m["away_name"]}',key=f'm_{m["id"]}',use_container_width=True):st.session_state['selected']=m['id']
-    st.caption(f'🏆 {canonical_competition_label(m.get("competition"))} • 🕐 {manaos_time(m.get("start_time"))} • {status_label(m.get("status"))} • fonte(s): {m.get("source")}')
+    try:
+        local_dt=datetime.fromisoformat((m.get('start_time') or '').replace('Z','+00:00')).astimezone(MANAUS)
+        day_key=local_dt.date()
+    except Exception:
+        continue
+    matches_by_day.setdefault(day_key,[]).append(m)
+
+day_names=['segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado','domingo']
+for day_key,day_matches in sorted(matches_by_day.items()):
+    day_label=f'{day_names[day_key.weekday()].capitalize()} • {day_key:%d/%m/%Y}'
+    with st.expander(f'📅 {day_label} • {len(day_matches)} jogos',expanded=(day_key==today)):
+        for m in day_matches:
+            if st.button(f'{m["home_name"]}  {m.get("home_score") if m.get("home_score") is not None else "·"} × {m.get("away_score") if m.get("away_score") is not None else "·"}  {m["away_name"]}',key=f'm_{m["id"]}',use_container_width=True):st.session_state['selected']=m['id']
+            st.caption(f'🏆 {canonical_competition_label(m.get("competition"))} • 🕐 {manaos_time(m.get("start_time"))} • {status_label(m.get("status"))} • fonte(s): {m.get("source")}')
 
 selected=st.session_state.get('selected')
 if selected:
