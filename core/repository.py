@@ -25,7 +25,6 @@ from core.db import (
     get_players,
     get_diagnostics,
     team_history,
-    metric_history,
 )
 
 __all__ = [
@@ -33,6 +32,5 @@ __all__ = [
     'init_db', 'record_api_usage', 'usage_today', 'calls_last_minute',
     'upsert_match', 'get_provider_id', 'upsert_match_stats', 'upsert_players',
     'upsert_player_stats', 'add_diagnostic', 'get_matches', 'get_match',
-    'get_stats', 'get_players', 'get_diagnostics', 'team_history',
-    'metric_history'
+    'get_stats', 'get_players', 'get_diagnostics', 'team_history'
 ]
