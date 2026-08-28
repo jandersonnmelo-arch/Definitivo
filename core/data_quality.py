@@ -4,9 +4,6 @@ from datetime import datetime, timezone
 
 SOURCE_PRIORITY = {'ESPN': 0, 'FotMob': 1, 'API-Futebol': 2, 'API-Football': 3, 'Football-Data.org': 4, 'LEGACY': 99}
 
-# Chaves correspondem ao resultado de _norm(): sem acentos e sem sufixos
-# genéricos como FC/EC/SC/CA. Variantes compostas são tratadas antes da
-# remoção dessas abreviações para não perder a identidade do clube.
 TEAM_ALIASES = {
     'bayer leverkusen': 'bayer 04 leverkusen',
     'bayer 04': 'bayer 04 leverkusen',
@@ -32,6 +29,8 @@ TEAM_ALIASES = {
     'sao paulo': 'sao paulo',
     'sao paulo fc': 'sao paulo',
     'corinthians': 'corinthians',
+    'corinthians paulista': 'corinthians',
+    'sport corinthians paulista': 'corinthians',
     'sport club corinthians paulista': 'corinthians',
     'santos': 'santos',
     'santos fc': 'santos',
@@ -71,17 +70,16 @@ TEAM_ALIASES = {
 def _norm(value):
     s = unicodedata.normalize('NFKD', str(value or '')).encode('ascii', 'ignore').decode().lower()
     s = re.sub(r'[^a-z0-9]+', ' ', s).strip()
-    # Reconhece variantes compostas antes de retirar abreviações genéricas.
     if s in {'ca mineiro', 'atletico mg', 'clube atletico mineiro', 'atletico mineiro'}:
         return 'atletico mineiro'
     if s == 'cam':
         return 'atletico mineiro'
     s = re.sub(r'\b(fc|cf|sc|ec|ac|se|ca|cr|club|football|futbol|sporting|deportivo|esporte)\b', ' ', s)
-    return re.sub(r'[^a-z0-9]+', ' ', s).strip()
+    s = re.sub(r'[^a-z0-9]+', ' ', s).strip()
+    return TEAM_ALIASES.get(s, s)
 
 def _team_key(value):
-    raw = _norm(value)
-    return TEAM_ALIASES.get(raw, raw)
+    return TEAM_ALIASES.get(_norm(value), _norm(value))
 
 def _player_key(name, team_id):
     return (str(team_id or ''), _norm(name))
@@ -96,12 +94,7 @@ def _valid_position(position):
     return str(position or '').strip() not in {'', '-', '—', 'None', 'null'}
 
 def reconcile_database(force=False):
-    """Consolida identidades sem apagar os valores brutos por partida.
-
-    ``force=True`` permite repetir a reconciliação depois que uma nova coleta
-    histórica introduziu nomes/IDs adicionais. Isso é importante porque a
-    coleta e a consolidação acontecem em etapas diferentes.
-    """
+    """Consolida identidades sem apagar os valores brutos por partida."""
     from core.db import connect, now_iso, init_db
     init_db()
     c = connect()
@@ -111,7 +104,6 @@ def reconcile_database(force=False):
         return {'teams_merged': 0, 'players_merged': 0, 'stats_migrated': 0, 'stats_deduped': 0}
 
     teams_merged = players_merged = stats_migrated = stats_deduped = 0
-
     team_rows = c.execute('SELECT id,sport,name,normalized_name,updated_at FROM teams ORDER BY updated_at DESC').fetchall()
     team_groups = {}
     for r in team_rows:
