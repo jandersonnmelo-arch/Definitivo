@@ -3,7 +3,6 @@ import re, unicodedata
 from providers.football_data import FootballDataProvider
 from providers.fotmob import FotMobProvider
 from providers.espn import ESPNProvider
-from providers.api_football import ApiFootballProvider
 from core.db import get_team_provider_id, upsert_match, team_history, history_coverage, add_diagnostic, upsert_match_stats, upsert_players, upsert_player_stats, get_players, get_stats
 
 HISTORY_MATCHES_PER_TEAM = 10
@@ -84,7 +83,7 @@ def _resolve_espn_event_id(match):
             if _same_team(match.get('home_name'), m.get('away_name')) and _same_team(match.get('away_name'), m.get('home_name')):
                 return m.get('provider_match_id')
     except Exception as e:
-        add_diagnostic('historico', 'ERROR', f'ESPN resolver: {e}', provider.name, match.get('id'))
+        add_diagnostic('diagnostico_jogadores', 'ERROR', f'ESPN resolver: {e}', provider.name, match.get('id'))
     return None
 
 
@@ -122,47 +121,48 @@ def _persist_detail(match, provider, d):
     return len(stats), len(players), len(pstats)
 
 
+def _diagnose_source_players(match, provider, detail, stage='diagnostico_jogadores'):
+    players = detail.get('players', []) or []
+    pstats = detail.get('player_stats', []) or []
+    names = [str(p.get('name') or 'Sem nome') for p in players[:8]]
+    sample = ', '.join(names) if names else 'nenhum nome retornado'
+    add_diagnostic(stage, 'OK' if players else 'INFO', f'{provider.name}: jogadores={len(players)}, estatísticas individuais={len(pstats)}, amostra=[{sample}]', provider.name, match.get('id'))
+
+
 def _enrich_match_details(match, stage='historico'):
     total_stats = total_players = total_pstats = 0
     success = False
 
+    # Teste isolado da ESPN: resolver a partida e consultar somente esta fonte.
     espn = ESPNProvider()
     try:
         eid = _resolve_espn_event_id(match)
         if eid:
             d = espn.match_details(eid)
+            _diagnose_source_players(match, espn, d)
             a, b, c = _persist_detail(match, espn, d)
             total_stats += a; total_players += b; total_pstats += c
             add_diagnostic(stage, 'OK', f'ESPN: {a} estatísticas, {b} jogadores, {c} individuais', espn.name, match['id'])
             success |= bool(a or b or c)
+        else:
+            add_diagnostic('diagnostico_jogadores', 'INFO', 'ESPN: partida não localizada para o teste isolado', espn.name, match.get('id'))
     except Exception as e:
-        add_diagnostic(stage, 'ERROR', f'ESPN detalhes: {e}', espn.name, match.get('id'))
+        add_diagnostic('diagnostico_jogadores', 'ERROR', f'ESPN detalhes: {e}', espn.name, match.get('id'))
 
+    # Teste isolado do FotMob: consulta somente esta fonte.
     fotmob = FotMobProvider()
     try:
         d = fotmob.match_details(match)
+        _diagnose_source_players(match, fotmob, d)
         a, b, c = _persist_detail(match, fotmob, d)
         total_stats += a; total_players += b; total_pstats += c
         add_diagnostic(stage, 'OK', f'FotMob: {a} estatísticas, {b} jogadores, {c} individuais', fotmob.name, match['id'])
         success |= bool(a or b or c)
     except Exception as e:
-        add_diagnostic(stage, 'ERROR', f'FotMob detalhes: {e}', fotmob.name, match.get('id'))
+        add_diagnostic('diagnostico_jogadores', 'ERROR', f'FotMob detalhes: {e}', fotmob.name, match.get('id'))
 
-    api = ApiFootballProvider()
-    if api.available():
-        try:
-            fid = api.resolve_match_id(match)
-            if fid:
-                d = api.match_details(fid)
-                a, b, c = _persist_detail(match, api, d)
-                total_stats += a; total_players += b; total_pstats += c
-                add_diagnostic(stage, 'OK', f'API-Football: {a} estatísticas, {b} jogadores, {c} individuais', api.name, match['id'])
-                success |= bool(a or b or c)
-            else:
-                add_diagnostic(stage, 'INFO', 'API-Football: partida não localizada por equipes/data', api.name, match.get('id'))
-        except Exception as e:
-            add_diagnostic(stage, 'ERROR', f'API-Football detalhes: {e}', api.name, match.get('id'))
-
+    # API-Football não participa mais do histórico/jogadores históricos.
+    # Ela fica reservada ao enriquecimento operacional dentro da janela suportada.
     return {'success': success, 'stats': total_stats, 'players': total_players, 'player_stats': total_pstats}
 
 
@@ -187,6 +187,7 @@ def build_history_for_match(match, matches_per_team=HISTORY_MATCHES_PER_TEAM, da
     historical = sorted(all_selected.values(), key=lambda x: x.get('start_time') or '', reverse=True)[:matches_per_team * 2]
     enriched = stats_records = player_records = player_matches = 0
     for h in historical:
+        # Se ainda não temos jogadores, o jogo será reprocessado mesmo que já tenha estatísticas.
         if get_stats(h['id']) and get_players(h['id']):
             continue
         r = _enrich_historical_match(h)
@@ -197,6 +198,8 @@ def build_history_for_match(match, matches_per_team=HISTORY_MATCHES_PER_TEAM, da
             if r['players'] or r['player_stats']:
                 player_matches += 1
 
+    # Para a partida futura, jogadores da partida só existem se a fonte já publicar escalação/lineup.
+    # O teste isolado ainda é executado, mas não usamos API-Football para tentar forçar dados.
     current = _enrich_match_details(match, 'partida')
     player_records += current['player_stats']
     stats_records += current['stats']
