@@ -22,6 +22,8 @@ TEAM_ALIASES = {
     'cruzeiro':'cruzeiro','cruzeiro esporte clube':'cruzeiro','botafogo':'botafogo','botafogo fr':'botafogo','fluminense':'fluminense','vasco da gama':'vasco da gama','vasco':'vasco da gama',
     'bahia':'bahia','ec bahia':'bahia','vitoria':'vitoria','fortaleza':'fortaleza','ceara':'ceara','sport recife':'sport recife','sport':'sport recife',
     'bragantino':'red bull bragantino','red bull bragantino':'red bull bragantino','red bull brasil':'red bull bragantino',
+    'racing santander':'real racing club de santander','racing club de santander':'real racing club de santander','real racing':'real racing club de santander','real racing club de santander':'real racing club de santander','real racing de santander':'real racing club de santander',
+    'sporting clube de portugal':'sporting portugal','clube de portugal':'sporting portugal','sporting portugal':'sporting portugal','sporting cp':'sporting portugal','sporting lisbon':'sporting portugal',
 }
 
 def add_diagnostic(stage,status,message,source=None,match_id=None):
@@ -35,6 +37,7 @@ def _parse_start(value):
 
 def _norm_name(value):
     s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower();s=re.sub(r'[^a-z0-9]+',' ',s).strip()
+    if s in TEAM_ALIASES:return TEAM_ALIASES[s]
     if s in {'ca mineiro','atletico mg','clube atletico mineiro','atletico mineiro'}:return 'atletico mineiro'
     if s=='cam':return 'atletico mineiro'
     s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol)\b',' ',s);s=re.sub(r'[^a-z0-9]+',' ',s).strip();return TEAM_ALIASES.get(s,s)
