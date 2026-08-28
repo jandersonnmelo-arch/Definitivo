@@ -12,10 +12,10 @@ from core.http_cache import get_json
 
 BASE = 'https://api.dadosfutebol.com.br/v1'
 
-# Limite interno conservador: a API Free informa 100 req/dia.
-# Mantemos margem para testes manuais e outras operações.
+# Limite operacional definido para a API própria da Série B: no máximo 10 chamadas/minuto.
+# O intervalo de 6s mantém margem de segurança entre chamadas.
 DAILY_LIMIT = 80
-MIN_INTERVAL_SECONDS = 1.5
+MIN_INTERVAL_SECONDS = 6.0
 
 _lock = threading.Lock()
 _recent_calls = deque()
@@ -24,12 +24,26 @@ _day_calls = {}
 
 def _token():
     try:
+        # Secret atualmente usado pelo projeto.
+        block = st.secrets.get('api_futebol')
+        if block:
+            for key in ('token', 'key', 'api_key'):
+                value = block.get(key)
+                if value:
+                    return str(value)
+
+        # Compatibilidade com a nomenclatura anterior.
         block = st.secrets.get('dados_futebol')
         if block:
             for key in ('token', 'key', 'api_key'):
                 value = block.get(key)
                 if value:
                     return str(value)
+
+        value = st.secrets.get('CHAVE_DADOS_FUTEBOL')
+        if value:
+            return str(value)
+
         value = st.secrets.get('DADOS_FUTEBOL_API_KEY')
         if value:
             return str(value)
@@ -221,7 +235,7 @@ class DadosFutebolProvider(FootballProvider):
 
     def _get(self, path):
         if not self.token:
-            raise RuntimeError('chave [dados_futebol] não configurada')
+            raise RuntimeError('chave [api_futebol] não configurada')
         self._wait_slot()
         return get_json(
             BASE + path,
