@@ -12,6 +12,7 @@ DB_PATH = Path(os.getenv("DEFINITIVO_DB_PATH", "data/definitivo.db"))
 DB_TIMEOUT = int(os.getenv("DEFINITIVO_DB_TIMEOUT", "60"))
 DB_BUSY_TIMEOUT_MS = int(os.getenv("DEFINITIVO_DB_BUSY_TIMEOUT_MS", "60000"))
 _DB_WRITE_LOCK = threading.RLock()
+_REMOTE_BOOTSTRAP_DONE = False
 
 def connect():
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -34,8 +35,13 @@ def _backup_after_write():
         from core.persistence import export_snapshot
         export_snapshot()
     except Exception: pass
+    try:
+        from core.remote_persistence import push
+        push()
+    except Exception: pass
 
 def init_db():
+    global _REMOTE_BOOTSTRAP_DONE
     with _DB_WRITE_LOCK:
         c=connect()
         try:
@@ -66,6 +72,12 @@ def init_db():
             c.execute("UPDATE player_stats SET team_id=(SELECT p.team_id FROM players p WHERE p.id=player_stats.player_id) WHERE team_id IS NULL")
             c.execute("INSERT OR REPLACE INTO schema_meta(key,value) VALUES('schema','15')");c.commit()
         finally:c.close()
+        if not _REMOTE_BOOTSTRAP_DONE:
+            _REMOTE_BOOTSTRAP_DONE=True
+            try:
+                from core.remote_persistence import restore_if_empty
+                restore_if_empty()
+            except Exception:pass
 
 def _team_id(c,sport,name,source=None,provider_id=None):
     cid=canonical_team_id(sport,name);c.execute("INSERT INTO teams(id,sport,name,normalized_name,updated_at) VALUES(?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name,updated_at=excluded.updated_at",(cid,sport,name,_norm(name),now_iso()))
