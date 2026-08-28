@@ -9,7 +9,56 @@ from core.data_quality import reconcile_database
 HISTORY_MATCHES_PER_TEAM = 10
 HISTORY_DAYS = 180
 PRESENCE_METRIC = '__player_presence__'
-TEAM_ALIASES = {'bayer leverkusen':'bayer 04 leverkusen','bayer 04':'bayer 04 leverkusen','bayern munich':'bayern munchen','bayern munchen fc':'bayern munchen','fc bayern munchen':'bayern munchen'}
+
+# Aliases usados SOMENTE para resolver identidade textual antes da persistência.
+# As chaves abaixo consideram a normalização feita por _norm_name().
+TEAM_ALIASES = {
+    'bayer leverkusen':'bayer 04 leverkusen',
+    'bayer 04':'bayer 04 leverkusen',
+    'bayern munich':'bayern munchen',
+    'bayern munchen fc':'bayern munchen',
+    'fc bayern munchen':'bayern munchen',
+    'atletico mineiro':'atletico mineiro',
+    'atletico mg':'atletico mineiro',
+    'clube atletico mineiro':'atletico mineiro',
+    'cam':'atletico mineiro',
+    'atletico paranaense':'athletico paranaense',
+    'athletico paranaense':'athletico paranaense',
+    'athletico pr':'athletico paranaense',
+    'cap':'athletico paranaense',
+    'flamengo':'flamengo',
+    'flamengo rj':'flamengo',
+    'cr flamengo':'flamengo',
+    'palmeiras':'palmeiras',
+    'se palmeiras':'palmeiras',
+    'sao paulo':'sao paulo',
+    'sao paulo fc':'sao paulo',
+    'corinthians':'corinthians',
+    'sport club corinthians paulista':'corinthians',
+    'santos':'santos',
+    'santos fc':'santos',
+    'gremio':'gremio',
+    'gremio fbpa':'gremio',
+    'internacional':'internacional',
+    'sport club internacional':'internacional',
+    'cruzeiro':'cruzeiro',
+    'cruzeiro esporte clube':'cruzeiro',
+    'botafogo':'botafogo',
+    'botafogo fr':'botafogo',
+    'fluminense':'fluminense',
+    'vasco da gama':'vasco da gama',
+    'vasco':'vasco da gama',
+    'bahia':'bahia',
+    'ec bahia':'bahia',
+    'vitoria':'vitoria',
+    'fortaleza':'fortaleza',
+    'ceara':'ceara',
+    'sport recife':'sport recife',
+    'sport':'sport recife',
+    'bragantino':'red bull bragantino',
+    'red bull bragantino':'red bull bragantino',
+    'red bull brasil':'red bull bragantino',
+}
 
 def add_diagnostic(stage,status,message,source=None,match_id=None):
     try:_db_add_diagnostic(stage,status,message,source,match_id)
@@ -132,13 +181,8 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
     for team_id in team_ids:
         if history_coverage(team_id,before_iso)<matches_per_team:_collect_team_history_from_football_data(team_id,before_iso,days)
         hist=_history_matches_for_team(team_id,before_iso,matches_per_team)
-        if len(hist)<matches_per_team:
-            _collect_team_history_from_espn(match['home_name'] if team_id==match.get('home_id') else match['away_name'],before_iso,120)
+        if len(hist)<matches_per_team:_collect_team_history_from_espn(match['home_name'] if team_id==match.get('home_id') else match['away_name'],before_iso,120)
 
-    # Historical fixtures can introduce a second internal team ID when the
-    # provider changes the display name (for example Bayern Munich/Bayern
-    # München). Consolidate immediately after collection, before selecting
-    # history and before player_history_summary() is queried by the UI.
     reconciliation=reconcile_database(force=True)
     add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-coleta: equipes={reconciliation.get("teams_merged",0)}, jogadores={reconciliation.get("players_merged",0)}, estatísticas migradas={reconciliation.get("stats_migrated",0)}, duplicadas removidas={reconciliation.get("stats_deduped",0)}','SYSTEM',match.get('id'))
 
@@ -158,7 +202,6 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
             enriched+=1;stats_records+=r['stats'];player_records+=r['player_stats']
             if r['players'] or r['player_stats']:player_matches+=1
 
-    # Detail enrichment can also introduce additional provider aliases.
     reconciliation2=reconcile_database(force=True)
     if any(reconciliation2.values()):add_diagnostic('qualidade_dados','OK',f'Reconciliação pós-enriquecimento: equipes={reconciliation2.get("teams_merged",0)}, jogadores={reconciliation2.get("players_merged",0)}, estatísticas migradas={reconciliation2.get("stats_migrated",0)}, duplicadas removidas={reconciliation2.get("stats_deduped",0)}','SYSTEM',match.get('id'))
 
