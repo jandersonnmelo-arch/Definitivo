@@ -18,7 +18,7 @@ PRESENCE_METRIC = '__player_presence__'
 
 
 def providers():
-    return [DadosFutebolProviderFixed(), FootballDataProvider(), ESPNProvider(), FotMobProvider(), TribunaProvider(), ApiFootballProvider()]
+    return [DadosFutebolProviderFixed(), FootballDataProvider(), ESPNProvider(), FotMobProvider(), ApiFootballProvider()]
 
 
 def collection_providers():
@@ -67,7 +67,6 @@ def _merge_players(existing, incoming):
             out.append(dict(p))
             continue
         cur = out[index[key]]
-        # Mantém a melhor informação disponível sem trocar a identidade.
         for field in ('name', 'position', 'team_name', 'team_id'):
             if cur.get(field) in (None, '', '—') and p.get(field) not in (None, '', '—'):
                 cur[field] = p.get(field)
@@ -87,15 +86,9 @@ def canonical_player_metric_safe(metric):
 
 
 def _merge_player_stats(existing, incoming):
-    """Mescla stats, nunca substitui uma fonte completa por outra parcial.
-
-    Este era o ponto que estava causando o sintoma dos prints: ESPN podia
-    trazer passes/desarmes, depois FotMob respondia com outros dados e o
-    fluxo gravava apenas o pacote FotMob. Agora todas as fontes contribuem.
-    """
+    """Mescla stats, nunca substitui uma fonte completa por outra parcial."""
     out = list(existing or [])
     seen = {_stat_key(r) for r in out}
-    # Preserva também a primeira ocorrência de uma métrica/valor equivalente.
     for r in incoming or []:
         row = dict(r)
         key = _stat_key(row)
@@ -139,7 +132,7 @@ def _fill_missing_from_espn_cdn(match, event_id):
 
 
 def _fill_missing_from_tribuna(match):
-    """Preenche somente métricas de equipe ainda ausentes usando Tribuna."""
+    """Preenche somente Laterais/Tiros de meta que ainda estiverem ausentes."""
     try:
         missing = _missing_metric_names(match)
         wanted = {'player_throws', 'goal_kicks'} & missing
@@ -194,8 +187,8 @@ def enrich(matches):
     """Enriquece diretamente a partida selecionada, sem exigir histórico.
 
     Cada provider pode contribuir com uma parte diferente dos dados. O fluxo
-    agora acumula e mescla os jogadores/stats individuais entre as fontes,
-    em vez de substituir o pacote anterior pelo último provider consultado.
+    acumula e mescla os jogadores/stats individuais entre as fontes, em vez
+    de substituir o pacote anterior pelo último provider consultado.
     """
     dedupe_existing_matches()
     reconcile_database()
@@ -204,7 +197,7 @@ def enrich(matches):
     total = 0
     for m in matches:
         is_serie_b = 'serie b' in str(m.get('competition') or '').lower()
-        ordered = [DadosFutebolProviderFixed(), FotMobProvider(), ESPNProvider(), TribunaProvider()] if is_serie_b else providers()
+        ordered = [DadosFutebolProviderFixed(), FotMobProvider(), ESPNProvider()] if is_serie_b else providers()
         primary_ok = False
         accumulated_players = []
         accumulated_player_stats = []
@@ -219,8 +212,6 @@ def enrich(matches):
                 elif p.name == 'API-Football':
                     pid = p.resolve_match_id(m)
                 elif p.name == 'FotMob':
-                    pid = m
-                elif p.name == 'Tribuna':
                     pid = m
                 else:
                     pid = get_provider_id(m['id'], p.name)
@@ -243,7 +234,7 @@ def enrich(matches):
                 player_stats = _attach_player_teams(players, player_stats)
                 player_stats = _with_player_presence(players, player_stats)
 
-                if is_serie_b and p.name not in ('Dados Futebol', 'Tribuna'):
+                if is_serie_b:
                     missing_before = _missing_metric_names(m)
                     filtered_stats = [row for row in stats_rows if canonical_match_metric(row.get('metric')) in missing_before]
                     if filtered_stats:
@@ -269,7 +260,6 @@ def enrich(matches):
                     accumulated_players = _merge_players(accumulated_players, players)
                     accumulated_player_stats = _merge_player_stats(accumulated_player_stats, player_stats)
                     any_player_data = True
-                    # Persiste incrementalmente, mas nunca substitui a fonte anterior.
                     upsert_players(accumulated_players)
                     upsert_player_stats(m['id'], accumulated_player_stats)
 
@@ -286,8 +276,6 @@ def enrich(matches):
                 primary_ok = True
                 add_diagnostic('enriquecimento', 'OK', f'{p.name}: {count} registros processados ({len(players)} jogadores); stats individuais: {len(player_stats)}; acumulado: {len(accumulated_players)} jogadores / {len(accumulated_player_stats)} stats', p.name, m['id'])
 
-                # Continua enquanto houver métricas de equipe faltando. Os
-                # jogadores/stats acumulados são preservados entre providers.
                 if any_player_data and not missing_team_stats:
                     break
             except Exception as e:
@@ -295,7 +283,6 @@ def enrich(matches):
                 if is_serie_b:
                     continue
 
-        # Garante uma gravação final com a união de todas as fontes.
         if accumulated_players:
             upsert_players(accumulated_players)
             upsert_player_stats(m['id'], accumulated_player_stats)
@@ -303,7 +290,7 @@ def enrich(matches):
             add_diagnostic('enriquecimento', 'WARNING', 'Nenhum provider conseguiu concluir o enriquecimento direto.', None, m['id'])
 
         # Último fallback, independente da competição. Nunca substitui dados
-        # existentes: só grava Laterais/Tiros de meta que ainda estiverem faltando.
+        # existentes: só grava Laterais/Tiros de meta ainda ausentes.
         filled_tribuna = _fill_missing_from_tribuna(m)
         total += filled_tribuna
 
