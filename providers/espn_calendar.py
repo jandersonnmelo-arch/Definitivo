@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from .espn import ESPNProvider
+from core.competitions import competition_matches, canonical_competition_label
 from core.http_cache import get_json
 from core.normalizer import normalize_status
 
@@ -9,7 +10,7 @@ BASES = [
     'https://site.web.api.espn.com/apis/site/v2/sports/soccer',
 ]
 
-# Cobertura explícita para não depender do /all, que não garante todas as ligas.
+# Cobertura explícita. Não dependemos do /all, que não garante todas as competições.
 ESPN_CALENDAR_LEAGUES = [
     'bra.1',
     'bra.2',
@@ -43,9 +44,19 @@ ESPN_CALENDAR_LEAGUES = [
     'kor.1',
 ]
 
+# Rótulo canônico do projeto para competições que precisam de cobertura explícita.
+LEAGUE_CANONICAL = {
+    'bra.1': '🇧🇷 Campeonato Brasileiro Série A',
+    'bra.2': '🇧🇷 Campeonato Brasileiro Série B',
+    'bra.copa_do_brazil': '🏆 Copa do Brasil',
+    'conmebol.libertadores': '🏆 Copa Libertadores',
+    'conmebol.sudamericana': '🏆 Copa Sudamericana',
+    'conmebol.recopa': '🏆 Copa Sudamericana',
+}
+
 
 class ESPNCalendarProvider(ESPNProvider):
-    """ESPN dedicada ao calendário, consultando cada liga explicitamente."""
+    """ESPN dedicada ao calendário, consultando cada competição explicitamente."""
 
     name = 'ESPN'
 
@@ -71,12 +82,34 @@ class ESPNCalendarProvider(ESPNProvider):
             raise last_error
         return {}
 
+    @staticmethod
+    def _canonical_competition(league, raw_name):
+        """Prioriza o slug ESPN para evitar variações de nome/acentuação."""
+        fixed = LEAGUE_CANONICAL.get(league)
+        if fixed:
+            return fixed
+        return canonical_competition_label(raw_name)
+
+    @staticmethod
+    def _selected_competition_matches(league, raw_name, selected):
+        if not selected:
+            return True
+        canonical = LEAGUE_CANONICAL.get(league)
+        if canonical and canonical in selected:
+            return True
+        return competition_matches(raw_name, selected)
+
     def matches(self, date_from, date_to, competition=None):
         out = []
         seen = set()
         start = datetime.fromisoformat(date_from)
         end = datetime.fromisoformat(date_to)
         date_param = f'{start:%Y%m%d}-{end:%Y%m%d}' if start != end else f'{start:%Y%m%d}'
+
+        # O parâmetro competition pode ser um rótulo do catálogo, por exemplo
+        # "🏆 Copa do Brasil". A filtragem é feita pelo slug da ESPN e também
+        # pelo nome retornado, evitando que uma competição válida seja perdida.
+        selected = [competition] if competition else None
 
         for league in ESPN_CALENDAR_LEAGUES:
             try:
@@ -92,13 +125,26 @@ class ESPNCalendarProvider(ESPNProvider):
 
                 c = (x.get('competitions') or [{}])[0]
                 league_obj = c.get('league') or {}
-                comp = league_obj.get('name') or league_obj.get('abbreviation') or ((x.get('season') or {}).get('displayName'))
-                if competition and competition.lower() not in str(comp).lower():
+                raw_comp = (
+                    league_obj.get('name')
+                    or league_obj.get('abbreviation')
+                    or ((x.get('season') or {}).get('displayName'))
+                    or ''
+                )
+                comp = self._canonical_competition(league, raw_comp)
+
+                if not self._selected_competition_matches(league, raw_comp, selected):
                     continue
 
                 teams = c.get('competitors') or []
-                home = next((t for t in teams if t.get('homeAway') == 'home'), teams[0] if teams else {})
-                away = next((t for t in teams if t.get('homeAway') == 'away'), teams[1] if len(teams) > 1 else {})
+                home = next(
+                    (t for t in teams if t.get('homeAway') == 'home'),
+                    teams[0] if teams else {},
+                )
+                away = next(
+                    (t for t in teams if t.get('homeAway') == 'away'),
+                    teams[1] if len(teams) > 1 else {},
+                )
                 st = x.get('status') or {}
                 typ = st.get('type') or {}
                 status = normalize_status(
@@ -111,6 +157,8 @@ class ESPNCalendarProvider(ESPNProvider):
                     'provider_match_id': event_id,
                     'sport': 'Futebol',
                     'competition': comp,
+                    'competition_raw': raw_comp,
+                    'competition_slug': league,
                     'season': str((x.get('season') or {}).get('year') or ''),
                     'start_time': x.get('date'),
                     'status': status,
