@@ -9,6 +9,7 @@ from core.data_quality import reconcile_database
 HISTORY_MATCHES_PER_TEAM = 10
 HISTORY_DAYS = 180
 PRESENCE_METRIC = '__player_presence__'
+TEAM_ALIASES = {'bayer leverkusen':'bayer 04 leverkusen','bayer 04':'bayer 04 leverkusen','bayern munich':'bayern munchen','bayern munchen fc':'bayern munchen','fc bayern munchen':'bayern munchen'}
 
 def add_diagnostic(stage,status,message,source=None,match_id=None):
     try:_db_add_diagnostic(stage,status,message,source,match_id)
@@ -20,7 +21,7 @@ def _parse_start(value):
     except Exception:return None
 
 def _norm_name(value):
-    s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower();s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol)\b',' ',s);return re.sub(r'[^a-z0-9]+',' ',s).strip()
+    s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower();s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol)\b',' ',s);s=re.sub(r'[^a-z0-9]+',' ',s).strip();return TEAM_ALIASES.get(s,s)
 
 def _same_team(a,b):
     a,b=_norm_name(a),_norm_name(b);return bool(a and b and (a==b or a in b or b in a))
@@ -107,7 +108,6 @@ def _has_real_player_stats(match_id):
     rows=get_players(match_id);return any(r.get('metric')!=PRESENCE_METRIC and r.get('value') is not None for r in rows)
 
 def _has_required_team_metrics(match_id):
-    """A match is complete only when passes and tackles are real positive values."""
     rows=get_stats(match_id);values={}
     for r in rows:
         metric=str(r.get('metric'));value=r.get('value')
