@@ -9,12 +9,10 @@ HISTORY_MATCHES_PER_TEAM = 10
 HISTORY_DAYS = 180
 PRESENCE_METRIC = '__player_presence__'
 
-
 def _parse_start(value):
     if not value:return None
-    try:return datetime.fromisoformat(str(value).replace('Z', '+00:00'))
+    try:return datetime.fromisoformat(str(value).replace('Z','+00:00'))
     except Exception:return None
-
 
 def _norm_name(value):
     s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower();s=re.sub(r'\b(fc|cf|sc|ec|ac|club|football|futbol)\b',' ',s);return re.sub(r'[^a-z0-9]+',' ',s).strip()
@@ -31,8 +29,7 @@ def _collect_team_history_from_football_data(team_id,before_iso,days=HISTORY_DAY
     if not provider_id:return []
     before=_parse_start(before_iso) or datetime.now(timezone.utc)
     try:rows=provider.team_matches(provider_id,(before-timedelta(days=days)).date().isoformat(),before.date().isoformat(),limit=100)
-    except Exception as e:
-        add_diagnostic('historico','ERROR',f'{provider.name}: {e}',provider.name);return []
+    except Exception as e:add_diagnostic('historico','ERROR',f'{provider.name}: {e}',provider.name);return []
     for m in rows:upsert_match(m)
     add_diagnostic('historico','OK',f'{provider.name}: {len(rows)} partidas históricas coletadas para a equipe',provider.name);return rows
 
@@ -105,15 +102,15 @@ def _has_real_player_stats(match_id):
     rows=get_players(match_id);return any(r.get('metric')!=PRESENCE_METRIC and r.get('value') is not None for r in rows)
 
 def _has_required_team_metrics(match_id):
-    """Historical detail is incomplete until the two key team markets exist.
-
-    Older runs could persist player statistics and other team statistics while
-    passes/tackles were normalized incorrectly. Those matches must be retried
-    after the provider parser is corrected; checking only player statistics is
-    therefore insufficient.
-    """
-    rows=get_stats(match_id);metrics={str(r.get('metric')) for r in rows if r.get('value') is not None}
-    return 'passes_completed' in metrics and 'effectivetackles' in metrics
+    """A match is complete only when passes and tackles are real positive values."""
+    rows=get_stats(match_id);values={}
+    for r in rows:
+        metric=str(r.get('metric'));value=r.get('value')
+        if value is None:continue
+        try:value=float(value)
+        except Exception:continue
+        values.setdefault(metric,[]).append(value)
+    return bool(values.get('passes_completed')) and any(v>0 for v in values['passes_completed']) and bool(values.get('effectivetackles')) and any(v>0 for v in values['effectivetackles'])
 
 def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days=HISTORY_DAYS):
     before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat();team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x];all_selected={}
@@ -125,9 +122,6 @@ def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days
         for h in hist:all_selected[h['id']]=h
     historical=sorted(all_selected.values(),key=lambda x:x.get('start_time') or '',reverse=True)[:matches_per_team*2];enriched=stats_records=player_records=player_matches=0
     for h in historical:
-        # A previous run may already contain player statistics while team
-        # passes/tackles are missing. Retry until the required team metrics
-        # are present as well.
         if get_stats(h['id']) and _has_real_player_stats(h['id']) and _has_required_team_metrics(h['id']):continue
         r=_enrich_historical_match(h)
         if r['success']:
