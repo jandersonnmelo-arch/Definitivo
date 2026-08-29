@@ -25,7 +25,17 @@ teams = list(NBA_TEAMS) if competition == "NBA" else list(NBB_TEAMS)
 team = st.selectbox("Equipe", teams)
 
 MANAUS = ZoneInfo("America/Manaus")
-NBA_SCHEDULE_URL = "https://data.nba.com/data/10s/v2015/json/mobile_teams/nba/{season_start}/league/00_full_schedule.json"
+NBA_SCHEDULE_URLS = (
+    "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
+    "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+)
+NBA_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Origin": "https://www.nba.com",
+    "Referer": "https://www.nba.com/",
+}
 NBB_SCHEDULE_URL = "https://lnb.com.br/nbb/tabela-de-jogos/"
 NBB_SEASON_ID = "48"  # NBB 2026/2027
 
@@ -60,65 +70,94 @@ def _to_manaus(value):
 
 
 def _nba_schedule_games(start_date: date, end_date: date):
-    r = requests.get(
-        NBA_SCHEDULE_URL.format(season_start=2026),
-        headers={"User-Agent": "Mozilla/5.0 Premium-Analytics", "Accept": "application/json"},
-        timeout=(8, 25),
-    )
-    r.raise_for_status()
-    payload = r.json()
-    found = []
-
-    def walk(obj):
-        if isinstance(obj, dict):
-            if obj.get("gid") and (obj.get("gcode") or obj.get("gdte") or obj.get("gameDate")):
-                found.append(obj)
-            for value in obj.values():
-                walk(value)
-        elif isinstance(obj, list):
-            for value in obj:
-                walk(value)
-
-    walk(payload)
-    rows = []
-    selected_team_id = NBA_TEAMS.get(team, (None,))[0]
-
-    for g in {str(x.get("gid")): x for x in found}.values():
-        gid = str(g.get("gid") or "")
-        if not gid.startswith("002"):
-            continue
-        home = g.get("h") or g.get("homeTeam") or {}
-        away = g.get("v") or g.get("awayTeam") or {}
+    """Carrega o calendário atual da NBA pelo CDN oficial e converte para Manaus."""
+    last_error = None
+    payload = None
+    for url in NBA_SCHEDULE_URLS:
         try:
-            hid = int(home.get("tid") or home.get("teamId"))
-            aid = int(away.get("tid") or away.get("teamId"))
-        except (TypeError, ValueError):
-            continue
-        if selected_team_id and selected_team_id not in (hid, aid):
-            continue
+            r = requests.get(url, headers=NBA_HEADERS, timeout=(10, 30))
+            r.raise_for_status()
+            payload = r.json()
+            break
+        except Exception as exc:
+            last_error = exc
 
-        dt = _to_manaus(g.get("gameTimeUTC") or g.get("gameTimeLocal") or g.get("gdte"))
-        if dt is None:
-            raw_day = g.get("gdte") or g.get("gameDate")
-            day = pd.to_datetime(raw_day, errors="coerce")
-            if pd.isna(day):
+    if payload is None:
+        raise RuntimeError(f"CDN oficial da NBA indisponível: {last_error}")
+
+    schedule = payload.get("leagueSchedule") or {}
+    game_dates = schedule.get("gameDates") or []
+    selected_team_id = NBA_TEAMS.get(team, (None,))[0]
+    rows = []
+
+    for day in game_dates:
+        if not isinstance(day, dict):
+            continue
+        for g in day.get("games") or []:
+            if not isinstance(g, dict):
                 continue
-            dt = day.tz_localize(MANAUS)
-        if not start_date <= dt.date() <= end_date:
-            continue
 
-        hs, vs = home.get("s"), away.get("s")
-        score = f"{hs} x {vs}" if hs not in (None, "") and vs not in (None, "") else "—"
-        rows.append({
-            "Data": dt.strftime("%d/%m/%Y"),
-            "Hora (Manaus)": dt.strftime("%H:%M"),
-            "Casa": home.get("ta") or home.get("tc") or str(hid),
-            "Fora": away.get("ta") or away.get("tc") or str(aid),
-            "Placar": score,
-            "Status": str(g.get("stt") or g.get("gameStatusText") or "Agendado"),
-            "game_id": gid,
-        })
-    return sorted(rows, key=lambda x: (x["Data"], x["Hora (Manaus)"], x["Casa"]))
+            gid = str(g.get("gameId") or g.get("gid") or "")
+            if not gid:
+                continue
+
+            home = g.get("homeTeam") or g.get("h") or {}
+            away = g.get("awayTeam") or g.get("v") or {}
+            try:
+                hid = int(home.get("teamId") or home.get("tid"))
+                aid = int(away.get("teamId") or away.get("tid"))
+            except (TypeError, ValueError):
+                continue
+
+            if selected_team_id and selected_team_id not in (hid, aid):
+                continue
+
+            dt = _to_manaus(
+                g.get("gameTimeUTC")
+                or g.get("gameTimeUtc")
+                or g.get("gameDateTimeUTC")
+                or g.get("utcTime")
+            )
+            if dt is None:
+                raw_day = g.get("gameDate") or day.get("gameDate")
+                raw_time = g.get("gameTimeLocal") or g.get("gameTime")
+                if raw_time and raw_day:
+                    dt = _to_manaus(f"{raw_day} {raw_time}")
+                else:
+                    parsed_day = pd.to_datetime(raw_day, errors="coerce")
+                    if pd.notna(parsed_day):
+                        dt = parsed_day.tz_localize(MANAUS)
+            if dt is None or not start_date <= dt.date() <= end_date:
+                continue
+
+            status_code = str(g.get("gameStatus") or g.get("statusNum") or "").lower()
+            status_text = str(g.get("gameStatusText") or "").strip()
+            if status_code in {"3", "final", "finalizado"} or status_text.lower() in {"final", "finalizado"}:
+                status = "Finalizado"
+            elif status_code in {"2", "live", "inprogress"}:
+                status = "Ao vivo"
+            else:
+                status = "Agendado"
+
+            hs = home.get("score") if home.get("score") is not None else home.get("s")
+            aws = away.get("score") if away.get("score") is not None else away.get("s")
+            score = f"{hs} x {aws}" if status != "Agendado" and hs not in (None, "") and aws not in (None, "") else "—"
+
+            home_name = home.get("teamName") or home.get("tn") or home.get("teamTricode") or home.get("ta") or str(hid)
+            away_name = away.get("teamName") or away.get("tn") or away.get("teamTricode") or away.get("ta") or str(aid)
+
+            rows.append({
+                "Data": dt.strftime("%d/%m/%Y"),
+                "Hora (Manaus)": dt.strftime("%H:%M"),
+                "Casa": home_name,
+                "Fora": away_name,
+                "Placar": score,
+                "Status": status,
+                "game_id": gid,
+            })
+
+    unique = {(x["Data"], x["Hora (Manaus)"], x["Casa"], x["Fora"], x["game_id"]): x for x in rows}
+    return sorted(unique.values(), key=lambda x: (x["Data"], x["Hora (Manaus)"], x["Casa"]))
 
 
 def _nbb_calendar_games(start_date: date, end_date: date):
