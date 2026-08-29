@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v4",
-  "created_at": "2026-08-29T03:53:42.528762+00:00",
+  "created_at": "2026-08-29T03:53:45.323800+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-29T03:53:19.958113+00:00"
-      },
-      {
         "key": "schema",
         "value": "15"
+      },
+      {
+        "key": "data_quality_v4",
+        "value": "2026-08-29T03:53:45.315177+00:00"
       }
     ],
     "teams": [
@@ -11081,7 +11081,7 @@
         "position": "CF-L",
         "source": "ESPN",
         "provider_player_id": "282588",
-        "updated_at": "2026-08-29T03:53:32.659789+00:00"
+        "updated_at": "2026-08-29T03:53:45.311930+00:00"
       },
       {
         "id": "130279445960852288",
@@ -11135,7 +11135,7 @@
         "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "155466",
-        "updated_at": "2026-08-29T03:53:32.659875+00:00"
+        "updated_at": "2026-08-29T03:53:45.311704+00:00"
       },
       {
         "id": "1083507764412127833",
@@ -11667,24 +11667,6 @@
         "source": "ESPN",
         "provider_player_id": "202493",
         "updated_at": "2026-08-29T03:53:12.705227+00:00"
-      },
-      {
-        "id": "698210041123708309",
-        "team_id": "ac643ac98a96d64adc",
-        "name": "Marcos Paulo",
-        "position": "CD-L",
-        "source": "ESPN",
-        "provider_player_id": "333835",
-        "updated_at": "2026-08-29T03:53:32.659593+00:00"
-      },
-      {
-        "id": "1127043990302435212",
-        "team_id": "ac643ac98a96d64adc",
-        "name": "Gabriel",
-        "position": "CD-R",
-        "source": "ESPN",
-        "provider_player_id": "285127",
-        "updated_at": "2026-08-29T03:53:32.659639+00:00"
       }
     ],
     "player_stats": [
@@ -58361,24 +58343,6 @@
         "value": 0.0,
         "source": "ESPN",
         "observed_at": "2026-08-29T03:53:12.786258+00:00"
-      },
-      {
-        "match_id": "4d75e1e44ea66a135e62",
-        "player_id": "698210041123708309",
-        "team_id": "ac643ac98a96d64adc",
-        "metric": "__player_presence__",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-29T03:53:32.728768+00:00"
-      },
-      {
-        "match_id": "4d75e1e44ea66a135e62",
-        "player_id": "1127043990302435212",
-        "team_id": "ac643ac98a96d64adc",
-        "metric": "__player_presence__",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-29T03:53:32.728812+00:00"
       }
     ],
     "diagnostics": [
