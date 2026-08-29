@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-29T15:33:44.099601+00:00",
+  "created_at": "2026-08-29T15:34:08.321574+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-29T15:34:05.036984+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-29T15:33:29.888150+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -424,7 +424,7 @@
         "sport": "Futebol",
         "name": "CR Vasco da Gama",
         "normalized_name": "vasco da gama",
-        "updated_at": "2026-08-29T15:31:26.460383+00:00"
+        "updated_at": "2026-08-29T15:34:07.561858+00:00"
       },
       {
         "id": "bff457c9c7114e8deb",
@@ -557,7 +557,7 @@
         "sport": "Futebol",
         "name": "Fluminense FC",
         "normalized_name": "fluminense",
-        "updated_at": "2026-08-29T15:31:25.460343+00:00"
+        "updated_at": "2026-08-29T15:34:07.165974+00:00"
       },
       {
         "id": "0f1e622559c82b0e72",
@@ -795,14 +795,14 @@
         "sport": "Futebol",
         "name": "Chapecoense AF",
         "normalized_name": "chapecoense af",
-        "updated_at": "2026-08-29T15:28:43.608909+00:00"
+        "updated_at": "2026-08-29T15:34:07.938079+00:00"
       },
       {
         "id": "9f563292bea3f50f07",
         "sport": "Futebol",
         "name": "EC Bahia",
         "normalized_name": "bahia",
-        "updated_at": "2026-08-29T15:28:43.251430+00:00"
+        "updated_at": "2026-08-29T15:34:07.938268+00:00"
       },
       {
         "id": "bd162042f98d9dd2b6",
@@ -1405,6 +1405,20 @@
         "name": "Grêmio",
         "normalized_name": "gremio",
         "updated_at": "2026-08-29T15:32:31.566616+00:00"
+      },
+      {
+        "id": "cfee4cccf2f07aeae1",
+        "sport": "Futebol",
+        "name": "CA Mineiro",
+        "normalized_name": "mineiro",
+        "updated_at": "2026-08-29T15:34:06.228479+00:00"
+      },
+      {
+        "id": "62f33764164ba57bcd",
+        "sport": "Futebol",
+        "name": "SC Corinthians Paulista",
+        "normalized_name": "corinthians paulista",
+        "updated_at": "2026-08-29T15:34:06.667772+00:00"
       }
     ],
     "team_sources": [
@@ -1760,7 +1774,7 @@
         "team_id": "860a128afaf93b6350",
         "source": "Football-Data.org",
         "provider_team_id": "1780",
-        "updated_at": "2026-08-29T15:31:26.460409+00:00"
+        "updated_at": "2026-08-29T15:34:07.561885+00:00"
       },
       {
         "team_id": "bff457c9c7114e8deb",
@@ -1874,7 +1888,7 @@
         "team_id": "0b87c3ffb6e9585c89",
         "source": "Football-Data.org",
         "provider_team_id": "1765",
-        "updated_at": "2026-08-29T15:31:25.460545+00:00"
+        "updated_at": "2026-08-29T15:34:07.166120+00:00"
       },
       {
         "team_id": "0f1e622559c82b0e72",
@@ -2078,13 +2092,13 @@
         "team_id": "76ad233033c62ff5ca",
         "source": "Football-Data.org",
         "provider_team_id": "1772",
-        "updated_at": "2026-08-29T15:28:43.609013+00:00"
+        "updated_at": "2026-08-29T15:34:07.938181+00:00"
       },
       {
         "team_id": "9f563292bea3f50f07",
         "source": "Football-Data.org",
         "provider_team_id": "1777",
-        "updated_at": "2026-08-29T15:28:43.251512+00:00"
+        "updated_at": "2026-08-29T15:34:07.938422+00:00"
       },
       {
         "team_id": "bd162042f98d9dd2b6",
@@ -2805,6 +2819,18 @@
         "source": "ESPN",
         "provider_team_id": "6273",
         "updated_at": "2026-08-29T15:32:31.566704+00:00"
+      },
+      {
+        "team_id": "cfee4cccf2f07aeae1",
+        "source": "Football-Data.org",
+        "provider_team_id": "1766",
+        "updated_at": "2026-08-29T15:34:06.228763+00:00"
+      },
+      {
+        "team_id": "62f33764164ba57bcd",
+        "source": "Football-Data.org",
+        "provider_team_id": "1779",
+        "updated_at": "2026-08-29T15:34:06.667794+00:00"
       }
     ],
     "matches": [
@@ -5606,7 +5632,7 @@
         "away_score": 0,
         "source": "Football-Data.org",
         "provider_match_id": "554945",
-        "updated_at": "2026-08-29T15:18:19.352516+00:00"
+        "updated_at": "2026-08-29T15:34:07.166326+00:00"
       },
       {
         "id": "13ed942ae3ffba4ed115",
@@ -6846,7 +6872,7 @@
         "away_score": 0,
         "source": "Football-Data.org",
         "provider_match_id": "554770",
-        "updated_at": "2026-08-29T15:28:41.984773+00:00"
+        "updated_at": "2026-08-29T15:34:05.624687+00:00"
       },
       {
         "id": "a8785c66fd91042b0227",
@@ -6886,7 +6912,7 @@
         "away_score": 3,
         "source": "Football-Data.org",
         "provider_match_id": "554962",
-        "updated_at": "2026-08-29T15:28:43.251653+00:00"
+        "updated_at": "2026-08-29T15:34:07.938661+00:00"
       },
       {
         "id": "d56149e6ae611e60e725",
@@ -7287,6 +7313,66 @@
         "source": "ESPN",
         "provider_match_id": "401874099",
         "updated_at": "2026-08-29T15:31:27.930286+00:00"
+      },
+      {
+        "id": "554920",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-21T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "cfee4cccf2f07aeae1",
+        "home_name": "CA Mineiro",
+        "home_short": "CAM",
+        "away_id": "9f563292bea3f50f07",
+        "away_name": "EC Bahia",
+        "away_short": "BAH",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "554920",
+        "updated_at": "2026-08-29T15:34:06.229211+00:00"
+      },
+      {
+        "id": "554931",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-26T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "9f563292bea3f50f07",
+        "home_name": "EC Bahia",
+        "home_short": "BAH",
+        "away_id": "62f33764164ba57bcd",
+        "away_name": "SC Corinthians Paulista",
+        "away_short": "COR",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "554931",
+        "updated_at": "2026-08-29T15:34:06.668053+00:00"
+      },
+      {
+        "id": "554950",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-09T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "9f563292bea3f50f07",
+        "home_name": "EC Bahia",
+        "home_short": "BAH",
+        "away_id": "860a128afaf93b6350",
+        "away_name": "CR Vasco da Gama",
+        "away_short": "VAS",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "554950",
+        "updated_at": "2026-08-29T15:34:07.562186+00:00"
       }
     ],
     "match_sources": [
@@ -8218,7 +8304,7 @@
         "match_id": "e9ed16ff8b764f23287d",
         "source": "Football-Data.org",
         "provider_match_id": "554945",
-        "updated_at": "2026-08-29T15:18:19.352672+00:00"
+        "updated_at": "2026-08-29T15:34:07.166465+00:00"
       },
       {
         "match_id": "13ed942ae3ffba4ed115",
@@ -8590,7 +8676,7 @@
         "match_id": "b323b0eadb7e3a019be1",
         "source": "Football-Data.org",
         "provider_match_id": "554770",
-        "updated_at": "2026-08-29T15:28:41.984923+00:00"
+        "updated_at": "2026-08-29T15:34:05.624820+00:00"
       },
       {
         "match_id": "a8785c66fd91042b0227",
@@ -8602,7 +8688,7 @@
         "match_id": "8c574ca234bb067aff53",
         "source": "Football-Data.org",
         "provider_match_id": "554962",
-        "updated_at": "2026-08-29T15:28:43.251757+00:00"
+        "updated_at": "2026-08-29T15:34:07.938852+00:00"
       },
       {
         "match_id": "d56149e6ae611e60e725",
@@ -8723,6 +8809,24 @@
         "source": "ESPN",
         "provider_match_id": "401874099",
         "updated_at": "2026-08-29T15:31:27.930461+00:00"
+      },
+      {
+        "match_id": "554920",
+        "source": "Football-Data.org",
+        "provider_match_id": "554920",
+        "updated_at": "2026-08-29T15:34:06.229376+00:00"
+      },
+      {
+        "match_id": "554931",
+        "source": "Football-Data.org",
+        "provider_match_id": "554931",
+        "updated_at": "2026-08-29T15:34:06.668176+00:00"
+      },
+      {
+        "match_id": "554950",
+        "source": "Football-Data.org",
+        "provider_match_id": "554950",
+        "updated_at": "2026-08-29T15:34:07.562293+00:00"
       }
     ],
     "match_stats": [
@@ -339813,8 +339917,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-08-29",
-        "calls": 10,
-        "last_call": "2026-08-29T15:31:23.351436+00:00",
+        "calls": 11,
+        "last_call": "2026-08-29T15:34:05.609002+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -341713,6 +341817,11 @@
         "id": 374,
         "provider": "FotMob",
         "created_at": "2026-08-29T15:33:25.825155+00:00"
+      },
+      {
+        "id": 375,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-29T15:34:05.609002+00:00"
       }
     ],
     "ai_match_samples": [
