@@ -1,6 +1,12 @@
 from __future__ import annotations
 
+from datetime import date, timedelta
+from io import StringIO
+from zoneinfo import ZoneInfo
+import re
+
 import pandas as pd
+import requests
 import streamlit as st
 
 from core.basketball.engine import BasketballSourceError, supported_competitions, collect_team_history
@@ -18,6 +24,11 @@ months = st.slider("Janela histórica", 3, 12, 8)
 teams = list(NBA_TEAMS) if competition == "NBA" else list(NBB_TEAMS)
 team = st.selectbox("Equipe", teams)
 
+MANAUS = ZoneInfo("America/Manaus")
+NBA_SCHEDULE_URL = "https://data.nba.com/data/10s/v2015/json/mobile_teams/nba/{season_start}/league/00_full_schedule.json"
+NBB_SCHEDULE_URL = "https://lnb.com.br/nbb/tabela-de-jogos/"
+NBB_SEASON_ID = "48"  # NBB 2026/2027
+
 
 def _numeric_mean(df: pd.DataFrame, column: str):
     if column not in df.columns:
@@ -30,10 +41,171 @@ def _fmt(value, decimals: int = 1):
     return "—" if value is None else f"{value:.{decimals}f}"
 
 
+def _to_manaus(value):
+    if not value:
+        return None
+    try:
+        dt = pd.to_datetime(str(value), utc=True, errors="coerce")
+        if pd.notna(dt):
+            return dt.tz_convert(MANAUS)
+    except Exception:
+        pass
+    try:
+        dt = pd.to_datetime(str(value), errors="coerce")
+        if pd.notna(dt):
+            return dt.tz_localize(MANAUS) if dt.tzinfo is None else dt.tz_convert(MANAUS)
+    except Exception:
+        pass
+    return None
+
+
+def _nba_schedule_games(start_date: date, end_date: date):
+    r = requests.get(
+        NBA_SCHEDULE_URL.format(season_start=2026),
+        headers={"User-Agent": "Mozilla/5.0 Premium-Analytics", "Accept": "application/json"},
+        timeout=(8, 25),
+    )
+    r.raise_for_status()
+    payload = r.json()
+    found = []
+
+    def walk(obj):
+        if isinstance(obj, dict):
+            if obj.get("gid") and (obj.get("gcode") or obj.get("gdte") or obj.get("gameDate")):
+                found.append(obj)
+            for value in obj.values():
+                walk(value)
+        elif isinstance(obj, list):
+            for value in obj:
+                walk(value)
+
+    walk(payload)
+    rows = []
+    selected_team_id = NBA_TEAMS.get(team, (None,))[0]
+
+    for g in {str(x.get("gid")): x for x in found}.values():
+        gid = str(g.get("gid") or "")
+        if not gid.startswith("002"):
+            continue
+        home = g.get("h") or g.get("homeTeam") or {}
+        away = g.get("v") or g.get("awayTeam") or {}
+        try:
+            hid = int(home.get("tid") or home.get("teamId"))
+            aid = int(away.get("tid") or away.get("teamId"))
+        except (TypeError, ValueError):
+            continue
+        if selected_team_id and selected_team_id not in (hid, aid):
+            continue
+
+        dt = _to_manaus(g.get("gameTimeUTC") or g.get("gameTimeLocal") or g.get("gdte"))
+        if dt is None:
+            raw_day = g.get("gdte") or g.get("gameDate")
+            day = pd.to_datetime(raw_day, errors="coerce")
+            if pd.isna(day):
+                continue
+            dt = day.tz_localize(MANAUS)
+        if not start_date <= dt.date() <= end_date:
+            continue
+
+        hs, vs = home.get("s"), away.get("s")
+        score = f"{hs} x {vs}" if hs not in (None, "") and vs not in (None, "") else "—"
+        rows.append({
+            "Data": dt.strftime("%d/%m/%Y"),
+            "Hora (Manaus)": dt.strftime("%H:%M"),
+            "Casa": home.get("ta") or home.get("tc") or str(hid),
+            "Fora": away.get("ta") or away.get("tc") or str(aid),
+            "Placar": score,
+            "Status": str(g.get("stt") or g.get("gameStatusText") or "Agendado"),
+            "game_id": gid,
+        })
+    return sorted(rows, key=lambda x: (x["Data"], x["Hora (Manaus)"], x["Casa"]))
+
+
+def _nbb_calendar_games(start_date: date, end_date: date):
+    r = requests.get(
+        NBB_SCHEDULE_URL,
+        params={"season[]": NBB_SEASON_ID},
+        headers={"User-Agent": "Mozilla/5.0 Premium-Analytics", "Accept-Language": "pt-BR,pt;q=0.9"},
+        timeout=30,
+    )
+    r.raise_for_status()
+    tables = pd.read_html(StringIO(r.text))
+    rows = []
+
+    def canonical(value):
+        text = str(value or "").strip().casefold()
+        for name, aliases in NBB_TEAMS.items():
+            for alias in [name, *aliases]:
+                if str(alias).strip().casefold() == text:
+                    return name
+        return None
+
+    for table in tables:
+        for _, raw in table.astype(object).iterrows():
+            cells = [str(x) for x in raw.tolist()]
+            found_teams = []
+            for cell in cells:
+                c = canonical(cell)
+                if c and c not in found_teams:
+                    found_teams.append(c)
+            if len(found_teams) < 2 or team not in found_teams:
+                continue
+            text = " | ".join(cells)
+            match = re.search(r"(\d{1,2}/\d{1,2}/\d{4}(?:\s+\d{1,2}:\d{2})?)", text)
+            if not match:
+                continue
+            dt = pd.to_datetime(match.group(1), dayfirst=True, errors="coerce")
+            if pd.isna(dt):
+                continue
+            dt = dt.tz_localize(MANAUS)
+            if not start_date <= dt.date() <= end_date:
+                continue
+            score = "—"
+            for cell in cells:
+                sm = re.search(r"(?<!\d)(\d{1,3})\s*[xX]\s*(\d{1,3})(?!\d)", cell)
+                if sm:
+                    score = f"{sm.group(1)} x {sm.group(2)}"
+                    break
+            rows.append({
+                "Data": dt.strftime("%d/%m/%Y"),
+                "Hora (Manaus)": dt.strftime("%H:%M"),
+                "Casa": found_teams[0],
+                "Fora": found_teams[1],
+                "Placar": score,
+                "Status": "Finalizado" if score != "—" else "Agendado",
+                "game_id": "—",
+            })
+    unique = {(x["Data"], x["Hora (Manaus)"], x["Casa"], x["Fora"], x["Placar"]): x for x in rows}
+    return sorted(unique.values(), key=lambda x: (x["Data"], x["Hora (Manaus)"], x["Casa"]))
+
+
+def render_calendar():
+    st.subheader(f"📅 Calendário — {competition} • {team}")
+    c1, c2 = st.columns(2)
+    start_date = c1.date_input("De", value=date.today(), key="basket_start")
+    end_date = c2.date_input("Até", value=date.today() + timedelta(days=45), key="basket_end")
+    if end_date < start_date:
+        st.error("A data final não pode ser anterior à data inicial.")
+        return
+    if st.button("🔄 Carregar calendário", use_container_width=True):
+        try:
+            with st.spinner(f"Consultando calendário {competition}..."):
+                rows = _nba_schedule_games(start_date, end_date) if competition == "NBA" else _nbb_calendar_games(start_date, end_date)
+            if rows:
+                st.success(f"{len(rows)} partida(s) encontrada(s). Horários convertidos para Manaus.")
+                st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+            else:
+                st.info("Nenhuma partida encontrada para a equipe e período selecionados.")
+        except Exception as exc:
+            st.error(f"❌ Não foi possível carregar o calendário: {type(exc).__name__}: {exc}")
+
+
+render_calendar()
+
+
 def render_team_summary(games: pd.DataFrame, competition_name: str):
     st.subheader(f"📊 Resumo da equipe — {team}")
     played = games[games["played"] == True].copy() if "played" in games.columns else games.copy()
-
     cols = st.columns(4)
     cols[0].metric("Jogos analisados", len(played))
     cols[1].metric("Média pontos feitos", _fmt(_numeric_mean(played, "PF")))
@@ -88,7 +260,6 @@ def render_nba_player(name: str, pdata: pd.DataFrame):
             cols = st.columns(len(row))
             for i, (column, label) in enumerate(row):
                 cols[i].metric(f"Média {label}", _fmt(_numeric_mean(pdata, column)))
-
         raw_cols = [c for c in ["Data", "game_id", "MIN", "PTS", "2PM", "2PA", "3PM", "3PA", "FTM", "FTA", "REB", "AST", "STL", "BLK", "TOV"] if c in pdata.columns]
         if raw_cols:
             st.dataframe(pdata[raw_cols], use_container_width=True, hide_index=True)
@@ -97,9 +268,6 @@ def render_nba_player(name: str, pdata: pd.DataFrame):
 def render_nbb_player(name: str, pdata: pd.DataFrame):
     with st.expander(f"🏀 {name}", expanded=False):
         st.caption(f"{len(pdata)} registro(s) individual(is) encontrado(s) para o atleta")
-
-        # A LNB entrega médias por categoria em tabelas diferentes. Mostramos
-        # cada categoria separadamente, preservando os nomes/valores da fonte.
         category_col = "categoria" if "categoria" in pdata.columns else None
         if category_col:
             for category, cat_df in pdata.groupby(category_col, dropna=False):
@@ -116,16 +284,13 @@ def render_players(players: pd.DataFrame, competition_name: str):
     if players.empty:
         st.warning("Nenhum dado individual foi reconstruído para esta equipe.")
         return
-
     player_col = "Jogador" if "Jogador" in players.columns else "player" if "player" in players.columns else None
     if player_col is None:
         st.warning("A fonte retornou registros individuais, mas não informou a coluna do jogador.")
         st.dataframe(players, use_container_width=True, hide_index=True)
         return
-
     names = sorted([str(x) for x in players[player_col].dropna().unique()], key=str.casefold)
     st.caption(f"{len(names)} jogador(es) encontrado(s). Abra somente o atleta que deseja consultar.")
-
     for name in names:
         pdata = players[players[player_col].astype(str) == name].copy()
         if competition_name == "NBA":
@@ -140,46 +305,35 @@ if st.button("🔬 Testar histórico", type="primary", use_container_width=True)
         progress.progress(20, text="Carregando calendário/histórico...")
         result = collect_team_history(competition, team, months)
         progress.progress(100, text="Teste concluído.")
-
         games = pd.DataFrame(result.get("games") or [])
         players = pd.DataFrame(result.get("players") or [])
         errors = result.get("errors") or []
-
         st.success(f"{competition} • {team}: {len(games)} jogos reconstruídos • {len(players)} registros individuais.")
-
         if not games.empty:
             render_team_summary(games, competition)
             with st.expander(f"📅 Histórico de jogos — {team}", expanded=False):
                 st.dataframe(games, use_container_width=True, hide_index=True)
         else:
             st.warning("Nenhum jogo foi reconstruído para a equipe selecionada.")
-
         render_players(players, competition)
-
         with st.expander("🧪 Diagnóstico", expanded=False):
             checks = {"Jogos": not games.empty, "Dados individuais": not players.empty}
             if competition == "NBA" and not games.empty:
                 checks.update({
-                    "Placar": {"PF", "PA"}.issubset(games.columns),
-                    "Q1": {"Q1_PF", "Q1_PA"}.issubset(games.columns),
-                    "Q2": {"Q2_PF", "Q2_PA"}.issubset(games.columns),
-                    "Q3": {"Q3_PF", "Q3_PA"}.issubset(games.columns),
-                    "Q4": {"Q4_PF", "Q4_PA"}.issubset(games.columns),
-                    "H1": {"H1_PF", "H1_PA"}.issubset(games.columns),
-                    "H2": {"H2_PF", "H2_PA"}.issubset(games.columns),
-                    "Rebotes": "REB" in games.columns, "Assistências": "AST" in games.columns,
-                    "Roubos": "STL" in games.columns, "Tocos": "BLK" in games.columns, "Turnovers": "TOV" in games.columns,
+                    "Placar": {"PF", "PA"}.issubset(games.columns), "Q1": {"Q1_PF", "Q1_PA"}.issubset(games.columns),
+                    "Q2": {"Q2_PF", "Q2_PA"}.issubset(games.columns), "Q3": {"Q3_PF", "Q3_PA"}.issubset(games.columns),
+                    "Q4": {"Q4_PF", "Q4_PA"}.issubset(games.columns), "H1": {"H1_PF", "H1_PA"}.issubset(games.columns),
+                    "H2": {"H2_PF", "H2_PA"}.issubset(games.columns), "Rebotes": "REB" in games.columns,
+                    "Assistências": "AST" in games.columns, "Roubos": "STL" in games.columns, "Tocos": "BLK" in games.columns,
+                    "Turnovers": "TOV" in games.columns,
                 })
             elif competition == "NBB" and not games.empty:
                 checks.update({"Placar": {"PF", "PA"}.issubset(games.columns), "Resultado/jogo": {"home", "away", "played"}.issubset(games.columns)})
             st.dataframe(pd.DataFrame([{"Indicador": k, "Status": "✅" if v else "❌"} for k, v in checks.items()]), use_container_width=True, hide_index=True)
-
         if errors:
             with st.expander(f"⚠️ Erros ({len(errors)})", expanded=False):
                 st.dataframe(pd.DataFrame(errors), use_container_width=True, hide_index=True)
-
         st.caption("Os dados continuam sendo consultados pela mesma fonte; a interface agora organiza as informações por equipe e jogador.")
-
     except BasketballSourceError as exc:
         progress.empty()
         st.error(str(exc))
