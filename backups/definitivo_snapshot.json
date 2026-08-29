@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v4",
-  "created_at": "2026-08-29T00:42:56.169060+00:00",
+  "created_at": "2026-08-29T00:42:59.243820+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -130,7 +130,7 @@
         "sport": "Futebol",
         "name": "Liverpool",
         "normalized_name": "liverpool",
-        "updated_at": "2026-08-29T00:42:49.306598+00:00"
+        "updated_at": "2026-08-29T00:42:58.377050+00:00"
       },
       {
         "id": "b8fd7430177f4e6a06",
@@ -2395,8 +2395,8 @@
       {
         "team_id": "acf77e31bd33648cc7",
         "source": "ESPN",
-        "provider_team_id": "364",
-        "updated_at": "2026-08-29T00:42:49.306758+00:00"
+        "provider_team_id": "5492",
+        "updated_at": "2026-08-29T00:42:58.377137+00:00"
       },
       {
         "team_id": "7a4e428438e7ab37a9",
@@ -7514,6 +7514,42 @@
         "source": "ESPN",
         "provider_player_id": "243396",
         "updated_at": "2026-08-29T00:42:55.500547+00:00"
+      },
+      {
+        "id": "613279455954816945",
+        "team_id": "acf77e31bd33648cc7",
+        "name": "Nicolás Garayalde",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "301991",
+        "updated_at": "2026-08-29T00:42:58.377191+00:00"
+      },
+      {
+        "id": "517299546199208909",
+        "team_id": "acf77e31bd33648cc7",
+        "name": "Federico Martínez",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "71784",
+        "updated_at": "2026-08-29T00:42:58.377240+00:00"
+      },
+      {
+        "id": "78141086502502337",
+        "team_id": "acf77e31bd33648cc7",
+        "name": "Renzo Machado",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "361159",
+        "updated_at": "2026-08-29T00:42:58.377258+00:00"
+      },
+      {
+        "id": "937938620027725925",
+        "team_id": "acf77e31bd33648cc7",
+        "name": "Facundo Barceló",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "184008",
+        "updated_at": "2026-08-29T00:42:58.377271+00:00"
       }
     ],
     "player_stats": [
@@ -22636,6 +22672,42 @@
         "value": 0.0,
         "source": "ESPN",
         "observed_at": "2026-08-29T00:42:55.534434+00:00"
+      },
+      {
+        "match_id": "3f6952775db5b38a1fd8",
+        "player_id": "613279455954816945",
+        "team_id": "acf77e31bd33648cc7",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-29T00:42:58.403908+00:00"
+      },
+      {
+        "match_id": "3f6952775db5b38a1fd8",
+        "player_id": "517299546199208909",
+        "team_id": "acf77e31bd33648cc7",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-29T00:42:58.404021+00:00"
+      },
+      {
+        "match_id": "3f6952775db5b38a1fd8",
+        "player_id": "78141086502502337",
+        "team_id": "acf77e31bd33648cc7",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-29T00:42:58.404046+00:00"
+      },
+      {
+        "match_id": "3f6952775db5b38a1fd8",
+        "player_id": "937938620027725925",
+        "team_id": "acf77e31bd33648cc7",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-29T00:42:58.404064+00:00"
       }
     ],
     "diagnostics": [
@@ -22800,6 +22872,42 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-08-29T00:42:56.119244+00:00"
+      },
+      {
+        "id": 19,
+        "match_id": "401909161",
+        "source": "ESPN",
+        "stage": "diagnostico_vinicius",
+        "status": "OK",
+        "message": "VINICIUS_DEBUG path=root.news.articles[0].images[2]; object=node; id=None; name=None; position=None; important_pairs=[]",
+        "created_at": "2026-08-29T00:42:58.362391+00:00"
+      },
+      {
+        "id": 20,
+        "match_id": "3f6952775db5b38a1fd8",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "OK",
+        "message": "ESPN: jogadores=4, estatísticas individuais reais=0, presença=0, amostra=[Nicolás Garayalde, Federico Martínez, Renzo Machado, Facundo Barceló]",
+        "created_at": "2026-08-29T00:42:58.371371+00:00"
+      },
+      {
+        "id": 21,
+        "match_id": "3f6952775db5b38a1fd8",
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN: 0 estatísticas, 4 jogadores, 0 estatísticas individuais reais, 4 presenças",
+        "created_at": "2026-08-29T00:42:58.429131+00:00"
+      },
+      {
+        "id": 22,
+        "match_id": "3f6952775db5b38a1fd8",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-08-29T00:42:59.199340+00:00"
       }
     ],
     "api_usage": [
@@ -22814,16 +22922,16 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-08-29",
-        "calls": 68,
-        "last_call": "2026-08-29T00:42:55.127722+00:00",
+        "calls": 69,
+        "last_call": "2026-08-29T00:42:58.238719+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
       {
         "provider": "FotMob",
         "day_utc": "2026-08-29",
-        "calls": 9,
-        "last_call": "2026-08-29T00:42:56.111951+00:00",
+        "calls": 12,
+        "last_call": "2026-08-29T00:42:59.191817+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -23228,6 +23336,26 @@
         "id": 80,
         "provider": "FotMob",
         "created_at": "2026-08-29T00:42:56.111951+00:00"
+      },
+      {
+        "id": 81,
+        "provider": "ESPN",
+        "created_at": "2026-08-29T00:42:58.238719+00:00"
+      },
+      {
+        "id": 82,
+        "provider": "FotMob",
+        "created_at": "2026-08-29T00:42:58.676253+00:00"
+      },
+      {
+        "id": 83,
+        "provider": "FotMob",
+        "created_at": "2026-08-29T00:42:58.874104+00:00"
+      },
+      {
+        "id": 84,
+        "provider": "FotMob",
+        "created_at": "2026-08-29T00:42:59.191817+00:00"
       }
     ],
     "ai_match_samples": [
@@ -23291,6 +23419,27 @@
         "target_away_goals": 1.0,
         "target_result": "AWAY",
         "target_total_goals": 1.0,
+        "target_btts": 0,
+        "is_training_ready": 1
+      },
+      {
+        "id": 4,
+        "match_id": "3f6952775db5b38a1fd8",
+        "dataset_version": "1",
+        "created_at": "2026-08-29T00:42:59.236995+00:00",
+        "cutoff_time": "2026-08-21T22:00Z",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "home_team_id": "acf77e31bd33648cc7",
+        "home_team_name": "Liverpool",
+        "away_team_id": "24cc889eda80b87035",
+        "away_team_name": "Cerro",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":7,\"sample_away\":0,\"xg_home\":1.57,\"xg_away\":1.29,\"probabilities\":{\"home\":43.9,\"draw\":24.7,\"away\":31.4},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":7,\"goals_for\":1.57,\"goals_against\":1.29,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":2.86,\"total_expected\":2.86,\"line\":2.5,\"lines\":{\"2.5\":54.5},\"under_lines\":{\"2.5\":45.5},\"over\":{\"2.5\":54.5},\"under\":{\"2.5\":45.5},\"over_probability\":54.5,\"under_probability\":45.5,\"exact_total\":{\"0\":5.7,\"1\":16.4,\"2\":23.4,\"3\":22.3,\"4+\":32.1},\"ambas_marcam\":57.4},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":1.57,\"away\":1.29,\"total\":2.86,\"sample_home\":7,\"sample_away\":0},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "target_home_goals": 4.0,
+        "target_away_goals": 0.0,
+        "target_result": "HOME",
+        "target_total_goals": 4.0,
         "target_btts": 0,
         "is_training_ready": 1
       }
