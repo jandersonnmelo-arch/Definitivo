@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-29T15:20:34.044727+00:00",
+  "created_at": "2026-08-29T15:21:11.690814+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-29T15:21:10.954433+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-29T15:20:34.033909+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -744,9 +744,9 @@
       {
         "id": "178d02ecb65a6640af",
         "sport": "Futebol",
-        "name": "Flamengo",
+        "name": "CR Flamengo",
         "normalized_name": "flamengo",
-        "updated_at": "2026-08-29T09:54:37.665798+00:00"
+        "updated_at": "2026-08-29T15:21:11.563773+00:00"
       },
       {
         "id": "f541c69bd4ee4d9180",
@@ -795,7 +795,7 @@
         "sport": "Futebol",
         "name": "Chapecoense AF",
         "normalized_name": "chapecoense af",
-        "updated_at": "2026-08-29T09:54:27.108183+00:00"
+        "updated_at": "2026-08-29T15:21:11.563548+00:00"
       },
       {
         "id": "9f563292bea3f50f07",
@@ -1882,7 +1882,7 @@
         "team_id": "178d02ecb65a6640af",
         "source": "Football-Data.org",
         "provider_team_id": "1783",
-        "updated_at": "2026-08-29T09:54:27.245379+00:00"
+        "updated_at": "2026-08-29T15:21:11.563791+00:00"
       },
       {
         "team_id": "f541c69bd4ee4d9180",
@@ -1924,7 +1924,7 @@
         "team_id": "76ad233033c62ff5ca",
         "source": "Football-Data.org",
         "provider_team_id": "1772",
-        "updated_at": "2026-08-29T09:54:27.108194+00:00"
+        "updated_at": "2026-08-29T15:21:11.563659+00:00"
       },
       {
         "team_id": "9f563292bea3f50f07",
@@ -5501,6 +5501,26 @@
         "source": "ESPN",
         "provider_match_id": "401874156",
         "updated_at": "2026-08-29T15:18:20.506268+00:00"
+      },
+      {
+        "id": "554922",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-23T00:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "76ad233033c62ff5ca",
+        "home_name": "Chapecoense AF",
+        "home_short": "CHA",
+        "away_id": "178d02ecb65a6640af",
+        "away_name": "CR Flamengo",
+        "away_short": "FLA",
+        "home_score": 0,
+        "away_score": 4,
+        "source": "Football-Data.org",
+        "provider_match_id": "554922",
+        "updated_at": "2026-08-29T15:21:11.563841+00:00"
       }
     ],
     "match_sources": [
@@ -6487,6 +6507,12 @@
         "source": "ESPN",
         "provider_match_id": "401874156",
         "updated_at": "2026-08-29T15:18:20.506409+00:00"
+      },
+      {
+        "match_id": "554922",
+        "source": "Football-Data.org",
+        "provider_match_id": "554922",
+        "updated_at": "2026-08-29T15:21:11.563950+00:00"
       }
     ],
     "match_stats": [
@@ -107488,8 +107514,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-08-29",
-        "calls": 4,
-        "last_call": "2026-08-29T15:18:19.199188+00:00",
+        "calls": 5,
+        "last_call": "2026-08-29T15:21:11.552553+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -108443,6 +108469,11 @@
         "id": 185,
         "provider": "FotMob",
         "created_at": "2026-08-29T15:19:01.974393+00:00"
+      },
+      {
+        "id": 186,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-29T15:21:11.552553+00:00"
       }
     ],
     "ai_match_samples": [
