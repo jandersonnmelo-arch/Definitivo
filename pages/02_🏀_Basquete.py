@@ -25,19 +25,10 @@ teams = list(NBA_TEAMS) if competition == "NBA" else list(NBB_TEAMS)
 team = st.selectbox("Equipe", teams)
 
 MANAUS = ZoneInfo("America/Manaus")
-NBA_SCHEDULE_URLS = (
-    "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
-    "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
-)
-NBA_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
-    "Accept": "application/json, text/plain, */*",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Origin": "https://www.nba.com",
-    "Referer": "https://www.nba.com/",
-}
+ESPN_NBA_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
+ESPN_HEADERS = {"User-Agent": "Mozilla/5.0 Premium-Analytics", "Accept": "application/json"}
 NBB_SCHEDULE_URL = "https://lnb.com.br/nbb/tabela-de-jogos/"
-NBB_SEASON_ID = "48"  # NBB 2026/2027
+NBB_SEASON_ID = "48"
 
 
 def _numeric_mean(df: pd.DataFrame, column: str):
@@ -70,91 +61,88 @@ def _to_manaus(value):
 
 
 def _nba_schedule_games(start_date: date, end_date: date):
-    """Carrega o calendário atual da NBA pelo CDN oficial e converte para Manaus."""
-    last_error = None
-    payload = None
-    for url in NBA_SCHEDULE_URLS:
-        try:
-            r = requests.get(url, headers=NBA_HEADERS, timeout=(10, 30))
-            r.raise_for_status()
-            payload = r.json()
-            break
-        except Exception as exc:
-            last_error = exc
+    """Calendário NBA por período, filtrado pela equipe e convertido para Manaus.
 
-    if payload is None:
-        raise RuntimeError(f"CDN oficial da NBA indisponível: {last_error}")
+    O CDN da NBA estava retornando HTTP 403 no Streamlit Cloud. O calendário
+    da interface usa ESPN como fonte de agenda; o histórico/boxscore continua
+    sendo obtido pelo motor NBA existente.
+    """
+    if end_date < start_date:
+        return []
 
-    schedule = payload.get("leagueSchedule") or {}
-    game_dates = schedule.get("gameDates") or []
-    selected_team_id = NBA_TEAMS.get(team, (None,))[0]
+    start = start_date.strftime("%Y%m%d")
+    end = end_date.strftime("%Y%m%d")
+    params = {"dates": f"{start}-{end}", "limit": 1000}
+
+    try:
+        response = requests.get(
+            ESPN_NBA_SCOREBOARD,
+            params=params,
+            headers=ESPN_HEADERS,
+            timeout=(10, 30),
+        )
+        response.raise_for_status()
+        payload = response.json()
+    except Exception as exc:
+        raise RuntimeError(f"Não foi possível consultar o calendário NBA: {type(exc).__name__}: {exc}") from exc
+
+    selected_abbr = str(NBA_TEAMS.get(team, (None, ""))[1] or "").upper()
     rows = []
 
-    for day in game_dates:
-        if not isinstance(day, dict):
+    for event in payload.get("events") or []:
+        competitions = event.get("competitions") or []
+        if not competitions:
             continue
-        for g in day.get("games") or []:
-            if not isinstance(g, dict):
-                continue
+        game = competitions[0]
+        competitors = game.get("competitors") or []
+        if len(competitors) < 2:
+            continue
 
-            gid = str(g.get("gameId") or g.get("gid") or "")
-            if not gid:
-                continue
+        home = next((x for x in competitors if x.get("homeAway") == "home"), competitors[0])
+        away = next((x for x in competitors if x.get("homeAway") == "away"), competitors[1])
+        home_team = home.get("team") or {}
+        away_team = away.get("team") or {}
+        home_abbr = str(home_team.get("abbreviation") or "").upper()
+        away_abbr = str(away_team.get("abbreviation") or "").upper()
 
-            home = g.get("homeTeam") or g.get("h") or {}
-            away = g.get("awayTeam") or g.get("v") or {}
-            try:
-                hid = int(home.get("teamId") or home.get("tid"))
-                aid = int(away.get("teamId") or away.get("tid"))
-            except (TypeError, ValueError):
-                continue
+        if selected_abbr and selected_abbr not in (home_abbr, away_abbr):
+            continue
 
-            if selected_team_id and selected_team_id not in (hid, aid):
-                continue
+        dt = _to_manaus(event.get("date") or game.get("date"))
+        if dt is None or not start_date <= dt.date() <= end_date:
+            continue
 
-            dt = _to_manaus(
-                g.get("gameTimeUTC")
-                or g.get("gameTimeUtc")
-                or g.get("gameDateTimeUTC")
-                or g.get("utcTime")
-            )
-            if dt is None:
-                raw_day = g.get("gameDate") or day.get("gameDate")
-                raw_time = g.get("gameTimeLocal") or g.get("gameTime")
-                if raw_time and raw_day:
-                    dt = _to_manaus(f"{raw_day} {raw_time}")
-                else:
-                    parsed_day = pd.to_datetime(raw_day, errors="coerce")
-                    if pd.notna(parsed_day):
-                        dt = parsed_day.tz_localize(MANAUS)
-            if dt is None or not start_date <= dt.date() <= end_date:
-                continue
+        status = game.get("status") or event.get("status") or {}
+        status_type = status.get("type") or {}
+        state = str(status_type.get("state") or "").lower()
+        completed = bool(status_type.get("completed"))
+        if completed or state == "post":
+            status_label = "Finalizado"
+        elif state == "in":
+            status_label = "Ao vivo"
+        else:
+            status_label = "Agendado"
 
-            status_code = str(g.get("gameStatus") or g.get("statusNum") or "").lower()
-            status_text = str(g.get("gameStatusText") or "").strip()
-            if status_code in {"3", "final", "finalizado"} or status_text.lower() in {"final", "finalizado"}:
-                status = "Finalizado"
-            elif status_code in {"2", "live", "inprogress"}:
-                status = "Ao vivo"
-            else:
-                status = "Agendado"
+        home_score = home.get("score")
+        away_score = away.get("score")
+        score = (
+            f"{home_score} x {away_score}"
+            if status_label != "Agendado" and home_score not in (None, "") and away_score not in (None, "")
+            else "—"
+        )
 
-            hs = home.get("score") if home.get("score") is not None else home.get("s")
-            aws = away.get("score") if away.get("score") is not None else away.get("s")
-            score = f"{hs} x {aws}" if status != "Agendado" and hs not in (None, "") and aws not in (None, "") else "—"
+        home_name = home_team.get("displayName") or home_team.get("shortDisplayName") or home_abbr
+        away_name = away_team.get("displayName") or away_team.get("shortDisplayName") or away_abbr
 
-            home_name = home.get("teamName") or home.get("tn") or home.get("teamTricode") or home.get("ta") or str(hid)
-            away_name = away.get("teamName") or away.get("tn") or away.get("teamTricode") or away.get("ta") or str(aid)
-
-            rows.append({
-                "Data": dt.strftime("%d/%m/%Y"),
-                "Hora (Manaus)": dt.strftime("%H:%M"),
-                "Casa": home_name,
-                "Fora": away_name,
-                "Placar": score,
-                "Status": status,
-                "game_id": gid,
-            })
+        rows.append({
+            "Data": dt.strftime("%d/%m/%Y"),
+            "Hora (Manaus)": dt.strftime("%H:%M"),
+            "Casa": home_name,
+            "Fora": away_name,
+            "Placar": score,
+            "Status": status_label,
+            "game_id": str(event.get("id") or game.get("id") or "—"),
+        })
 
     unique = {(x["Data"], x["Hora (Manaus)"], x["Casa"], x["Fora"], x["game_id"]): x for x in rows}
     return sorted(unique.values(), key=lambda x: (x["Data"], x["Hora (Manaus)"], x["Casa"]))
@@ -359,11 +347,17 @@ if st.button("🔬 Testar histórico", type="primary", use_container_width=True)
             checks = {"Jogos": not games.empty, "Dados individuais": not players.empty}
             if competition == "NBA" and not games.empty:
                 checks.update({
-                    "Placar": {"PF", "PA"}.issubset(games.columns), "Q1": {"Q1_PF", "Q1_PA"}.issubset(games.columns),
-                    "Q2": {"Q2_PF", "Q2_PA"}.issubset(games.columns), "Q3": {"Q3_PF", "Q3_PA"}.issubset(games.columns),
-                    "Q4": {"Q4_PF", "Q4_PA"}.issubset(games.columns), "H1": {"H1_PF", "H1_PA"}.issubset(games.columns),
-                    "H2": {"H2_PF", "H2_PA"}.issubset(games.columns), "Rebotes": "REB" in games.columns,
-                    "Assistências": "AST" in games.columns, "Roubos": "STL" in games.columns, "Tocos": "BLK" in games.columns,
+                    "Placar": {"PF", "PA"}.issubset(games.columns),
+                    "Q1": {"Q1_PF", "Q1_PA"}.issubset(games.columns),
+                    "Q2": {"Q2_PF", "Q2_PA"}.issubset(games.columns),
+                    "Q3": {"Q3_PF", "Q3_PA"}.issubset(games.columns),
+                    "Q4": {"Q4_PF", "Q4_PA"}.issubset(games.columns),
+                    "H1": {"H1_PF", "H1_PA"}.issubset(games.columns),
+                    "H2": {"H2_PF", "H2_PA"}.issubset(games.columns),
+                    "Rebotes": "REB" in games.columns,
+                    "Assistências": "AST" in games.columns,
+                    "Roubos": "STL" in games.columns,
+                    "Tocos": "BLK" in games.columns,
                     "Turnovers": "TOV" in games.columns,
                 })
             elif competition == "NBB" and not games.empty:
@@ -372,7 +366,7 @@ if st.button("🔬 Testar histórico", type="primary", use_container_width=True)
         if errors:
             with st.expander(f"⚠️ Erros ({len(errors)})", expanded=False):
                 st.dataframe(pd.DataFrame(errors), use_container_width=True, hide_index=True)
-        st.caption("Os dados continuam sendo consultados pela mesma fonte; a interface agora organiza as informações por equipe e jogador.")
+        st.caption("Os dados continuam sendo consultados pela mesma fonte; a interface organiza as informações por equipe e jogador.")
     except BasketballSourceError as exc:
         progress.empty()
         st.error(str(exc))
