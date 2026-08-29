@@ -1,11 +1,11 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-29T09:50:36.255455+00:00",
+  "created_at": "2026-08-29T09:50:37.574418+00:00",
   "tables": {
     "schema_meta": [
       {
         "key": "data_quality_v4",
-        "value": "2026-08-29T09:50:11.342459+00:00"
+        "value": "2026-08-29T09:50:36.620919+00:00"
       },
       {
         "key": "schema",
@@ -18,7 +18,7 @@
         "sport": "Futebol",
         "name": "Liverpool FC",
         "normalized_name": "liverpool",
-        "updated_at": "2026-08-29T09:50:16.971062+00:00"
+        "updated_at": "2026-08-29T09:50:37.258110+00:00"
       },
       {
         "id": "b8fd7430177f4e6a06",
@@ -263,7 +263,7 @@
         "sport": "Futebol",
         "name": "Newcastle United FC",
         "normalized_name": "newcastle united",
-        "updated_at": "2026-08-29T09:50:16.164080+00:00"
+        "updated_at": "2026-08-29T09:50:37.257880+00:00"
       },
       {
         "id": "be3e95c5d03ba1a261",
@@ -1202,7 +1202,7 @@
         "team_id": "acf77e31bd33648cc7",
         "source": "Football-Data.org",
         "provider_team_id": "64",
-        "updated_at": "2026-08-29T09:50:16.971086+00:00"
+        "updated_at": "2026-08-29T09:50:37.258133+00:00"
       },
       {
         "team_id": "b8fd7430177f4e6a06",
@@ -1412,7 +1412,7 @@
         "team_id": "92596fc166955d857f",
         "source": "Football-Data.org",
         "provider_team_id": "67",
-        "updated_at": "2026-08-29T09:50:16.164099+00:00"
+        "updated_at": "2026-08-29T09:50:37.257957+00:00"
       },
       {
         "team_id": "be3e95c5d03ba1a261",
@@ -2950,7 +2950,7 @@
         "start_time": "2026-08-29T21:30:00Z",
         "status": "SCHEDULED",
         "minute": null,
-        "home_id": "cfee4cccf2f07aeae1",
+        "home_id": "eae0e92669d99715d5",
         "home_name": "CA Mineiro",
         "home_short": "CAM",
         "away_id": "5220b1187a985dca02",
@@ -3450,7 +3450,7 @@
         "start_time": "2026-08-30T19:00:00Z",
         "status": "SCHEDULED",
         "minute": null,
-        "home_id": "62f33764164ba57bcd",
+        "home_id": "7ce26de4dc6960a5e7",
         "home_name": "SC Corinthians Paulista",
         "home_short": "COR",
         "away_id": "f541c69bd4ee4d9180",
@@ -3473,7 +3473,7 @@
         "home_id": "178d02ecb65a6640af",
         "home_name": "CR Flamengo",
         "home_short": "FLA",
-        "away_id": "b5154ebb446486d065",
+        "away_id": "3b748ab976a81dcbcd",
         "away_name": "Botafogo FR",
         "away_short": "BOT",
         "home_score": null,
@@ -3493,7 +3493,7 @@
         "home_id": "625066e0d50c1a6094",
         "home_name": "RC Celta de Vigo",
         "home_short": "CEL",
-        "away_id": "75f564e3d16ab2ec31",
+        "away_id": "f0744d7d6c6fa9d40a",
         "away_name": "Athletic Club",
         "away_short": "ATH",
         "home_score": null,
@@ -3530,7 +3530,7 @@
         "start_time": "2026-08-30T21:30:00Z",
         "status": "SCHEDULED",
         "minute": null,
-        "home_id": "45b1f483af41b09527",
+        "home_id": "c0eb691b941f2978d1",
         "home_name": "Grêmio FBPA",
         "home_short": "FBP",
         "away_id": "76ad233033c62ff5ca",
@@ -4641,6 +4641,26 @@
         "source": "ESPN",
         "provider_match_id": "401909114",
         "updated_at": "2026-08-29T09:50:24.400128+00:00"
+      },
+      {
+        "id": "560550",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-23T15:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "92596fc166955d857f",
+        "home_name": "Newcastle United FC",
+        "home_short": "NEW",
+        "away_id": "acf77e31bd33648cc7",
+        "away_name": "Liverpool FC",
+        "away_short": "LIV",
+        "home_score": 2,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "560550",
+        "updated_at": "2026-08-29T09:50:37.258178+00:00"
       }
     ],
     "match_sources": [
@@ -5411,6 +5431,12 @@
         "source": "ESPN",
         "provider_match_id": "401909114",
         "updated_at": "2026-08-29T09:50:24.400245+00:00"
+      },
+      {
+        "match_id": "560550",
+        "source": "Football-Data.org",
+        "provider_match_id": "560550",
+        "updated_at": "2026-08-29T09:50:37.258265+00:00"
       }
     ],
     "diagnostics": [
@@ -5491,8 +5517,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-08-29",
-        "calls": 1,
-        "last_call": "2026-08-29T09:50:14.950967+00:00",
+        "calls": 2,
+        "last_call": "2026-08-29T09:50:37.254215+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -5678,6 +5704,11 @@
         "id": 33,
         "provider": "ESPN",
         "created_at": "2026-08-29T09:50:23.597822+00:00"
+      },
+      {
+        "id": 34,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-29T09:50:37.254215+00:00"
       }
     ]
   }
