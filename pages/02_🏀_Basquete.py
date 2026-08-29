@@ -15,7 +15,6 @@ st.info("Selecione uma competição e uma equipe para visualizar somente os dado
 
 competition = st.selectbox("Competição", supported_competitions())
 months = st.slider("Janela histórica", 3, 12, 8)
-
 teams = list(NBA_TEAMS) if competition == "NBA" else list(NBB_TEAMS)
 team = st.selectbox("Equipe", teams)
 
@@ -33,13 +32,12 @@ def _fmt(value, decimals: int = 1):
 
 def render_team_summary(games: pd.DataFrame, competition_name: str):
     st.subheader(f"📊 Resumo da equipe — {team}")
-
     played = games[games["played"] == True].copy() if "played" in games.columns else games.copy()
+
     cols = st.columns(4)
     cols[0].metric("Jogos analisados", len(played))
     cols[1].metric("Média pontos feitos", _fmt(_numeric_mean(played, "PF")))
     cols[2].metric("Média pontos sofridos", _fmt(_numeric_mean(played, "PA")))
-
     if not played.empty and {"PF", "PA"}.issubset(played.columns):
         saldo = pd.to_numeric(played["PF"], errors="coerce") - pd.to_numeric(played["PA"], errors="coerce")
         cols[3].metric("Saldo médio", _fmt(float(saldo.mean()) if not saldo.dropna().empty else None))
@@ -52,7 +50,6 @@ def render_team_summary(games: pd.DataFrame, competition_name: str):
         ("🏀 Lance livre", [("FTM", "FT convertidos"), ("FTA", "FT tentados")]),
         ("📈 Jogo", [("REB", "Rebotes"), ("AST", "Assistências"), ("STL", "Roubos"), ("BLK", "Tocos"), ("TOV", "Turnovers")]),
     ]
-
     for title, metrics in metric_groups:
         available = [(column, label) for column, label in metrics if column in played.columns]
         if not available:
@@ -65,11 +62,8 @@ def render_team_summary(games: pd.DataFrame, competition_name: str):
     if competition_name == "NBA":
         period_metrics = []
         for q in range(1, 5):
-            period_metrics.extend([(f"Q{q}_PF", f"Q{q} pontos feitos"), (f"Q{q}_PA", f"Q{q} pontos sofridos"), (f"Q{q}_SALDO", f"Q{q} saldo")])
-        period_metrics.extend([
-            ("H1_PF", "H1 pontos feitos"), ("H1_PA", "H1 pontos sofridos"), ("H1_SALDO", "H1 saldo"),
-            ("H2_PF", "H2 pontos feitos"), ("H2_PA", "H2 pontos sofridos"), ("H2_SALDO", "H2 saldo"),
-        ])
+            period_metrics.extend([(f"Q{q}_PF", f"Q{q} feitos"), (f"Q{q}_PA", f"Q{q} sofridos"), (f"Q{q}_SALDO", f"Q{q} saldo")])
+        period_metrics.extend([(f"H1_PF", "H1 feitos"), (f"H1_PA", "H1 sofridos"), (f"H1_SALDO", "H1 saldo"), (f"H2_PF", "H2 feitos"), (f"H2_PA", "H2 sofridos"), (f"H2_SALDO", "H2 saldo")])
         available = [(c, label) for c, label in period_metrics if c in played.columns]
         if available:
             with st.expander("⏱️ Períodos — quartos e metades", expanded=False):
@@ -80,52 +74,64 @@ def render_team_summary(games: pd.DataFrame, competition_name: str):
                         c[i].metric(label, _fmt(_numeric_mean(played, column)))
 
 
-def render_players(players: pd.DataFrame):
+def render_nba_player(name: str, pdata: pd.DataFrame):
+    labels = {
+        "MIN": "Minutos", "PTS": "Pontos", "2PM": "2PT convertidos", "2PA": "2PT tentados",
+        "3PM": "3PT convertidos", "3PA": "3PT tentados", "FTM": "FT convertidos", "FTA": "FT tentados",
+        "REB": "Rebotes", "AST": "Assistências", "STL": "Roubos", "BLK": "Tocos", "TOV": "Turnovers",
+    }
+    with st.expander(f"🏀 {name}", expanded=False):
+        st.caption(f"{len(pdata)} partida(s) com registro individual")
+        available = [(c, label) for c, label in labels.items() if c in pdata.columns]
+        for start in range(0, len(available), 4):
+            row = available[start:start + 4]
+            cols = st.columns(len(row))
+            for i, (column, label) in enumerate(row):
+                cols[i].metric(f"Média {label}", _fmt(_numeric_mean(pdata, column)))
+
+        raw_cols = [c for c in ["Data", "game_id", "MIN", "PTS", "2PM", "2PA", "3PM", "3PA", "FTM", "FTA", "REB", "AST", "STL", "BLK", "TOV"] if c in pdata.columns]
+        if raw_cols:
+            st.dataframe(pdata[raw_cols], use_container_width=True, hide_index=True)
+
+
+def render_nbb_player(name: str, pdata: pd.DataFrame):
+    with st.expander(f"🏀 {name}", expanded=False):
+        st.caption(f"{len(pdata)} registro(s) individual(is) encontrado(s) para o atleta")
+
+        # A LNB entrega médias por categoria em tabelas diferentes. Mostramos
+        # cada categoria separadamente, preservando os nomes/valores da fonte.
+        category_col = "categoria" if "categoria" in pdata.columns else None
+        if category_col:
+            for category, cat_df in pdata.groupby(category_col, dropna=False):
+                st.markdown(f"**{str(category).replace('-', ' ').title()}**")
+                display = cat_df.drop(columns=[category_col], errors="ignore").copy()
+                display = display.drop(columns=["competition", "Equipe", "Jogador"], errors="ignore")
+                st.dataframe(display, use_container_width=True, hide_index=True)
+        else:
+            st.dataframe(pdata, use_container_width=True, hide_index=True)
+
+
+def render_players(players: pd.DataFrame, competition_name: str):
     st.subheader(f"👥 Jogadores — {team}")
     if players.empty:
         st.warning("Nenhum dado individual foi reconstruído para esta equipe.")
         return
 
-    # O resultado da fonte pode trazer várias linhas/categorias para o mesmo atleta.
-    # Agrupamos pelo nome e exibimos cada jogador em uma seção retrátil independente.
-    player_col = "player" if "player" in players.columns else "Jogador" if "Jogador" in players.columns else None
+    player_col = "Jogador" if "Jogador" in players.columns else "player" if "player" in players.columns else None
     if player_col is None:
+        st.warning("A fonte retornou registros individuais, mas não informou a coluna do jogador.")
         st.dataframe(players, use_container_width=True, hide_index=True)
         return
 
-    names = [str(x) for x in players[player_col].dropna().unique()]
-    names.sort(key=str.casefold)
-
+    names = sorted([str(x) for x in players[player_col].dropna().unique()], key=str.casefold)
     st.caption(f"{len(names)} jogador(es) encontrado(s). Abra somente o atleta que deseja consultar.")
-
-    display_map = {
-        "minutes": "Minutos", "points": "Pontos", "two_points_made": "2PT convertidos", "two_points_attempted": "2PT tentados",
-        "three_points_made": "3PT convertidos", "three_points_attempted": "3PT tentados", "free_throws_made": "FT convertidos",
-        "free_throws_attempted": "FT tentados", "rebounds": "Rebotes", "assists": "Assistências", "steals": "Roubos",
-        "blocks": "Tocos", "turnovers": "Turnovers",
-    }
 
     for name in names:
         pdata = players[players[player_col].astype(str) == name].copy()
-        with st.expander(f"🏀 {name}", expanded=False):
-            metric_cols = []
-            for column, label in display_map.items():
-                if column in pdata.columns:
-                    value = _numeric_mean(pdata, column)
-                    if value is not None:
-                        metric_cols.append((column, label, value))
-
-            if metric_cols:
-                for start in range(0, len(metric_cols), 4):
-                    row = metric_cols[start:start + 4]
-                    cols = st.columns(len(row))
-                    for i, (_, label, value) in enumerate(row):
-                        cols[i].metric(f"Média {label}", _fmt(value))
-
-            # Mantém apenas os registros do atleta, sem misturar com outros jogadores.
-            raw_cols = [c for c in ["competition", "game_id", "date", "minutes", "points", "two_points_made", "two_points_attempted", "three_points_made", "three_points_attempted", "free_throws_made", "free_throws_attempted", "rebounds", "assists", "steals", "blocks", "turnovers"] if c in pdata.columns]
-            if raw_cols:
-                st.dataframe(pdata[raw_cols], use_container_width=True, hide_index=True)
+        if competition_name == "NBA":
+            render_nba_player(name, pdata)
+        else:
+            render_nbb_player(name, pdata)
 
 
 if st.button("🔬 Testar histórico", type="primary", use_container_width=True):
@@ -143,13 +149,12 @@ if st.button("🔬 Testar histórico", type="primary", use_container_width=True)
 
         if not games.empty:
             render_team_summary(games, competition)
-
             with st.expander(f"📅 Histórico de jogos — {team}", expanded=False):
                 st.dataframe(games, use_container_width=True, hide_index=True)
         else:
             st.warning("Nenhum jogo foi reconstruído para a equipe selecionada.")
 
-        render_players(players)
+        render_players(players, competition)
 
         with st.expander("🧪 Diagnóstico", expanded=False):
             checks = {"Jogos": not games.empty, "Dados individuais": not players.empty}
@@ -162,11 +167,8 @@ if st.button("🔬 Testar histórico", type="primary", use_container_width=True)
                     "Q4": {"Q4_PF", "Q4_PA"}.issubset(games.columns),
                     "H1": {"H1_PF", "H1_PA"}.issubset(games.columns),
                     "H2": {"H2_PF", "H2_PA"}.issubset(games.columns),
-                    "Rebotes": "REB" in games.columns,
-                    "Assistências": "AST" in games.columns,
-                    "Roubos": "STL" in games.columns,
-                    "Tocos": "BLK" in games.columns,
-                    "Turnovers": "TOV" in games.columns,
+                    "Rebotes": "REB" in games.columns, "Assistências": "AST" in games.columns,
+                    "Roubos": "STL" in games.columns, "Tocos": "BLK" in games.columns, "Turnovers": "TOV" in games.columns,
                 })
             elif competition == "NBB" and not games.empty:
                 checks.update({"Placar": {"PF", "PA"}.issubset(games.columns), "Resultado/jogo": {"home", "away", "played"}.issubset(games.columns)})
@@ -176,7 +178,7 @@ if st.button("🔬 Testar histórico", type="primary", use_container_width=True)
             with st.expander(f"⚠️ Erros ({len(errors)})", expanded=False):
                 st.dataframe(pd.DataFrame(errors), use_container_width=True, hide_index=True)
 
-        st.caption("Os dados continuam sendo consultados pela mesma fonte; esta alteração reorganiza apenas a apresentação por equipe e jogador.")
+        st.caption("Os dados continuam sendo consultados pela mesma fonte; a interface agora organiza as informações por equipe e jogador.")
 
     except BasketballSourceError as exc:
         progress.empty()
