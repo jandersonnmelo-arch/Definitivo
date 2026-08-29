@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-29T15:19:06.034098+00:00",
+  "created_at": "2026-08-29T15:20:04.089804+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-29T15:20:03.923645+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-29T15:19:06.019050+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -970,7 +970,7 @@
         "sport": "Futebol",
         "name": "Ponte Preta",
         "normalized_name": "ponte preta",
-        "updated_at": "2026-08-29T15:18:09.120470+00:00"
+        "updated_at": "2026-08-29T15:20:03.966998+00:00"
       },
       {
         "id": "7de440a2a67a1c06fc",
@@ -1251,6 +1251,13 @@
         "name": "Independiente Rivadavia",
         "normalized_name": "independiente rivadavia",
         "updated_at": "2026-08-29T15:18:20.505635+00:00"
+      },
+      {
+        "id": "f0744d7d6c6fa9d40a",
+        "sport": "Futebol",
+        "name": "Athletic",
+        "normalized_name": "athletic",
+        "updated_at": "2026-08-29T15:20:03.967230+00:00"
       }
     ],
     "team_sources": [
@@ -2296,7 +2303,7 @@
         "team_id": "d2b3e32f8c4cd7c39a",
         "source": "ESPN",
         "provider_team_id": "3459",
-        "updated_at": "2026-08-29T15:18:09.120570+00:00"
+        "updated_at": "2026-08-29T15:20:03.967124+00:00"
       },
       {
         "team_id": "7de440a2a67a1c06fc",
@@ -2519,6 +2526,12 @@
         "source": "ESPN",
         "provider_team_id": "9744",
         "updated_at": "2026-08-29T15:18:20.505830+00:00"
+      },
+      {
+        "team_id": "f0744d7d6c6fa9d40a",
+        "source": "ESPN",
+        "provider_team_id": "20851",
+        "updated_at": "2026-08-29T15:20:03.967248+00:00"
       }
     ],
     "matches": [
@@ -5053,14 +5066,14 @@
         "home_id": "d2b3e32f8c4cd7c39a",
         "home_name": "Ponte Preta",
         "home_short": "PON",
-        "away_id": "75f564e3d16ab2ec31",
+        "away_id": "f0744d7d6c6fa9d40a",
         "away_name": "Athletic",
         "away_short": "ACMG",
         "home_score": 1,
         "away_score": 1,
         "source": "ESPN",
         "provider_match_id": "401860261",
-        "updated_at": "2026-08-29T15:18:09.120766+00:00"
+        "updated_at": "2026-08-29T15:20:03.967303+00:00"
       },
       {
         "id": "b3d9d77be9714ecd7f3c",
@@ -6354,7 +6367,7 @@
         "match_id": "6f86f6a0b35c25292ddb",
         "source": "ESPN",
         "provider_match_id": "401860261",
-        "updated_at": "2026-08-29T15:18:09.120903+00:00"
+        "updated_at": "2026-08-29T15:20:03.967436+00:00"
       },
       {
         "match_id": "b3d9d77be9714ecd7f3c",
