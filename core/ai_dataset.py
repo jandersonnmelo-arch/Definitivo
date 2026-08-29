@@ -129,6 +129,13 @@ def init_dataset_db():
     )
     c.commit()
     c.close()
+    # init_db() may run before this table exists, so bootstrap again here.
+    # INSERT OR IGNORE makes the second restore safe for already-present data.
+    try:
+        from core.remote_persistence import restore_if_empty
+        restore_if_empty()
+    except Exception:
+        pass
 
 
 def _split_for_index(index, total):
@@ -204,6 +211,13 @@ def build_dataset_v1(max_matches=5000):
         ready += training_ready
     c.commit()
     c.close()
+    # This write bypasses the generic db upsert helpers, so explicitly persist
+    # the completed Dataset IA snapshot to GitHub before returning to the UI.
+    try:
+        from core.remote_persistence import push
+        push(force=True)
+    except Exception:
+        pass
     return dataset_summary()
 
 
