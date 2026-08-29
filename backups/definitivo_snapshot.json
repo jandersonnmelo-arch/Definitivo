@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-29T09:56:01.913534+00:00",
+  "created_at": "2026-08-29T15:18:09.210061+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-29T15:18:08.741790+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-29T09:55:59.173559+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -970,7 +970,7 @@
         "sport": "Futebol",
         "name": "Ponte Preta",
         "normalized_name": "ponte preta",
-        "updated_at": "2026-08-29T09:54:37.720448+00:00"
+        "updated_at": "2026-08-29T15:18:09.120470+00:00"
       },
       {
         "id": "7de440a2a67a1c06fc",
@@ -1152,7 +1152,7 @@
         "sport": "Futebol",
         "name": "Athletic",
         "normalized_name": "athletic",
-        "updated_at": "2026-08-29T09:54:37.805970+00:00"
+        "updated_at": "2026-08-29T15:18:09.120692+00:00"
       },
       {
         "id": "7a4e428438e7ab37a9",
@@ -2253,7 +2253,7 @@
         "team_id": "d2b3e32f8c4cd7c39a",
         "source": "ESPN",
         "provider_team_id": "3459",
-        "updated_at": "2026-08-29T09:54:37.720470+00:00"
+        "updated_at": "2026-08-29T15:18:09.120570+00:00"
       },
       {
         "team_id": "7de440a2a67a1c06fc",
@@ -2325,7 +2325,7 @@
         "team_id": "f0744d7d6c6fa9d40a",
         "source": "ESPN",
         "provider_team_id": "20851",
-        "updated_at": "2026-08-29T09:54:37.806025+00:00"
+        "updated_at": "2026-08-29T15:18:09.120712+00:00"
       },
       {
         "team_id": "bf998c2b2e99fc9938",
@@ -4938,6 +4938,26 @@
         "source": "ESPN",
         "provider_match_id": "401908138",
         "updated_at": "2026-08-29T09:55:11.492446+00:00"
+      },
+      {
+        "id": "401860261",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-07-28T22:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "d2b3e32f8c4cd7c39a",
+        "home_name": "Ponte Preta",
+        "home_short": "PON",
+        "away_id": "f0744d7d6c6fa9d40a",
+        "away_name": "Athletic",
+        "away_short": "ACMG",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401860261",
+        "updated_at": "2026-08-29T15:18:09.120766+00:00"
       }
     ],
     "match_sources": [
@@ -5786,6 +5806,12 @@
         "source": "ESPN",
         "provider_match_id": "401908138",
         "updated_at": "2026-08-29T09:55:11.492612+00:00"
+      },
+      {
+        "match_id": "401860261",
+        "source": "ESPN",
+        "provider_match_id": "401860261",
+        "updated_at": "2026-08-29T15:18:09.120903+00:00"
       }
     ],
     "match_stats": [
@@ -61788,8 +61814,8 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-08-29",
-        "calls": 79,
-        "last_call": "2026-08-29T09:55:55.377225+00:00",
+        "calls": 82,
+        "last_call": "2026-08-29T15:18:09.098359+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -62387,6 +62413,21 @@
         "id": 117,
         "provider": "FotMob",
         "created_at": "2026-08-29T09:55:56.555538+00:00"
+      },
+      {
+        "id": 118,
+        "provider": "ESPN",
+        "created_at": "2026-08-29T15:18:08.893718+00:00"
+      },
+      {
+        "id": 119,
+        "provider": "ESPN",
+        "created_at": "2026-08-29T15:18:08.999064+00:00"
+      },
+      {
+        "id": 120,
+        "provider": "ESPN",
+        "created_at": "2026-08-29T15:18:09.098359+00:00"
       }
     ],
     "ai_match_samples": [
