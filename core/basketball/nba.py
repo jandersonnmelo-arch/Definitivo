@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 import re
 import requests
 
@@ -29,6 +30,8 @@ BOXSCORE_URLS = (
     "https://cdn.nba.com/static/json/liveData/boxscore/boxscore_{game_id}.json",
 )
 HEADERS = {"User-Agent": "Mozilla/5.0 Premium-Analytics", "Accept": "application/json, text/plain, */*", "Referer": "https://www.nba.com/"}
+MANAUS = ZoneInfo("America/Manaus")
+NBA_CALENDAR_SEASON = "2026-27"
 
 
 def _num(value):
@@ -77,6 +80,68 @@ def _team_games(schedule, team_id, start, end):
         if team_id not in (hid, aid): continue
         rows.append({"game_id": gid, "date": gd, "home_id": hid, "away_id": aid, "home": h.get("ta"), "away": a.get("ta")})
     return sorted(rows, key=lambda x: x["date"])
+
+
+def _parse_utc(value):
+    if not value:
+        return None
+    text = str(value).strip().replace("Z", "+00:00")
+    try:
+        dt = datetime.fromisoformat(text)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(MANAUS)
+    except ValueError:
+        return None
+
+
+def _calendar_datetime(game):
+    for key in ("gdtutc", "gameTimeUTC", "gameDateTimeUTC", "utcTime"):
+        dt = _parse_utc(game.get(key))
+        if dt:
+            return dt
+    # Fallback for schedule payloads that expose only date/time fields.
+    gd = str(game.get("gdte") or game.get("gameDate") or "")[:10]
+    tm = str(game.get("etm") or game.get("gameTime") or "").strip()
+    if gd and tm:
+        for fmt in ("%Y-%m-%d %H:%M", "%m/%d/%Y %H:%M"):
+            try:
+                return datetime.strptime(f"{gd} {tm}", fmt).replace(tzinfo=ZoneInfo("America/New_York")).astimezone(MANAUS)
+            except ValueError:
+                pass
+    if gd:
+        d = _date(gd)
+        return datetime.combine(d, datetime.min.time(), tzinfo=MANAUS) if d else None
+    return None
+
+
+def collect_calendar(start_date, end_date, season: str = NBA_CALENDAR_SEASON):
+    """Retorna o calendário NBA no fuso de Manaus, incluindo jogos futuros."""
+    schedule = _schedule(season)
+    rows = []
+    for g in _games(schedule):
+        gid = str(g.get("gid", ""))
+        if not gid.startswith("002"):
+            continue
+        dt = _calendar_datetime(g)
+        if not dt or not start_date <= dt.date() <= end_date:
+            continue
+        h, a = g.get("h") or {}, g.get("v") or {}
+        status_code = str(g.get("stt") or g.get("statusNum") or "").lower()
+        if status_code in {"3", "final", "finalizado", "post"}:
+            status = "Finalizado"
+        elif status_code in {"2", "live", "inprogress", "1st", "2nd", "3rd", "4th"}:
+            status = "Ao vivo"
+        else:
+            status = "Agendado"
+        hs = h.get("s", h.get("score")); aws = a.get("s", a.get("score"))
+        rows.append({
+            "competition": "NBA", "game_id": gid, "datetime": dt, "date": dt.date(), "time": dt.strftime("%H:%M"),
+            "home": h.get("tn") or h.get("ta") or h.get("tc"), "away": a.get("tn") or a.get("ta") or a.get("tc"),
+            "home_score": hs if status != "Agendado" else None, "away_score": aws if status != "Agendado" else None,
+            "status": status, "season": season,
+        })
+    return sorted(rows, key=lambda x: x["datetime"])
 
 
 def _boxscore(game_id):
