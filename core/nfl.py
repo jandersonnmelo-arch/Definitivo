@@ -1,111 +1,294 @@
 from __future__ import annotations
+
 from datetime import date, timedelta
-from zoneinfo import ZoneInfo
+import os
 import time
+from zoneinfo import ZoneInfo
+
 import requests
 import pandas as pd
 
-BASE='https://site.api.espn.com/apis/site/v2/sports/football/nfl'
-SEASON=2026
-MANAUS=ZoneInfo('America/Manaus')
-S=requests.Session(); S.headers.update({'User-Agent':'PremiumMultiSportAnalytics/1.0','Accept':'application/json'})
+from core.db import record_api_usage, usage_today, calls_last_minute
 
-NFL_TEAMS={
-'Atlanta Falcons':'ATL','Arizona Cardinals':'ARI','Baltimore Ravens':'BAL','Buffalo Bills':'BUF','Carolina Panthers':'CAR','Chicago Bears':'CHI','Cincinnati Bengals':'CIN','Cleveland Browns':'CLE','Dallas Cowboys':'DAL','Denver Broncos':'DEN','Detroit Lions':'DET','Green Bay Packers':'GB','Houston Texans':'HOU','Indianapolis Colts':'IND','Jacksonville Jaguars':'JAX','Kansas City Chiefs':'KC','Las Vegas Raiders':'LV','Los Angeles Chargers':'LAC','Los Angeles Rams':'LAR','Miami Dolphins':'MIA','Minnesota Vikings':'MIN','New England Patriots':'NE','New Orleans Saints':'NO','New York Giants':'NYG','New York Jets':'NYJ','Philadelphia Eagles':'PHI','Pittsburgh Steelers':'PIT','San Francisco 49ers':'SF','Seattle Seahawks':'SEA','Tampa Bay Buccaneers':'TB','Tennessee Titans':'TEN','Washington Commanders':'WSH'
+BASE = 'https://v1.american-football.api-sports.io'
+LEAGUE_NFL = 1
+SEASON = 2026
+MANAUS = ZoneInfo('America/Manaus')
+PROVIDER = 'API-NFL/API-Sports'
+DAILY_SOFT_LIMIT = 90
+MINUTE_SOFT_LIMIT = 8
+S = requests.Session()
+
+NFL_TEAMS = {
+    'Atlanta Falcons':'ATL','Arizona Cardinals':'ARI','Baltimore Ravens':'BAL','Buffalo Bills':'BUF','Carolina Panthers':'CAR','Chicago Bears':'CHI','Cincinnati Bengals':'CIN','Cleveland Browns':'CLE','Dallas Cowboys':'DAL','Denver Broncos':'DEN','Detroit Lions':'DET','Green Bay Packers':'GB','Houston Texans':'HOU','Indianapolis Colts':'IND','Jacksonville Jaguars':'JAX','Kansas City Chiefs':'KC','Las Vegas Raiders':'LV','Los Angeles Chargers':'LAC','Los Angeles Rams':'LAR','Miami Dolphins':'MIA','Minnesota Vikings':'MIN','New England Patriots':'NE','New Orleans Saints':'NO','New York Giants':'NYG','New York Jets':'NYJ','Philadelphia Eagles':'PHI','Pittsburgh Steelers':'PIT','San Francisco 49ers':'SF','Seattle Seahawks':'SEA','Tampa Bay Buccaneers':'TB','Tennessee Titans':'TEN','Washington Commanders':'WSH'
 }
 
-def api_get(path='',params=None):
-    last=None
-    for attempt in range(3):
+
+def _secret():
+    names = ('API_SPORTS_KEY','API_NFL_KEY','API_FOOTBALL_KEY','APISPORTS_KEY')
+    for n in names:
+        v = os.getenv(n)
+        if v:
+            return v
+    try:
+        import streamlit as st
+        for n in names:
+            try:
+                v = st.secrets.get(n)
+            except Exception:
+                v = None
+            if v:
+                return v
         try:
-            r=S.get(f'{BASE}/{path.lstrip("/")}',params=params or {},timeout=(10,30)); r.raise_for_status(); return r.json()
-        except (requests.RequestException,ValueError) as e:
-            last=e
-            if attempt<2: time.sleep(attempt+1)
-    raise RuntimeError(f'Falha na fonte NFL/ESPN: {last}')
-
-def _manaus(v):
-    dt=pd.to_datetime(v,utc=True,errors='coerce')
-    return None if pd.isna(dt) else dt.tz_convert(MANAUS)
-
-def scoreboard(start:date,end:date):
-    if end<start:return []
-    # ESPN aceita intervalos de datas no scoreboard; usamos blocos de até 7 dias para reduzir carga.
-    rows=[]; cur=start
-    while cur<=end:
-        chunk_end=min(end,cur+timedelta(days=6))
-        data=api_get('scoreboard',{'dates':f'{cur:%Y%m%d}-{chunk_end:%Y%m%d}','limit':100})
-        rows.extend(data.get('events',[])); cur=chunk_end+timedelta(days=1)
-    unique={str(x.get('id')):x for x in rows if x.get('id')}
-    return list(unique.values())
-
-def team_code_from_event(event):
-    for comp in event.get('competitions',[]):
-        for c in comp.get('competitors',[]):
-            abbr=(c.get('team') or {}).get('abbreviation') or ''
-            if abbr:return str(abbr).upper()
-    return ''
-
-def team_schedule(team_code,start:date,end:date):
-    events=scoreboard(start,end); out=[]
-    for e in events:
-        comp=(e.get('competitions') or [{}])[0]; competitors=comp.get('competitors') or []
-        if not any(str((c.get('team') or {}).get('abbreviation','')).upper()==team_code.upper() for c in competitors):continue
-        dt=_manaus(e.get('date')); home=away=None; hs=as_=None
-        for c in competitors:
-            t=(c.get('team') or {}).get('displayName') or (c.get('team') or {}).get('name') or '—'; score=c.get('score')
-            if c.get('homeAway')=='home':home=t; hs=score
-            else:away=t; as_=score
-        status=((comp.get('status') or {}).get('type') or {}).get('description') or ((comp.get('status') or {}).get('type') or {}).get('name') or 'Scheduled'
-        out.append({'game_id':e.get('id'),'Data':dt.strftime('%d/%m/%Y') if dt else '—','Hora (Manaus)':dt.strftime('%H:%M') if dt else '—','Casa':home,'Fora':away,'Placar':f'{hs} x {as_}' if hs is not None and as_ is not None else '—','Status':status})
-    return sorted(out,key=lambda x:(x['Data'],x['Hora (Manaus)']))
-
-def summary(event_id):
-    return api_get('summary',{'event':event_id})
-
-def _stat_value(stats,name):
-    for s in stats or []:
-        if str(s.get('name','')).lower()==name.lower():
-            return s.get('value') or s.get('displayValue')
+            block = st.secrets.get('api_futebol')
+            if block:
+                for k in ('token','key','api_key'):
+                    try: v = block.get(k)
+                    except Exception: v = None
+                    if v: return v
+        except Exception:
+            pass
+    except Exception:
+        pass
     return None
 
-def parse_team_stats(summary_json):
-    rows=[]
-    for box in summary_json.get('boxscore',{}).get('teams',[]) or []:
-        team=(box.get('team') or {}).get('displayName') or '—'; stats=box.get('statistics') or []
-        rows.append({'Equipe':team,'Pontos':_stat_value(stats,'points'),'Total Yards':_stat_value(stats,'totalYards'),'Passing Yards':_stat_value(stats,'netPassingYards') or _stat_value(stats,'passingYards'),'Rushing Yards':_stat_value(stats,'rushingYards'),'Turnovers':_stat_value(stats,'turnovers'),'First Downs':_stat_value(stats,'firstDowns'),'Third Down %':_stat_value(stats,'thirdDownEfficiency'),'Red Zone %':_stat_value(stats,'redZoneEfficiency'),'Penalidades':_stat_value(stats,'totalPenaltiesYards')})
+
+def _guard():
+    key = _secret()
+    if not key:
+        raise RuntimeError('chave API-Sports não configurada. Use API_SPORTS_KEY nos Secrets.')
+    u = usage_today(PROVIDER)
+    if int(u.get('calls', 0)) >= DAILY_SOFT_LIMIT:
+        raise RuntimeError(f'proteção diária ativa ({u.get("calls",0)} chamadas registradas hoje)')
+    if calls_last_minute(PROVIDER) >= MINUTE_SOFT_LIMIT:
+        raise RuntimeError('proteção por minuto ativa; aguarde antes de novas chamadas')
+    return key
+
+
+def api_get(path='', params=None):
+    key = _guard()
+    url = f'{BASE}/{path.lstrip("/")}'
+    last = None
+    for attempt in range(3):
+        try:
+            r = S.get(url, params=params or {}, headers={'x-apisports-key': key}, timeout=(10, 30))
+            record_api_usage(PROVIDER, r.headers.get('x-ratelimit-requests-remaining'), r.headers.get('x-ratelimit-requests-minute-remaining'))
+            r.raise_for_status()
+            data = r.json()
+            errors = data.get('errors')
+            if errors and errors != [] and errors != {}:
+                raise RuntimeError(f'API-NFL retornou erro: {errors}')
+            return data
+        except (requests.RequestException, ValueError, RuntimeError) as e:
+            last = e
+            if attempt < 2:
+                time.sleep(attempt + 1)
+    raise RuntimeError(f'Falha na fonte NFL/API-Sports: {last}')
+
+
+def _manaus(dt_value):
+    dt = pd.to_datetime(dt_value, utc=True, errors='coerce')
+    if pd.isna(dt):
+        return None
+    return dt.tz_convert(MANAUS)
+
+
+def _game_datetime(game):
+    d = ((game.get('date') or {}).get('date') or '')
+    t = ((game.get('date') or {}).get('time') or '00:00')
+    if not d:
+        return None
+    try:
+        return pd.Timestamp(f'{d}T{t}', tz='UTC').tz_convert(MANAUS)
+    except Exception:
+        return None
+
+
+def _game_rows(data):
+    rows = []
+    for item in data.get('response', []) or []:
+        game = item.get('game') or {}
+        teams = item.get('teams') or {}
+        home = teams.get('home') or {}
+        away = teams.get('away') or {}
+        scores = item.get('scores') or {}
+        hs = (scores.get('home') or {}).get('total')
+        aws = (scores.get('away') or {}).get('total')
+        dt = _game_datetime(game)
+        status = game.get('status') or {}
+        rows.append({
+            'game_id': game.get('id'),
+            'team_home_id': home.get('id'),
+            'team_away_id': away.get('id'),
+            'Data': dt.strftime('%d/%m/%Y') if dt is not None else game.get('date',{}).get('date','—'),
+            'Hora (Manaus)': dt.strftime('%H:%M') if dt is not None else '—',
+            'Casa': home.get('name') or '—',
+            'Fora': away.get('name') or '—',
+            'Placar': f'{hs} x {aws}' if hs is not None and aws is not None else '—',
+            'Status': status.get('long') or status.get('short') or 'Scheduled',
+            '_datetime': dt,
+            '_raw': item,
+        })
     return rows
 
-def parse_players(summary_json):
-    rows=[]
-    for group in summary_json.get('boxscore',{}).get('players',[]) or []:
-        team=(group.get('team') or {}).get('displayName') or '—'
-        for stat_group in group.get('statistics',[]) or []:
-            labels=stat_group.get('labels') or []
-            for athlete in stat_group.get('athletes',[]) or []:
-                a=athlete.get('athlete') or {}; stats=athlete.get('stats') or []
-                row={'Equipe':team,'Jogador':a.get('displayName') or a.get('fullName') or '—','Posição':a.get('position',{}).get('abbreviation') if isinstance(a.get('position'),dict) else a.get('position')}
-                row.update({str(labels[i]):stats[i] for i in range(min(len(labels),len(stats)))})
-                rows.append(row)
+
+def _load_season_games():
+    data = api_get('games', {'league': LEAGUE_NFL, 'season': SEASON})
+    return _game_rows(data)
+
+
+def scoreboard(start: date, end: date):
+    if end < start:
+        return []
+    # Uma chamada de temporada é preferível a uma chamada por dia: preserva a quota do plano gratuito.
+    rows = _load_season_games()
+    return [r for r in rows if r.get('_datetime') is not None and start <= r['_datetime'].date() <= end]
+
+
+def team_schedule(team_code, start: date, end: date):
+    code = str(team_code or '').upper()
+    rows = scoreboard(start, end)
+    out = []
+    for r in rows:
+        home_code = _abbr(r['Casa'])
+        away_code = _abbr(r['Fora'])
+        if code not in (home_code, away_code):
+            continue
+        out.append({k:v for k,v in r.items() if not k.startswith('_')})
+    return sorted(out, key=lambda x: (x['Data'], x['Hora (Manaus)']))
+
+
+def _abbr(name):
+    for full, code in NFL_TEAMS.items():
+        if str(name).casefold() == full.casefold():
+            return code
+    return ''
+
+
+def _find_game(event_id):
+    data = api_get('games', {'id': event_id})
+    rows = _game_rows(data)
+    if not rows:
+        raise RuntimeError(f'Partida NFL {event_id} não encontrada.')
+    return rows[0]['_raw']
+
+
+def summary(event_id):
+    game = _find_game(event_id)
+    return api_get('games/statistics/teams', {'id': event_id}), api_get('games/statistics/players', {'id': event_id}), game
+
+
+def _num(value):
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        if isinstance(value, str):
+            s = value.replace('%','').replace(',','').strip()
+            if '-' in s and s.count('-') == 1:
+                a,b = s.split('-',1)
+                if a.strip().isdigit() and b.strip().isdigit():
+                    return float(a)
+            return float(s)
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _flatten_stats(obj, prefix=''):
+    out = {}
+    if isinstance(obj, dict):
+        for k,v in obj.items():
+            key = f'{prefix}_{k}' if prefix else str(k)
+            if isinstance(v, dict): out.update(_flatten_stats(v, key))
+            elif isinstance(v, list):
+                for i,item in enumerate(v): out.update(_flatten_stats(item, f'{key}_{i}'))
+            else: out[key] = v
+    return out
+
+
+def parse_team_stats(data):
+    rows = []
+    for item in data.get('response', []) or []:
+        team = item.get('team') or {}
+        stats = item.get('statistics') or {}
+        flat = _flatten_stats(stats)
+        row = {'Equipe': team.get('name') or '—'}
+        aliases = {
+            'First Downs':'first_downs_total', 'First Downs Pass':'first_downs_passing', 'First Downs Rush':'first_downs_rushing',
+            'Third Down':'first_downs_third_down_efficiency', 'Fourth Down':'first_downs_fourth_down_efficiency',
+            'Plays':'plays_total', 'Total Yards':'yards_total', 'Yards/Play':'yards_per_play',
+            'Passing':'passing_total', 'Passing Yards':'passing_yards', 'Completions':'passing_comp_att',
+            'Rushing':'rushings_total', 'Rushing Yards':'rushings_yards', 'Yards/Rush':'rushings_yards_per_rush',
+            'Red Zone':'red_zone', 'Penalidades':'penalties_total', 'Turnovers':'turnovers_total',
+            'Fumbles Recovered':'fumbles_recovered', 'Interceptions':'interceptions', 'Sacks':'sacks',
+            'Safeties':'safeties', 'Pontos contra':'points_against', 'Posse':'possession'
+        }
+        for label,key in aliases.items():
+            val = flat.get(key)
+            if val is None:
+                # tolera pequenas diferenças de nomenclatura da API sem transformar ausência em zero.
+                candidates = [v for k,v in flat.items() if k.endswith('_'+key) or k == key]
+                val = candidates[0] if candidates else None
+            row[label] = val
+        rows.append(row)
     return rows
 
-def recent_team_games(team_code,n=5):
-    end=date.today(); start=end-timedelta(days=180)
-    rows=team_schedule(team_code,start,end)
-    done=[r for r in rows if r['Placar']!='—']
-    return done[-n:]
 
-def team_averages(team_code,n=5):
-    games=recent_team_games(team_code,n); agg=[]
+def _player_group_rows(data):
+    for item in data.get('response', []) or []:
+        team = item.get('team') or {}
+        group = item.get('group') or item.get('type') or 'Estatísticas'
+        players = item.get('players') or []
+        if isinstance(players, dict):
+            players = [players]
+        yield team, group, players
+
+
+def parse_players(data):
+    rows = []
+    for team, group, players in _player_group_rows(data):
+        for item in players:
+            p = item.get('player') or {}
+            stats = item.get('statistics') or {}
+            if isinstance(stats, list):
+                merged = {}
+                for s in stats: merged.update(s if isinstance(s,dict) else {})
+                stats = merged
+            flat = _flatten_stats(stats)
+            row = {'Equipe': team.get('name') or '—','Jogador': p.get('name') or p.get('displayName') or '—','Posição': p.get('position') or group,'Grupo': group}
+            for k,v in flat.items():
+                if k and v is not None:
+                    row[k] = v
+            rows.append(row)
+    return rows
+
+
+def recent_team_games(team_code, n=5):
+    end = date.today() + timedelta(days=1)
+    start = end - timedelta(days=220)
+    rows = team_schedule(team_code, start, end)
+    finished = [r for r in rows if r.get('Placar') != '—' and str(r.get('Status','')).lower() in ('finished','aot','ft') or r.get('Placar') != '—']
+    return finished[-n:]
+
+
+def team_averages(team_code, n=5):
+    games = recent_team_games(team_code, n)
+    # Mantemos o cálculo conservador: cada partida requer seu box score de equipes.
+    all_rows = []
     for g in games:
-        try: agg.append(parse_team_stats(summary(g['game_id'])))
-        except Exception: continue
-    flat={}
-    for game in agg:
-        for row in game:
-            if team_code.upper() in str(row['Equipe']).upper() or True:
-                for k,v in row.items():
-                    if k=='Equipe':continue
-                    try: flat.setdefault(k,[]).append(float(str(v).replace('%','').split('-')[0]))
-                    except Exception: pass
-    return games,{k:sum(v)/len(v) for k,v in flat.items() if v}
+        try:
+            team_data, _, _ = summary(g['game_id'])
+            all_rows.extend(parse_team_stats(team_data))
+        except Exception:
+            continue
+    target = next((r for r in all_rows if _abbr(r.get('Equipe','')) == str(team_code).upper()), None)
+    if not target:
+        # Alguns nomes podem não coincidir exatamente; usa a primeira linha somente se houver uma equipe.
+        target = all_rows[0] if len(all_rows) == 1 else None
+    avg = {}
+    if target:
+        for k,v in target.items():
+            if k == 'Equipe': continue
+            nval = _num(v)
+            if nval is not None: avg[k] = nval
+    return games, avg
