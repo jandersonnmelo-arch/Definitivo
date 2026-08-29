@@ -81,7 +81,7 @@ def init_db():
 
 def _team_id(c,sport,name,source=None,provider_id=None):
     cid=canonical_team_id(sport,name);c.execute("INSERT INTO teams(id,sport,name,normalized_name,updated_at) VALUES(?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name,updated_at=excluded.updated_at",(cid,sport,name,_norm(name),now_iso()))
-    if source and provider_id is not None:c.execute("INSERT INTO team_sources(team_id,source,provider_team_id,updated_at) VALUES(?,?,?,?) ON CONFLICT(team_id,source) DO UPDATE SET provider_team_id=excluded.provider_team_id,updated_at=excluded.updated_at",(cid,source,str(provider_id),now_iso()))
+    if source and provider_id is not None:c.execute("INSERT INTO team_sources(team_id,source,provider_id,updated_at) VALUES(?,?,?,?) ON CONFLICT(team_id,source) DO UPDATE SET provider_team_id=excluded.provider_id,updated_at=excluded.updated_at",(cid,source,str(provider_id),now_iso()))
     return cid
 
 def record_api_usage(provider,remaining_day=None,remaining_minute=None):
@@ -186,7 +186,6 @@ def get_players(mid):
         if not m:return []
         return [dict(x) for x in c.execute("SELECT p.id,p.team_id,p.name,p.position,ps.metric,ps.value,ps.source FROM players p JOIN player_stats ps ON ps.player_id=p.id WHERE ps.match_id=? AND ps.team_id IN (?,?) ORDER BY ps.team_id,p.name,ps.metric",(mid,m["home_id"],m["away_id"])).fetchall()]
     finally:c.close()
-
 def get_diagnostics(limit=100):
     c=connect()
     try:return [dict(x) for x in c.execute("SELECT * FROM diagnostics ORDER BY id DESC LIMIT ?",(limit,)).fetchall()]
@@ -201,16 +200,38 @@ def team_history(team_id,before_iso=None,limit=10):
     finally:c.close()
 def history_coverage(team_id,before_iso=None):return len(team_history(team_id,before_iso,10))
 
-def player_history_summary(team_id=None,match_id=None):
-    """Retorna registros individuais agregados sem misturar jogadores entre equipes."""
+def player_history_summary(team_id=None,match_id=None,before_iso=None,limit=20):
+    """Agrega estatísticas individuais históricas da equipe sem misturar jogadores."""
     c=connect()
     try:
         if match_id:
             m=c.execute("SELECT home_id,away_id FROM matches WHERE id=?",(match_id,)).fetchone()
             if not m:return []
             team_ids=[m["home_id"],m["away_id"]]
-            q="SELECT p.team_id,p.name,p.position,COUNT(DISTINCT ps.match_id) jogos,SUM(CASE WHEN ps.metric='goals' THEN ps.value ELSE 0 END) gols,SUM(CASE WHEN ps.metric='assists' THEN ps.value ELSE 0 END) assistencias FROM players p JOIN player_stats ps ON ps.player_id=p.id WHERE ps.match_id=? AND ps.team_id IN (?,?) GROUP BY p.team_id,p.id,p.name,p.position ORDER BY p.team_id,p.name";return [dict(r) for r in c.execute(q,(match_id,*team_ids)).fetchall()]
-        if team_id:
-            q="SELECT p.team_id,p.name,p.position,COUNT(DISTINCT ps.match_id) jogos,SUM(CASE WHEN ps.metric='goals' THEN ps.value ELSE 0 END) gols,SUM(CASE WHEN ps.metric='assists' THEN ps.value ELSE 0 END) assistencias FROM players p JOIN player_stats ps ON ps.player_id=p.id WHERE ps.team_id=? GROUP BY p.team_id,p.id,p.name,p.position ORDER BY p.name";return [dict(r) for r in c.execute(q,(team_id,)).fetchall()]
-        return []
+            where="ps.match_id=? AND ps.team_id IN (?,?)";params=[match_id,*team_ids]
+        elif team_id:
+            where="ps.team_id=?";params=[team_id]
+            if before_iso:
+                where+=" AND ps.match_id IN (SELECT id FROM matches WHERE status='FINISHED' AND start_time<?)";params.append(before_iso)
+        else:return []
+        q=f"""SELECT p.team_id,p.name,p.position,
+            COUNT(DISTINCT ps.match_id) jogos,
+            SUM(CASE WHEN ps.metric='goals' THEN ps.value ELSE 0 END) gols,
+            SUM(CASE WHEN ps.metric='assists' THEN ps.value ELSE 0 END) assistencias,
+            SUM(CASE WHEN ps.metric='shots' THEN ps.value ELSE 0 END) shots,
+            SUM(CASE WHEN ps.metric='shots_on_target' THEN ps.value ELSE 0 END) shots_on_target,
+            SUM(CASE WHEN ps.metric='passes_completed' THEN ps.value ELSE 0 END) passes_completed,
+            SUM(CASE WHEN ps.metric IN ('tackles','effectivetackles') THEN ps.value ELSE 0 END) tackles,
+            SUM(CASE WHEN ps.metric='fouls' THEN ps.value ELSE 0 END) fouls,
+            SUM(CASE WHEN ps.metric='was_fouled' THEN ps.value ELSE 0 END) was_fouled,
+            SUM(CASE WHEN ps.metric='minutes' THEN ps.value ELSE 0 END) minutes,
+            SUM(CASE WHEN ps.metric='yellow_cards' THEN ps.value ELSE 0 END) yellow_cards,
+            SUM(CASE WHEN ps.metric='red_cards' THEN ps.value ELSE 0 END) red_cards
+            FROM players p JOIN player_stats ps ON ps.player_id=p.id
+            WHERE {where}
+            GROUP BY p.team_id,p.id,p.name,p.position
+            ORDER BY p.name
+            LIMIT ?"""
+        params.append(limit)
+        return [dict(r) for r in c.execute(q,params).fetchall()]
     finally:c.close()
