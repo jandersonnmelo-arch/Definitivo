@@ -1,11 +1,11 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-29T15:24:35.084113+00:00",
+  "created_at": "2026-08-29T15:24:57.739109+00:00",
   "tables": {
     "schema_meta": [
       {
         "key": "data_quality_v4",
-        "value": "2026-08-29T15:24:19.519728+00:00"
+        "value": "2026-08-29T15:24:55.253579+00:00"
       },
       {
         "key": "schema",
@@ -802,14 +802,14 @@
         "sport": "Futebol",
         "name": "Bahia",
         "normalized_name": "bahia",
-        "updated_at": "2026-08-29T15:18:20.016716+00:00"
+        "updated_at": "2026-08-29T15:24:55.307643+00:00"
       },
       {
         "id": "bd162042f98d9dd2b6",
         "sport": "Futebol",
         "name": "Internacional",
         "normalized_name": "internacional",
-        "updated_at": "2026-08-29T15:23:21.128920+00:00"
+        "updated_at": "2026-08-29T15:24:56.136762+00:00"
       },
       {
         "id": "fb5d9cd90e17b64f5f",
@@ -1096,7 +1096,7 @@
         "sport": "Futebol",
         "name": "Corinthians",
         "normalized_name": "corinthians",
-        "updated_at": "2026-08-29T09:54:37.575847+00:00"
+        "updated_at": "2026-08-29T15:24:57.078990+00:00"
       },
       {
         "id": "c0eb691b941f2978d1",
@@ -1265,6 +1265,34 @@
         "name": "São Bernardo",
         "normalized_name": "sao bernardo",
         "updated_at": "2026-08-29T15:23:23.774823+00:00"
+      },
+      {
+        "id": "0d5841bbbb529e5eab",
+        "sport": "Futebol",
+        "name": "Lingfield",
+        "normalized_name": "lingfield",
+        "updated_at": "2026-08-29T15:24:56.462026+00:00"
+      },
+      {
+        "id": "46417552f6f8401873",
+        "sport": "Futebol",
+        "name": "Corinthian",
+        "normalized_name": "corinthian",
+        "updated_at": "2026-08-29T15:24:57.419800+00:00"
+      },
+      {
+        "id": "e836cb85acc475d96b",
+        "sport": "Futebol",
+        "name": "Rosario Central",
+        "normalized_name": "rosario central",
+        "updated_at": "2026-08-29T15:24:57.079337+00:00"
+      },
+      {
+        "id": "c983837401081dc46d",
+        "sport": "Futebol",
+        "name": "Broadfields United",
+        "normalized_name": "broadfields united",
+        "updated_at": "2026-08-29T15:24:57.419997+00:00"
       }
     ],
     "team_sources": [
@@ -2226,7 +2254,7 @@
         "team_id": "7ce26de4dc6960a5e7",
         "source": "ESPN",
         "provider_team_id": "874",
-        "updated_at": "2026-08-29T09:54:37.575927+00:00"
+        "updated_at": "2026-08-29T15:24:57.079216+00:00"
       },
       {
         "team_id": "f541c69bd4ee4d9180",
@@ -2268,13 +2296,13 @@
         "team_id": "9f563292bea3f50f07",
         "source": "ESPN",
         "provider_team_id": "9967",
-        "updated_at": "2026-08-29T15:18:20.016748+00:00"
+        "updated_at": "2026-08-29T15:24:55.307753+00:00"
       },
       {
         "team_id": "bd162042f98d9dd2b6",
         "source": "ESPN",
         "provider_team_id": "1936",
-        "updated_at": "2026-08-29T15:23:21.128999+00:00"
+        "updated_at": "2026-08-29T15:24:56.136791+00:00"
       },
       {
         "team_id": "85fe60cf642c9168d5",
@@ -2545,6 +2573,30 @@
         "source": "ESPN",
         "provider_team_id": "11268",
         "updated_at": "2026-08-29T15:23:23.774924+00:00"
+      },
+      {
+        "team_id": "0d5841bbbb529e5eab",
+        "source": "ESPN",
+        "provider_team_id": "132263",
+        "updated_at": "2026-08-29T15:24:56.462144+00:00"
+      },
+      {
+        "team_id": "46417552f6f8401873",
+        "source": "ESPN",
+        "provider_team_id": "132262",
+        "updated_at": "2026-08-29T15:24:57.419894+00:00"
+      },
+      {
+        "team_id": "e836cb85acc475d96b",
+        "source": "ESPN",
+        "provider_team_id": "17",
+        "updated_at": "2026-08-29T15:24:57.079383+00:00"
+      },
+      {
+        "team_id": "c983837401081dc46d",
+        "source": "ESPN",
+        "provider_team_id": "132271",
+        "updated_at": "2026-08-29T15:24:57.420019+00:00"
       }
     ],
     "matches": [
@@ -5947,6 +5999,146 @@
         "source": "ESPN",
         "provider_match_id": "401860300",
         "updated_at": "2026-08-29T15:23:24.742951+00:00"
+      },
+      {
+        "id": "401841159",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-07-26T19:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "9f563292bea3f50f07",
+        "home_name": "Bahia",
+        "home_short": "BAH",
+        "away_id": "7ce26de4dc6960a5e7",
+        "away_name": "Corinthians",
+        "away_short": "COR",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401841159",
+        "updated_at": "2026-08-29T15:24:55.307957+00:00"
+      },
+      {
+        "id": "401873957",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-02T22:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "bd162042f98d9dd2b6",
+        "home_name": "Internacional",
+        "home_short": "INT",
+        "away_id": "7ce26de4dc6960a5e7",
+        "away_name": "Corinthians",
+        "away_short": "COR",
+        "home_score": 2,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401873957",
+        "updated_at": "2026-08-29T15:24:55.756500+00:00"
+      },
+      {
+        "id": "401874094",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-06T23:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "bd162042f98d9dd2b6",
+        "away_name": "Internacional",
+        "away_short": "INT",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401874094",
+        "updated_at": "2026-08-29T15:24:56.136854+00:00"
+      },
+      {
+        "id": "401907034",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-12T19:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "0d5841bbbb529e5eab",
+        "home_name": "Lingfield",
+        "home_short": "LNG",
+        "away_id": "46417552f6f8401873",
+        "away_name": "Corinthian",
+        "away_short": "COR",
+        "home_score": 3,
+        "away_score": 5,
+        "source": "ESPN",
+        "provider_match_id": "401907034",
+        "updated_at": "2026-08-29T15:24:56.462393+00:00"
+      },
+      {
+        "id": "401874075",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-14T00:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "e836cb85acc475d96b",
+        "home_name": "Rosario Central",
+        "home_short": "ROS",
+        "away_id": "7ce26de4dc6960a5e7",
+        "away_name": "Corinthians",
+        "away_short": "COR",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401874075",
+        "updated_at": "2026-08-29T15:24:56.713021+00:00"
+      },
+      {
+        "id": "401874149",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-21T00:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "e836cb85acc475d96b",
+        "away_name": "Rosario Central",
+        "away_short": "ROS",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401874149",
+        "updated_at": "2026-08-29T15:24:57.079502+00:00"
+      },
+      {
+        "id": "401913590",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-25T18:45Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "46417552f6f8401873",
+        "home_name": "Corinthian",
+        "home_short": "COR",
+        "away_id": "c983837401081dc46d",
+        "away_name": "Broadfields United",
+        "away_short": "BRD",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401913590",
+        "updated_at": "2026-08-29T15:24:57.420401+00:00"
       }
     ],
     "match_sources": [
@@ -7059,6 +7251,48 @@
         "source": "ESPN",
         "provider_match_id": "401860300",
         "updated_at": "2026-08-29T15:23:24.743082+00:00"
+      },
+      {
+        "match_id": "401841159",
+        "source": "ESPN",
+        "provider_match_id": "401841159",
+        "updated_at": "2026-08-29T15:24:55.308100+00:00"
+      },
+      {
+        "match_id": "401873957",
+        "source": "ESPN",
+        "provider_match_id": "401873957",
+        "updated_at": "2026-08-29T15:24:55.757067+00:00"
+      },
+      {
+        "match_id": "401874094",
+        "source": "ESPN",
+        "provider_match_id": "401874094",
+        "updated_at": "2026-08-29T15:24:56.137008+00:00"
+      },
+      {
+        "match_id": "401907034",
+        "source": "ESPN",
+        "provider_match_id": "401907034",
+        "updated_at": "2026-08-29T15:24:56.462529+00:00"
+      },
+      {
+        "match_id": "401874075",
+        "source": "ESPN",
+        "provider_match_id": "401874075",
+        "updated_at": "2026-08-29T15:24:56.713125+00:00"
+      },
+      {
+        "match_id": "401874149",
+        "source": "ESPN",
+        "provider_match_id": "401874149",
+        "updated_at": "2026-08-29T15:24:57.079779+00:00"
+      },
+      {
+        "match_id": "401913590",
+        "source": "ESPN",
+        "provider_match_id": "401913590",
+        "updated_at": "2026-08-29T15:24:57.421194+00:00"
       }
     ],
     "match_stats": [
@@ -178583,6 +178817,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-08-29T15:24:16.927180+00:00"
+      },
+      {
+        "id": 160,
+        "match_id": null,
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "ERROR",
+        "message": "ESPN fixtures: UNIQUE constraint failed: team_sources.source, team_sources.provider_team_id",
+        "created_at": "2026-08-29T15:24:55.679931+00:00"
       }
     ],
     "api_usage": [
