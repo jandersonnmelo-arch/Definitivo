@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v4",
-  "created_at": "2026-08-29T00:36:13.940526+00:00",
+  "created_at": "2026-08-29T00:36:52.806269+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-29T00:36:52.094131+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-29T00:36:13.930983+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -116,7 +116,7 @@
         "sport": "Futebol",
         "name": "Liverpool FC",
         "normalized_name": "liverpool",
-        "updated_at": "2026-08-29T00:35:09.527858+00:00"
+        "updated_at": "2026-08-29T00:36:52.727908+00:00"
       },
       {
         "id": "b8fd7430177f4e6a06",
@@ -305,7 +305,7 @@
         "sport": "Futebol",
         "name": "Newcastle United FC",
         "normalized_name": "newcastle united",
-        "updated_at": "2026-08-29T00:35:09.653768+00:00"
+        "updated_at": "2026-08-29T00:36:52.727778+00:00"
       },
       {
         "id": "67ce44e1c93339b287",
@@ -1412,7 +1412,7 @@
         "team_id": "acf77e31bd33648cc7",
         "source": "Football-Data.org",
         "provider_team_id": "64",
-        "updated_at": "2026-08-29T00:35:09.527929+00:00"
+        "updated_at": "2026-08-29T00:36:52.727922+00:00"
       },
       {
         "team_id": "b8fd7430177f4e6a06",
@@ -1574,7 +1574,7 @@
         "team_id": "92596fc166955d857f",
         "source": "Football-Data.org",
         "provider_team_id": "67",
-        "updated_at": "2026-08-29T00:35:09.653780+00:00"
+        "updated_at": "2026-08-29T00:36:52.727838+00:00"
       },
       {
         "team_id": "67ce44e1c93339b287",
@@ -5003,6 +5003,26 @@
         "source": "ESPN",
         "provider_match_id": "401912264",
         "updated_at": "2026-08-29T00:35:40.838115+00:00"
+      },
+      {
+        "id": "560550",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-23T15:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "92596fc166955d857f",
+        "home_name": "Newcastle United FC",
+        "home_short": "NEW",
+        "away_id": "acf77e31bd33648cc7",
+        "away_name": "Liverpool FC",
+        "away_short": "LIV",
+        "home_score": 2,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "560550",
+        "updated_at": "2026-08-29T00:36:52.727957+00:00"
       }
     ],
     "match_sources": [
@@ -5767,6 +5787,12 @@
         "source": "ESPN",
         "provider_match_id": "401912264",
         "updated_at": "2026-08-29T00:35:40.838264+00:00"
+      },
+      {
+        "match_id": "560550",
+        "source": "Football-Data.org",
+        "provider_match_id": "560550",
+        "updated_at": "2026-08-29T00:36:52.728100+00:00"
       }
     ],
     "match_stats": [
@@ -56884,14 +56910,50 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-08-29T00:36:12.046661+00:00"
+      },
+      {
+        "id": 43,
+        "match_id": "61b0aa5428ff9c9c1f48",
+        "source": "Dados Futebol",
+        "stage": "enriquecimento",
+        "status": "ERROR",
+        "message": "Dados Futebol: HTTP 401: {'erro': 'Não autorizado', 'mensagem': 'API Key inválida ou inativa'}",
+        "created_at": "2026-08-29T00:36:21.915741+00:00"
+      },
+      {
+        "id": 44,
+        "match_id": "61b0aa5428ff9c9c1f48",
+        "source": "Football-Data.org",
+        "stage": "enriquecimento",
+        "status": "OK",
+        "message": "Football-Data.org: 0 registros; 0 jogadores; stats individuais: 0; faltam métricas individuais: ['passes_completed', 'tackles', 'tackles_won']",
+        "created_at": "2026-08-29T00:36:22.437863+00:00"
+      },
+      {
+        "id": 45,
+        "match_id": "61b0aa5428ff9c9c1f48",
+        "source": "FotMob",
+        "stage": "enriquecimento",
+        "status": "ERROR",
+        "message": "FotMob: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-08-29T00:36:22.440421+00:00"
+      },
+      {
+        "id": 46,
+        "match_id": "61b0aa5428ff9c9c1f48",
+        "source": "Tribuna",
+        "stage": "enriquecimento_tribuna",
+        "status": "WARNING",
+        "message": "Tribuna: HTTP 403",
+        "created_at": "2026-08-29T00:36:22.846730+00:00"
       }
     ],
     "api_usage": [
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-08-29",
-        "calls": 3,
-        "last_call": "2026-08-29T00:35:40.504594+00:00",
+        "calls": 5,
+        "last_call": "2026-08-29T00:36:52.724315+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -56908,6 +56970,14 @@
         "day_utc": "2026-08-29",
         "calls": 30,
         "last_call": "2026-08-29T00:36:12.036581+00:00",
+        "remaining_day": null,
+        "remaining_minute": null
+      },
+      {
+        "provider": "API-Football",
+        "day_utc": "2026-08-29",
+        "calls": 1,
+        "last_call": "2026-08-29T00:36:22.682587+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -57442,6 +57512,21 @@
         "id": 106,
         "provider": "FotMob",
         "created_at": "2026-08-29T00:36:12.036581+00:00"
+      },
+      {
+        "id": 107,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-29T00:36:22.433581+00:00"
+      },
+      {
+        "id": 108,
+        "provider": "API-Football",
+        "created_at": "2026-08-29T00:36:22.682587+00:00"
+      },
+      {
+        "id": 109,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-29T00:36:52.724315+00:00"
       }
     ],
     "ai_match_samples": [
