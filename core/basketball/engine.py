@@ -44,7 +44,6 @@ def get_source(competition: str) -> BasketballSource:
 
 
 def collect_team_history(competition: str, team: str, months: int = 8) -> dict[str, Any]:
-    """Interface comum: devolve histórico bruto/normalizado da competição."""
     source = get_source(competition)
     return source.collect_team_history(team, months)
 
@@ -57,3 +56,9 @@ def collect_player_stats(competition: str, team: str, months: int = 8) -> Any:
 def collect_game(competition: str, game_id: str) -> dict[str, Any]:
     source = get_source(competition)
     return source.collect_game(game_id)
+
+
+def collect_calendar(competition: str, start_date, end_date) -> list[dict[str, Any]]:
+    """Calendário unificado do basquete, sem alterar o fluxo de histórico."""
+    source = get_source(competition)
+    return source.collect_calendar(start_date, end_date)
