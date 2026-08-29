@@ -1,8 +1,8 @@
 """Persistência remota durável do banco SQLite no GitHub.
 
 O SQLite continua sendo a base operacional. Este módulo mantém uma cópia remota
-recuperável e, principalmente, evita que uma execução com banco parcial/antigo
-substitua um snapshot remoto que contém mais dados.
+recuperável e evita que uma execução com banco parcial/antigo substitua um
+snapshot remoto que contém mais dados.
 
 Princípios:
 - remoto + local são mesclados antes de cada push;
@@ -10,12 +10,13 @@ Princípios:
 - em conflitos, a versão com timestamp mais recente é preferida quando existe;
 - respostas 409 do GitHub são relidas e o merge é repetido;
 - o restore ocorre tabela a tabela quando a tabela local está vazia;
-- `force=True` permite confirmar um lote de enriquecimento imediatamente, sem
-  depender do debounce usado para gravações individuais.
+- gravações dentro do debounce agendam um flush automático posterior;
+- `force=True` permite confirmar um lote de enriquecimento imediatamente.
 """
 import base64
 import json
 import os
+import threading
 import time
 from datetime import datetime, timezone
 
@@ -27,6 +28,8 @@ REMOTE_PATH = os.getenv("DEFINITIVO_REMOTE_PATH", "backups/definitivo_snapshot.j
 MIN_PUSH_SECONDS = int(os.getenv("DEFINITIVO_REMOTE_PUSH_MIN_SECONDS", "20"))
 MAX_PUSH_RETRIES = int(os.getenv("DEFINITIVO_REMOTE_PUSH_RETRIES", "3"))
 _LAST_PUSH = 0.0
+_PUSH_TIMER = None
+_PUSH_TIMER_LOCK = threading.Lock()
 
 TABLES = [
     "schema_meta", "teams", "team_sources", "matches", "match_sources",
@@ -123,7 +126,6 @@ def _remote_snapshot(headers):
 
 
 def _primary_key_columns(table):
-    """Obtém a PK diretamente do SQLite para não codificar chaves por tabela."""
     from core.db import connect
     c = connect()
     try:
@@ -134,7 +136,6 @@ def _primary_key_columns(table):
 
 
 def _row_timestamp(row):
-    """Retorna o timestamp mais útil para resolver conflito remoto/local."""
     for key in ("updated_at", "observed_at", "created_at", "last_call"):
         value = row.get(key)
         if value:
@@ -146,7 +147,6 @@ def _row_timestamp(row):
 
 
 def _prefer_row(local_row, remote_row):
-    """Escolhe a versão mais recente; sem timestamp, preserva o local atual."""
     lt = _row_timestamp(local_row)
     rt = _row_timestamp(remote_row)
     if lt is not None and rt is not None:
@@ -158,7 +158,6 @@ def _merge_table_rows(table, local_rows, remote_rows):
     """União segura: nunca perde registros que existam somente no remoto."""
     pk = _primary_key_columns(table)
     if not pk:
-        # Fallback para tabelas sem PK explícita.
         seen = set()
         out = []
         for row in list(remote_rows or []) + list(local_rows or []):
@@ -182,7 +181,6 @@ def _merge_table_rows(table, local_rows, remote_rows):
 
 
 def _merge_snapshots(local_payload, remote_payload):
-    """Mescla snapshots completos por tabela, preservando a união dos dados."""
     if not remote_payload:
         return local_payload
     merged = {
@@ -200,8 +198,29 @@ def _merge_snapshots(local_payload, remote_payload):
     return merged
 
 
+def _schedule_force_push(delay):
+    """Agenda um único flush posterior para não perder gravações no debounce."""
+    global _PUSH_TIMER
+    delay = max(0.5, float(delay))
+    with _PUSH_TIMER_LOCK:
+        if _PUSH_TIMER is not None and _PUSH_TIMER.is_alive():
+            return
+        _PUSH_TIMER = threading.Timer(delay, _delayed_force_push)
+        _PUSH_TIMER.daemon = True
+        _PUSH_TIMER.start()
+
+
+def _delayed_force_push():
+    global _PUSH_TIMER
+    try:
+        push(force=True)
+    finally:
+        with _PUSH_TIMER_LOCK:
+            _PUSH_TIMER = None
+
+
 def push(force=False):
-    """Faz push seguro do snapshot, com merge e retry em conflito."""
+    """Faz push seguro do snapshot, com merge, debounce e retry em conflito."""
     global _LAST_PUSH
     token = _token()
     if not token:
@@ -209,7 +228,8 @@ def push(force=False):
 
     now = time.monotonic()
     if not force and _LAST_PUSH and now - _LAST_PUSH < MIN_PUSH_SECONDS:
-        return {"pushed": False, "reason": "debounced"}
+        _schedule_force_push(MIN_PUSH_SECONDS - (now - _LAST_PUSH))
+        return {"pushed": False, "reason": "debounced_flush_scheduled"}
 
     local_payload = snapshot_payload()
     headers = _headers(token)
@@ -246,8 +266,6 @@ def push(force=False):
                 "bytes": len(content.encode("utf-8")),
             }
 
-        # Outro processo pode ter atualizado o arquivo entre GET e PUT.
-        # Releia o remoto e refaça o merge antes de tentar novamente.
         if r.status_code == 409 and attempt + 1 < MAX_PUSH_RETRIES:
             time.sleep(0.5 * (attempt + 1))
             continue
@@ -257,7 +275,9 @@ def push(force=False):
 
 
 def pull():
-    payload, _, status = _remote_snapshot(_headers(_token()) if _token() else {"Accept": "application/vnd.github+json"})
+    token = _token()
+    headers = _headers(token) if token else {"Accept": "application/vnd.github+json"}
+    payload, _, status = _remote_snapshot(headers)
     return payload if status == 200 else None
 
 
@@ -289,10 +309,7 @@ def restore_if_empty():
             names = ",".join(cols)
             inserted = 0
             for row in rows:
-                c.execute(
-                    f"INSERT OR IGNORE INTO {table} ({names}) VALUES ({marks})",
-                    [row.get(k) for k in cols],
-                )
+                c.execute(f"INSERT OR IGNORE INTO {table} ({names}) VALUES ({marks})", [row.get(k) for k in cols])
                 inserted += c.rowcount if c.rowcount > 0 else 0
             if inserted:
                 restored_tables.append(table)
