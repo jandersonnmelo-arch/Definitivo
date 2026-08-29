@@ -41,6 +41,43 @@ def telegram_diagnostic():
         return False, f"Falha ao consultar Telegram: {exc}"
 
 
+def _known_chats(token):
+    """Tenta descobrir chats que o bot já recebeu via getUpdates, sem expor o token."""
+    try:
+        response = requests.get(f"https://api.telegram.org/bot{token}/getUpdates", params={"limit": 100, "allowed_updates": '["message","channel_post"]'}, timeout=15)
+        data = response.json()
+        if not response.ok or not data.get("ok"):
+            return [], data.get("description") or f"HTTP {response.status_code}"
+        found = {}
+        for update in data.get("result", []):
+            for key in ("message", "channel_post"):
+                obj = update.get(key) or {}
+                chat = obj.get("chat") or {}
+                cid = chat.get("id")
+                if cid is not None:
+                    found[str(cid)] = chat.get("title") or chat.get("username") or chat.get("first_name") or str(cid)
+        return list(found.items()), None
+    except Exception as exc:
+        return [], str(exc)
+
+
+def _telegram_error_detail(token, chat_id, description):
+    if "chat not found" not in str(description).lower():
+        return f"Telegram recusou o envio: {description}"
+    known, update_error = _known_chats(token)
+    detail = [f"Telegram recusou o envio: {description}", "", f"CHAT_ID configurado: {chat_id}"]
+    if known:
+        detail += ["", "🔎 Chats que o bot já conseguiu enxergar:"]
+        for cid, title in known[:10]:
+            detail.append(f"• {title} → {cid}")
+        detail += ["", "Use no Secret CHAT_ID exatamente o ID do grupo desejado."]
+    elif update_error:
+        detail += ["", f"Não foi possível consultar os chats conhecidos: {update_error}", "Confirme que o bot está no grupo e envie /teste no grupo antes de tentar novamente."]
+    else:
+        detail += ["", "O bot não encontrou nenhum chat recente. Adicione o bot ao grupo e envie /teste nele; depois tente novamente."]
+    return "\n".join(detail)
+
+
 def format_analysis_message(match, analysis, competition, kickoff):
     p = analysis.get("probabilities") or {}; mk = analysis.get("markets") or {}
     lines = ["⚽ ARENA 360 • ANÁLISE PRÉ-JOGO", "", f"🏆 {competition}", f"⚔️ {match.get('home_name', 'Casa')} × {match.get('away_name', 'Fora')}", f"🕐 {kickoff} — Manaus", "", "🔮 PROBABILIDADES", f"🏠 Casa: {p.get('home', '—')}%", f"🤝 Empate: {p.get('draw', '—')}%", f"✈️ Fora: {p.get('away', '—')}%", f"⚽ xG: {analysis.get('xg_home', '—')} × {analysis.get('xg_away', '—')}", "", "📊 BASE ESTATÍSTICA"]
@@ -77,7 +114,7 @@ def send_analysis_to_telegram(message):
     except Exception as exc:
         return False, f"Falha de conexão com o Telegram: {exc}"
     if response.ok and data.get("ok"): return True, "Análise enviada ao Telegram."
-    return False, f"Telegram recusou o envio: {data.get('description') or f'HTTP {response.status_code}'}"
+    return False, _telegram_error_detail(token, chat_id, data.get('description') or f'HTTP {response.status_code}')
 
 
 def send_test_to_telegram():
