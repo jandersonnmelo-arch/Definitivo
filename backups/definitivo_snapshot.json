@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-29T15:27:38.441684+00:00",
+  "created_at": "2026-08-29T15:27:41.414385+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -255005,6 +255005,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-08-29T15:27:25.533792+00:00"
+      },
+      {
+        "id": 214,
+        "match_id": "3fff25772ba711b440d4",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-08-29T15:27:41.352669+00:00"
       }
     ],
     "api_usage": [
@@ -257652,7 +257661,7 @@
         "id": 84,
         "match_id": "3fff25772ba711b440d4",
         "dataset_version": "1",
-        "created_at": "2026-08-29T15:26:10.794941+00:00",
+        "created_at": "2026-08-29T15:27:41.405230+00:00",
         "cutoff_time": "2026-08-09T21:30:00Z",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
