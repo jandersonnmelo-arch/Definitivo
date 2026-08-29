@@ -8,6 +8,7 @@ from core.history import build_history_for_match
 from core.engine import build_pre_match_analysis
 from core.competitions import FIXED_COMPETITIONS,OPTIONAL_COMPETITIONS,selected_labels,canonical_competition_label
 from core.normalizer import manaos_time,status_label,position_label,format_metric_value,MATCH_DISPLAY_ORDER,MATCH_DISPLAY_LABELS,PLAYER_DISPLAY_ORDER,PLAYER_DISPLAY_LABELS,canonical_match_metric,canonical_player_metric,choose_preferred_stat
+from core.telegram import send_analysis_to_telegram,format_analysis_message
 
 st.set_page_config(page_title='Arena 360 • Futebol',page_icon='⚽',layout='centered',initial_sidebar_state='expanded')
 init_db();MANAUS=ZoneInfo('America/Manaus');today=datetime.now(MANAUS).date()
@@ -146,6 +147,10 @@ if selected:
                 if exact:
                     st.markdown('#### ⚽ Distribuição de gols');st.dataframe(pd.DataFrame([{'Total de gols':k,'Probabilidade':f'{v}%'} for k,v in exact.items()]),hide_index=True,use_container_width=True)
                 st.caption('Probabilidades de mercados estatísticos usam Poisson sobre médias históricas persistidas. Ausência de dado não vira zero.')
+                if st.button('📲 Enviar análise no Telegram',key=f'tg_{selected}',use_container_width=True):
+                    telegram_message=format_analysis_message(m,analysis,canonical_competition_label(m.get('competition')),manaos_time(m.get('start_time')))
+                    ok,detail=send_analysis_to_telegram(telegram_message)
+                    (st.success if ok else st.error)(detail)
                 for tid,tname in ((m.get('home_id'),m.get('home_name')),(m.get('away_id'),m.get('away_name'))):
                     if not tid:continue
                     summary=player_history_summary(tid,before,limit=20);st.markdown(f'#### 👥 Jogadores da análise — {tname}')
