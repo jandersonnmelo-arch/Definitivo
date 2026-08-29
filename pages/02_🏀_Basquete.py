@@ -25,8 +25,8 @@ teams = list(NBA_TEAMS) if competition == "NBA" else list(NBB_TEAMS)
 team = st.selectbox("Equipe", teams)
 
 MANAUS = ZoneInfo("America/Manaus")
-ESPN_NBA_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
-ESPN_HEADERS = {"User-Agent": "Mozilla/5.0 Premium-Analytics", "Accept": "application/json"}
+SPORTSBLAZE_NBA_SCHEDULE = "https://cache.sportsblaze.com/schedule/nba/2026"
+SPORTSBLAZE_HEADERS = {"User-Agent": "Mozilla/5.0 Premium-Analytics", "Accept": "application/json"}
 NBB_SCHEDULE_URL = "https://lnb.com.br/nbb/tabela-de-jogos/"
 NBB_SEASON_ID = "48"
 
@@ -61,78 +61,61 @@ def _to_manaus(value):
 
 
 def _nba_schedule_games(start_date: date, end_date: date):
-    """Calendário NBA por período, filtrado pela equipe e convertido para Manaus.
-
-    O CDN da NBA estava retornando HTTP 403 no Streamlit Cloud. O calendário
-    da interface usa ESPN como fonte de agenda; o histórico/boxscore continua
-    sendo obtido pelo motor NBA existente.
-    """
+    """Carrega o calendário NBA 2026/27 sem depender do CDN da NBA ou ESPN."""
     if end_date < start_date:
         return []
 
-    start = start_date.strftime("%Y%m%d")
-    end = end_date.strftime("%Y%m%d")
-    params = {"dates": f"{start}-{end}", "limit": 1000}
-
     try:
         response = requests.get(
-            ESPN_NBA_SCOREBOARD,
-            params=params,
-            headers=ESPN_HEADERS,
+            SPORTSBLAZE_NBA_SCHEDULE,
+            headers=SPORTSBLAZE_HEADERS,
             timeout=(10, 30),
         )
         response.raise_for_status()
         payload = response.json()
     except Exception as exc:
-        raise RuntimeError(f"Não foi possível consultar o calendário NBA: {type(exc).__name__}: {exc}") from exc
+        raise RuntimeError(
+            f"Não foi possível consultar o calendário NBA pela fonte pública alternativa: {type(exc).__name__}: {exc}"
+        ) from exc
 
     selected_abbr = str(NBA_TEAMS.get(team, (None, ""))[1] or "").upper()
     rows = []
 
     for event in payload.get("events") or []:
-        competitions = event.get("competitions") or []
-        if not competitions:
-            continue
-        game = competitions[0]
-        competitors = game.get("competitors") or []
-        if len(competitors) < 2:
-            continue
+        teams_data = event.get("teams") or {}
+        away = teams_data.get("away") or {}
+        home = teams_data.get("home") or {}
+        away_abbr = str(away.get("abbreviation") or "").upper()
+        home_abbr = str(home.get("abbreviation") or "").upper()
 
-        home = next((x for x in competitors if x.get("homeAway") == "home"), competitors[0])
-        away = next((x for x in competitors if x.get("homeAway") == "away"), competitors[1])
-        home_team = home.get("team") or {}
-        away_team = away.get("team") or {}
-        home_abbr = str(home_team.get("abbreviation") or "").upper()
-        away_abbr = str(away_team.get("abbreviation") or "").upper()
-
-        if selected_abbr and selected_abbr not in (home_abbr, away_abbr):
+        if selected_abbr and selected_abbr not in (away_abbr, home_abbr):
             continue
 
-        dt = _to_manaus(event.get("date") or game.get("date"))
+        dt = _to_manaus(event.get("date"))
         if dt is None or not start_date <= dt.date() <= end_date:
             continue
 
-        status = game.get("status") or event.get("status") or {}
-        status_type = status.get("type") or {}
-        state = str(status_type.get("state") or "").lower()
-        completed = bool(status_type.get("completed"))
-        if completed or state == "post":
+        status_raw = str(event.get("status") or "").strip().lower()
+        live = bool(event.get("live"))
+        if status_raw in {"final", "completed", "closed", "finished"}:
             status_label = "Finalizado"
-        elif state == "in":
+        elif live:
             status_label = "Ao vivo"
         else:
             status_label = "Agendado"
 
-        home_score = home.get("score")
-        away_score = away.get("score")
+        scores = event.get("scores") or {}
+        total = scores.get("total") or {}
+        away_score = total.get("away")
+        home_score = total.get("home")
         score = (
             f"{home_score} x {away_score}"
             if status_label != "Agendado" and home_score not in (None, "") and away_score not in (None, "")
             else "—"
         )
 
-        home_name = home_team.get("displayName") or home_team.get("shortDisplayName") or home_abbr
-        away_name = away_team.get("displayName") or away_team.get("shortDisplayName") or away_abbr
+        home_name = home.get("name") or home_abbr
+        away_name = away.get("name") or away_abbr
 
         rows.append({
             "Data": dt.strftime("%d/%m/%Y"),
@@ -141,7 +124,7 @@ def _nba_schedule_games(start_date: date, end_date: date):
             "Fora": away_name,
             "Placar": score,
             "Status": status_label,
-            "game_id": str(event.get("id") or game.get("id") or "—"),
+            "game_id": str(event.get("id") or "—"),
         })
 
     unique = {(x["Data"], x["Hora (Manaus)"], x["Casa"], x["Fora"], x["game_id"]): x for x in rows}
