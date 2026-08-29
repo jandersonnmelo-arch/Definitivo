@@ -63,21 +63,42 @@ def pull():
         return payload if payload.get("format","").startswith("definitivo-db-snapshot") else None
     except Exception:return None
 def restore_if_empty():
+    """Restore every table that is currently empty from the remote snapshot.
+
+    This is intentionally not gated only by `matches`: on Streamlit Cloud the
+    main tables may already have been restored before the AI tables are created.
+    The AI Dataset therefore gets a second bootstrap after its schema exists.
+    """
     from core.db import connect
-    c=connect()
-    try:
-        if c.execute("SELECT COUNT(*) FROM matches").fetchone()[0]:return {"restored":False,"reason":"database_has_data"}
-    finally:c.close()
     payload=pull()
-    if not payload or not payload.get("tables",{}).get("matches"):return {"restored":False,"reason":"no_remote_snapshot"}
+    if not payload:return {"restored":False,"reason":"no_remote_snapshot"}
+    remote_tables=payload.get("tables",{}) or {}
+    if not remote_tables:return {"restored":False,"reason":"empty_remote_snapshot"}
+
     c=connect()
+    restored_tables=[]
+    restored_rows=0
     try:
+        existing={r["name"] for r in c.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()}
         for table in TABLES:
-            rows=payload.get("tables",{}).get(table) or []
-            if not rows:continue
-            cols=list(rows[0].keys());marks=",".join("?" for _ in cols);names=",".join(cols)
-            for row in rows:c.execute(f"INSERT OR IGNORE INTO {table} ({names}) VALUES ({marks})",[row.get(k) for k in cols])
-        c.commit();return {"restored":True,"matches":c.execute("SELECT COUNT(*) FROM matches").fetchone()[0]}
+            rows=remote_tables.get(table) or []
+            if table not in existing or not rows:
+                continue
+            local_count=c.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
+            if local_count:
+                continue
+            cols=list(rows[0].keys())
+            marks=",".join("?" for _ in cols)
+            names=",".join(cols)
+            inserted=0
+            for row in rows:
+                c.execute(f"INSERT OR IGNORE INTO {table} ({names}) VALUES ({marks})",[row.get(k) for k in cols])
+                inserted+=c.rowcount if c.rowcount > 0 else 0
+            if inserted:
+                restored_tables.append(table)
+                restored_rows+=inserted
+        c.commit()
+        return {"restored":bool(restored_tables),"tables":restored_tables,"rows":restored_rows}
     except Exception:
         c.rollback();return {"restored":False,"reason":"restore_error"}
     finally:c.close()
