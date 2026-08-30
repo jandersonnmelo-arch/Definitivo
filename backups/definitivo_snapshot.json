@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-30T14:26:47.566638+00:00",
+  "created_at": "2026-08-30T14:26:54.428051+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -6323,6 +6323,15 @@
         "status": "ERROR",
         "message": "Dados Futebol detalhes: HTTP 401: {'erro': 'Não autorizado', 'mensagem': 'API Key inválida ou inativa'}",
         "created_at": "2026-08-30T14:26:47.251302+00:00"
+      },
+      {
+        "id": 17,
+        "match_id": "401874006",
+        "source": "Dados Futebol",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "Dados Futebol detalhes: HTTP 401: {'erro': 'Não autorizado', 'mensagem': 'API Key inválida ou inativa'}",
+        "created_at": "2026-08-30T14:26:53.963240+00:00"
       }
     ],
     "api_usage": [
@@ -6934,6 +6943,27 @@
         "target_result": "HOME",
         "target_total_goals": 3.0,
         "target_btts": 1,
+        "is_training_ready": 1
+      },
+      {
+        "id": 13,
+        "match_id": "401874006",
+        "dataset_version": "1",
+        "created_at": "2026-08-30T14:26:54.013272+00:00",
+        "cutoff_time": "2026-07-18T19:00Z",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "home_team_id": "2261634969adb266d9",
+        "home_team_name": "Criciúma",
+        "away_team_id": "207f17fd2b1750e642",
+        "away_team_name": "Vila Nova",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":1,\"sample_away\":6,\"xg_home\":1.17,\"xg_away\":1.17,\"probabilities\":{\"home\":36.0,\"draw\":28.1,\"away\":36.0},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":1,\"goals_for\":1.0,\"goals_against\":1.0,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":6,\"goals_for\":1.33,\"goals_against\":1.33,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":2.34,\"total_expected\":2.34,\"line\":2.5,\"lines\":{\"2.5\":41.5},\"under_lines\":{\"2.5\":58.5},\"over\":{\"2.5\":41.5},\"under\":{\"2.5\":58.5},\"over_probability\":41.5,\"under_probability\":58.5,\"exact_total\":{\"0\":9.6,\"1\":22.5,\"2\":26.4,\"3\":20.6,\"4+\":20.9},\"ambas_marcam\":47.6},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":1.17,\"away\":1.17,\"total\":2.34,\"sample_home\":1,\"sample_away\":6},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "target_home_goals": 2.0,
+        "target_away_goals": 0.0,
+        "target_result": "HOME",
+        "target_total_goals": 2.0,
+        "target_btts": 0,
         "is_training_ready": 1
       }
     ]
