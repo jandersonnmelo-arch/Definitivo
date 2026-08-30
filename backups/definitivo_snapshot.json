@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-29T15:36:33.717046+00:00",
+  "created_at": "2026-08-30T02:33:18.313386+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-30T02:33:17.274086+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-29T15:36:19.466993+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -403,7 +403,7 @@
         "sport": "Futebol",
         "name": "EC Vitória",
         "normalized_name": "vitoria",
-        "updated_at": "2026-08-29T15:34:17.165056+00:00"
+        "updated_at": "2026-08-30T02:33:17.905424+00:00"
       },
       {
         "id": "09a7997a6af73b43f7",
@@ -424,7 +424,7 @@
         "sport": "Futebol",
         "name": "CR Vasco da Gama",
         "normalized_name": "vasco da gama",
-        "updated_at": "2026-08-29T15:34:07.561858+00:00"
+        "updated_at": "2026-08-30T02:33:17.905724+00:00"
       },
       {
         "id": "bff457c9c7114e8deb",
@@ -1875,7 +1875,7 @@
         "team_id": "5220b1187a985dca02",
         "source": "Football-Data.org",
         "provider_team_id": "1782",
-        "updated_at": "2026-08-29T15:34:17.165133+00:00"
+        "updated_at": "2026-08-30T02:33:17.905534+00:00"
       },
       {
         "team_id": "09a7997a6af73b43f7",
@@ -1893,7 +1893,7 @@
         "team_id": "860a128afaf93b6350",
         "source": "Football-Data.org",
         "provider_team_id": "1780",
-        "updated_at": "2026-08-29T15:34:07.561885+00:00"
+        "updated_at": "2026-08-30T02:33:17.905753+00:00"
       },
       {
         "team_id": "bff457c9c7114e8deb",
@@ -8014,6 +8014,26 @@
         "source": "ESPN",
         "provider_match_id": "401887774",
         "updated_at": "2026-08-29T15:34:41.782474+00:00"
+      },
+      {
+        "id": "554929",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-16T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "5220b1187a985dca02",
+        "home_name": "EC Vitória",
+        "home_short": "VIT",
+        "away_id": "860a128afaf93b6350",
+        "away_name": "CR Vasco da Gama",
+        "away_short": "VAS",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "554929",
+        "updated_at": "2026-08-30T02:33:17.905814+00:00"
       }
     ],
     "match_sources": [
@@ -9594,6 +9614,12 @@
         "source": "ESPN",
         "provider_match_id": "401887774",
         "updated_at": "2026-08-29T15:34:41.782646+00:00"
+      },
+      {
+        "match_id": "554929",
+        "source": "Football-Data.org",
+        "provider_match_id": "554929",
+        "updated_at": "2026-08-30T02:33:17.905956+00:00"
       }
     ],
     "match_stats": [
@@ -365984,6 +366010,14 @@
         "last_call": "2026-08-29T15:36:15.474141+00:00",
         "remaining_day": null,
         "remaining_minute": null
+      },
+      {
+        "provider": "Football-Data.org",
+        "day_utc": "2026-08-30",
+        "calls": 1,
+        "last_call": "2026-08-30T02:33:17.894236+00:00",
+        "remaining_day": null,
+        "remaining_minute": null
       }
     ],
     "api_call_log": [
@@ -368181,6 +368215,11 @@
         "id": 439,
         "provider": "FotMob",
         "created_at": "2026-08-29T15:36:15.474141+00:00"
+      },
+      {
+        "id": 440,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-30T02:33:17.894236+00:00"
       }
     ],
     "ai_match_samples": [
