@@ -164,5 +164,67 @@ try:
     _db.get_players = get_players
     _db.player_history_summary = player_history_summary
 except Exception:
-    # Compatibilidade nunca deve impedir a aplicação de iniciar.
+    pass
+
+# Fallback individual para a Série B: Dados Futebol continua sendo a fonte
+# primária; FotMob só entra quando não há estatísticas individuais reais.
+try:
+    from core import history as _history
+    from providers.fotmob import FotMobProvider
+
+    _original_enrich_details = _history._enrich_match_details
+
+    def _enrich_with_player_fallback(match, stage='historico'):
+        result = _original_enrich_details(match, stage)
+        result = result if isinstance(result, dict) else {
+            'success': False, 'stats': 0, 'players': [], 'player_count': 0, 'player_stats': 0
+        }
+
+        existing = []
+        try:
+            existing = [
+                row for row in _db.get_players(match.get('id'))
+                if row.get('metric') != getattr(_history, 'PRESENCE_METRIC', '__player_presence__')
+                and row.get('value') is not None
+            ]
+        except Exception:
+            pass
+
+        if existing:
+            return result
+
+        try:
+            provider = FotMobProvider()
+            detail = provider.match_details(match)
+            players = detail.get('players') or []
+            pstats = detail.get('player_stats') or []
+            stats = detail.get('stats') or []
+            if players or pstats or stats:
+                a, b, c, presence = _history._persist_detail(match, provider, detail)
+                result['stats'] = int(result.get('stats') or 0) + a
+                result['player_count'] = int(result.get('player_count') or 0) + b
+                result['player_stats'] = int(result.get('player_stats') or 0) + c
+                if not result.get('players'):
+                    result['players'] = players
+                result['success'] = bool(result.get('success') or a or b or c or presence)
+                _db.add_diagnostic(
+                    'diagnostico_jogadores', 'OK',
+                    f'FotMob fallback: {a} estatísticas, {b} jogadores, {c} estatísticas individuais reais, {presence} presenças',
+                    provider.name, match.get('id')
+                )
+        except Exception as exc:
+            try:
+                _db.add_diagnostic(
+                    'diagnostico_jogadores', 'INFO',
+                    f'FotMob fallback não disponível para a partida: {exc}',
+                    'FotMob', match.get('id')
+                )
+            except Exception:
+                pass
+
+        return result
+
+    _history._enrich_match_details = _enrich_with_player_fallback
+    _history._enrich_historical_match = lambda match: _enrich_with_player_fallback(match, 'historico')
+except Exception:
     pass
