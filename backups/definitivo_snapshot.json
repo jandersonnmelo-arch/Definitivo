@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-30T23:22:54.703938+00:00",
+  "created_at": "2026-08-30T23:22:55.476898+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
-      },
-      {
         "key": "data_quality_v4",
         "value": "2026-08-30T23:22:54.511067+00:00"
+      },
+      {
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -515,7 +515,7 @@
         "sport": "Futebol",
         "name": "Barcelona",
         "normalized_name": "barcelona",
-        "updated_at": "2026-08-30T23:22:54.355373+00:00"
+        "updated_at": "2026-08-30T23:22:55.358521+00:00"
       },
       {
         "id": "9b2cbb4b6b5a74fcda",
@@ -2436,8 +2436,8 @@
       {
         "team_id": "192a5a24657fd487e0",
         "source": "ESPN",
-        "provider_team_id": "83",
-        "updated_at": "2026-08-30T23:22:52.783400+00:00"
+        "provider_team_id": "20091",
+        "updated_at": "2026-08-30T23:22:55.358588+00:00"
       },
       {
         "team_id": "b2676e62cf3368eb2d",
@@ -16614,6 +16614,422 @@
         "value": 9.0,
         "source": "ESPN",
         "observed_at": "2026-08-30T23:22:17.415866+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "fouls",
+        "value": 7.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358639+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "yellow_cards",
+        "value": 3.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358695+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "red_cards",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358723+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "offsides",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358735+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "corners",
+        "value": 12.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358746+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "saves",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358765+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "possession_pct",
+        "value": 78.2,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358776+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "shots",
+        "value": 27.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358792+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "shots_on_target",
+        "value": 12.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358803+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "shot_pct",
+        "value": 0.4,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358815+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "penalty_kick_goals",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358825+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "penalty_kick_shots",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358841+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "passes_completed",
+        "value": 704.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358871+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "pass_pct",
+        "value": 0.9,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358881+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "accurate_crosses",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358895+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "total_crosses",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358905+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "cross_pct",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358918+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "total_long_balls",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358938+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "accurate_long_balls",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358953+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "longball_pct",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358972+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "blocked_shots",
+        "value": 5.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.358982+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "effectivetackles",
+        "value": 7.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359000+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "tackle_pct",
+        "value": 0.9,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359009+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "interceptions",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359017+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "effective_clearance",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359028+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "total_clearance",
+        "value": 9.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359041+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "fouls",
+        "value": 4.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359051+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "yellow_cards",
+        "value": 2.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359061+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "red_cards",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359072+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "offsides",
+        "value": 3.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359091+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "corners",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359115+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "saves",
+        "value": 8.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359134+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "possession_pct",
+        "value": 21.8,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359145+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "shots",
+        "value": 3.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359162+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "shots_on_target",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359171+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "shot_pct",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359182+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "penalty_kick_goals",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359199+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "penalty_kick_shots",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359220+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "passes_completed",
+        "value": 197.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359255+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "pass_pct",
+        "value": 0.6,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359265+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "accurate_crosses",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359274+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "total_crosses",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359291+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "cross_pct",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359335+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "total_long_balls",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359357+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "accurate_long_balls",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359380+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "longball_pct",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359390+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "blocked_shots",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359398+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "effectivetackles",
+        "value": 21.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359435+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "tackle_pct",
+        "value": 0.7,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359453+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "interceptions",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359467+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "effective_clearance",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359481+00:00"
+      },
+      {
+        "match_id": "05afc76cfa420ad2a2d4",
+        "team_id": "0d43afa252704cb1b9",
+        "metric": "total_clearance",
+        "value": 26.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:22:55.359499+00:00"
       }
     ],
     "players": [
@@ -148677,6 +149093,15 @@
         "status": "OK",
         "message": "Reconciliação pós-coleta: equipes=2, jogadores=0, estatísticas migradas=0, duplicadas removidas=0, partidas Série B consolidadas=0",
         "created_at": "2026-08-30T23:22:54.518008+00:00"
+      },
+      {
+        "id": 121,
+        "match_id": "05afc76cfa420ad2a2d4",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "OK",
+        "message": "ESPN: jogadores=38, estatísticas individuais reais=532, presença=0, amostra=[Cata Coll, Renee Van Asten, Marta Torrejón, Irene Paredes, Lúa Arufe, Martina Fernández, Patri Guijarro, Sydney Schertenleib]",
+        "created_at": "2026-08-30T23:22:55.352481+00:00"
       }
     ],
     "api_usage": [
