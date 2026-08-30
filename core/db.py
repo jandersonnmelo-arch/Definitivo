@@ -207,7 +207,21 @@ def team_history(team_id,before_iso=None,limit=10):
         sql="SELECT * FROM matches WHERE (home_id=? OR away_id=?) AND status='FINISHED'";params=[team_id,team_id]
         if before_iso:sql+=" AND start_time<?";params.append(before_iso)
         sql+=" ORDER BY start_time DESC LIMIT ?";params.append(limit)
-        return [dict(r) for r in c.execute(sql,params).fetchall()]
+        rows=[dict(r) for r in c.execute(sql,params).fetchall()]
+        if len(rows)<limit:
+            existing={r.get("id") for r in rows}
+            fallback="""SELECT DISTINCT m.* FROM matches m JOIN match_stats s ON s.match_id=m.id WHERE s.team_id=? AND m.status='FINISHED'"""
+            fallback_params=[team_id]
+            if before_iso:fallback+=" AND m.start_time<?";fallback_params.append(before_iso)
+            fallback+=" ORDER BY m.start_time DESC LIMIT ?";fallback_params.append(limit)
+            for r in c.execute(fallback,fallback_params).fetchall():
+                item=dict(r)
+                if item.get("id") not in existing:
+                    rows.append(item);existing.add(item.get("id"))
+                    if len(rows)>=limit:break
+            rows.sort(key=lambda x:x.get("start_time") or "",reverse=True)
+            rows=rows[:limit]
+        return rows
     finally:c.close()
 def history_coverage(team_id,before_iso=None):return len(team_history(team_id,before_iso,10))
 
