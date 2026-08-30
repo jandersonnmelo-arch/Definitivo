@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-30T21:49:14.335600+00:00",
+  "created_at": "2026-08-30T23:20:50.561321+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-30T23:20:49.909410+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-30T21:48:57.932677+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -410,14 +410,14 @@
         "sport": "Futebol",
         "name": "Chapecoense AF",
         "normalized_name": "chapecoense af",
-        "updated_at": "2026-08-30T21:47:16.370154+00:00"
+        "updated_at": "2026-08-30T23:20:50.498717+00:00"
       },
       {
         "id": "9f563292bea3f50f07",
         "sport": "Futebol",
-        "name": "Bahia",
+        "name": "EC Bahia",
         "normalized_name": "bahia",
-        "updated_at": "2026-08-30T21:47:20.681195+00:00"
+        "updated_at": "2026-08-30T23:20:50.498660+00:00"
       },
       {
         "id": "bd162042f98d9dd2b6",
@@ -4796,6 +4796,26 @@
         "source": "ESPN",
         "provider_match_id": "401909065",
         "updated_at": "2026-08-30T21:47:48.691013+00:00"
+      },
+      {
+        "id": "554770",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-17T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "9f563292bea3f50f07",
+        "home_name": "EC Bahia",
+        "home_short": "BAH",
+        "away_id": "76ad233033c62ff5ca",
+        "away_name": "Chapecoense AF",
+        "away_short": "CHA",
+        "home_score": 2,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "554770",
+        "updated_at": "2026-08-30T23:20:50.498746+00:00"
       }
     ],
     "match_sources": [
@@ -5662,6 +5682,12 @@
         "source": "ESPN",
         "provider_match_id": "401909065",
         "updated_at": "2026-08-30T21:47:48.691099+00:00"
+      },
+      {
+        "match_id": "554770",
+        "source": "Football-Data.org",
+        "provider_match_id": "554770",
+        "updated_at": "2026-08-30T23:20:50.498828+00:00"
       }
     ],
     "match_stats": [
@@ -82380,8 +82406,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-08-30",
-        "calls": 3,
-        "last_call": "2026-08-30T21:47:48.214461+00:00",
+        "calls": 4,
+        "last_call": "2026-08-30T23:20:50.495854+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -83027,6 +83053,11 @@
         "id": 125,
         "provider": "FotMob",
         "created_at": "2026-08-30T21:48:55.894157+00:00"
+      },
+      {
+        "id": 126,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-30T23:20:50.495854+00:00"
       }
     ],
     "ai_match_samples": [
