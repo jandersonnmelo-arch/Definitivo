@@ -23,7 +23,11 @@ def providers():
 
 
 def collection_providers():
-    return [DadosFutebolProviderFixed(), FootballDataProvider(), ApiFutebolCalendarProviderFixed(), ESPNCalendarProvider()]
+    # Dados Futebol é a API exclusiva da Série B para ENRIQUECIMENTO.
+    # Ela não participa mais do calendário/coleta. O calendário da Série B
+    # vem das mesmas fontes gerais dos demais campeonatos, evitando chamadas
+    # repetidas ao endpoint exclusivo apenas para descobrir partidas.
+    return [FootballDataProvider(), ApiFutebolCalendarProviderFixed(), ESPNCalendarProvider()]
 
 
 def _with_player_presence(players, player_stats):
@@ -157,7 +161,9 @@ def enrich(matches):
     total = 0
     for m in matches:
         is_serie_b = 'serie b' in str(m.get('competition') or '').lower()
-        ordered = [DadosFutebolProviderFixed(), FotMobProvider(), ESPNProvider()] if is_serie_b else providers()
+        # REGRA DA SÉRIE B: somente Dados Futebol pode enriquecer.
+        # Não existe fallback para ESPN/FotMob/API-Football neste caso.
+        ordered = [DadosFutebolProviderFixed()] if is_serie_b else providers()
         primary_ok = False; accumulated_players = []; accumulated_player_stats = []; any_player_data = False
         for p in ordered:
             if not p.available(): continue
@@ -211,5 +217,6 @@ def enrich(matches):
         if accumulated_players:
             upsert_players(accumulated_players); upsert_player_stats(m['id'], accumulated_player_stats)
         if not primary_ok: add_diagnostic('enriquecimento','WARNING','Nenhum provider conseguiu concluir o enriquecimento direto.',None,m['id'])
-        total += _fill_missing_from_tribuna(m)
+        if not is_serie_b:
+            total += _fill_missing_from_tribuna(m)
     return total
