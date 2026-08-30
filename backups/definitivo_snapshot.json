@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-30T21:48:55.947301+00:00",
+  "created_at": "2026-08-30T21:48:57.937432+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-30T21:47:48.783519+00:00"
-      },
-      {
         "key": "schema",
         "value": "15"
+      },
+      {
+        "key": "data_quality_v4",
+        "value": "2026-08-30T21:48:57.932677+00:00"
       }
     ],
     "teams": [
@@ -4298,7 +4298,7 @@
         "updated_at": "2026-08-30T21:47:20.904634+00:00"
       },
       {
-        "id": "140c53a1ba1c90a092ed",
+        "id": "57953f922e00d6ab2aac",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
         "season": "2026",
@@ -4318,7 +4318,7 @@
         "updated_at": "2026-08-30T21:47:42.385033+00:00"
       },
       {
-        "id": "477d130dab18df80eda3",
+        "id": "9e8853bdc0b65ff9189f",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
         "season": "2026",
@@ -4698,7 +4698,7 @@
         "updated_at": "2026-08-30T21:47:48.305056+00:00"
       },
       {
-        "id": "5811baa54c47ffd60dc5",
+        "id": "1b63defe37307e871291",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
         "season": "2026",
@@ -5514,13 +5514,13 @@
         "updated_at": "2026-08-30T21:47:20.904704+00:00"
       },
       {
-        "match_id": "140c53a1ba1c90a092ed",
+        "match_id": "57953f922e00d6ab2aac",
         "source": "Football-Data.org",
         "provider_match_id": "554927",
         "updated_at": "2026-08-30T21:47:42.385109+00:00"
       },
       {
-        "match_id": "477d130dab18df80eda3",
+        "match_id": "9e8853bdc0b65ff9189f",
         "source": "Football-Data.org",
         "provider_match_id": "554939",
         "updated_at": "2026-08-30T21:47:42.393516+00:00"
@@ -5634,7 +5634,7 @@
         "updated_at": "2026-08-30T21:47:48.305148+00:00"
       },
       {
-        "match_id": "5811baa54c47ffd60dc5",
+        "match_id": "1b63defe37307e871291",
         "source": "Football-Data.org",
         "provider_match_id": "554977",
         "updated_at": "2026-08-30T21:47:48.319081+00:00"
@@ -11386,7 +11386,7 @@
         "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "218974",
-        "updated_at": "2026-08-30T21:48:55.161297+00:00"
+        "updated_at": "2026-08-30T21:48:57.927971+00:00"
       },
       {
         "id": "297365944594831758",
@@ -11693,15 +11693,6 @@
         "source": "ESPN",
         "provider_player_id": "115379",
         "updated_at": "2026-08-30T21:48:55.161158+00:00"
-      },
-      {
-        "id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "name": "Carlos Eduardo",
-        "position": "F",
-        "source": "ESPN",
-        "provider_player_id": "174782",
-        "updated_at": "2026-08-30T21:48:55.161222+00:00"
       },
       {
         "id": "333757824312489911",
@@ -30544,132 +30535,6 @@
       },
       {
         "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "appearances",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576464+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "fouls",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576495+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "was_fouled",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576509+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "own_goals",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576521+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "red_cards",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576533+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "sub_ins",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576545+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "yellow_cards",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576556+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "goals_conceded",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576567+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots_faced",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576581+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "assists",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576593+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "offsides",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576604+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots_on_target",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576628+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "goals",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576640+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:14.576651+00:00"
-      },
-      {
-        "match_id": "d1383fe15caebfb85ee0",
         "player_id": "54380267443058087",
         "team_id": "590c1e0cd091eaf7e1",
         "metric": "appearances",
@@ -48346,132 +48211,6 @@
       },
       {
         "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "appearances",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486777+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "fouls",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486790+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "was_fouled",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486802+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "own_goals",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486814+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "red_cards",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486827+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "sub_ins",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486838+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "yellow_cards",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486855+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "goals_conceded",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486868+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots_faced",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486880+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "assists",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486896+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "offsides",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486909+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots_on_target",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486921+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "goals",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486938+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:36.486953+00:00"
-      },
-      {
-        "match_id": "e1541299d52bf9b13057",
         "player_id": "494239523768710894",
         "team_id": "590c1e0cd091eaf7e1",
         "metric": "appearances",
@@ -65734,132 +65473,6 @@
       },
       {
         "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "appearances",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289675+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "fouls",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289688+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "was_fouled",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289700+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "own_goals",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289718+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "red_cards",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289733+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "sub_ins",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289745+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "yellow_cards",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289758+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "goals_conceded",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289772+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots_faced",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289786+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "assists",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289797+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "offsides",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289812+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots_on_target",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289825+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "goals",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289838+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots",
-        "value": 2.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:46.289855+00:00"
-      },
-      {
-        "match_id": "a53824f9e7adbad1b89d",
         "player_id": "54380267443058087",
         "team_id": "590c1e0cd091eaf7e1",
         "metric": "appearances",
@@ -77578,132 +77191,6 @@
       },
       {
         "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "appearances",
-        "value": 1.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223151+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "fouls",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223173+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "was_fouled",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223184+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "own_goals",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223199+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "red_cards",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223211+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "sub_ins",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223223+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "yellow_cards",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223238+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "goals_conceded",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223251+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots_faced",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223263+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "assists",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223274+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "offsides",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223294+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots_on_target",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223326+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "goals",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223342+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
-        "player_id": "824525699347784234",
-        "team_id": "590c1e0cd091eaf7e1",
-        "metric": "shots",
-        "value": 0.0,
-        "source": "ESPN",
-        "observed_at": "2026-08-30T21:48:55.223354+00:00"
-      },
-      {
-        "match_id": "20487afe7e8369827a89",
         "player_id": "503887116942868946",
         "team_id": "590c1e0cd091eaf7e1",
         "metric": "appearances",
@@ -82467,7 +81954,7 @@
       },
       {
         "id": 12,
-        "match_id": "5811baa54c47ffd60dc5",
+        "match_id": "1b63defe37307e871291",
         "source": "FotMob",
         "stage": "diagnostico_jogadores",
         "status": "ERROR",
