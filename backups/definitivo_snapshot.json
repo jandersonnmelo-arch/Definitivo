@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-30T13:12:35.146665+00:00",
+  "created_at": "2026-08-30T13:12:56.402902+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -18,14 +18,1043 @@
         "sport": "Futebol",
         "name": "Vasco",
         "normalized_name": "vasco",
-        "updated_at": "2026-08-30T13:12:35.138306+00:00"
+        "updated_at": "2026-08-30T13:12:44.264905+00:00"
       },
       {
         "id": "bff457c9c7114e8deb",
         "sport": "Futebol",
         "name": "Cruzeiro",
         "normalized_name": "cruzeiro",
-        "updated_at": "2026-08-30T13:12:35.138420+00:00"
+        "updated_at": "2026-08-30T13:12:44.248799+00:00"
+      },
+      {
+        "id": "45744402425d537790",
+        "sport": "Futebol",
+        "name": "FC Utrecht",
+        "normalized_name": "utrecht",
+        "updated_at": "2026-08-30T13:12:36.647033+00:00"
+      },
+      {
+        "id": "26900e06180b8fe85d",
+        "sport": "Futebol",
+        "name": "PSV",
+        "normalized_name": "psv",
+        "updated_at": "2026-08-30T13:12:36.667707+00:00"
+      },
+      {
+        "id": "e86198aa8453e37fa0",
+        "sport": "Futebol",
+        "name": "Feyenoord Rotterdam",
+        "normalized_name": "feyenoord rotterdam",
+        "updated_at": "2026-08-30T13:12:36.582134+00:00"
+      },
+      {
+        "id": "27f05ea30b92c43976",
+        "sport": "Futebol",
+        "name": "ADO Den Haag",
+        "normalized_name": "ado den haag",
+        "updated_at": "2026-08-30T13:12:36.189216+00:00"
+      },
+      {
+        "id": "b0b26971823bef1834",
+        "sport": "Futebol",
+        "name": "Willem II Tilburg",
+        "normalized_name": "willem ii tilburg",
+        "updated_at": "2026-08-30T13:12:36.700728+00:00"
+      },
+      {
+        "id": "8a6f7c789ee5df65f1",
+        "sport": "Futebol",
+        "name": "SC Heerenveen",
+        "normalized_name": "heerenveen",
+        "updated_at": "2026-08-30T13:12:36.193469+00:00"
+      },
+      {
+        "id": "19b18c8a61ace3568b",
+        "sport": "Futebol",
+        "name": "Chelsea FC",
+        "normalized_name": "chelsea",
+        "updated_at": "2026-08-30T13:12:36.197295+00:00"
+      },
+      {
+        "id": "07bb506f7ecae9cde3",
+        "sport": "Futebol",
+        "name": "Brighton & Hove Albion FC",
+        "normalized_name": "brighton hove albion",
+        "updated_at": "2026-08-30T13:12:36.560991+00:00"
+      },
+      {
+        "id": "2fce916caa377bf3be",
+        "sport": "Futebol",
+        "name": "Leeds United FC",
+        "normalized_name": "leeds united",
+        "updated_at": "2026-08-30T13:12:36.561047+00:00"
+      },
+      {
+        "id": "8fe8d6055f415c8a3a",
+        "sport": "Futebol",
+        "name": "Brentford FC",
+        "normalized_name": "brentford",
+        "updated_at": "2026-08-30T13:12:36.539667+00:00"
+      },
+      {
+        "id": "6870da2987d7be518e",
+        "sport": "Futebol",
+        "name": "Paris FC",
+        "normalized_name": "paris",
+        "updated_at": "2026-08-30T13:12:36.205900+00:00"
+      },
+      {
+        "id": "6873bd184c33922853",
+        "sport": "Futebol",
+        "name": "OGC Nice",
+        "normalized_name": "ogc nice",
+        "updated_at": "2026-08-30T13:12:36.687572+00:00"
+      },
+      {
+        "id": "beb50cb8f137d21e4d",
+        "sport": "Futebol",
+        "name": "Sunderland AFC",
+        "normalized_name": "sunderland afc",
+        "updated_at": "2026-08-30T13:12:36.539727+00:00"
+      },
+      {
+        "id": "c377470d7173311551",
+        "sport": "Futebol",
+        "name": "Fulham FC",
+        "normalized_name": "fulham",
+        "updated_at": "2026-08-30T13:12:36.546813+00:00"
+      },
+      {
+        "id": "5020b38d61f1ab71da",
+        "sport": "Futebol",
+        "name": "SC Freiburg",
+        "normalized_name": "freiburg",
+        "updated_at": "2026-08-30T13:12:36.525808+00:00"
+      },
+      {
+        "id": "8181209a55f1a2ab46",
+        "sport": "Futebol",
+        "name": "SV Werder Bremen",
+        "normalized_name": "sv werder bremen",
+        "updated_at": "2026-08-30T13:12:36.532671+00:00"
+      },
+      {
+        "id": "71cf9e0f0db3eef124",
+        "sport": "Futebol",
+        "name": "CA Paranaense",
+        "normalized_name": "paranaense",
+        "updated_at": "2026-08-30T13:12:36.219275+00:00"
+      },
+      {
+        "id": "0b87c3ffb6e9585c89",
+        "sport": "Futebol",
+        "name": "Fluminense",
+        "normalized_name": "fluminense",
+        "updated_at": "2026-08-30T13:12:44.018845+00:00"
+      },
+      {
+        "id": "0f1e622559c82b0e72",
+        "sport": "Futebol",
+        "name": "CD Nacional",
+        "normalized_name": "cd nacional",
+        "updated_at": "2026-08-30T13:12:36.453800+00:00"
+      },
+      {
+        "id": "266b2db4633cab2bdf",
+        "sport": "Futebol",
+        "name": "CF Estrela da Amadora",
+        "normalized_name": "estrela da amadora",
+        "updated_at": "2026-08-30T13:12:36.596044+00:00"
+      },
+      {
+        "id": "bc5ad0b51f6a24ca22",
+        "sport": "Futebol",
+        "name": "Telstar 1963",
+        "normalized_name": "telstar 1963",
+        "updated_at": "2026-08-30T13:12:36.228994+00:00"
+      },
+      {
+        "id": "d62aacc8afd1f7b904",
+        "sport": "Futebol",
+        "name": "AFC Ajax",
+        "normalized_name": "afc ajax",
+        "updated_at": "2026-08-30T13:12:36.667654+00:00"
+      },
+      {
+        "id": "041a41a9e5d46f7396",
+        "sport": "Futebol",
+        "name": "Real Madrid CF",
+        "normalized_name": "real madrid",
+        "updated_at": "2026-08-30T13:12:36.430171+00:00"
+      },
+      {
+        "id": "bd4aa81e67081b754d",
+        "sport": "Futebol",
+        "name": "Málaga CF",
+        "normalized_name": "malaga",
+        "updated_at": "2026-08-30T13:12:36.234019+00:00"
+      },
+      {
+        "id": "ccc8935de6e6e210aa",
+        "sport": "Futebol",
+        "name": "Stade Rennais FC 1901",
+        "normalized_name": "stade rennais 1901",
+        "updated_at": "2026-08-30T13:12:36.238965+00:00"
+      },
+      {
+        "id": "d89bfd7223ab6fc905",
+        "sport": "Futebol",
+        "name": "Le Mans FC",
+        "normalized_name": "le mans",
+        "updated_at": "2026-08-30T13:12:36.687627+00:00"
+      },
+      {
+        "id": "e67bc202ea288ba209",
+        "sport": "Futebol",
+        "name": "Manchester United FC",
+        "normalized_name": "manchester united",
+        "updated_at": "2026-08-30T13:12:36.243703+00:00"
+      },
+      {
+        "id": "c06044b267ac04e9cc",
+        "sport": "Futebol",
+        "name": "Ipswich Town FC",
+        "normalized_name": "ipswich town",
+        "updated_at": "2026-08-30T13:12:36.437454+00:00"
+      },
+      {
+        "id": "01fe9c9db8edf60ba6",
+        "sport": "Futebol",
+        "name": "FC Augsburg",
+        "normalized_name": "augsburg",
+        "updated_at": "2026-08-30T13:12:36.248896+00:00"
+      },
+      {
+        "id": "582e350ad18db82585",
+        "sport": "Futebol",
+        "name": "FC Schalke 04",
+        "normalized_name": "schalke 04",
+        "updated_at": "2026-08-30T13:12:36.625917+00:00"
+      },
+      {
+        "id": "c1407e379bdfd0f619",
+        "sport": "Futebol",
+        "name": "SSC Napoli",
+        "normalized_name": "ssc napoli",
+        "updated_at": "2026-08-30T13:12:36.619424+00:00"
+      },
+      {
+        "id": "30b7d3c7f0d40041e3",
+        "sport": "Futebol",
+        "name": "Como 1907",
+        "normalized_name": "como 1907",
+        "updated_at": "2026-08-30T13:12:36.422887+00:00"
+      },
+      {
+        "id": "88475f3398d621b540",
+        "sport": "Futebol",
+        "name": "Casa Pia AC",
+        "normalized_name": "casa pia",
+        "updated_at": "2026-08-30T13:12:36.259014+00:00"
+      },
+      {
+        "id": "aa92681ee7e28fc6c0",
+        "sport": "Futebol",
+        "name": "Moreirense FC",
+        "normalized_name": "moreirense",
+        "updated_at": "2026-08-30T13:12:36.460711+00:00"
+      },
+      {
+        "id": "261661bcea4cc81817",
+        "sport": "Futebol",
+        "name": "RC Deportivo La Coruña",
+        "normalized_name": "rc deportivo la coruna",
+        "updated_at": "2026-08-30T13:12:36.694089+00:00"
+      },
+      {
+        "id": "65aafafbe092920271",
+        "sport": "Futebol",
+        "name": "Valencia CF",
+        "normalized_name": "valencia",
+        "updated_at": "2026-08-30T13:12:36.264224+00:00"
+      },
+      {
+        "id": "7067d11cefa4d4b228",
+        "sport": "Futebol",
+        "name": "SC Cambuur-Leeuwarden",
+        "normalized_name": "cambuur leeuwarden",
+        "updated_at": "2026-08-30T13:12:36.269330+00:00"
+      },
+      {
+        "id": "e879416a3907d68df8",
+        "sport": "Futebol",
+        "name": "FC Twente '65",
+        "normalized_name": "twente 65",
+        "updated_at": "2026-08-30T13:12:36.269429+00:00"
+      },
+      {
+        "id": "f5396ab988c301d482",
+        "sport": "Futebol",
+        "name": "AS Monaco FC",
+        "normalized_name": "as monaco",
+        "updated_at": "2026-08-30T13:12:36.446018+00:00"
+      },
+      {
+        "id": "948c0bf86e8c7238af",
+        "sport": "Futebol",
+        "name": "Olympique de Marseille",
+        "normalized_name": "olympique de marseille",
+        "updated_at": "2026-08-30T13:12:36.284651+00:00"
+      },
+      {
+        "id": "6d9b6fb05ca9570165",
+        "sport": "Futebol",
+        "name": "Cagliari Calcio",
+        "normalized_name": "cagliari calcio",
+        "updated_at": "2026-08-30T13:12:36.289866+00:00"
+      },
+      {
+        "id": "a95f6b83f9390ff949",
+        "sport": "Futebol",
+        "name": "FC Internazionale Milano",
+        "normalized_name": "internazionale milano",
+        "updated_at": "2026-08-30T13:12:36.619369+00:00"
+      },
+      {
+        "id": "d340f22a1daf331bf5",
+        "sport": "Futebol",
+        "name": "SS Lazio",
+        "normalized_name": "ss lazio",
+        "updated_at": "2026-08-30T13:12:36.295187+00:00"
+      },
+      {
+        "id": "575ad11bbc7426759e",
+        "sport": "Futebol",
+        "name": "Genoa CFC",
+        "normalized_name": "genoa cfc",
+        "updated_at": "2026-08-30T13:12:36.422829+00:00"
+      },
+      {
+        "id": "178d02ecb65a6640af",
+        "sport": "Futebol",
+        "name": "Flamengo",
+        "normalized_name": "flamengo",
+        "updated_at": "2026-08-30T13:12:44.064356+00:00"
+      },
+      {
+        "id": "3b748ab976a81dcbcd",
+        "sport": "Futebol",
+        "name": "Botafogo",
+        "normalized_name": "botafogo",
+        "updated_at": "2026-08-30T13:12:44.073778+00:00"
+      },
+      {
+        "id": "7ce26de4dc6960a5e7",
+        "sport": "Futebol",
+        "name": "Corinthians",
+        "normalized_name": "corinthians",
+        "updated_at": "2026-08-30T13:12:44.082139+00:00"
+      },
+      {
+        "id": "f541c69bd4ee4d9180",
+        "sport": "Futebol",
+        "name": "Santos",
+        "normalized_name": "santos",
+        "updated_at": "2026-08-30T13:12:44.256741+00:00"
+      },
+      {
+        "id": "625066e0d50c1a6094",
+        "sport": "Futebol",
+        "name": "RC Celta de Vigo",
+        "normalized_name": "rc celta de vigo",
+        "updated_at": "2026-08-30T13:12:36.397595+00:00"
+      },
+      {
+        "id": "75f564e3d16ab2ec31",
+        "sport": "Futebol",
+        "name": "Athletic Club",
+        "normalized_name": "athletic club",
+        "updated_at": "2026-08-30T13:12:39.794170+00:00"
+      },
+      {
+        "id": "9934adef4d76a974df",
+        "sport": "Futebol",
+        "name": "FC Famalicão",
+        "normalized_name": "famalicao",
+        "updated_at": "2026-08-30T13:12:36.596102+00:00"
+      },
+      {
+        "id": "6cf03bde613d291b40",
+        "sport": "Futebol",
+        "name": "Gil Vicente FC",
+        "normalized_name": "gil vicente",
+        "updated_at": "2026-08-30T13:12:36.316724+00:00"
+      },
+      {
+        "id": "590c1e0cd091eaf7e1",
+        "sport": "Futebol",
+        "name": "Mirassol",
+        "normalized_name": "mirassol",
+        "updated_at": "2026-08-30T13:12:44.030985+00:00"
+      },
+      {
+        "id": "9a3c152825daa730cb",
+        "sport": "Futebol",
+        "name": "Palmeiras",
+        "normalized_name": "palmeiras",
+        "updated_at": "2026-08-30T13:12:44.256794+00:00"
+      },
+      {
+        "id": "c0eb691b941f2978d1",
+        "sport": "Futebol",
+        "name": "Grêmio",
+        "normalized_name": "gremio",
+        "updated_at": "2026-08-30T13:12:44.273065+00:00"
+      },
+      {
+        "id": "76ad233033c62ff5ca",
+        "sport": "Futebol",
+        "name": "Chapecoense AF",
+        "normalized_name": "chapecoense af",
+        "updated_at": "2026-08-30T13:12:36.327865+00:00"
+      },
+      {
+        "id": "9f563292bea3f50f07",
+        "sport": "Futebol",
+        "name": "Bahia",
+        "normalized_name": "bahia",
+        "updated_at": "2026-08-30T13:12:43.997268+00:00"
+      },
+      {
+        "id": "bd162042f98d9dd2b6",
+        "sport": "Futebol",
+        "name": "Internacional",
+        "normalized_name": "internacional",
+        "updated_at": "2026-08-30T13:12:44.273121+00:00"
+      },
+      {
+        "id": "fb5d9cd90e17b64f5f",
+        "sport": "Futebol",
+        "name": "US Lecce",
+        "normalized_name": "us lecce",
+        "updated_at": "2026-08-30T13:12:36.338974+00:00"
+      },
+      {
+        "id": "30a42a6fb391da1f6d",
+        "sport": "Futebol",
+        "name": "AS Roma",
+        "normalized_name": "as roma",
+        "updated_at": "2026-08-30T13:12:36.680556+00:00"
+      },
+      {
+        "id": "00c50df0c16981dc92",
+        "sport": "Futebol",
+        "name": "CA Osasuna",
+        "normalized_name": "osasuna",
+        "updated_at": "2026-08-30T13:12:36.344557+00:00"
+      },
+      {
+        "id": "42a5202c26440e05e2",
+        "sport": "Futebol",
+        "name": "Getafe CF",
+        "normalized_name": "getafe",
+        "updated_at": "2026-08-30T13:12:36.344667+00:00"
+      },
+      {
+        "id": "99cc461eeaf7e2306d",
+        "sport": "Futebol",
+        "name": "Atalanta BC",
+        "normalized_name": "atalanta bc",
+        "updated_at": "2026-08-30T13:12:36.680612+00:00"
+      },
+      {
+        "id": "fb7723b516c14d5dc0",
+        "sport": "Futebol",
+        "name": "Bologna FC 1909",
+        "normalized_name": "bologna 1909",
+        "updated_at": "2026-08-30T13:12:36.350716+00:00"
+      },
+      {
+        "id": "b34a03c29de23d2aa1",
+        "sport": "Futebol",
+        "name": "Aston Villa FC",
+        "normalized_name": "aston villa",
+        "updated_at": "2026-08-30T13:12:36.632955+00:00"
+      },
+      {
+        "id": "11772e395749fdc0f9",
+        "sport": "Futebol",
+        "name": "Arsenal FC",
+        "normalized_name": "arsenal",
+        "updated_at": "2026-08-30T13:12:36.356443+00:00"
+      },
+      {
+        "id": "7d9c345405bc64d7b6",
+        "sport": "Futebol",
+        "name": "Sporting Clube de Braga",
+        "normalized_name": "sporting clube de braga",
+        "updated_at": "2026-08-30T13:12:36.654014+00:00"
+      },
+      {
+        "id": "5220b1187a985dca02",
+        "sport": "Futebol",
+        "name": "Vitória",
+        "normalized_name": "vitoria",
+        "updated_at": "2026-08-30T13:12:44.264800+00:00"
+      },
+      {
+        "id": "6514e9ded380962790",
+        "sport": "Futebol",
+        "name": "Sport Lisboa e Benfica",
+        "normalized_name": "sport lisboa e benfica",
+        "updated_at": "2026-08-30T13:12:36.660889+00:00"
+      },
+      {
+        "id": "9130df838c83ad844a",
+        "sport": "Futebol",
+        "name": "GD Estoril Praia",
+        "normalized_name": "gd estoril praia",
+        "updated_at": "2026-08-30T13:12:36.367472+00:00"
+      },
+      {
+        "id": "192a5a24657fd487e0",
+        "sport": "Futebol",
+        "name": "FC Barcelona",
+        "normalized_name": "barcelona",
+        "updated_at": "2026-08-30T13:12:36.373585+00:00"
+      },
+      {
+        "id": "9b2cbb4b6b5a74fcda",
+        "sport": "Futebol",
+        "name": "Rayo Vallecano de Madrid",
+        "normalized_name": "rayo vallecano de madrid",
+        "updated_at": "2026-08-30T13:12:36.639956+00:00"
+      },
+      {
+        "id": "7f612db037dc322ddd",
+        "sport": "Futebol",
+        "name": "Clube do Remo",
+        "normalized_name": "clube do remo",
+        "updated_at": "2026-08-30T13:12:36.379595+00:00"
+      },
+      {
+        "id": "7db41a535db1869ad4",
+        "sport": "Futebol",
+        "name": "Coritiba FBC",
+        "normalized_name": "coritiba fbc",
+        "updated_at": "2026-08-30T13:12:36.379712+00:00"
+      },
+      {
+        "id": "0b06e9b9967767637f",
+        "sport": "Futebol",
+        "name": "Toulouse FC",
+        "normalized_name": "toulouse",
+        "updated_at": "2026-08-30T13:12:36.391503+00:00"
+      },
+      {
+        "id": "4dff16d93d91d0a06a",
+        "sport": "Futebol",
+        "name": "Lille OSC",
+        "normalized_name": "lille osc",
+        "updated_at": "2026-08-30T13:12:36.391634+00:00"
+      },
+      {
+        "id": "719084a08a71e4d678",
+        "sport": "Futebol",
+        "name": "Real Sociedad de Fútbol",
+        "normalized_name": "real sociedad de futbol",
+        "updated_at": "2026-08-30T13:12:36.397449+00:00"
+      },
+      {
+        "id": "f7715410c3c77c20c4",
+        "sport": "Futebol",
+        "name": "Olympique Lyonnais",
+        "normalized_name": "olympique lyonnais",
+        "updated_at": "2026-08-30T13:12:36.403358+00:00"
+      },
+      {
+        "id": "d3a0101b081da80039",
+        "sport": "Futebol",
+        "name": "AJ Auxerre",
+        "normalized_name": "aj auxerre",
+        "updated_at": "2026-08-30T13:12:36.403459+00:00"
+      },
+      {
+        "id": "e7f5902c9d2e4f2e34",
+        "sport": "Futebol",
+        "name": "Sparta Rotterdam",
+        "normalized_name": "sparta rotterdam",
+        "updated_at": "2026-08-30T13:12:36.409563+00:00"
+      },
+      {
+        "id": "064dc9921966a25f57",
+        "sport": "Futebol",
+        "name": "PEC Zwolle",
+        "normalized_name": "pec zwolle",
+        "updated_at": "2026-08-30T13:12:36.409667+00:00"
+      },
+      {
+        "id": "df314da1cb7a207a06",
+        "sport": "Futebol",
+        "name": "VfB Stuttgart",
+        "normalized_name": "vfb stuttgart",
+        "updated_at": "2026-08-30T13:12:36.415963+00:00"
+      },
+      {
+        "id": "5c56978c1e3101b3e2",
+        "sport": "Futebol",
+        "name": "1. FC Köln",
+        "normalized_name": "1 koln",
+        "updated_at": "2026-08-30T13:12:36.416069+00:00"
+      },
+      {
+        "id": "f8ba9ee2acf6651c58",
+        "sport": "Futebol",
+        "name": "Real Betis Balompié",
+        "normalized_name": "real betis balompie",
+        "updated_at": "2026-08-30T13:12:36.430068+00:00"
+      },
+      {
+        "id": "acf77e31bd33648cc7",
+        "sport": "Futebol",
+        "name": "Liverpool FC",
+        "normalized_name": "liverpool",
+        "updated_at": "2026-08-30T13:12:36.437572+00:00"
+      },
+      {
+        "id": "69dee0aaa3e7b50573",
+        "sport": "Futebol",
+        "name": "Paris Saint-Germain FC",
+        "normalized_name": "paris saint germain",
+        "updated_at": "2026-08-30T13:12:36.445740+00:00"
+      },
+      {
+        "id": "99d3f60a330dd37181",
+        "sport": "Futebol",
+        "name": "Sporting Clube de Portugal",
+        "normalized_name": "sporting clube de portugal",
+        "updated_at": "2026-08-30T13:12:36.453682+00:00"
+      },
+      {
+        "id": "64e919a47dc6d5e97d",
+        "sport": "Futebol",
+        "name": "FC Porto",
+        "normalized_name": "porto",
+        "updated_at": "2026-08-30T13:12:36.460608+00:00"
+      },
+      {
+        "id": "92596fc166955d857f",
+        "sport": "Futebol",
+        "name": "Newcastle United FC",
+        "normalized_name": "newcastle united",
+        "updated_at": "2026-08-30T13:12:36.467217+00:00"
+      },
+      {
+        "id": "a6d70aa2a233a12551",
+        "sport": "Futebol",
+        "name": "AFC Bournemouth",
+        "normalized_name": "afc bournemouth",
+        "updated_at": "2026-08-30T13:12:36.467320+00:00"
+      },
+      {
+        "id": "68d1e8d49c1c8fefc6",
+        "sport": "Futebol",
+        "name": "ACF Fiorentina",
+        "normalized_name": "acf fiorentina",
+        "updated_at": "2026-08-30T13:12:36.474345+00:00"
+      },
+      {
+        "id": "5b876bf53ec6c12639",
+        "sport": "Futebol",
+        "name": "Torino FC",
+        "normalized_name": "torino",
+        "updated_at": "2026-08-30T13:12:36.474449+00:00"
+      },
+      {
+        "id": "02c67b3096b32878b0",
+        "sport": "Futebol",
+        "name": "Bayer 04 Leverkusen",
+        "normalized_name": "bayer 04 leverkusen",
+        "updated_at": "2026-08-30T13:12:36.504053+00:00"
+      },
+      {
+        "id": "0ab4d3bec69c195da4",
+        "sport": "Futebol",
+        "name": "1. FC Union Berlin",
+        "normalized_name": "1 union berlin",
+        "updated_at": "2026-08-30T13:12:36.504160+00:00"
+      },
+      {
+        "id": "dba1ba25341bde4013",
+        "sport": "Futebol",
+        "name": "Borussia Mönchengladbach",
+        "normalized_name": "borussia monchengladbach",
+        "updated_at": "2026-08-30T13:12:36.511206+00:00"
+      },
+      {
+        "id": "eee5e68b4c7e2f2a7a",
+        "sport": "Futebol",
+        "name": "SV 07 Elversberg",
+        "normalized_name": "sv 07 elversberg",
+        "updated_at": "2026-08-30T13:12:36.511343+00:00"
+      },
+      {
+        "id": "f38eeeaa2ed201c043",
+        "sport": "Futebol",
+        "name": "TSG 1899 Hoffenheim",
+        "normalized_name": "tsg 1899 hoffenheim",
+        "updated_at": "2026-08-30T13:12:36.518263+00:00"
+      },
+      {
+        "id": "67ce44e1c93339b287",
+        "sport": "Futebol",
+        "name": "Borussia Dortmund",
+        "normalized_name": "borussia dortmund",
+        "updated_at": "2026-08-30T13:12:36.518376+00:00"
+      },
+      {
+        "id": "50f6b971769258b9c1",
+        "sport": "Futebol",
+        "name": "SC Paderborn 07",
+        "normalized_name": "paderborn 07",
+        "updated_at": "2026-08-30T13:12:36.525697+00:00"
+      },
+      {
+        "id": "01ec1e8f3a4620b60c",
+        "sport": "Futebol",
+        "name": "RB Leipzig",
+        "normalized_name": "rb leipzig",
+        "updated_at": "2026-08-30T13:12:36.532738+00:00"
+      },
+      {
+        "id": "cb2305824ed37603ea",
+        "sport": "Futebol",
+        "name": "Crystal Palace FC",
+        "normalized_name": "crystal palace",
+        "updated_at": "2026-08-30T13:12:36.546878+00:00"
+      },
+      {
+        "id": "630e0be9d7e0b6d045",
+        "sport": "Futebol",
+        "name": "Manchester City FC",
+        "normalized_name": "manchester city",
+        "updated_at": "2026-08-30T13:12:36.553719+00:00"
+      },
+      {
+        "id": "c6ce9442c38867d5a3",
+        "sport": "Futebol",
+        "name": "Coventry City FC",
+        "normalized_name": "coventry city",
+        "updated_at": "2026-08-30T13:12:36.553835+00:00"
+      },
+      {
+        "id": "b8fd7430177f4e6a06",
+        "sport": "Futebol",
+        "name": "Nottingham Forest FC",
+        "normalized_name": "nottingham forest",
+        "updated_at": "2026-08-30T13:12:36.568337+00:00"
+      },
+      {
+        "id": "9f1cfe532350c1b92f",
+        "sport": "Futebol",
+        "name": "Tottenham Hotspur FC",
+        "normalized_name": "tottenham hotspur",
+        "updated_at": "2026-08-30T13:12:36.568450+00:00"
+      },
+      {
+        "id": "f5fd03ff72746d9a82",
+        "sport": "Futebol",
+        "name": "Club Atlético de Madrid",
+        "normalized_name": "club atletico de madrid",
+        "updated_at": "2026-08-30T13:12:36.575409+00:00"
+      },
+      {
+        "id": "8982d740c26b9b26df",
+        "sport": "Futebol",
+        "name": "NEC",
+        "normalized_name": "nec",
+        "updated_at": "2026-08-30T13:12:36.582033+00:00"
+      },
+      {
+        "id": "7aec4ac763fdfc9343",
+        "sport": "Futebol",
+        "name": "Racing Club de Lens",
+        "normalized_name": "racing club de lens",
+        "updated_at": "2026-08-30T13:12:36.602337+00:00"
+      },
+      {
+        "id": "c533f66b1dba6e47b3",
+        "sport": "Futebol",
+        "name": "FC Lorient",
+        "normalized_name": "lorient",
+        "updated_at": "2026-08-30T13:12:36.602442+00:00"
+      },
+      {
+        "id": "2be6218d69d398541a",
+        "sport": "Futebol",
+        "name": "FC Bayern München",
+        "normalized_name": "bayern munchen",
+        "updated_at": "2026-08-30T13:12:36.625984+00:00"
+      },
+      {
+        "id": "2629095d2fea3c5485",
+        "sport": "Futebol",
+        "name": "Hull City AFC",
+        "normalized_name": "hull city afc",
+        "updated_at": "2026-08-30T13:12:36.632854+00:00"
+      },
+      {
+        "id": "78f7aceccec7234876",
+        "sport": "Futebol",
+        "name": "Real Racing Club de Santander",
+        "normalized_name": "real racing club de santander",
+        "updated_at": "2026-08-30T13:12:36.640022+00:00"
+      },
+      {
+        "id": "b75aafc430316c0f6b",
+        "sport": "Futebol",
+        "name": "Go Ahead Eagles",
+        "normalized_name": "go ahead eagles",
+        "updated_at": "2026-08-30T13:12:36.647098+00:00"
+      },
+      {
+        "id": "e0e0e8a58e3c34ec71",
+        "sport": "Futebol",
+        "name": "FC Alverca",
+        "normalized_name": "alverca",
+        "updated_at": "2026-08-30T13:12:36.653914+00:00"
+      },
+      {
+        "id": "4035e3225f10998c0d",
+        "sport": "Futebol",
+        "name": "CS Marítimo",
+        "normalized_name": "cs maritimo",
+        "updated_at": "2026-08-30T13:12:36.660785+00:00"
+      },
+      {
+        "id": "db41b510a99f845322",
+        "sport": "Futebol",
+        "name": "Le Havre AC",
+        "normalized_name": "le havre",
+        "updated_at": "2026-08-30T13:12:36.674060+00:00"
+      },
+      {
+        "id": "de0e72dd1ec0ef55f7",
+        "sport": "Futebol",
+        "name": "Stade Brestois 29",
+        "normalized_name": "stade brestois 29",
+        "updated_at": "2026-08-30T13:12:36.674164+00:00"
+      },
+      {
+        "id": "edd16a2b82f0664400",
+        "sport": "Futebol",
+        "name": "Villarreal CF",
+        "normalized_name": "villarreal",
+        "updated_at": "2026-08-30T13:12:36.693985+00:00"
+      },
+      {
+        "id": "e935532b54e93aed78",
+        "sport": "Futebol",
+        "name": "SBV Excelsior",
+        "normalized_name": "sbv excelsior",
+        "updated_at": "2026-08-30T13:12:36.700799+00:00"
+      },
+      {
+        "id": "c70e342520628d90be",
+        "sport": "Futebol",
+        "name": "Bragantino",
+        "normalized_name": "bragantino",
+        "updated_at": "2026-08-30T13:12:43.997154+00:00"
+      },
+      {
+        "id": "09a7997a6af73b43f7",
+        "sport": "Futebol",
+        "name": "São Paulo",
+        "normalized_name": "sao paulo",
+        "updated_at": "2026-08-30T13:12:44.006727+00:00"
+      },
+      {
+        "id": "cfee4cccf2f07aeae1",
+        "sport": "Futebol",
+        "name": "CA Mineiro",
+        "normalized_name": "mineiro",
+        "updated_at": "2026-08-30T13:12:36.714290+00:00"
+      },
+      {
+        "id": "d7e1cc423a168816ff",
+        "sport": "Futebol",
+        "name": "América-MG",
+        "normalized_name": "america mg",
+        "updated_at": "2026-08-30T13:12:44.177296+00:00"
+      },
+      {
+        "id": "d2b3e32f8c4cd7c39a",
+        "sport": "Futebol",
+        "name": "Ponte Preta",
+        "normalized_name": "ponte preta",
+        "updated_at": "2026-08-30T13:12:44.240599+00:00"
+      },
+      {
+        "id": "7de440a2a67a1c06fc",
+        "sport": "Futebol",
+        "name": "Avaí",
+        "normalized_name": "avai",
+        "updated_at": "2026-08-30T13:12:44.195259+00:00"
+      },
+      {
+        "id": "1ee83309d2aaad6cb2",
+        "sport": "Futebol",
+        "name": "Atlético-GO",
+        "normalized_name": "atletico go",
+        "updated_at": "2026-08-30T13:12:44.216003+00:00"
+      },
+      {
+        "id": "be09e06efb37d00134",
+        "sport": "Futebol",
+        "name": "CRB",
+        "normalized_name": "crb",
+        "updated_at": "2026-08-30T13:12:44.177230+00:00"
+      },
+      {
+        "id": "2261634969adb266d9",
+        "sport": "Futebol",
+        "name": "Criciúma",
+        "normalized_name": "criciuma",
+        "updated_at": "2026-08-30T13:12:44.159135+00:00"
+      },
+      {
+        "id": "207f17fd2b1750e642",
+        "sport": "Futebol",
+        "name": "Vila Nova",
+        "normalized_name": "vila nova",
+        "updated_at": "2026-08-30T13:12:44.168439+00:00"
+      },
+      {
+        "id": "2071f11a627bf816bf",
+        "sport": "Futebol",
+        "name": "Ceará",
+        "normalized_name": "ceara",
+        "updated_at": "2026-08-30T13:12:44.224083+00:00"
+      },
+      {
+        "id": "07673e12c1119a155f",
+        "sport": "Futebol",
+        "name": "Fortaleza",
+        "normalized_name": "fortaleza",
+        "updated_at": "2026-08-30T13:12:44.186410+00:00"
+      },
+      {
+        "id": "fc545f03a62c420875",
+        "sport": "Futebol",
+        "name": "Operário PR",
+        "normalized_name": "operario pr",
+        "updated_at": "2026-08-30T13:12:44.232492+00:00"
+      },
+      {
+        "id": "96d118a7e4b9df7bcc",
+        "sport": "Futebol",
+        "name": "Londrina",
+        "normalized_name": "londrina",
+        "updated_at": "2026-08-30T13:12:44.232437+00:00"
+      },
+      {
+        "id": "ac643ac98a96d64adc",
+        "sport": "Futebol",
+        "name": "Juventude",
+        "normalized_name": "juventude",
+        "updated_at": "2026-08-30T13:12:44.215938+00:00"
+      },
+      {
+        "id": "44a17e6df941ebfe60",
+        "sport": "Futebol",
+        "name": "Náutico",
+        "normalized_name": "nautico",
+        "updated_at": "2026-08-30T13:12:44.149082+00:00"
+      },
+      {
+        "id": "dcda99a2b28eaa1280",
+        "sport": "Futebol",
+        "name": "Botafogo-SP",
+        "normalized_name": "botafogo sp",
+        "updated_at": "2026-08-30T13:12:44.149226+00:00"
+      },
+      {
+        "id": "173dab27777d6de841",
+        "sport": "Futebol",
+        "name": "Cuiabá",
+        "normalized_name": "cuiaba",
+        "updated_at": "2026-08-30T13:12:44.159202+00:00"
+      },
+      {
+        "id": "289edf6b1fe9585e70",
+        "sport": "Futebol",
+        "name": "Novorizontino",
+        "normalized_name": "novorizontino",
+        "updated_at": "2026-08-30T13:12:44.195156+00:00"
+      },
+      {
+        "id": "bf998c2b2e99fc9938",
+        "sport": "Futebol",
+        "name": "Goiás",
+        "normalized_name": "goias",
+        "updated_at": "2026-08-30T13:12:44.186303+00:00"
+      },
+      {
+        "id": "41fc766556d4af4ef3",
+        "sport": "Futebol",
+        "name": "Sport",
+        "normalized_name": "sport",
+        "updated_at": "2026-08-30T13:12:44.224147+00:00"
+      },
+      {
+        "id": "a7fe1b99a4d517b578",
+        "sport": "Futebol",
+        "name": "São Bernardo",
+        "normalized_name": "sao bernardo",
+        "updated_at": "2026-08-30T13:12:44.240670+00:00"
+      },
+      {
+        "id": "20e39c11167389f209",
+        "sport": "Futebol",
+        "name": "Athletico-PR",
+        "normalized_name": "athletico pr",
+        "updated_at": "2026-08-30T13:12:44.043287+00:00"
+      },
+      {
+        "id": "a5aeb62b91fd20b43b",
+        "sport": "Futebol",
+        "name": "Chapecoense",
+        "normalized_name": "chapecoense",
+        "updated_at": "2026-08-30T13:12:44.082196+00:00"
+      },
+      {
+        "id": "85fe60cf642c9168d5",
+        "sport": "Futebol",
+        "name": "Remo",
+        "normalized_name": "remo",
+        "updated_at": "2026-08-30T13:12:44.064299+00:00"
+      },
+      {
+        "id": "ae486e255b7574cdfc",
+        "sport": "Futebol",
+        "name": "Coritiba",
+        "normalized_name": "coritiba",
+        "updated_at": "2026-08-30T13:12:44.030912+00:00"
+      },
+      {
+        "id": "eae0e92669d99715d5",
+        "sport": "Futebol",
+        "name": "Atlético-MG",
+        "normalized_name": "atletico mg",
+        "updated_at": "2026-08-30T13:12:44.248744+00:00"
+      },
+      {
+        "id": "f0744d7d6c6fa9d40a",
+        "sport": "Futebol",
+        "name": "Athletic",
+        "normalized_name": "athletic",
+        "updated_at": "2026-08-30T13:12:44.168334+00:00"
       }
     ],
     "team_sources": [
@@ -40,6 +1069,1098 @@
         "source": "Football-Data.org",
         "provider_team_id": "1771",
         "updated_at": "2026-08-30T13:12:35.138430+00:00"
+      },
+      {
+        "team_id": "45744402425d537790",
+        "source": "Football-Data.org",
+        "provider_team_id": "676",
+        "updated_at": "2026-08-30T13:12:36.184564+00:00"
+      },
+      {
+        "team_id": "26900e06180b8fe85d",
+        "source": "Football-Data.org",
+        "provider_team_id": "674",
+        "updated_at": "2026-08-30T13:12:36.184631+00:00"
+      },
+      {
+        "team_id": "e86198aa8453e37fa0",
+        "source": "Football-Data.org",
+        "provider_team_id": "675",
+        "updated_at": "2026-08-30T13:12:36.189165+00:00"
+      },
+      {
+        "team_id": "27f05ea30b92c43976",
+        "source": "Football-Data.org",
+        "provider_team_id": "680",
+        "updated_at": "2026-08-30T13:12:36.189225+00:00"
+      },
+      {
+        "team_id": "b0b26971823bef1834",
+        "source": "Football-Data.org",
+        "provider_team_id": "672",
+        "updated_at": "2026-08-30T13:12:36.193418+00:00"
+      },
+      {
+        "team_id": "8a6f7c789ee5df65f1",
+        "source": "Football-Data.org",
+        "provider_team_id": "673",
+        "updated_at": "2026-08-30T13:12:36.193477+00:00"
+      },
+      {
+        "team_id": "19b18c8a61ace3568b",
+        "source": "Football-Data.org",
+        "provider_team_id": "61",
+        "updated_at": "2026-08-30T13:12:36.197341+00:00"
+      },
+      {
+        "team_id": "07bb506f7ecae9cde3",
+        "source": "Football-Data.org",
+        "provider_team_id": "397",
+        "updated_at": "2026-08-30T13:12:36.197402+00:00"
+      },
+      {
+        "team_id": "2fce916caa377bf3be",
+        "source": "Football-Data.org",
+        "provider_team_id": "341",
+        "updated_at": "2026-08-30T13:12:36.201906+00:00"
+      },
+      {
+        "team_id": "8fe8d6055f415c8a3a",
+        "source": "Football-Data.org",
+        "provider_team_id": "402",
+        "updated_at": "2026-08-30T13:12:36.201967+00:00"
+      },
+      {
+        "team_id": "6870da2987d7be518e",
+        "source": "Football-Data.org",
+        "provider_team_id": "1045",
+        "updated_at": "2026-08-30T13:12:36.205946+00:00"
+      },
+      {
+        "team_id": "6873bd184c33922853",
+        "source": "Football-Data.org",
+        "provider_team_id": "522",
+        "updated_at": "2026-08-30T13:12:36.206007+00:00"
+      },
+      {
+        "team_id": "beb50cb8f137d21e4d",
+        "source": "Football-Data.org",
+        "provider_team_id": "71",
+        "updated_at": "2026-08-30T13:12:36.210145+00:00"
+      },
+      {
+        "team_id": "c377470d7173311551",
+        "source": "Football-Data.org",
+        "provider_team_id": "63",
+        "updated_at": "2026-08-30T13:12:36.210205+00:00"
+      },
+      {
+        "team_id": "5020b38d61f1ab71da",
+        "source": "Football-Data.org",
+        "provider_team_id": "17",
+        "updated_at": "2026-08-30T13:12:36.214646+00:00"
+      },
+      {
+        "team_id": "8181209a55f1a2ab46",
+        "source": "Football-Data.org",
+        "provider_team_id": "12",
+        "updated_at": "2026-08-30T13:12:36.214708+00:00"
+      },
+      {
+        "team_id": "71cf9e0f0db3eef124",
+        "source": "Football-Data.org",
+        "provider_team_id": "1768",
+        "updated_at": "2026-08-30T13:12:36.219323+00:00"
+      },
+      {
+        "team_id": "0b87c3ffb6e9585c89",
+        "source": "Football-Data.org",
+        "provider_team_id": "1765",
+        "updated_at": "2026-08-30T13:12:36.219385+00:00"
+      },
+      {
+        "team_id": "0f1e622559c82b0e72",
+        "source": "Football-Data.org",
+        "provider_team_id": "5529",
+        "updated_at": "2026-08-30T13:12:36.224135+00:00"
+      },
+      {
+        "team_id": "266b2db4633cab2bdf",
+        "source": "Football-Data.org",
+        "provider_team_id": "9136",
+        "updated_at": "2026-08-30T13:12:36.224201+00:00"
+      },
+      {
+        "team_id": "bc5ad0b51f6a24ca22",
+        "source": "Football-Data.org",
+        "provider_team_id": "1912",
+        "updated_at": "2026-08-30T13:12:36.229039+00:00"
+      },
+      {
+        "team_id": "d62aacc8afd1f7b904",
+        "source": "Football-Data.org",
+        "provider_team_id": "678",
+        "updated_at": "2026-08-30T13:12:36.229100+00:00"
+      },
+      {
+        "team_id": "041a41a9e5d46f7396",
+        "source": "Football-Data.org",
+        "provider_team_id": "86",
+        "updated_at": "2026-08-30T13:12:36.233965+00:00"
+      },
+      {
+        "team_id": "bd4aa81e67081b754d",
+        "source": "Football-Data.org",
+        "provider_team_id": "84",
+        "updated_at": "2026-08-30T13:12:36.234028+00:00"
+      },
+      {
+        "team_id": "ccc8935de6e6e210aa",
+        "source": "Football-Data.org",
+        "provider_team_id": "529",
+        "updated_at": "2026-08-30T13:12:36.239011+00:00"
+      },
+      {
+        "team_id": "d89bfd7223ab6fc905",
+        "source": "Football-Data.org",
+        "provider_team_id": "535",
+        "updated_at": "2026-08-30T13:12:36.239073+00:00"
+      },
+      {
+        "team_id": "e67bc202ea288ba209",
+        "source": "Football-Data.org",
+        "provider_team_id": "66",
+        "updated_at": "2026-08-30T13:12:36.243750+00:00"
+      },
+      {
+        "team_id": "c06044b267ac04e9cc",
+        "source": "Football-Data.org",
+        "provider_team_id": "349",
+        "updated_at": "2026-08-30T13:12:36.243811+00:00"
+      },
+      {
+        "team_id": "01fe9c9db8edf60ba6",
+        "source": "Football-Data.org",
+        "provider_team_id": "16",
+        "updated_at": "2026-08-30T13:12:36.248941+00:00"
+      },
+      {
+        "team_id": "582e350ad18db82585",
+        "source": "Football-Data.org",
+        "provider_team_id": "6",
+        "updated_at": "2026-08-30T13:12:36.249004+00:00"
+      },
+      {
+        "team_id": "c1407e379bdfd0f619",
+        "source": "Football-Data.org",
+        "provider_team_id": "113",
+        "updated_at": "2026-08-30T13:12:36.254195+00:00"
+      },
+      {
+        "team_id": "30b7d3c7f0d40041e3",
+        "source": "Football-Data.org",
+        "provider_team_id": "7397",
+        "updated_at": "2026-08-30T13:12:36.254258+00:00"
+      },
+      {
+        "team_id": "88475f3398d621b540",
+        "source": "Football-Data.org",
+        "provider_team_id": "6618",
+        "updated_at": "2026-08-30T13:12:36.259060+00:00"
+      },
+      {
+        "team_id": "aa92681ee7e28fc6c0",
+        "source": "Football-Data.org",
+        "provider_team_id": "583",
+        "updated_at": "2026-08-30T13:12:36.259122+00:00"
+      },
+      {
+        "team_id": "261661bcea4cc81817",
+        "source": "Football-Data.org",
+        "provider_team_id": "560",
+        "updated_at": "2026-08-30T13:12:36.264172+00:00"
+      },
+      {
+        "team_id": "65aafafbe092920271",
+        "source": "Football-Data.org",
+        "provider_team_id": "95",
+        "updated_at": "2026-08-30T13:12:36.264233+00:00"
+      },
+      {
+        "team_id": "7067d11cefa4d4b228",
+        "source": "Football-Data.org",
+        "provider_team_id": "1909",
+        "updated_at": "2026-08-30T13:12:36.269375+00:00"
+      },
+      {
+        "team_id": "e879416a3907d68df8",
+        "source": "Football-Data.org",
+        "provider_team_id": "666",
+        "updated_at": "2026-08-30T13:12:36.269439+00:00"
+      },
+      {
+        "team_id": "f5396ab988c301d482",
+        "source": "Football-Data.org",
+        "provider_team_id": "548",
+        "updated_at": "2026-08-30T13:12:36.284597+00:00"
+      },
+      {
+        "team_id": "948c0bf86e8c7238af",
+        "source": "Football-Data.org",
+        "provider_team_id": "516",
+        "updated_at": "2026-08-30T13:12:36.284661+00:00"
+      },
+      {
+        "team_id": "6d9b6fb05ca9570165",
+        "source": "Football-Data.org",
+        "provider_team_id": "104",
+        "updated_at": "2026-08-30T13:12:36.289911+00:00"
+      },
+      {
+        "team_id": "a95f6b83f9390ff949",
+        "source": "Football-Data.org",
+        "provider_team_id": "108",
+        "updated_at": "2026-08-30T13:12:36.289975+00:00"
+      },
+      {
+        "team_id": "d340f22a1daf331bf5",
+        "source": "Football-Data.org",
+        "provider_team_id": "110",
+        "updated_at": "2026-08-30T13:12:36.295235+00:00"
+      },
+      {
+        "team_id": "575ad11bbc7426759e",
+        "source": "Football-Data.org",
+        "provider_team_id": "107",
+        "updated_at": "2026-08-30T13:12:36.295300+00:00"
+      },
+      {
+        "team_id": "178d02ecb65a6640af",
+        "source": "Football-Data.org",
+        "provider_team_id": "1783",
+        "updated_at": "2026-08-30T13:12:36.300740+00:00"
+      },
+      {
+        "team_id": "3b748ab976a81dcbcd",
+        "source": "Football-Data.org",
+        "provider_team_id": "1770",
+        "updated_at": "2026-08-30T13:12:36.300810+00:00"
+      },
+      {
+        "team_id": "7ce26de4dc6960a5e7",
+        "source": "Football-Data.org",
+        "provider_team_id": "1779",
+        "updated_at": "2026-08-30T13:12:36.306120+00:00"
+      },
+      {
+        "team_id": "f541c69bd4ee4d9180",
+        "source": "Football-Data.org",
+        "provider_team_id": "6685",
+        "updated_at": "2026-08-30T13:12:36.306181+00:00"
+      },
+      {
+        "team_id": "625066e0d50c1a6094",
+        "source": "Football-Data.org",
+        "provider_team_id": "558",
+        "updated_at": "2026-08-30T13:12:36.311329+00:00"
+      },
+      {
+        "team_id": "75f564e3d16ab2ec31",
+        "source": "Football-Data.org",
+        "provider_team_id": "77",
+        "updated_at": "2026-08-30T13:12:36.311391+00:00"
+      },
+      {
+        "team_id": "9934adef4d76a974df",
+        "source": "Football-Data.org",
+        "provider_team_id": "5531",
+        "updated_at": "2026-08-30T13:12:36.316668+00:00"
+      },
+      {
+        "team_id": "6cf03bde613d291b40",
+        "source": "Football-Data.org",
+        "provider_team_id": "5533",
+        "updated_at": "2026-08-30T13:12:36.316733+00:00"
+      },
+      {
+        "team_id": "590c1e0cd091eaf7e1",
+        "source": "Football-Data.org",
+        "provider_team_id": "4364",
+        "updated_at": "2026-08-30T13:12:36.322221+00:00"
+      },
+      {
+        "team_id": "9a3c152825daa730cb",
+        "source": "Football-Data.org",
+        "provider_team_id": "1769",
+        "updated_at": "2026-08-30T13:12:36.322292+00:00"
+      },
+      {
+        "team_id": "c0eb691b941f2978d1",
+        "source": "Football-Data.org",
+        "provider_team_id": "1767",
+        "updated_at": "2026-08-30T13:12:36.327808+00:00"
+      },
+      {
+        "team_id": "76ad233033c62ff5ca",
+        "source": "Football-Data.org",
+        "provider_team_id": "1772",
+        "updated_at": "2026-08-30T13:12:36.327886+00:00"
+      },
+      {
+        "team_id": "9f563292bea3f50f07",
+        "source": "Football-Data.org",
+        "provider_team_id": "1777",
+        "updated_at": "2026-08-30T13:12:36.333423+00:00"
+      },
+      {
+        "team_id": "bd162042f98d9dd2b6",
+        "source": "Football-Data.org",
+        "provider_team_id": "6684",
+        "updated_at": "2026-08-30T13:12:36.333487+00:00"
+      },
+      {
+        "team_id": "fb5d9cd90e17b64f5f",
+        "source": "Football-Data.org",
+        "provider_team_id": "5890",
+        "updated_at": "2026-08-30T13:12:36.339021+00:00"
+      },
+      {
+        "team_id": "30a42a6fb391da1f6d",
+        "source": "Football-Data.org",
+        "provider_team_id": "100",
+        "updated_at": "2026-08-30T13:12:36.339084+00:00"
+      },
+      {
+        "team_id": "00c50df0c16981dc92",
+        "source": "Football-Data.org",
+        "provider_team_id": "79",
+        "updated_at": "2026-08-30T13:12:36.344611+00:00"
+      },
+      {
+        "team_id": "42a5202c26440e05e2",
+        "source": "Football-Data.org",
+        "provider_team_id": "82",
+        "updated_at": "2026-08-30T13:12:36.344676+00:00"
+      },
+      {
+        "team_id": "99cc461eeaf7e2306d",
+        "source": "Football-Data.org",
+        "provider_team_id": "102",
+        "updated_at": "2026-08-30T13:12:36.350661+00:00"
+      },
+      {
+        "team_id": "fb7723b516c14d5dc0",
+        "source": "Football-Data.org",
+        "provider_team_id": "103",
+        "updated_at": "2026-08-30T13:12:36.350725+00:00"
+      },
+      {
+        "team_id": "b34a03c29de23d2aa1",
+        "source": "Football-Data.org",
+        "provider_team_id": "58",
+        "updated_at": "2026-08-30T13:12:36.356388+00:00"
+      },
+      {
+        "team_id": "11772e395749fdc0f9",
+        "source": "Football-Data.org",
+        "provider_team_id": "57",
+        "updated_at": "2026-08-30T13:12:36.356452+00:00"
+      },
+      {
+        "team_id": "7d9c345405bc64d7b6",
+        "source": "Football-Data.org",
+        "provider_team_id": "5613",
+        "updated_at": "2026-08-30T13:12:36.361992+00:00"
+      },
+      {
+        "team_id": "5220b1187a985dca02",
+        "source": "Football-Data.org",
+        "provider_team_id": "5543",
+        "updated_at": "2026-08-30T13:12:36.362056+00:00"
+      },
+      {
+        "team_id": "6514e9ded380962790",
+        "source": "Football-Data.org",
+        "provider_team_id": "1903",
+        "updated_at": "2026-08-30T13:12:36.367417+00:00"
+      },
+      {
+        "team_id": "9130df838c83ad844a",
+        "source": "Football-Data.org",
+        "provider_team_id": "582",
+        "updated_at": "2026-08-30T13:12:36.367481+00:00"
+      },
+      {
+        "team_id": "192a5a24657fd487e0",
+        "source": "Football-Data.org",
+        "provider_team_id": "81",
+        "updated_at": "2026-08-30T13:12:36.373637+00:00"
+      },
+      {
+        "team_id": "9b2cbb4b6b5a74fcda",
+        "source": "Football-Data.org",
+        "provider_team_id": "87",
+        "updated_at": "2026-08-30T13:12:36.373703+00:00"
+      },
+      {
+        "team_id": "7f612db037dc322ddd",
+        "source": "Football-Data.org",
+        "provider_team_id": "4287",
+        "updated_at": "2026-08-30T13:12:36.379643+00:00"
+      },
+      {
+        "team_id": "7db41a535db1869ad4",
+        "source": "Football-Data.org",
+        "provider_team_id": "4241",
+        "updated_at": "2026-08-30T13:12:36.379723+00:00"
+      },
+      {
+        "team_id": "0b06e9b9967767637f",
+        "source": "Football-Data.org",
+        "provider_team_id": "511",
+        "updated_at": "2026-08-30T13:12:36.391577+00:00"
+      },
+      {
+        "team_id": "4dff16d93d91d0a06a",
+        "source": "Football-Data.org",
+        "provider_team_id": "521",
+        "updated_at": "2026-08-30T13:12:36.391644+00:00"
+      },
+      {
+        "team_id": "719084a08a71e4d678",
+        "source": "Football-Data.org",
+        "provider_team_id": "92",
+        "updated_at": "2026-08-30T13:12:36.397499+00:00"
+      },
+      {
+        "team_id": "f7715410c3c77c20c4",
+        "source": "Football-Data.org",
+        "provider_team_id": "523",
+        "updated_at": "2026-08-30T13:12:36.403406+00:00"
+      },
+      {
+        "team_id": "d3a0101b081da80039",
+        "source": "Football-Data.org",
+        "provider_team_id": "519",
+        "updated_at": "2026-08-30T13:12:36.403468+00:00"
+      },
+      {
+        "team_id": "e7f5902c9d2e4f2e34",
+        "source": "Football-Data.org",
+        "provider_team_id": "6806",
+        "updated_at": "2026-08-30T13:12:36.409613+00:00"
+      },
+      {
+        "team_id": "064dc9921966a25f57",
+        "source": "Football-Data.org",
+        "provider_team_id": "684",
+        "updated_at": "2026-08-30T13:12:36.409676+00:00"
+      },
+      {
+        "team_id": "df314da1cb7a207a06",
+        "source": "Football-Data.org",
+        "provider_team_id": "10",
+        "updated_at": "2026-08-30T13:12:36.416012+00:00"
+      },
+      {
+        "team_id": "5c56978c1e3101b3e2",
+        "source": "Football-Data.org",
+        "provider_team_id": "1",
+        "updated_at": "2026-08-30T13:12:36.416079+00:00"
+      },
+      {
+        "team_id": "f8ba9ee2acf6651c58",
+        "source": "Football-Data.org",
+        "provider_team_id": "90",
+        "updated_at": "2026-08-30T13:12:36.430117+00:00"
+      },
+      {
+        "team_id": "acf77e31bd33648cc7",
+        "source": "Football-Data.org",
+        "provider_team_id": "64",
+        "updated_at": "2026-08-30T13:12:36.437619+00:00"
+      },
+      {
+        "team_id": "69dee0aaa3e7b50573",
+        "source": "Football-Data.org",
+        "provider_team_id": "524",
+        "updated_at": "2026-08-30T13:12:36.445941+00:00"
+      },
+      {
+        "team_id": "99d3f60a330dd37181",
+        "source": "Football-Data.org",
+        "provider_team_id": "498",
+        "updated_at": "2026-08-30T13:12:36.453735+00:00"
+      },
+      {
+        "team_id": "64e919a47dc6d5e97d",
+        "source": "Football-Data.org",
+        "provider_team_id": "503",
+        "updated_at": "2026-08-30T13:12:36.460659+00:00"
+      },
+      {
+        "team_id": "92596fc166955d857f",
+        "source": "Football-Data.org",
+        "provider_team_id": "67",
+        "updated_at": "2026-08-30T13:12:36.467266+00:00"
+      },
+      {
+        "team_id": "a6d70aa2a233a12551",
+        "source": "Football-Data.org",
+        "provider_team_id": "1044",
+        "updated_at": "2026-08-30T13:12:36.467330+00:00"
+      },
+      {
+        "team_id": "68d1e8d49c1c8fefc6",
+        "source": "Football-Data.org",
+        "provider_team_id": "99",
+        "updated_at": "2026-08-30T13:12:36.474395+00:00"
+      },
+      {
+        "team_id": "5b876bf53ec6c12639",
+        "source": "Football-Data.org",
+        "provider_team_id": "586",
+        "updated_at": "2026-08-30T13:12:36.474459+00:00"
+      },
+      {
+        "team_id": "02c67b3096b32878b0",
+        "source": "Football-Data.org",
+        "provider_team_id": "3",
+        "updated_at": "2026-08-30T13:12:36.504102+00:00"
+      },
+      {
+        "team_id": "0ab4d3bec69c195da4",
+        "source": "Football-Data.org",
+        "provider_team_id": "28",
+        "updated_at": "2026-08-30T13:12:36.504169+00:00"
+      },
+      {
+        "team_id": "dba1ba25341bde4013",
+        "source": "Football-Data.org",
+        "provider_team_id": "18",
+        "updated_at": "2026-08-30T13:12:36.511257+00:00"
+      },
+      {
+        "team_id": "eee5e68b4c7e2f2a7a",
+        "source": "Football-Data.org",
+        "provider_team_id": "719",
+        "updated_at": "2026-08-30T13:12:36.511354+00:00"
+      },
+      {
+        "team_id": "f38eeeaa2ed201c043",
+        "source": "Football-Data.org",
+        "provider_team_id": "2",
+        "updated_at": "2026-08-30T13:12:36.518320+00:00"
+      },
+      {
+        "team_id": "67ce44e1c93339b287",
+        "source": "Football-Data.org",
+        "provider_team_id": "4",
+        "updated_at": "2026-08-30T13:12:36.518386+00:00"
+      },
+      {
+        "team_id": "50f6b971769258b9c1",
+        "source": "Football-Data.org",
+        "provider_team_id": "29",
+        "updated_at": "2026-08-30T13:12:36.525749+00:00"
+      },
+      {
+        "team_id": "01ec1e8f3a4620b60c",
+        "source": "Football-Data.org",
+        "provider_team_id": "721",
+        "updated_at": "2026-08-30T13:12:36.532774+00:00"
+      },
+      {
+        "team_id": "cb2305824ed37603ea",
+        "source": "Football-Data.org",
+        "provider_team_id": "354",
+        "updated_at": "2026-08-30T13:12:36.546910+00:00"
+      },
+      {
+        "team_id": "630e0be9d7e0b6d045",
+        "source": "Football-Data.org",
+        "provider_team_id": "65",
+        "updated_at": "2026-08-30T13:12:36.553775+00:00"
+      },
+      {
+        "team_id": "c6ce9442c38867d5a3",
+        "source": "Football-Data.org",
+        "provider_team_id": "1076",
+        "updated_at": "2026-08-30T13:12:36.553845+00:00"
+      },
+      {
+        "team_id": "b8fd7430177f4e6a06",
+        "source": "Football-Data.org",
+        "provider_team_id": "351",
+        "updated_at": "2026-08-30T13:12:36.568388+00:00"
+      },
+      {
+        "team_id": "9f1cfe532350c1b92f",
+        "source": "Football-Data.org",
+        "provider_team_id": "73",
+        "updated_at": "2026-08-30T13:12:36.568460+00:00"
+      },
+      {
+        "team_id": "f5fd03ff72746d9a82",
+        "source": "Football-Data.org",
+        "provider_team_id": "78",
+        "updated_at": "2026-08-30T13:12:36.575442+00:00"
+      },
+      {
+        "team_id": "8982d740c26b9b26df",
+        "source": "Football-Data.org",
+        "provider_team_id": "1915",
+        "updated_at": "2026-08-30T13:12:36.582081+00:00"
+      },
+      {
+        "team_id": "7aec4ac763fdfc9343",
+        "source": "Football-Data.org",
+        "provider_team_id": "546",
+        "updated_at": "2026-08-30T13:12:36.602385+00:00"
+      },
+      {
+        "team_id": "c533f66b1dba6e47b3",
+        "source": "Football-Data.org",
+        "provider_team_id": "525",
+        "updated_at": "2026-08-30T13:12:36.602451+00:00"
+      },
+      {
+        "team_id": "2be6218d69d398541a",
+        "source": "Football-Data.org",
+        "provider_team_id": "5",
+        "updated_at": "2026-08-30T13:12:36.626016+00:00"
+      },
+      {
+        "team_id": "2629095d2fea3c5485",
+        "source": "Football-Data.org",
+        "provider_team_id": "322",
+        "updated_at": "2026-08-30T13:12:36.632902+00:00"
+      },
+      {
+        "team_id": "78f7aceccec7234876",
+        "source": "Football-Data.org",
+        "provider_team_id": "5335",
+        "updated_at": "2026-08-30T13:12:36.640054+00:00"
+      },
+      {
+        "team_id": "b75aafc430316c0f6b",
+        "source": "Football-Data.org",
+        "provider_team_id": "718",
+        "updated_at": "2026-08-30T13:12:36.647130+00:00"
+      },
+      {
+        "team_id": "e0e0e8a58e3c34ec71",
+        "source": "Football-Data.org",
+        "provider_team_id": "7822",
+        "updated_at": "2026-08-30T13:12:36.653961+00:00"
+      },
+      {
+        "team_id": "4035e3225f10998c0d",
+        "source": "Football-Data.org",
+        "provider_team_id": "5575",
+        "updated_at": "2026-08-30T13:12:36.660835+00:00"
+      },
+      {
+        "team_id": "db41b510a99f845322",
+        "source": "Football-Data.org",
+        "provider_team_id": "533",
+        "updated_at": "2026-08-30T13:12:36.674107+00:00"
+      },
+      {
+        "team_id": "de0e72dd1ec0ef55f7",
+        "source": "Football-Data.org",
+        "provider_team_id": "512",
+        "updated_at": "2026-08-30T13:12:36.674173+00:00"
+      },
+      {
+        "team_id": "edd16a2b82f0664400",
+        "source": "Football-Data.org",
+        "provider_team_id": "94",
+        "updated_at": "2026-08-30T13:12:36.694033+00:00"
+      },
+      {
+        "team_id": "e935532b54e93aed78",
+        "source": "Football-Data.org",
+        "provider_team_id": "670",
+        "updated_at": "2026-08-30T13:12:36.700833+00:00"
+      },
+      {
+        "team_id": "c70e342520628d90be",
+        "source": "Football-Data.org",
+        "provider_team_id": "4286",
+        "updated_at": "2026-08-30T13:12:36.707582+00:00"
+      },
+      {
+        "team_id": "09a7997a6af73b43f7",
+        "source": "Football-Data.org",
+        "provider_team_id": "1776",
+        "updated_at": "2026-08-30T13:12:36.714233+00:00"
+      },
+      {
+        "team_id": "cfee4cccf2f07aeae1",
+        "source": "Football-Data.org",
+        "provider_team_id": "1766",
+        "updated_at": "2026-08-30T13:12:36.714299+00:00"
+      },
+      {
+        "team_id": "d7e1cc423a168816ff",
+        "source": "API-Futebol",
+        "provider_team_id": "33",
+        "updated_at": "2026-08-30T13:12:39.734602+00:00"
+      },
+      {
+        "team_id": "d2b3e32f8c4cd7c39a",
+        "source": "API-Futebol",
+        "provider_team_id": "61",
+        "updated_at": "2026-08-30T13:12:39.734672+00:00"
+      },
+      {
+        "team_id": "7de440a2a67a1c06fc",
+        "source": "API-Futebol",
+        "provider_team_id": "6",
+        "updated_at": "2026-08-30T13:12:39.742115+00:00"
+      },
+      {
+        "team_id": "1ee83309d2aaad6cb2",
+        "source": "API-Futebol",
+        "provider_team_id": "98",
+        "updated_at": "2026-08-30T13:12:39.742184+00:00"
+      },
+      {
+        "team_id": "be09e06efb37d00134",
+        "source": "API-Futebol",
+        "provider_team_id": "90",
+        "updated_at": "2026-08-30T13:12:39.749032+00:00"
+      },
+      {
+        "team_id": "2261634969adb266d9",
+        "source": "API-Futebol",
+        "provider_team_id": "1",
+        "updated_at": "2026-08-30T13:12:39.749115+00:00"
+      },
+      {
+        "team_id": "207f17fd2b1750e642",
+        "source": "API-Futebol",
+        "provider_team_id": "110",
+        "updated_at": "2026-08-30T13:12:39.756339+00:00"
+      },
+      {
+        "team_id": "2071f11a627bf816bf",
+        "source": "API-Futebol",
+        "provider_team_id": "105",
+        "updated_at": "2026-08-30T13:12:39.756450+00:00"
+      },
+      {
+        "team_id": "07673e12c1119a155f",
+        "source": "API-Futebol",
+        "provider_team_id": "131",
+        "updated_at": "2026-08-30T13:12:39.764160+00:00"
+      },
+      {
+        "team_id": "fc545f03a62c420875",
+        "source": "API-Futebol",
+        "provider_team_id": "117",
+        "updated_at": "2026-08-30T13:12:39.764230+00:00"
+      },
+      {
+        "team_id": "96d118a7e4b9df7bcc",
+        "source": "API-Futebol",
+        "provider_team_id": "71",
+        "updated_at": "2026-08-30T13:12:39.771364+00:00"
+      },
+      {
+        "team_id": "ac643ac98a96d64adc",
+        "source": "API-Futebol",
+        "provider_team_id": "43",
+        "updated_at": "2026-08-30T13:12:39.771427+00:00"
+      },
+      {
+        "team_id": "44a17e6df941ebfe60",
+        "source": "API-Futebol",
+        "provider_team_id": "74",
+        "updated_at": "2026-08-30T13:12:39.778776+00:00"
+      },
+      {
+        "team_id": "dcda99a2b28eaa1280",
+        "source": "API-Futebol",
+        "provider_team_id": "66",
+        "updated_at": "2026-08-30T13:12:39.778842+00:00"
+      },
+      {
+        "team_id": "173dab27777d6de841",
+        "source": "API-Futebol",
+        "provider_team_id": "204",
+        "updated_at": "2026-08-30T13:12:39.786239+00:00"
+      },
+      {
+        "team_id": "75f564e3d16ab2ec31",
+        "source": "API-Futebol",
+        "provider_team_id": "214",
+        "updated_at": "2026-08-30T13:12:39.794224+00:00"
+      },
+      {
+        "team_id": "289edf6b1fe9585e70",
+        "source": "API-Futebol",
+        "provider_team_id": "51",
+        "updated_at": "2026-08-30T13:12:39.809280+00:00"
+      },
+      {
+        "team_id": "bf998c2b2e99fc9938",
+        "source": "API-Futebol",
+        "provider_team_id": "115",
+        "updated_at": "2026-08-30T13:12:39.816960+00:00"
+      },
+      {
+        "team_id": "41fc766556d4af4ef3",
+        "source": "API-Futebol",
+        "provider_team_id": "79",
+        "updated_at": "2026-08-30T13:12:39.831457+00:00"
+      },
+      {
+        "team_id": "a7fe1b99a4d517b578",
+        "source": "API-Futebol",
+        "provider_team_id": "402",
+        "updated_at": "2026-08-30T13:12:39.848155+00:00"
+      },
+      {
+        "team_id": "20e39c11167389f209",
+        "source": "ESPN",
+        "provider_team_id": "3458",
+        "updated_at": "2026-08-30T13:12:43.928318+00:00"
+      },
+      {
+        "team_id": "0b87c3ffb6e9585c89",
+        "source": "ESPN",
+        "provider_team_id": "3445",
+        "updated_at": "2026-08-30T13:12:43.928393+00:00"
+      },
+      {
+        "team_id": "7ce26de4dc6960a5e7",
+        "source": "ESPN",
+        "provider_team_id": "874",
+        "updated_at": "2026-08-30T13:12:43.937330+00:00"
+      },
+      {
+        "team_id": "f541c69bd4ee4d9180",
+        "source": "ESPN",
+        "provider_team_id": "2674",
+        "updated_at": "2026-08-30T13:12:43.937400+00:00"
+      },
+      {
+        "team_id": "178d02ecb65a6640af",
+        "source": "ESPN",
+        "provider_team_id": "819",
+        "updated_at": "2026-08-30T13:12:43.945813+00:00"
+      },
+      {
+        "team_id": "3b748ab976a81dcbcd",
+        "source": "ESPN",
+        "provider_team_id": "6086",
+        "updated_at": "2026-08-30T13:12:43.945880+00:00"
+      },
+      {
+        "team_id": "c0eb691b941f2978d1",
+        "source": "ESPN",
+        "provider_team_id": "6273",
+        "updated_at": "2026-08-30T13:12:43.954128+00:00"
+      },
+      {
+        "team_id": "a5aeb62b91fd20b43b",
+        "source": "ESPN",
+        "provider_team_id": "9318",
+        "updated_at": "2026-08-30T13:12:43.954192+00:00"
+      },
+      {
+        "team_id": "590c1e0cd091eaf7e1",
+        "source": "ESPN",
+        "provider_team_id": "9169",
+        "updated_at": "2026-08-30T13:12:43.962341+00:00"
+      },
+      {
+        "team_id": "9a3c152825daa730cb",
+        "source": "ESPN",
+        "provider_team_id": "2029",
+        "updated_at": "2026-08-30T13:12:43.962407+00:00"
+      },
+      {
+        "team_id": "9f563292bea3f50f07",
+        "source": "ESPN",
+        "provider_team_id": "9967",
+        "updated_at": "2026-08-30T13:12:43.971010+00:00"
+      },
+      {
+        "team_id": "bd162042f98d9dd2b6",
+        "source": "ESPN",
+        "provider_team_id": "1936",
+        "updated_at": "2026-08-30T13:12:43.971090+00:00"
+      },
+      {
+        "team_id": "85fe60cf642c9168d5",
+        "source": "ESPN",
+        "provider_team_id": "4936",
+        "updated_at": "2026-08-30T13:12:43.979770+00:00"
+      },
+      {
+        "team_id": "ae486e255b7574cdfc",
+        "source": "ESPN",
+        "provider_team_id": "3456",
+        "updated_at": "2026-08-30T13:12:43.979844+00:00"
+      },
+      {
+        "team_id": "c70e342520628d90be",
+        "source": "ESPN",
+        "provider_team_id": "6079",
+        "updated_at": "2026-08-30T13:12:43.997208+00:00"
+      },
+      {
+        "team_id": "09a7997a6af73b43f7",
+        "source": "ESPN",
+        "provider_team_id": "2026",
+        "updated_at": "2026-08-30T13:12:44.006805+00:00"
+      },
+      {
+        "team_id": "eae0e92669d99715d5",
+        "source": "ESPN",
+        "provider_team_id": "7632",
+        "updated_at": "2026-08-30T13:12:44.006913+00:00"
+      },
+      {
+        "team_id": "b7dc25efe9d18ad729",
+        "source": "ESPN",
+        "provider_team_id": "3454",
+        "updated_at": "2026-08-30T13:12:44.018968+00:00"
+      },
+      {
+        "team_id": "bff457c9c7114e8deb",
+        "source": "ESPN",
+        "provider_team_id": "2022",
+        "updated_at": "2026-08-30T13:12:44.043209+00:00"
+      },
+      {
+        "team_id": "d7e1cc423a168816ff",
+        "source": "ESPN",
+        "provider_team_id": "6154",
+        "updated_at": "2026-08-30T13:12:44.090504+00:00"
+      },
+      {
+        "team_id": "d2b3e32f8c4cd7c39a",
+        "source": "ESPN",
+        "provider_team_id": "3459",
+        "updated_at": "2026-08-30T13:12:44.090620+00:00"
+      },
+      {
+        "team_id": "7de440a2a67a1c06fc",
+        "source": "ESPN",
+        "provider_team_id": "9966",
+        "updated_at": "2026-08-30T13:12:44.100191+00:00"
+      },
+      {
+        "team_id": "1ee83309d2aaad6cb2",
+        "source": "ESPN",
+        "provider_team_id": "10357",
+        "updated_at": "2026-08-30T13:12:44.100283+00:00"
+      },
+      {
+        "team_id": "be09e06efb37d00134",
+        "source": "ESPN",
+        "provider_team_id": "9970",
+        "updated_at": "2026-08-30T13:12:44.108697+00:00"
+      },
+      {
+        "team_id": "2261634969adb266d9",
+        "source": "ESPN",
+        "provider_team_id": "9971",
+        "updated_at": "2026-08-30T13:12:44.108769+00:00"
+      },
+      {
+        "team_id": "207f17fd2b1750e642",
+        "source": "ESPN",
+        "provider_team_id": "9973",
+        "updated_at": "2026-08-30T13:12:44.117100+00:00"
+      },
+      {
+        "team_id": "2071f11a627bf816bf",
+        "source": "ESPN",
+        "provider_team_id": "9969",
+        "updated_at": "2026-08-30T13:12:44.117172+00:00"
+      },
+      {
+        "team_id": "07673e12c1119a155f",
+        "source": "ESPN",
+        "provider_team_id": "6272",
+        "updated_at": "2026-08-30T13:12:44.126048+00:00"
+      },
+      {
+        "team_id": "fc545f03a62c420875",
+        "source": "ESPN",
+        "provider_team_id": "18187",
+        "updated_at": "2026-08-30T13:12:44.126153+00:00"
+      },
+      {
+        "team_id": "96d118a7e4b9df7bcc",
+        "source": "ESPN",
+        "provider_team_id": "17333",
+        "updated_at": "2026-08-30T13:12:44.134785+00:00"
+      },
+      {
+        "team_id": "ac643ac98a96d64adc",
+        "source": "ESPN",
+        "provider_team_id": "6270",
+        "updated_at": "2026-08-30T13:12:44.134857+00:00"
+      },
+      {
+        "team_id": "44a17e6df941ebfe60",
+        "source": "ESPN",
+        "provider_team_id": "7633",
+        "updated_at": "2026-08-30T13:12:44.149157+00:00"
+      },
+      {
+        "team_id": "dcda99a2b28eaa1280",
+        "source": "ESPN",
+        "provider_team_id": "10281",
+        "updated_at": "2026-08-30T13:12:44.149237+00:00"
+      },
+      {
+        "team_id": "173dab27777d6de841",
+        "source": "ESPN",
+        "provider_team_id": "17313",
+        "updated_at": "2026-08-30T13:12:44.159235+00:00"
+      },
+      {
+        "team_id": "f0744d7d6c6fa9d40a",
+        "source": "ESPN",
+        "provider_team_id": "20851",
+        "updated_at": "2026-08-30T13:12:44.168383+00:00"
+      },
+      {
+        "team_id": "bf998c2b2e99fc9938",
+        "source": "ESPN",
+        "provider_team_id": "3395",
+        "updated_at": "2026-08-30T13:12:44.186355+00:00"
+      },
+      {
+        "team_id": "289edf6b1fe9585e70",
+        "source": "ESPN",
+        "provider_team_id": "18127",
+        "updated_at": "2026-08-30T13:12:44.195204+00:00"
+      },
+      {
+        "team_id": "41fc766556d4af4ef3",
+        "source": "ESPN",
+        "provider_team_id": "7635",
+        "updated_at": "2026-08-30T13:12:44.224177+00:00"
+      },
+      {
+        "team_id": "a7fe1b99a4d517b578",
+        "source": "ESPN",
+        "provider_team_id": "11268",
+        "updated_at": "2026-08-30T13:12:44.240705+00:00"
+      },
+      {
+        "team_id": "5220b1187a985dca02",
+        "source": "ESPN",
+        "provider_team_id": "3457",
+        "updated_at": "2026-08-30T13:12:44.264851+00:00"
       }
     ],
     "matches": [
@@ -62,6 +2183,2226 @@
         "source": "Football-Data.org",
         "provider_match_id": "554989",
         "updated_at": "2026-08-30T13:12:35.138460+00:00"
+      },
+      {
+        "id": "5e9f106fa41fea38ff0a",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-08-30T10:15:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "45744402425d537790",
+        "home_name": "FC Utrecht",
+        "home_short": "UTR",
+        "away_id": "26900e06180b8fe85d",
+        "away_name": "PSV",
+        "away_short": "PSV",
+        "home_score": 1,
+        "away_score": 6,
+        "source": "Football-Data.org",
+        "provider_match_id": "558245",
+        "updated_at": "2026-08-30T13:12:36.184660+00:00"
+      },
+      {
+        "id": "cedfdfe35027c4a00b89",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-08-30T12:30:00Z",
+        "status": "LIVE",
+        "minute": null,
+        "home_id": "e86198aa8453e37fa0",
+        "home_name": "Feyenoord Rotterdam",
+        "home_short": "FEY",
+        "away_id": "27f05ea30b92c43976",
+        "away_name": "ADO Den Haag",
+        "away_short": "ADO",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "558247",
+        "updated_at": "2026-08-30T13:12:36.189250+00:00"
+      },
+      {
+        "id": "2e42579cf56e44751bdb",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-08-30T12:30:00Z",
+        "status": "LIVE",
+        "minute": null,
+        "home_id": "b0b26971823bef1834",
+        "home_name": "Willem II Tilburg",
+        "home_short": "WII",
+        "away_id": "8a6f7c789ee5df65f1",
+        "away_name": "SC Heerenveen",
+        "away_short": "HEE",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "558246",
+        "updated_at": "2026-08-30T13:12:36.193503+00:00"
+      },
+      {
+        "id": "105151eb75c1b5073fd3",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-30T13:00:00Z",
+        "status": "LIVE",
+        "minute": null,
+        "home_id": "19b18c8a61ace3568b",
+        "home_name": "Chelsea FC",
+        "home_short": "CHE",
+        "away_id": "07bb506f7ecae9cde3",
+        "away_name": "Brighton & Hove Albion FC",
+        "away_short": "BHA",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "560556",
+        "updated_at": "2026-08-30T13:12:36.197429+00:00"
+      },
+      {
+        "id": "1a67fcd3c5e764c646ef",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-30T13:00:00Z",
+        "status": "LIVE",
+        "minute": null,
+        "home_id": "2fce916caa377bf3be",
+        "home_name": "Leeds United FC",
+        "home_short": "LEE",
+        "away_id": "8fe8d6055f415c8a3a",
+        "away_name": "Brentford FC",
+        "away_short": "BRE",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "560559",
+        "updated_at": "2026-08-30T13:12:36.201994+00:00"
+      },
+      {
+        "id": "e8d4e6a3305848f8bce1",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-08-30T13:00:00Z",
+        "status": "LIVE",
+        "minute": null,
+        "home_id": "6870da2987d7be518e",
+        "home_name": "Paris FC",
+        "home_short": "PFC",
+        "away_id": "6873bd184c33922853",
+        "away_name": "OGC Nice",
+        "away_short": "NIC",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "559707",
+        "updated_at": "2026-08-30T13:12:36.206033+00:00"
+      },
+      {
+        "id": "0465c9ac60636a5d5bfd",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-30T13:00:00Z",
+        "status": "LIVE",
+        "minute": null,
+        "home_id": "beb50cb8f137d21e4d",
+        "home_name": "Sunderland AFC",
+        "home_short": "SUN",
+        "away_id": "c377470d7173311551",
+        "away_name": "Fulham FC",
+        "away_short": "FUL",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "560554",
+        "updated_at": "2026-08-30T13:12:36.210232+00:00"
+      },
+      {
+        "id": "b708fa9de60f6d1090e5",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-08-30T13:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "5020b38d61f1ab71da",
+        "home_name": "SC Freiburg",
+        "home_short": "SCF",
+        "away_id": "8181209a55f1a2ab46",
+        "away_name": "SV Werder Bremen",
+        "away_short": "SVW",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "565784",
+        "updated_at": "2026-08-30T13:12:36.214734+00:00"
+      },
+      {
+        "id": "048fd42dd9bfebaadb37",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-30T14:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "71cf9e0f0db3eef124",
+        "home_name": "CA Paranaense",
+        "home_short": "CAP",
+        "away_id": "0b87c3ffb6e9585c89",
+        "away_name": "Fluminense FC",
+        "away_short": "FLU",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "554980",
+        "updated_at": "2026-08-30T13:12:36.219412+00:00"
+      },
+      {
+        "id": "13666d8563dcf9534eda",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-08-30T14:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "0f1e622559c82b0e72",
+        "home_name": "CD Nacional",
+        "home_short": "CDN",
+        "away_id": "266b2db4633cab2bdf",
+        "away_name": "CF Estrela da Amadora",
+        "away_short": "AMA",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567286",
+        "updated_at": "2026-08-30T13:12:36.224229+00:00"
+      },
+      {
+        "id": "80aad09786497e8d0930",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-08-30T14:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "bc5ad0b51f6a24ca22",
+        "home_name": "Telstar 1963",
+        "home_short": "TEL",
+        "away_id": "d62aacc8afd1f7b904",
+        "away_name": "AFC Ajax",
+        "away_short": "AJA",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558248",
+        "updated_at": "2026-08-30T13:12:36.229127+00:00"
+      },
+      {
+        "id": "7891ef3ae427a4d7bb85",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-30T15:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "041a41a9e5d46f7396",
+        "home_name": "Real Madrid CF",
+        "home_short": "RMA",
+        "away_id": "bd4aa81e67081b754d",
+        "away_name": "Málaga CF",
+        "away_short": "MAL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564656",
+        "updated_at": "2026-08-30T13:12:36.234055+00:00"
+      },
+      {
+        "id": "07088d87b6772de9ecbe",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-08-30T15:15:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "ccc8935de6e6e210aa",
+        "home_name": "Stade Rennais FC 1901",
+        "home_short": "REN",
+        "away_id": "d89bfd7223ab6fc905",
+        "away_name": "Le Mans FC",
+        "away_short": "LMF",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "559709",
+        "updated_at": "2026-08-30T13:12:36.239100+00:00"
+      },
+      {
+        "id": "b6cab58932b74662b6c2",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-30T15:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "e67bc202ea288ba209",
+        "home_name": "Manchester United FC",
+        "home_short": "MUN",
+        "away_id": "c06044b267ac04e9cc",
+        "away_name": "Ipswich Town FC",
+        "away_short": "IPS",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560553",
+        "updated_at": "2026-08-30T13:12:36.243839+00:00"
+      },
+      {
+        "id": "1cbf01629f5dc9f57101",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-08-30T15:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "01fe9c9db8edf60ba6",
+        "home_name": "FC Augsburg",
+        "home_short": "FCA",
+        "away_id": "582e350ad18db82585",
+        "away_name": "FC Schalke 04",
+        "away_short": "S04",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "565782",
+        "updated_at": "2026-08-30T13:12:36.249031+00:00"
+      },
+      {
+        "id": "16de65a9dca8bc54a227",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-08-30T16:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "c1407e379bdfd0f619",
+        "home_name": "SSC Napoli",
+        "home_short": "NAP",
+        "away_id": "30b7d3c7f0d40041e3",
+        "away_name": "Como 1907",
+        "away_short": "COM",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558626",
+        "updated_at": "2026-08-30T13:12:36.254289+00:00"
+      },
+      {
+        "id": "5e2c51ea1e0098343c3b",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-08-30T17:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "88475f3398d621b540",
+        "home_name": "Casa Pia AC",
+        "home_short": "CAS",
+        "away_id": "aa92681ee7e28fc6c0",
+        "away_name": "Moreirense FC",
+        "away_short": "MOR",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567290",
+        "updated_at": "2026-08-30T13:12:36.259150+00:00"
+      },
+      {
+        "id": "20e04a072847435f730e",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-30T17:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "261661bcea4cc81817",
+        "home_name": "RC Deportivo La Coruña",
+        "home_short": "DEP",
+        "away_id": "65aafafbe092920271",
+        "away_name": "Valencia CF",
+        "away_short": "VAL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564651",
+        "updated_at": "2026-08-30T13:12:36.264261+00:00"
+      },
+      {
+        "id": "072301abdecf10016117",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-08-30T18:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "7067d11cefa4d4b228",
+        "home_name": "SC Cambuur-Leeuwarden",
+        "home_short": "CAM",
+        "away_id": "e879416a3907d68df8",
+        "away_name": "FC Twente '65",
+        "away_short": "TWE",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558249",
+        "updated_at": "2026-08-30T13:12:36.269466+00:00"
+      },
+      {
+        "id": "0a30ffce73717c666e6e",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-08-30T18:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "f5396ab988c301d482",
+        "home_name": "AS Monaco FC",
+        "home_short": "ASM",
+        "away_id": "948c0bf86e8c7238af",
+        "away_name": "Olympique de Marseille",
+        "away_short": "MAR",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "559703",
+        "updated_at": "2026-08-30T13:12:36.284688+00:00"
+      },
+      {
+        "id": "2252841203965d329b7a",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-08-30T18:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "6d9b6fb05ca9570165",
+        "home_name": "Cagliari Calcio",
+        "home_short": "CAG",
+        "away_id": "a95f6b83f9390ff949",
+        "away_name": "FC Internazionale Milano",
+        "away_short": "INT",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558623",
+        "updated_at": "2026-08-30T13:12:36.290002+00:00"
+      },
+      {
+        "id": "bbb61a844171353c474b",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-08-30T18:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "d340f22a1daf331bf5",
+        "home_name": "SS Lazio",
+        "home_short": "LAZ",
+        "away_id": "575ad11bbc7426759e",
+        "away_name": "Genoa CFC",
+        "away_short": "GEN",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558622",
+        "updated_at": "2026-08-30T13:12:36.295329+00:00"
+      },
+      {
+        "id": "e1c632f67f03b24445b7",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-30T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "178d02ecb65a6640af",
+        "home_name": "Flamengo",
+        "home_short": "FLA",
+        "away_id": "3b748ab976a81dcbcd",
+        "away_name": "Botafogo",
+        "away_short": "BOT",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401841213",
+        "updated_at": "2026-08-30T13:12:43.945915+00:00"
+      },
+      {
+        "id": "5f356760983063dd09ce",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-30T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "f541c69bd4ee4d9180",
+        "away_name": "Santos",
+        "away_short": "SAN",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401841214",
+        "updated_at": "2026-08-30T13:12:43.937439+00:00"
+      },
+      {
+        "id": "7d2bdfe783ee2a0014f0",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-30T19:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "625066e0d50c1a6094",
+        "home_name": "RC Celta de Vigo",
+        "home_short": "CEL",
+        "away_id": "75f564e3d16ab2ec31",
+        "away_name": "Athletic Club",
+        "away_short": "ATH",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564652",
+        "updated_at": "2026-08-30T13:12:36.311421+00:00"
+      },
+      {
+        "id": "177d0f1f09a63f46120b",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-08-30T19:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "9934adef4d76a974df",
+        "home_name": "FC Famalicão",
+        "home_short": "FAM",
+        "away_id": "6cf03bde613d291b40",
+        "away_name": "Gil Vicente FC",
+        "away_short": "GIL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567284",
+        "updated_at": "2026-08-30T13:12:36.316761+00:00"
+      },
+      {
+        "id": "20487afe7e8369827a89",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-30T21:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "590c1e0cd091eaf7e1",
+        "home_name": "Mirassol",
+        "home_short": "MIR",
+        "away_id": "9a3c152825daa730cb",
+        "away_name": "Palmeiras",
+        "away_short": "PAL",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401841211",
+        "updated_at": "2026-08-30T13:12:43.962443+00:00"
+      },
+      {
+        "id": "75d9e0c0db9956545be3",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-30T21:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "c0eb691b941f2978d1",
+        "home_name": "Grêmio",
+        "home_short": "FBP",
+        "away_id": "76ad233033c62ff5ca",
+        "away_name": "Chapecoense AF",
+        "away_short": "CHA",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "554985",
+        "updated_at": "2026-08-30T13:12:36.327920+00:00"
+      },
+      {
+        "id": "30569cd6061b8914bc32",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-30T22:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "9f563292bea3f50f07",
+        "home_name": "Bahia",
+        "home_short": "BAH",
+        "away_id": "bd162042f98d9dd2b6",
+        "away_name": "Internacional",
+        "away_short": "INT",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401841215",
+        "updated_at": "2026-08-30T13:12:43.971125+00:00"
+      },
+      {
+        "id": "527a62bd4a4c4b385741",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-08-31T16:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "fb5d9cd90e17b64f5f",
+        "home_name": "US Lecce",
+        "home_short": "USL",
+        "away_id": "30a42a6fb391da1f6d",
+        "away_name": "AS Roma",
+        "away_short": "ROM",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558621",
+        "updated_at": "2026-08-30T13:12:36.339112+00:00"
+      },
+      {
+        "id": "f5ce687dce9afdde046d",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-31T17:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "00c50df0c16981dc92",
+        "home_name": "CA Osasuna",
+        "home_short": "OSA",
+        "away_id": "42a5202c26440e05e2",
+        "away_name": "Getafe CF",
+        "away_short": "GET",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564657",
+        "updated_at": "2026-08-30T13:12:36.344704+00:00"
+      },
+      {
+        "id": "b45f2359419aee0f4841",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-08-31T18:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "99cc461eeaf7e2306d",
+        "home_name": "Atalanta BC",
+        "home_short": "ATA",
+        "away_id": "fb7723b516c14d5dc0",
+        "away_name": "Bologna FC 1909",
+        "away_short": "BOL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558628",
+        "updated_at": "2026-08-30T13:12:36.350752+00:00"
+      },
+      {
+        "id": "9085432e2ecd46cd7cad",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-31T19:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "b34a03c29de23d2aa1",
+        "home_name": "Aston Villa FC",
+        "home_short": "AVL",
+        "away_id": "11772e395749fdc0f9",
+        "away_name": "Arsenal FC",
+        "away_short": "ARS",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560557",
+        "updated_at": "2026-08-30T13:12:36.356479+00:00"
+      },
+      {
+        "id": "8a196168bde83527f35d",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-08-31T19:15:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "7d9c345405bc64d7b6",
+        "home_name": "Sporting Clube de Braga",
+        "home_short": "SCB",
+        "away_id": "5220b1187a985dca02",
+        "away_name": "Vitória",
+        "away_short": "GUI",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567292",
+        "updated_at": "2026-08-30T13:12:36.362084+00:00"
+      },
+      {
+        "id": "f75a08f871d016ec1062",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-08-31T19:15:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "6514e9ded380962790",
+        "home_name": "Sport Lisboa e Benfica",
+        "home_short": "BEN",
+        "away_id": "9130df838c83ad844a",
+        "away_name": "GD Estoril Praia",
+        "away_short": "EST",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567288",
+        "updated_at": "2026-08-30T13:12:36.367508+00:00"
+      },
+      {
+        "id": "c0945fe192e626d14d5f",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-31T19:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "192a5a24657fd487e0",
+        "home_name": "FC Barcelona",
+        "home_short": "FCB",
+        "away_id": "9b2cbb4b6b5a74fcda",
+        "away_name": "Rayo Vallecano de Madrid",
+        "away_short": "RAY",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564650",
+        "updated_at": "2026-08-30T13:12:36.373731+00:00"
+      },
+      {
+        "id": "118c391b3b312e491175",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-31T23:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "7f612db037dc322ddd",
+        "home_name": "Clube do Remo",
+        "home_short": "CRE",
+        "away_id": "7db41a535db1869ad4",
+        "away_name": "Coritiba FBC",
+        "away_short": "COR",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "554987",
+        "updated_at": "2026-08-30T13:12:36.379752+00:00"
+      },
+      {
+        "id": "377239c1fea2d195f1d2",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-02T22:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "178d02ecb65a6640af",
+        "home_name": "Flamengo",
+        "home_short": "FLA",
+        "away_id": "590c1e0cd091eaf7e1",
+        "away_name": "Mirassol",
+        "away_short": "MIR",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401913077",
+        "updated_at": "2026-08-30T13:12:43.988665+00:00"
+      },
+      {
+        "id": "e6f296dd3cf6d50713a2",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-09-03T18:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "0b06e9b9967767637f",
+        "home_name": "Toulouse FC",
+        "home_short": "TOU",
+        "away_id": "4dff16d93d91d0a06a",
+        "away_name": "Lille OSC",
+        "away_short": "LIL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "559696",
+        "updated_at": "2026-08-30T13:12:36.391673+00:00"
+      },
+      {
+        "id": "0f766ac38bce7b220db5",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-09-03T19:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "719084a08a71e4d678",
+        "home_name": "Real Sociedad de Fútbol",
+        "home_short": "RSO",
+        "away_id": "625066e0d50c1a6094",
+        "away_name": "RC Celta de Vigo",
+        "away_short": "CEL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564682",
+        "updated_at": "2026-08-30T13:12:36.397636+00:00"
+      },
+      {
+        "id": "7457711af31d9bba0fb9",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-09-04T17:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "f7715410c3c77c20c4",
+        "home_name": "Olympique Lyonnais",
+        "home_short": "LYO",
+        "away_id": "d3a0101b081da80039",
+        "away_name": "AJ Auxerre",
+        "away_short": "AJA",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "559699",
+        "updated_at": "2026-08-30T13:12:36.403495+00:00"
+      },
+      {
+        "id": "cf186c4c63bdc819be6d",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-09-04T18:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "e7f5902c9d2e4f2e34",
+        "home_name": "Sparta Rotterdam",
+        "home_short": "SPA",
+        "away_id": "064dc9921966a25f57",
+        "away_name": "PEC Zwolle",
+        "away_short": "ZWO",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558250",
+        "updated_at": "2026-08-30T13:12:36.409704+00:00"
+      },
+      {
+        "id": "a7d84d1dfe092d5c6933",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-09-04T18:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "df314da1cb7a207a06",
+        "home_name": "VfB Stuttgart",
+        "home_short": "VFB",
+        "away_id": "5c56978c1e3101b3e2",
+        "away_name": "1. FC Köln",
+        "away_short": "KOE",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "565791",
+        "updated_at": "2026-08-30T13:12:36.416107+00:00"
+      },
+      {
+        "id": "43d0c39d4fd30f45a754",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-09-04T18:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "575ad11bbc7426759e",
+        "home_name": "Genoa CFC",
+        "home_short": "GEN",
+        "away_id": "30b7d3c7f0d40041e3",
+        "away_name": "Como 1907",
+        "away_short": "COM",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558609",
+        "updated_at": "2026-08-30T13:12:36.422918+00:00"
+      },
+      {
+        "id": "ed0e7baba850f3b48bb0",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-09-04T19:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "f8ba9ee2acf6651c58",
+        "home_name": "Real Betis Balompié",
+        "home_short": "BET",
+        "away_id": "041a41a9e5d46f7396",
+        "away_name": "Real Madrid CF",
+        "away_short": "RMA",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564667",
+        "updated_at": "2026-08-30T13:12:36.430213+00:00"
+      },
+      {
+        "id": "bf1ae3ffb89fb4a17b6c",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-09-04T19:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "c06044b267ac04e9cc",
+        "home_name": "Ipswich Town FC",
+        "home_short": "IPS",
+        "away_id": "acf77e31bd33648cc7",
+        "away_name": "Liverpool FC",
+        "away_short": "LIV",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560566",
+        "updated_at": "2026-08-30T13:12:36.437690+00:00"
+      },
+      {
+        "id": "7141bde14a07be9b4b48",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-09-04T19:05:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "69dee0aaa3e7b50573",
+        "home_name": "Paris Saint-Germain FC",
+        "home_short": "PSG",
+        "away_id": "f5396ab988c301d482",
+        "away_name": "AS Monaco FC",
+        "away_short": "ASM",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "559697",
+        "updated_at": "2026-08-30T13:12:36.446071+00:00"
+      },
+      {
+        "id": "0fe5673794e7f41e5c2e",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-09-04T19:15:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "99d3f60a330dd37181",
+        "home_name": "Sporting Clube de Portugal",
+        "home_short": "SPO",
+        "away_id": "0f1e622559c82b0e72",
+        "away_name": "CD Nacional",
+        "away_short": "CDN",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567298",
+        "updated_at": "2026-08-30T13:12:36.453845+00:00"
+      },
+      {
+        "id": "f226305d5f7b29e867ee",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-09-04T19:15:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "64e919a47dc6d5e97d",
+        "home_name": "FC Porto",
+        "home_short": "FCP",
+        "away_id": "aa92681ee7e28fc6c0",
+        "away_name": "Moreirense FC",
+        "away_short": "MOR",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567299",
+        "updated_at": "2026-08-30T13:12:36.460753+00:00"
+      },
+      {
+        "id": "f3ac6bceb7bb8a628ad8",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-09-05T11:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "92596fc166955d857f",
+        "home_name": "Newcastle United FC",
+        "home_short": "NEW",
+        "away_id": "a6d70aa2a233a12551",
+        "away_name": "AFC Bournemouth",
+        "away_short": "BOU",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560571",
+        "updated_at": "2026-08-30T13:12:36.467357+00:00"
+      },
+      {
+        "id": "f913401d159de96db996",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-09-05T13:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "68d1e8d49c1c8fefc6",
+        "home_name": "ACF Fiorentina",
+        "home_short": "FIO",
+        "away_id": "5b876bf53ec6c12639",
+        "away_name": "Torino FC",
+        "away_short": "TOR",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558616",
+        "updated_at": "2026-08-30T13:12:36.474487+00:00"
+      },
+      {
+        "id": "94dd16c958a9a5f9a8a2",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-09-05T13:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "02c67b3096b32878b0",
+        "home_name": "Bayer 04 Leverkusen",
+        "home_short": "B04",
+        "away_id": "0ab4d3bec69c195da4",
+        "away_name": "1. FC Union Berlin",
+        "away_short": "UNB",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "565790",
+        "updated_at": "2026-08-30T13:12:36.504207+00:00"
+      },
+      {
+        "id": "fb1ec5f04901d87d913f",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-09-05T13:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "dba1ba25341bde4013",
+        "home_name": "Borussia Mönchengladbach",
+        "home_short": "BMG",
+        "away_id": "eee5e68b4c7e2f2a7a",
+        "away_name": "SV 07 Elversberg",
+        "away_short": "ELV",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "565792",
+        "updated_at": "2026-08-30T13:12:36.511385+00:00"
+      },
+      {
+        "id": "e9b9171305d9d33a1e4f",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-09-05T13:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "f38eeeaa2ed201c043",
+        "home_name": "TSG 1899 Hoffenheim",
+        "home_short": "TSG",
+        "away_id": "67ce44e1c93339b287",
+        "away_name": "Borussia Dortmund",
+        "away_short": "BVB",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "565787",
+        "updated_at": "2026-08-30T13:12:36.518416+00:00"
+      },
+      {
+        "id": "a0e6f94af10bd34162be",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-09-05T13:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "50f6b971769258b9c1",
+        "home_name": "SC Paderborn 07",
+        "home_short": "SCP",
+        "away_id": "5020b38d61f1ab71da",
+        "away_name": "SC Freiburg",
+        "away_short": "SCF",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "565793",
+        "updated_at": "2026-08-30T13:12:36.525852+00:00"
+      },
+      {
+        "id": "878417f65e901d75848c",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-09-05T13:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "8181209a55f1a2ab46",
+        "home_name": "SV Werder Bremen",
+        "home_short": "SVW",
+        "away_id": "01ec1e8f3a4620b60c",
+        "away_name": "RB Leipzig",
+        "away_short": "RBL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "565785",
+        "updated_at": "2026-08-30T13:12:36.532827+00:00"
+      },
+      {
+        "id": "269ac95aeaf7b4c7ea17",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-09-05T14:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "8fe8d6055f415c8a3a",
+        "home_name": "Brentford FC",
+        "home_short": "BRE",
+        "away_id": "beb50cb8f137d21e4d",
+        "away_name": "Sunderland AFC",
+        "away_short": "SUN",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560565",
+        "updated_at": "2026-08-30T13:12:36.539758+00:00"
+      },
+      {
+        "id": "4c5bf0d78cfd270fddb1",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-09-05T14:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "c377470d7173311551",
+        "home_name": "Fulham FC",
+        "home_short": "FUL",
+        "away_id": "cb2305824ed37603ea",
+        "away_name": "Crystal Palace FC",
+        "away_short": "CRY",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560568",
+        "updated_at": "2026-08-30T13:12:36.546962+00:00"
+      },
+      {
+        "id": "aeb0ad7deaeddd6f13a1",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-09-05T14:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "630e0be9d7e0b6d045",
+        "home_name": "Manchester City FC",
+        "home_short": "MCI",
+        "away_id": "c6ce9442c38867d5a3",
+        "away_name": "Coventry City FC",
+        "away_short": "COV",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560563",
+        "updated_at": "2026-08-30T13:12:36.553876+00:00"
+      },
+      {
+        "id": "c5b361214edc3441519c",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-09-05T14:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "07bb506f7ecae9cde3",
+        "home_name": "Brighton & Hove Albion FC",
+        "home_short": "BHA",
+        "away_id": "2fce916caa377bf3be",
+        "away_name": "Leeds United FC",
+        "away_short": "LEE",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560564",
+        "updated_at": "2026-08-30T13:12:36.561077+00:00"
+      },
+      {
+        "id": "9923377386da4b100651",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-09-05T14:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "b8fd7430177f4e6a06",
+        "home_name": "Nottingham Forest FC",
+        "home_short": "NOT",
+        "away_id": "9f1cfe532350c1b92f",
+        "away_name": "Tottenham Hotspur FC",
+        "away_short": "TOT",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560562",
+        "updated_at": "2026-08-30T13:12:36.568488+00:00"
+      },
+      {
+        "id": "2c4fe6c74a29560be732",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-09-05T14:15:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "75f564e3d16ab2ec31",
+        "home_name": "Athletic Club",
+        "home_short": "ATH",
+        "away_id": "f5fd03ff72746d9a82",
+        "away_name": "Club Atlético de Madrid",
+        "away_short": "ATL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564663",
+        "updated_at": "2026-08-30T13:12:36.575492+00:00"
+      },
+      {
+        "id": "5913b0ccd5953bd24a19",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-09-05T14:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "8982d740c26b9b26df",
+        "home_name": "NEC",
+        "home_short": "NEC",
+        "away_id": "e86198aa8453e37fa0",
+        "away_name": "Feyenoord Rotterdam",
+        "away_short": "FEY",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558251",
+        "updated_at": "2026-08-30T13:12:36.582174+00:00"
+      },
+      {
+        "id": "e6ec546c28325120381d",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-09-05T14:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "266b2db4633cab2bdf",
+        "home_name": "CF Estrela da Amadora",
+        "home_short": "AMA",
+        "away_id": "9934adef4d76a974df",
+        "away_name": "FC Famalicão",
+        "away_short": "FAM",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567297",
+        "updated_at": "2026-08-30T13:12:36.596135+00:00"
+      },
+      {
+        "id": "c9428385db9bd5167437",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-09-05T15:15:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "7aec4ac763fdfc9343",
+        "home_name": "Racing Club de Lens",
+        "home_short": "RCL",
+        "away_id": "c533f66b1dba6e47b3",
+        "away_name": "FC Lorient",
+        "away_short": "FCL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "559695",
+        "updated_at": "2026-08-30T13:12:36.602481+00:00"
+      },
+      {
+        "id": "a139d15fd799024d2f85",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-09-05T16:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "a95f6b83f9390ff949",
+        "home_name": "FC Internazionale Milano",
+        "home_short": "INT",
+        "away_id": "c1407e379bdfd0f619",
+        "away_name": "SSC Napoli",
+        "away_short": "NAP",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558614",
+        "updated_at": "2026-08-30T13:12:36.619454+00:00"
+      },
+      {
+        "id": "0af5b941a7651aa4d405",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-09-05T16:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "582e350ad18db82585",
+        "home_name": "FC Schalke 04",
+        "home_short": "S04",
+        "away_id": "2be6218d69d398541a",
+        "away_name": "FC Bayern München",
+        "away_short": "FCB",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "565789",
+        "updated_at": "2026-08-30T13:12:36.626067+00:00"
+      },
+      {
+        "id": "af13485f0306bc29c01c",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-09-05T16:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "2629095d2fea3c5485",
+        "home_name": "Hull City AFC",
+        "home_short": "HUL",
+        "away_id": "b34a03c29de23d2aa1",
+        "away_name": "Aston Villa FC",
+        "away_short": "AVL",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "560569",
+        "updated_at": "2026-08-30T13:12:36.632996+00:00"
+      },
+      {
+        "id": "2698a39444d1f4fa27cb",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-09-05T16:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "9b2cbb4b6b5a74fcda",
+        "home_name": "Rayo Vallecano de Madrid",
+        "home_short": "RAY",
+        "away_id": "78f7aceccec7234876",
+        "away_name": "Real Racing Club de Santander",
+        "away_short": "SAN",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564660",
+        "updated_at": "2026-08-30T13:12:36.640103+00:00"
+      },
+      {
+        "id": "2544a818bb4310f68a42",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-09-05T16:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "45744402425d537790",
+        "home_name": "FC Utrecht",
+        "home_short": "UTR",
+        "away_id": "b75aafc430316c0f6b",
+        "away_name": "Go Ahead Eagles",
+        "away_short": "GOA",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558252",
+        "updated_at": "2026-08-30T13:12:36.647179+00:00"
+      },
+      {
+        "id": "7b8cc8110c2491f5ae1c",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-09-05T17:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "e0e0e8a58e3c34ec71",
+        "home_name": "FC Alverca",
+        "home_short": "ALV",
+        "away_id": "7d9c345405bc64d7b6",
+        "away_name": "Sporting Clube de Braga",
+        "away_short": "SCB",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567296",
+        "updated_at": "2026-08-30T13:12:36.654055+00:00"
+      },
+      {
+        "id": "a65763f57f7c6c1f4ee0",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-09-05T17:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "4035e3225f10998c0d",
+        "home_name": "CS Marítimo",
+        "home_short": "CSM",
+        "away_id": "6514e9ded380962790",
+        "away_name": "Sport Lisboa e Benfica",
+        "away_short": "BEN",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "567293",
+        "updated_at": "2026-08-30T13:12:36.660929+00:00"
+      },
+      {
+        "id": "aa20e21ad922b006283b",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-09-05T18:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "d62aacc8afd1f7b904",
+        "home_name": "AFC Ajax",
+        "home_short": "AJA",
+        "away_id": "26900e06180b8fe85d",
+        "away_name": "PSV",
+        "away_short": "PSV",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558253",
+        "updated_at": "2026-08-30T13:12:36.667735+00:00"
+      },
+      {
+        "id": "707cf67e85c81d631ac0",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-09-05T18:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "db41b510a99f845322",
+        "home_name": "Le Havre AC",
+        "home_short": "HAC",
+        "away_id": "de0e72dd1ec0ef55f7",
+        "away_name": "Stade Brestois 29",
+        "away_short": "BRE",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "559693",
+        "updated_at": "2026-08-30T13:12:36.674200+00:00"
+      },
+      {
+        "id": "3915a436c9636c541171",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-09-05T18:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "30a42a6fb391da1f6d",
+        "home_name": "AS Roma",
+        "home_short": "ROM",
+        "away_id": "99cc461eeaf7e2306d",
+        "away_name": "Atalanta BC",
+        "away_short": "ATA",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558611",
+        "updated_at": "2026-08-30T13:12:36.680641+00:00"
+      },
+      {
+        "id": "d5af31068278be527301",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-09-05T18:45:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "6873bd184c33922853",
+        "home_name": "OGC Nice",
+        "home_short": "NIC",
+        "away_id": "d89bfd7223ab6fc905",
+        "away_name": "Le Mans FC",
+        "away_short": "LMF",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "559701",
+        "updated_at": "2026-08-30T13:12:36.687657+00:00"
+      },
+      {
+        "id": "86fd51ce031fa0afb72f",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-09-05T19:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "edd16a2b82f0664400",
+        "home_name": "Villarreal CF",
+        "home_short": "VIL",
+        "away_id": "261661bcea4cc81817",
+        "away_name": "RC Deportivo La Coruña",
+        "away_short": "DEP",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "564662",
+        "updated_at": "2026-08-30T13:12:36.694130+00:00"
+      },
+      {
+        "id": "c81bd2390815407800c6",
+        "sport": "Futebol",
+        "competition": "Eredivisie",
+        "season": "2026",
+        "start_time": "2026-09-05T19:00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "b0b26971823bef1834",
+        "home_name": "Willem II Tilburg",
+        "home_short": "WII",
+        "away_id": "e935532b54e93aed78",
+        "away_name": "SBV Excelsior",
+        "away_short": "EXC",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "558254",
+        "updated_at": "2026-08-30T13:12:36.700882+00:00"
+      },
+      {
+        "id": "dbe13b5f3f2ca4b967d7",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-05T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "c70e342520628d90be",
+        "home_name": "Bragantino",
+        "home_short": "BRA",
+        "away_id": "9f563292bea3f50f07",
+        "away_name": "Bahia",
+        "away_short": "BAH",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401841224",
+        "updated_at": "2026-08-30T13:12:43.997318+00:00"
+      },
+      {
+        "id": "971b0cb4af7055532e0f",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-05T21:30:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "09a7997a6af73b43f7",
+        "home_name": "São Paulo",
+        "home_short": "PAU",
+        "away_id": "cfee4cccf2f07aeae1",
+        "away_name": "CA Mineiro",
+        "away_short": "CAM",
+        "home_score": null,
+        "away_score": null,
+        "source": "Football-Data.org",
+        "provider_match_id": "554998",
+        "updated_at": "2026-08-30T13:12:36.714329+00:00"
+      },
+      {
+        "id": "318a523e949fa5ad3b8d",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-06T00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "0b87c3ffb6e9585c89",
+        "home_name": "Fluminense",
+        "home_short": "FLU",
+        "away_id": "b7dc25efe9d18ad729",
+        "away_name": "Vasco",
+        "away_short": "VAS",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401841227",
+        "updated_at": "2026-08-30T13:12:44.019045+00:00"
+      },
+      {
+        "id": "b784e56ae50e33892a3c",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-08-30T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "d7e1cc423a168816ff",
+        "home_name": "América-MG",
+        "home_short": "AMG",
+        "away_id": "d2b3e32f8c4cd7c39a",
+        "away_name": "Ponte Preta",
+        "away_short": "PON",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860302",
+        "updated_at": "2026-08-30T13:12:44.090655+00:00"
+      },
+      {
+        "id": "2403b65533c6ca15828b",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-08-30T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "7de440a2a67a1c06fc",
+        "home_name": "Avaí",
+        "home_short": "AVA",
+        "away_id": "1ee83309d2aaad6cb2",
+        "away_name": "Atlético-GO",
+        "away_short": "AGO",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860303",
+        "updated_at": "2026-08-30T13:12:44.100324+00:00"
+      },
+      {
+        "id": "db7fa67762cf2f39b071",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-08-30T21:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "be09e06efb37d00134",
+        "home_name": "CRB",
+        "home_short": "CRB",
+        "away_id": "2261634969adb266d9",
+        "away_name": "Criciúma",
+        "away_short": "CRI",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860305",
+        "updated_at": "2026-08-30T13:12:44.108806+00:00"
+      },
+      {
+        "id": "95c20dbf7e5ccd2eea02",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-08-30T21:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "207f17fd2b1750e642",
+        "home_name": "Vila Nova",
+        "home_short": "VIL",
+        "away_id": "2071f11a627bf816bf",
+        "away_name": "Ceará",
+        "away_short": "CEA",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860306",
+        "updated_at": "2026-08-30T13:12:44.117208+00:00"
+      },
+      {
+        "id": "0818242d7abe638c6da1",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-08-31T22:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "07673e12c1119a155f",
+        "home_name": "Fortaleza",
+        "home_short": "FOR",
+        "away_id": "fc545f03a62c420875",
+        "away_name": "Operário PR",
+        "away_short": "OPE",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860311",
+        "updated_at": "2026-08-30T13:12:44.126194+00:00"
+      },
+      {
+        "id": "8846afc608d5a16ddb05",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-01T22:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "96d118a7e4b9df7bcc",
+        "home_name": "Londrina",
+        "home_short": "LON",
+        "away_id": "ac643ac98a96d64adc",
+        "away_name": "Juventude",
+        "away_short": "JUV",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860308",
+        "updated_at": "2026-08-30T13:12:44.134891+00:00"
+      },
+      {
+        "id": "42bcfdcae3ac10c08509",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-03T23:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "44a17e6df941ebfe60",
+        "home_name": "Náutico",
+        "home_short": "NAU",
+        "away_id": "dcda99a2b28eaa1280",
+        "away_name": "Botafogo-SP",
+        "away_short": "BFC",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860315",
+        "updated_at": "2026-08-30T13:12:44.149284+00:00"
+      },
+      {
+        "id": "68439459afba25ae710f",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-04T22:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "2261634969adb266d9",
+        "home_name": "Criciúma",
+        "home_short": "CRI",
+        "away_id": "173dab27777d6de841",
+        "away_name": "Cuiabá",
+        "away_short": "CUI",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860312",
+        "updated_at": "2026-08-30T13:12:44.159305+00:00"
+      },
+      {
+        "id": "5d5c932ef1ce24e699e0",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-04T23:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "f0744d7d6c6fa9d40a",
+        "home_name": "Athletic",
+        "home_short": "ACMG",
+        "away_id": "207f17fd2b1750e642",
+        "away_name": "Vila Nova",
+        "away_short": "VIL",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860320",
+        "updated_at": "2026-08-30T13:12:44.168486+00:00"
+      },
+      {
+        "id": "000c3357bae72f046b0e",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-05T00:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "be09e06efb37d00134",
+        "home_name": "CRB",
+        "home_short": "CRB",
+        "away_id": "d7e1cc423a168816ff",
+        "away_name": "América-MG",
+        "away_short": "AMG",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860321",
+        "updated_at": "2026-08-30T13:12:44.177335+00:00"
+      },
+      {
+        "id": "337f744df9e019e37756",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-05T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "289edf6b1fe9585e70",
+        "home_name": "Novorizontino",
+        "home_short": "NOV",
+        "away_id": "7de440a2a67a1c06fc",
+        "away_name": "Avaí",
+        "away_short": "AVA",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860316",
+        "updated_at": "2026-08-30T13:12:44.195316+00:00"
+      },
+      {
+        "id": "67525dad52862534e184",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-05T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "bf998c2b2e99fc9938",
+        "home_name": "Goiás",
+        "home_short": "GOI",
+        "away_id": "07673e12c1119a155f",
+        "away_name": "Fortaleza",
+        "away_short": "FOR",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860319",
+        "updated_at": "2026-08-30T13:12:44.186455+00:00"
+      },
+      {
+        "id": "935fd0117653999e4c4a",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-05T21:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "ac643ac98a96d64adc",
+        "home_name": "Juventude",
+        "home_short": "JUV",
+        "away_id": "1ee83309d2aaad6cb2",
+        "away_name": "Atlético-GO",
+        "away_short": "AGO",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860318",
+        "updated_at": "2026-08-30T13:12:44.216040+00:00"
+      },
+      {
+        "id": "f1f4a6f76e29c53f2958",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-05T21:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "2071f11a627bf816bf",
+        "home_name": "Ceará",
+        "home_short": "CEA",
+        "away_id": "41fc766556d4af4ef3",
+        "away_name": "Sport",
+        "away_short": "SPO",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860313",
+        "updated_at": "2026-08-30T13:12:44.224235+00:00"
+      },
+      {
+        "id": "39fa76fdd14183491562",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-06T14:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "96d118a7e4b9df7bcc",
+        "home_name": "Londrina",
+        "home_short": "LON",
+        "away_id": "fc545f03a62c420875",
+        "away_name": "Operário PR",
+        "away_short": "OPE",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860317",
+        "updated_at": "2026-08-30T13:12:44.232556+00:00"
+      },
+      {
+        "id": "dbf51adbf669b0964565",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-09-06T21:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "d2b3e32f8c4cd7c39a",
+        "home_name": "Ponte Preta",
+        "home_short": "PON",
+        "away_id": "a7fe1b99a4d517b578",
+        "away_name": "São Bernardo",
+        "away_short": "BER",
+        "home_score": null,
+        "away_score": null,
+        "source": "multi",
+        "provider_match_id": "401860314",
+        "updated_at": "2026-08-30T13:12:44.240765+00:00"
+      },
+      {
+        "id": "2cb1af8d53bcda2e4ab2",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-30T14:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "20e39c11167389f209",
+        "home_name": "Athletico-PR",
+        "home_short": "CAP",
+        "away_id": "0b87c3ffb6e9585c89",
+        "away_name": "Fluminense",
+        "away_short": "FLU",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841208",
+        "updated_at": "2026-08-30T13:12:43.928422+00:00"
+      },
+      {
+        "id": "7cd4fbaae7b74c69c806",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-30T21:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "c0eb691b941f2978d1",
+        "home_name": "Grêmio",
+        "home_short": "GRE",
+        "away_id": "a5aeb62b91fd20b43b",
+        "away_name": "Chapecoense",
+        "away_short": "CHA",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841217",
+        "updated_at": "2026-08-30T13:12:43.954219+00:00"
+      },
+      {
+        "id": "f0910218916be328fd68",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-31T23:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "85fe60cf642c9168d5",
+        "home_name": "Remo",
+        "home_short": "REMO",
+        "away_id": "ae486e255b7574cdfc",
+        "away_name": "Coritiba",
+        "away_short": "CFC",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841210",
+        "updated_at": "2026-08-30T13:12:43.979877+00:00"
+      },
+      {
+        "id": "faba7cf83a98c8520dd4",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-05T21:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "09a7997a6af73b43f7",
+        "home_name": "São Paulo",
+        "home_short": "SAO",
+        "away_id": "eae0e92669d99715d5",
+        "away_name": "Atlético-MG",
+        "away_short": "CAM",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841226",
+        "updated_at": "2026-08-30T13:12:44.006954+00:00"
+      },
+      {
+        "id": "5ff4b900099d8d7257b7",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-06T14:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "ae486e255b7574cdfc",
+        "home_name": "Coritiba",
+        "home_short": "CFC",
+        "away_id": "590c1e0cd091eaf7e1",
+        "away_name": "Mirassol",
+        "away_short": "MIR",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841219",
+        "updated_at": "2026-08-30T13:12:44.031026+00:00"
+      },
+      {
+        "id": "8aa44cbf2321ab884462",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-06T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "bff457c9c7114e8deb",
+        "home_name": "Cruzeiro",
+        "home_short": "CRU",
+        "away_id": "20e39c11167389f209",
+        "away_name": "Athletico-PR",
+        "away_short": "CAP",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841218",
+        "updated_at": "2026-08-30T13:12:44.043339+00:00"
+      },
+      {
+        "id": "7c707dd7c6be432c312e",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-06T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "bd162042f98d9dd2b6",
+        "home_name": "Internacional",
+        "home_short": "INT",
+        "away_id": "f541c69bd4ee4d9180",
+        "away_name": "Santos",
+        "away_short": "SAN",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841223",
+        "updated_at": "2026-08-30T13:12:44.055472+00:00"
+      },
+      {
+        "id": "ab343e6be4422b39a230",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-06T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "85fe60cf642c9168d5",
+        "home_name": "Remo",
+        "home_short": "REMO",
+        "away_id": "178d02ecb65a6640af",
+        "away_name": "Flamengo",
+        "away_short": "FLA",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841225",
+        "updated_at": "2026-08-30T13:12:44.064387+00:00"
+      },
+      {
+        "id": "9fc1106a72f90fff62c2",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-06T21:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "3b748ab976a81dcbcd",
+        "home_name": "Botafogo",
+        "home_short": "BOT",
+        "away_id": "9a3c152825daa730cb",
+        "away_name": "Palmeiras",
+        "away_short": "PAL",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841221",
+        "updated_at": "2026-08-30T13:12:44.073867+00:00"
+      },
+      {
+        "id": "857efb71838fbe087275",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-06T22:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "a5aeb62b91fd20b43b",
+        "away_name": "Chapecoense",
+        "away_short": "CHA",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841220",
+        "updated_at": "2026-08-30T13:12:44.082227+00:00"
+      },
+      {
+        "id": "f3a92fd55bdc89e31756",
+        "sport": "Futebol",
+        "competition": "🏆 Copa do Brasil",
+        "season": "2026",
+        "start_time": "2026-09-02T00:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "eae0e92669d99715d5",
+        "home_name": "Atlético-MG",
+        "home_short": "CAM",
+        "away_id": "bff457c9c7114e8deb",
+        "away_name": "Cruzeiro",
+        "away_short": "CRU",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401909112",
+        "updated_at": "2026-08-30T13:12:44.248829+00:00"
+      },
+      {
+        "id": "26489a757fcfb4617570",
+        "sport": "Futebol",
+        "competition": "🏆 Copa do Brasil",
+        "season": "2026",
+        "start_time": "2026-09-03T00:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "f541c69bd4ee4d9180",
+        "home_name": "Santos",
+        "home_short": "SAN",
+        "away_id": "9a3c152825daa730cb",
+        "away_name": "Palmeiras",
+        "away_short": "PAL",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401909110",
+        "updated_at": "2026-08-30T13:12:44.256838+00:00"
+      },
+      {
+        "id": "da2560c5e3996d7b9aeb",
+        "sport": "Futebol",
+        "competition": "🏆 Copa do Brasil",
+        "season": "2026",
+        "start_time": "2026-09-03T00:30Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "5220b1187a985dca02",
+        "home_name": "Vitória",
+        "home_short": "VIT",
+        "away_id": "b7dc25efe9d18ad729",
+        "away_name": "Vasco",
+        "away_short": "VAS",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401909111",
+        "updated_at": "2026-08-30T13:12:44.264946+00:00"
+      },
+      {
+        "id": "fa4d64903e60c25ae773",
+        "sport": "Futebol",
+        "competition": "🏆 Copa do Brasil",
+        "season": "2026",
+        "start_time": "2026-09-03T23:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "c0eb691b941f2978d1",
+        "home_name": "Grêmio",
+        "home_short": "GRE",
+        "away_id": "bd162042f98d9dd2b6",
+        "away_name": "Internacional",
+        "away_short": "INT",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401909114",
+        "updated_at": "2026-08-30T13:12:44.273150+00:00"
       }
     ],
     "match_sources": [
@@ -70,11 +4411,812 @@
         "source": "Football-Data.org",
         "provider_match_id": "554989",
         "updated_at": "2026-08-30T13:12:35.138567+00:00"
+      },
+      {
+        "match_id": "5e9f106fa41fea38ff0a",
+        "source": "Football-Data.org",
+        "provider_match_id": "558245",
+        "updated_at": "2026-08-30T13:12:36.184730+00:00"
+      },
+      {
+        "match_id": "cedfdfe35027c4a00b89",
+        "source": "Football-Data.org",
+        "provider_match_id": "558247",
+        "updated_at": "2026-08-30T13:12:36.189326+00:00"
+      },
+      {
+        "match_id": "2e42579cf56e44751bdb",
+        "source": "Football-Data.org",
+        "provider_match_id": "558246",
+        "updated_at": "2026-08-30T13:12:36.193593+00:00"
+      },
+      {
+        "match_id": "105151eb75c1b5073fd3",
+        "source": "Football-Data.org",
+        "provider_match_id": "560556",
+        "updated_at": "2026-08-30T13:12:36.197495+00:00"
+      },
+      {
+        "match_id": "1a67fcd3c5e764c646ef",
+        "source": "Football-Data.org",
+        "provider_match_id": "560559",
+        "updated_at": "2026-08-30T13:12:36.202059+00:00"
+      },
+      {
+        "match_id": "e8d4e6a3305848f8bce1",
+        "source": "Football-Data.org",
+        "provider_match_id": "559707",
+        "updated_at": "2026-08-30T13:12:36.206099+00:00"
+      },
+      {
+        "match_id": "0465c9ac60636a5d5bfd",
+        "source": "Football-Data.org",
+        "provider_match_id": "560554",
+        "updated_at": "2026-08-30T13:12:36.210308+00:00"
+      },
+      {
+        "match_id": "b708fa9de60f6d1090e5",
+        "source": "Football-Data.org",
+        "provider_match_id": "565784",
+        "updated_at": "2026-08-30T13:12:36.214800+00:00"
+      },
+      {
+        "match_id": "048fd42dd9bfebaadb37",
+        "source": "Football-Data.org",
+        "provider_match_id": "554980",
+        "updated_at": "2026-08-30T13:12:36.219479+00:00"
+      },
+      {
+        "match_id": "13666d8563dcf9534eda",
+        "source": "Football-Data.org",
+        "provider_match_id": "567286",
+        "updated_at": "2026-08-30T13:12:36.224327+00:00"
+      },
+      {
+        "match_id": "80aad09786497e8d0930",
+        "source": "Football-Data.org",
+        "provider_match_id": "558248",
+        "updated_at": "2026-08-30T13:12:36.229193+00:00"
+      },
+      {
+        "match_id": "7891ef3ae427a4d7bb85",
+        "source": "Football-Data.org",
+        "provider_match_id": "564656",
+        "updated_at": "2026-08-30T13:12:36.234121+00:00"
+      },
+      {
+        "match_id": "07088d87b6772de9ecbe",
+        "source": "Football-Data.org",
+        "provider_match_id": "559709",
+        "updated_at": "2026-08-30T13:12:36.239166+00:00"
+      },
+      {
+        "match_id": "b6cab58932b74662b6c2",
+        "source": "Football-Data.org",
+        "provider_match_id": "560553",
+        "updated_at": "2026-08-30T13:12:36.243904+00:00"
+      },
+      {
+        "match_id": "1cbf01629f5dc9f57101",
+        "source": "Football-Data.org",
+        "provider_match_id": "565782",
+        "updated_at": "2026-08-30T13:12:36.249096+00:00"
+      },
+      {
+        "match_id": "16de65a9dca8bc54a227",
+        "source": "Football-Data.org",
+        "provider_match_id": "558626",
+        "updated_at": "2026-08-30T13:12:36.254355+00:00"
+      },
+      {
+        "match_id": "5e2c51ea1e0098343c3b",
+        "source": "Football-Data.org",
+        "provider_match_id": "567290",
+        "updated_at": "2026-08-30T13:12:36.259215+00:00"
+      },
+      {
+        "match_id": "20e04a072847435f730e",
+        "source": "Football-Data.org",
+        "provider_match_id": "564651",
+        "updated_at": "2026-08-30T13:12:36.264334+00:00"
+      },
+      {
+        "match_id": "072301abdecf10016117",
+        "source": "Football-Data.org",
+        "provider_match_id": "558249",
+        "updated_at": "2026-08-30T13:12:36.269566+00:00"
+      },
+      {
+        "match_id": "0a30ffce73717c666e6e",
+        "source": "Football-Data.org",
+        "provider_match_id": "559703",
+        "updated_at": "2026-08-30T13:12:36.284756+00:00"
+      },
+      {
+        "match_id": "2252841203965d329b7a",
+        "source": "Football-Data.org",
+        "provider_match_id": "558623",
+        "updated_at": "2026-08-30T13:12:36.290070+00:00"
+      },
+      {
+        "match_id": "bbb61a844171353c474b",
+        "source": "Football-Data.org",
+        "provider_match_id": "558622",
+        "updated_at": "2026-08-30T13:12:36.295397+00:00"
+      },
+      {
+        "match_id": "e1c632f67f03b24445b7",
+        "source": "Football-Data.org",
+        "provider_match_id": "554984",
+        "updated_at": "2026-08-30T13:12:36.300905+00:00"
+      },
+      {
+        "match_id": "5f356760983063dd09ce",
+        "source": "Football-Data.org",
+        "provider_match_id": "554983",
+        "updated_at": "2026-08-30T13:12:36.306288+00:00"
+      },
+      {
+        "match_id": "7d2bdfe783ee2a0014f0",
+        "source": "Football-Data.org",
+        "provider_match_id": "564652",
+        "updated_at": "2026-08-30T13:12:36.311491+00:00"
+      },
+      {
+        "match_id": "177d0f1f09a63f46120b",
+        "source": "Football-Data.org",
+        "provider_match_id": "567284",
+        "updated_at": "2026-08-30T13:12:36.316846+00:00"
+      },
+      {
+        "match_id": "20487afe7e8369827a89",
+        "source": "Football-Data.org",
+        "provider_match_id": "554986",
+        "updated_at": "2026-08-30T13:12:36.322389+00:00"
+      },
+      {
+        "match_id": "75d9e0c0db9956545be3",
+        "source": "Football-Data.org",
+        "provider_match_id": "554985",
+        "updated_at": "2026-08-30T13:12:36.327991+00:00"
+      },
+      {
+        "match_id": "30569cd6061b8914bc32",
+        "source": "Football-Data.org",
+        "provider_match_id": "554982",
+        "updated_at": "2026-08-30T13:12:36.333613+00:00"
+      },
+      {
+        "match_id": "527a62bd4a4c4b385741",
+        "source": "Football-Data.org",
+        "provider_match_id": "558621",
+        "updated_at": "2026-08-30T13:12:36.339178+00:00"
+      },
+      {
+        "match_id": "f5ce687dce9afdde046d",
+        "source": "Football-Data.org",
+        "provider_match_id": "564657",
+        "updated_at": "2026-08-30T13:12:36.344811+00:00"
+      },
+      {
+        "match_id": "b45f2359419aee0f4841",
+        "source": "Football-Data.org",
+        "provider_match_id": "558628",
+        "updated_at": "2026-08-30T13:12:36.350829+00:00"
+      },
+      {
+        "match_id": "9085432e2ecd46cd7cad",
+        "source": "Football-Data.org",
+        "provider_match_id": "560557",
+        "updated_at": "2026-08-30T13:12:36.356591+00:00"
+      },
+      {
+        "match_id": "8a196168bde83527f35d",
+        "source": "Football-Data.org",
+        "provider_match_id": "567292",
+        "updated_at": "2026-08-30T13:12:36.362151+00:00"
+      },
+      {
+        "match_id": "f75a08f871d016ec1062",
+        "source": "Football-Data.org",
+        "provider_match_id": "567288",
+        "updated_at": "2026-08-30T13:12:36.367603+00:00"
+      },
+      {
+        "match_id": "c0945fe192e626d14d5f",
+        "source": "Football-Data.org",
+        "provider_match_id": "564650",
+        "updated_at": "2026-08-30T13:12:36.373811+00:00"
+      },
+      {
+        "match_id": "118c391b3b312e491175",
+        "source": "Football-Data.org",
+        "provider_match_id": "554987",
+        "updated_at": "2026-08-30T13:12:36.379830+00:00"
+      },
+      {
+        "match_id": "377239c1fea2d195f1d2",
+        "source": "Football-Data.org",
+        "provider_match_id": "554775",
+        "updated_at": "2026-08-30T13:12:36.385801+00:00"
+      },
+      {
+        "match_id": "e6f296dd3cf6d50713a2",
+        "source": "Football-Data.org",
+        "provider_match_id": "559696",
+        "updated_at": "2026-08-30T13:12:36.391741+00:00"
+      },
+      {
+        "match_id": "0f766ac38bce7b220db5",
+        "source": "Football-Data.org",
+        "provider_match_id": "564682",
+        "updated_at": "2026-08-30T13:12:36.397707+00:00"
+      },
+      {
+        "match_id": "7457711af31d9bba0fb9",
+        "source": "Football-Data.org",
+        "provider_match_id": "559699",
+        "updated_at": "2026-08-30T13:12:36.403597+00:00"
+      },
+      {
+        "match_id": "cf186c4c63bdc819be6d",
+        "source": "Football-Data.org",
+        "provider_match_id": "558250",
+        "updated_at": "2026-08-30T13:12:36.409779+00:00"
+      },
+      {
+        "match_id": "a7d84d1dfe092d5c6933",
+        "source": "Football-Data.org",
+        "provider_match_id": "565791",
+        "updated_at": "2026-08-30T13:12:36.416175+00:00"
+      },
+      {
+        "match_id": "43d0c39d4fd30f45a754",
+        "source": "Football-Data.org",
+        "provider_match_id": "558609",
+        "updated_at": "2026-08-30T13:12:36.422990+00:00"
+      },
+      {
+        "match_id": "ed0e7baba850f3b48bb0",
+        "source": "Football-Data.org",
+        "provider_match_id": "564667",
+        "updated_at": "2026-08-30T13:12:36.430287+00:00"
+      },
+      {
+        "match_id": "bf1ae3ffb89fb4a17b6c",
+        "source": "Football-Data.org",
+        "provider_match_id": "560566",
+        "updated_at": "2026-08-30T13:12:36.437808+00:00"
+      },
+      {
+        "match_id": "7141bde14a07be9b4b48",
+        "source": "Football-Data.org",
+        "provider_match_id": "559697",
+        "updated_at": "2026-08-30T13:12:36.446177+00:00"
+      },
+      {
+        "match_id": "0fe5673794e7f41e5c2e",
+        "source": "Football-Data.org",
+        "provider_match_id": "567298",
+        "updated_at": "2026-08-30T13:12:36.453915+00:00"
+      },
+      {
+        "match_id": "f226305d5f7b29e867ee",
+        "source": "Football-Data.org",
+        "provider_match_id": "567299",
+        "updated_at": "2026-08-30T13:12:36.460878+00:00"
+      },
+      {
+        "match_id": "f3ac6bceb7bb8a628ad8",
+        "source": "Football-Data.org",
+        "provider_match_id": "560571",
+        "updated_at": "2026-08-30T13:12:36.467426+00:00"
+      },
+      {
+        "match_id": "f913401d159de96db996",
+        "source": "Football-Data.org",
+        "provider_match_id": "558616",
+        "updated_at": "2026-08-30T13:12:36.474621+00:00"
+      },
+      {
+        "match_id": "94dd16c958a9a5f9a8a2",
+        "source": "Football-Data.org",
+        "provider_match_id": "565790",
+        "updated_at": "2026-08-30T13:12:36.504289+00:00"
+      },
+      {
+        "match_id": "fb1ec5f04901d87d913f",
+        "source": "Football-Data.org",
+        "provider_match_id": "565792",
+        "updated_at": "2026-08-30T13:12:36.511458+00:00"
+      },
+      {
+        "match_id": "e9b9171305d9d33a1e4f",
+        "source": "Football-Data.org",
+        "provider_match_id": "565787",
+        "updated_at": "2026-08-30T13:12:36.518485+00:00"
+      },
+      {
+        "match_id": "a0e6f94af10bd34162be",
+        "source": "Football-Data.org",
+        "provider_match_id": "565793",
+        "updated_at": "2026-08-30T13:12:36.525926+00:00"
+      },
+      {
+        "match_id": "878417f65e901d75848c",
+        "source": "Football-Data.org",
+        "provider_match_id": "565785",
+        "updated_at": "2026-08-30T13:12:36.532898+00:00"
+      },
+      {
+        "match_id": "269ac95aeaf7b4c7ea17",
+        "source": "Football-Data.org",
+        "provider_match_id": "560565",
+        "updated_at": "2026-08-30T13:12:36.539834+00:00"
+      },
+      {
+        "match_id": "4c5bf0d78cfd270fddb1",
+        "source": "Football-Data.org",
+        "provider_match_id": "560568",
+        "updated_at": "2026-08-30T13:12:36.547030+00:00"
+      },
+      {
+        "match_id": "aeb0ad7deaeddd6f13a1",
+        "source": "Football-Data.org",
+        "provider_match_id": "560563",
+        "updated_at": "2026-08-30T13:12:36.553944+00:00"
+      },
+      {
+        "match_id": "c5b361214edc3441519c",
+        "source": "Football-Data.org",
+        "provider_match_id": "560564",
+        "updated_at": "2026-08-30T13:12:36.561147+00:00"
+      },
+      {
+        "match_id": "9923377386da4b100651",
+        "source": "Football-Data.org",
+        "provider_match_id": "560562",
+        "updated_at": "2026-08-30T13:12:36.568611+00:00"
+      },
+      {
+        "match_id": "2c4fe6c74a29560be732",
+        "source": "Football-Data.org",
+        "provider_match_id": "564663",
+        "updated_at": "2026-08-30T13:12:36.575605+00:00"
+      },
+      {
+        "match_id": "5913b0ccd5953bd24a19",
+        "source": "Football-Data.org",
+        "provider_match_id": "558251",
+        "updated_at": "2026-08-30T13:12:36.582244+00:00"
+      },
+      {
+        "match_id": "e6ec546c28325120381d",
+        "source": "Football-Data.org",
+        "provider_match_id": "567297",
+        "updated_at": "2026-08-30T13:12:36.596209+00:00"
+      },
+      {
+        "match_id": "c9428385db9bd5167437",
+        "source": "Football-Data.org",
+        "provider_match_id": "559695",
+        "updated_at": "2026-08-30T13:12:36.602598+00:00"
+      },
+      {
+        "match_id": "a139d15fd799024d2f85",
+        "source": "Football-Data.org",
+        "provider_match_id": "558614",
+        "updated_at": "2026-08-30T13:12:36.619569+00:00"
+      },
+      {
+        "match_id": "0af5b941a7651aa4d405",
+        "source": "Football-Data.org",
+        "provider_match_id": "565789",
+        "updated_at": "2026-08-30T13:12:36.626137+00:00"
+      },
+      {
+        "match_id": "af13485f0306bc29c01c",
+        "source": "Football-Data.org",
+        "provider_match_id": "560569",
+        "updated_at": "2026-08-30T13:12:36.633066+00:00"
+      },
+      {
+        "match_id": "2698a39444d1f4fa27cb",
+        "source": "Football-Data.org",
+        "provider_match_id": "564660",
+        "updated_at": "2026-08-30T13:12:36.640173+00:00"
+      },
+      {
+        "match_id": "2544a818bb4310f68a42",
+        "source": "Football-Data.org",
+        "provider_match_id": "558252",
+        "updated_at": "2026-08-30T13:12:36.647248+00:00"
+      },
+      {
+        "match_id": "7b8cc8110c2491f5ae1c",
+        "source": "Football-Data.org",
+        "provider_match_id": "567296",
+        "updated_at": "2026-08-30T13:12:36.654123+00:00"
+      },
+      {
+        "match_id": "a65763f57f7c6c1f4ee0",
+        "source": "Football-Data.org",
+        "provider_match_id": "567293",
+        "updated_at": "2026-08-30T13:12:36.661000+00:00"
+      },
+      {
+        "match_id": "aa20e21ad922b006283b",
+        "source": "Football-Data.org",
+        "provider_match_id": "558253",
+        "updated_at": "2026-08-30T13:12:36.667815+00:00"
+      },
+      {
+        "match_id": "707cf67e85c81d631ac0",
+        "source": "Football-Data.org",
+        "provider_match_id": "559693",
+        "updated_at": "2026-08-30T13:12:36.674269+00:00"
+      },
+      {
+        "match_id": "3915a436c9636c541171",
+        "source": "Football-Data.org",
+        "provider_match_id": "558611",
+        "updated_at": "2026-08-30T13:12:36.680712+00:00"
+      },
+      {
+        "match_id": "d5af31068278be527301",
+        "source": "Football-Data.org",
+        "provider_match_id": "559701",
+        "updated_at": "2026-08-30T13:12:36.687728+00:00"
+      },
+      {
+        "match_id": "86fd51ce031fa0afb72f",
+        "source": "Football-Data.org",
+        "provider_match_id": "564662",
+        "updated_at": "2026-08-30T13:12:36.694200+00:00"
+      },
+      {
+        "match_id": "c81bd2390815407800c6",
+        "source": "Football-Data.org",
+        "provider_match_id": "558254",
+        "updated_at": "2026-08-30T13:12:36.700949+00:00"
+      },
+      {
+        "match_id": "dbe13b5f3f2ca4b967d7",
+        "source": "Football-Data.org",
+        "provider_match_id": "554991",
+        "updated_at": "2026-08-30T13:12:36.707743+00:00"
+      },
+      {
+        "match_id": "971b0cb4af7055532e0f",
+        "source": "Football-Data.org",
+        "provider_match_id": "554998",
+        "updated_at": "2026-08-30T13:12:36.714398+00:00"
+      },
+      {
+        "match_id": "318a523e949fa5ad3b8d",
+        "source": "Football-Data.org",
+        "provider_match_id": "554995",
+        "updated_at": "2026-08-30T13:12:36.720969+00:00"
+      },
+      {
+        "match_id": "b784e56ae50e33892a3c",
+        "source": "API-Futebol",
+        "provider_match_id": "30369",
+        "updated_at": "2026-08-30T13:12:39.734775+00:00"
+      },
+      {
+        "match_id": "2403b65533c6ca15828b",
+        "source": "API-Futebol",
+        "provider_match_id": "30373",
+        "updated_at": "2026-08-30T13:12:39.742293+00:00"
+      },
+      {
+        "match_id": "db7fa67762cf2f39b071",
+        "source": "API-Futebol",
+        "provider_match_id": "30375",
+        "updated_at": "2026-08-30T13:12:39.749215+00:00"
+      },
+      {
+        "match_id": "95c20dbf7e5ccd2eea02",
+        "source": "API-Futebol",
+        "provider_match_id": "30376",
+        "updated_at": "2026-08-30T13:12:39.756639+00:00"
+      },
+      {
+        "match_id": "0818242d7abe638c6da1",
+        "source": "API-Futebol",
+        "provider_match_id": "30371",
+        "updated_at": "2026-08-30T13:12:39.764339+00:00"
+      },
+      {
+        "match_id": "8846afc608d5a16ddb05",
+        "source": "API-Futebol",
+        "provider_match_id": "30370",
+        "updated_at": "2026-08-30T13:12:39.771557+00:00"
+      },
+      {
+        "match_id": "42bcfdcae3ac10c08509",
+        "source": "API-Futebol",
+        "provider_match_id": "30384",
+        "updated_at": "2026-08-30T13:12:39.778941+00:00"
+      },
+      {
+        "match_id": "68439459afba25ae710f",
+        "source": "API-Futebol",
+        "provider_match_id": "30383",
+        "updated_at": "2026-08-30T13:12:39.786369+00:00"
+      },
+      {
+        "match_id": "5d5c932ef1ce24e699e0",
+        "source": "API-Futebol",
+        "provider_match_id": "30379",
+        "updated_at": "2026-08-30T13:12:39.794408+00:00"
+      },
+      {
+        "match_id": "000c3357bae72f046b0e",
+        "source": "API-Futebol",
+        "provider_match_id": "30385",
+        "updated_at": "2026-08-30T13:12:39.801962+00:00"
+      },
+      {
+        "match_id": "337f744df9e019e37756",
+        "source": "API-Futebol",
+        "provider_match_id": "30378",
+        "updated_at": "2026-08-30T13:12:39.809447+00:00"
+      },
+      {
+        "match_id": "67525dad52862534e184",
+        "source": "API-Futebol",
+        "provider_match_id": "30382",
+        "updated_at": "2026-08-30T13:12:39.817130+00:00"
+      },
+      {
+        "match_id": "935fd0117653999e4c4a",
+        "source": "API-Futebol",
+        "provider_match_id": "30386",
+        "updated_at": "2026-08-30T13:12:39.824235+00:00"
+      },
+      {
+        "match_id": "f1f4a6f76e29c53f2958",
+        "source": "API-Futebol",
+        "provider_match_id": "30381",
+        "updated_at": "2026-08-30T13:12:39.831622+00:00"
+      },
+      {
+        "match_id": "39fa76fdd14183491562",
+        "source": "API-Futebol",
+        "provider_match_id": "30380",
+        "updated_at": "2026-08-30T13:12:39.839905+00:00"
+      },
+      {
+        "match_id": "dbf51adbf669b0964565",
+        "source": "API-Futebol",
+        "provider_match_id": "30377",
+        "updated_at": "2026-08-30T13:12:39.848281+00:00"
+      },
+      {
+        "match_id": "2cb1af8d53bcda2e4ab2",
+        "source": "ESPN",
+        "provider_match_id": "401841208",
+        "updated_at": "2026-08-30T13:12:43.928497+00:00"
+      },
+      {
+        "match_id": "5f356760983063dd09ce",
+        "source": "ESPN",
+        "provider_match_id": "401841214",
+        "updated_at": "2026-08-30T13:12:43.937549+00:00"
+      },
+      {
+        "match_id": "e1c632f67f03b24445b7",
+        "source": "ESPN",
+        "provider_match_id": "401841213",
+        "updated_at": "2026-08-30T13:12:43.945987+00:00"
+      },
+      {
+        "match_id": "7cd4fbaae7b74c69c806",
+        "source": "ESPN",
+        "provider_match_id": "401841217",
+        "updated_at": "2026-08-30T13:12:43.954293+00:00"
+      },
+      {
+        "match_id": "20487afe7e8369827a89",
+        "source": "ESPN",
+        "provider_match_id": "401841211",
+        "updated_at": "2026-08-30T13:12:43.962537+00:00"
+      },
+      {
+        "match_id": "30569cd6061b8914bc32",
+        "source": "ESPN",
+        "provider_match_id": "401841215",
+        "updated_at": "2026-08-30T13:12:43.971197+00:00"
+      },
+      {
+        "match_id": "f0910218916be328fd68",
+        "source": "ESPN",
+        "provider_match_id": "401841210",
+        "updated_at": "2026-08-30T13:12:43.979948+00:00"
+      },
+      {
+        "match_id": "377239c1fea2d195f1d2",
+        "source": "ESPN",
+        "provider_match_id": "401913077",
+        "updated_at": "2026-08-30T13:12:43.988739+00:00"
+      },
+      {
+        "match_id": "dbe13b5f3f2ca4b967d7",
+        "source": "ESPN",
+        "provider_match_id": "401841224",
+        "updated_at": "2026-08-30T13:12:43.997392+00:00"
+      },
+      {
+        "match_id": "faba7cf83a98c8520dd4",
+        "source": "ESPN",
+        "provider_match_id": "401841226",
+        "updated_at": "2026-08-30T13:12:44.007060+00:00"
+      },
+      {
+        "match_id": "318a523e949fa5ad3b8d",
+        "source": "ESPN",
+        "provider_match_id": "401841227",
+        "updated_at": "2026-08-30T13:12:44.019146+00:00"
+      },
+      {
+        "match_id": "5ff4b900099d8d7257b7",
+        "source": "ESPN",
+        "provider_match_id": "401841219",
+        "updated_at": "2026-08-30T13:12:44.031127+00:00"
+      },
+      {
+        "match_id": "8aa44cbf2321ab884462",
+        "source": "ESPN",
+        "provider_match_id": "401841218",
+        "updated_at": "2026-08-30T13:12:44.043442+00:00"
+      },
+      {
+        "match_id": "7c707dd7c6be432c312e",
+        "source": "ESPN",
+        "provider_match_id": "401841223",
+        "updated_at": "2026-08-30T13:12:44.055607+00:00"
+      },
+      {
+        "match_id": "ab343e6be4422b39a230",
+        "source": "ESPN",
+        "provider_match_id": "401841225",
+        "updated_at": "2026-08-30T13:12:44.064459+00:00"
+      },
+      {
+        "match_id": "9fc1106a72f90fff62c2",
+        "source": "ESPN",
+        "provider_match_id": "401841221",
+        "updated_at": "2026-08-30T13:12:44.073950+00:00"
+      },
+      {
+        "match_id": "857efb71838fbe087275",
+        "source": "ESPN",
+        "provider_match_id": "401841220",
+        "updated_at": "2026-08-30T13:12:44.082309+00:00"
+      },
+      {
+        "match_id": "b784e56ae50e33892a3c",
+        "source": "ESPN",
+        "provider_match_id": "401860302",
+        "updated_at": "2026-08-30T13:12:44.090728+00:00"
+      },
+      {
+        "match_id": "2403b65533c6ca15828b",
+        "source": "ESPN",
+        "provider_match_id": "401860303",
+        "updated_at": "2026-08-30T13:12:44.100403+00:00"
+      },
+      {
+        "match_id": "db7fa67762cf2f39b071",
+        "source": "ESPN",
+        "provider_match_id": "401860305",
+        "updated_at": "2026-08-30T13:12:44.108879+00:00"
+      },
+      {
+        "match_id": "95c20dbf7e5ccd2eea02",
+        "source": "ESPN",
+        "provider_match_id": "401860306",
+        "updated_at": "2026-08-30T13:12:44.117288+00:00"
+      },
+      {
+        "match_id": "0818242d7abe638c6da1",
+        "source": "ESPN",
+        "provider_match_id": "401860311",
+        "updated_at": "2026-08-30T13:12:44.126268+00:00"
+      },
+      {
+        "match_id": "8846afc608d5a16ddb05",
+        "source": "ESPN",
+        "provider_match_id": "401860308",
+        "updated_at": "2026-08-30T13:12:44.134964+00:00"
+      },
+      {
+        "match_id": "42bcfdcae3ac10c08509",
+        "source": "ESPN",
+        "provider_match_id": "401860315",
+        "updated_at": "2026-08-30T13:12:44.149381+00:00"
+      },
+      {
+        "match_id": "68439459afba25ae710f",
+        "source": "ESPN",
+        "provider_match_id": "401860312",
+        "updated_at": "2026-08-30T13:12:44.159381+00:00"
+      },
+      {
+        "match_id": "5d5c932ef1ce24e699e0",
+        "source": "ESPN",
+        "provider_match_id": "401860320",
+        "updated_at": "2026-08-30T13:12:44.168585+00:00"
+      },
+      {
+        "match_id": "000c3357bae72f046b0e",
+        "source": "ESPN",
+        "provider_match_id": "401860321",
+        "updated_at": "2026-08-30T13:12:44.177406+00:00"
+      },
+      {
+        "match_id": "67525dad52862534e184",
+        "source": "ESPN",
+        "provider_match_id": "401860319",
+        "updated_at": "2026-08-30T13:12:44.186562+00:00"
+      },
+      {
+        "match_id": "337f744df9e019e37756",
+        "source": "ESPN",
+        "provider_match_id": "401860316",
+        "updated_at": "2026-08-30T13:12:44.195386+00:00"
+      },
+      {
+        "match_id": "935fd0117653999e4c4a",
+        "source": "ESPN",
+        "provider_match_id": "401860318",
+        "updated_at": "2026-08-30T13:12:44.216110+00:00"
+      },
+      {
+        "match_id": "f1f4a6f76e29c53f2958",
+        "source": "ESPN",
+        "provider_match_id": "401860313",
+        "updated_at": "2026-08-30T13:12:44.224321+00:00"
+      },
+      {
+        "match_id": "39fa76fdd14183491562",
+        "source": "ESPN",
+        "provider_match_id": "401860317",
+        "updated_at": "2026-08-30T13:12:44.232629+00:00"
+      },
+      {
+        "match_id": "dbf51adbf669b0964565",
+        "source": "ESPN",
+        "provider_match_id": "401860314",
+        "updated_at": "2026-08-30T13:12:44.240873+00:00"
+      },
+      {
+        "match_id": "f3a92fd55bdc89e31756",
+        "source": "ESPN",
+        "provider_match_id": "401909112",
+        "updated_at": "2026-08-30T13:12:44.248900+00:00"
+      },
+      {
+        "match_id": "26489a757fcfb4617570",
+        "source": "ESPN",
+        "provider_match_id": "401909110",
+        "updated_at": "2026-08-30T13:12:44.256909+00:00"
+      },
+      {
+        "match_id": "da2560c5e3996d7b9aeb",
+        "source": "ESPN",
+        "provider_match_id": "401909111",
+        "updated_at": "2026-08-30T13:12:44.265014+00:00"
+      },
+      {
+        "match_id": "fa4d64903e60c25ae773",
+        "source": "ESPN",
+        "provider_match_id": "401909114",
+        "updated_at": "2026-08-30T13:12:44.273220+00:00"
       }
     ],
-    "match_stats": [],
-    "players": [],
-    "player_stats": [],
     "diagnostics": [
       {
         "id": 1,
@@ -84,6 +5226,69 @@
         "status": "ERROR",
         "message": "Dados Futebol: HTTP 401: {'erro': 'Não autorizado', 'mensagem': 'API Key inválida ou inativa'}",
         "created_at": "2026-08-30T13:12:33.907574+00:00"
+      },
+      {
+        "id": 2,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "coleta",
+        "status": "OK",
+        "message": "Football-Data.org: 82 partidas recebidas e persistidas",
+        "created_at": "2026-08-30T13:12:36.725730+00:00"
+      },
+      {
+        "id": 3,
+        "match_id": null,
+        "source": "API-Futebol",
+        "stage": "coleta",
+        "status": "INFO",
+        "message": "Série B: campeonato encontrado id=14 nome=Campeonato Brasileiro Série B",
+        "created_at": "2026-08-30T13:12:37.711380+00:00"
+      },
+      {
+        "id": 4,
+        "match_id": null,
+        "source": "API-Futebol",
+        "stage": "coleta",
+        "status": "INFO",
+        "message": "Série B: fase encontrada id=1112 nome=Fase Única",
+        "created_at": "2026-08-30T13:12:38.352941+00:00"
+      },
+      {
+        "id": 5,
+        "match_id": null,
+        "source": "API-Futebol",
+        "stage": "coleta",
+        "status": "INFO",
+        "message": "Série B DATA FIX: brutas=380; válidas=380; inválidas=0; rodadas candidatas=0; detalhes consultados=0; datas corrigidas=0",
+        "created_at": "2026-08-30T13:12:39.729585+00:00"
+      },
+      {
+        "id": 6,
+        "match_id": null,
+        "source": "API-Futebol",
+        "stage": "coleta",
+        "status": "INFO",
+        "message": "Série B DATA FIX: partidas no período=16",
+        "created_at": "2026-08-30T13:12:39.730213+00:00"
+      },
+      {
+        "id": 7,
+        "match_id": null,
+        "source": "API-Futebol",
+        "stage": "coleta",
+        "status": "OK",
+        "message": "API-Futebol: 16 partidas recebidas e persistidas",
+        "created_at": "2026-08-30T13:12:39.854767+00:00"
+      },
+      {
+        "id": 8,
+        "match_id": null,
+        "source": "ESPN",
+        "stage": "coleta",
+        "status": "OK",
+        "message": "ESPN: 37 partidas recebidas e persistidas",
+        "created_at": "2026-08-30T13:12:44.278987+00:00"
       }
     ],
     "api_usage": [
@@ -94,6 +5299,22 @@
         "last_call": "2026-08-30T13:12:35.118055+00:00",
         "remaining_day": null,
         "remaining_minute": null
+      },
+      {
+        "provider": "API-Futebol",
+        "day_utc": "2026-08-30",
+        "calls": 3,
+        "last_call": "2026-08-30T13:12:39.716742+00:00",
+        "remaining_day": null,
+        "remaining_minute": null
+      },
+      {
+        "provider": "ESPN",
+        "day_utc": "2026-08-30",
+        "calls": 29,
+        "last_call": "2026-08-30T13:12:43.616399+00:00",
+        "remaining_day": null,
+        "remaining_minute": null
       }
     ],
     "api_call_log": [
@@ -101,6 +5322,166 @@
         "id": 1,
         "provider": "Football-Data.org",
         "created_at": "2026-08-30T13:12:35.118055+00:00"
+      },
+      {
+        "id": 2,
+        "provider": "API-Futebol",
+        "created_at": "2026-08-30T13:12:37.707952+00:00"
+      },
+      {
+        "id": 3,
+        "provider": "API-Futebol",
+        "created_at": "2026-08-30T13:12:38.350989+00:00"
+      },
+      {
+        "id": 4,
+        "provider": "API-Futebol",
+        "created_at": "2026-08-30T13:12:39.716742+00:00"
+      },
+      {
+        "id": 5,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:40.142718+00:00"
+      },
+      {
+        "id": 6,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:40.250872+00:00"
+      },
+      {
+        "id": 7,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:40.368280+00:00"
+      },
+      {
+        "id": 8,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:40.541483+00:00"
+      },
+      {
+        "id": 9,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:40.622854+00:00"
+      },
+      {
+        "id": 10,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:40.721813+00:00"
+      },
+      {
+        "id": 11,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:40.795596+00:00"
+      },
+      {
+        "id": 12,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:40.882771+00:00"
+      },
+      {
+        "id": 13,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:40.995138+00:00"
+      },
+      {
+        "id": 14,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:41.297846+00:00"
+      },
+      {
+        "id": 15,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:41.610434+00:00"
+      },
+      {
+        "id": 16,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:41.972447+00:00"
+      },
+      {
+        "id": 17,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.058817+00:00"
+      },
+      {
+        "id": 18,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.165950+00:00"
+      },
+      {
+        "id": 19,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.273830+00:00"
+      },
+      {
+        "id": 20,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.380843+00:00"
+      },
+      {
+        "id": 21,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.453078+00:00"
+      },
+      {
+        "id": 22,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.534479+00:00"
+      },
+      {
+        "id": 23,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.638173+00:00"
+      },
+      {
+        "id": 24,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.776246+00:00"
+      },
+      {
+        "id": 25,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.872111+00:00"
+      },
+      {
+        "id": 26,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:42.953463+00:00"
+      },
+      {
+        "id": 27,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:43.023817+00:00"
+      },
+      {
+        "id": 28,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:43.113464+00:00"
+      },
+      {
+        "id": 29,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:43.229715+00:00"
+      },
+      {
+        "id": 30,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:43.329135+00:00"
+      },
+      {
+        "id": 31,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:43.445457+00:00"
+      },
+      {
+        "id": 32,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:43.512660+00:00"
+      },
+      {
+        "id": 33,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T13:12:43.616399+00:00"
       }
     ]
   }
