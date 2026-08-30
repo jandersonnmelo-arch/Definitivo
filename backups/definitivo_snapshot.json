@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-30T23:45:17.770321+00:00",
+  "created_at": "2026-08-30T23:45:58.812242+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-30T23:45:58.087045+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-30T23:45:09.307475+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -515,7 +515,7 @@
         "sport": "Futebol",
         "name": "FC Barcelona",
         "normalized_name": "barcelona",
-        "updated_at": "2026-08-30T23:43:16.446008+00:00"
+        "updated_at": "2026-08-30T23:45:58.706505+00:00"
       },
       {
         "id": "9b2cbb4b6b5a74fcda",
@@ -1132,6 +1132,13 @@
         "name": "Tigres UANL",
         "normalized_name": "tigres uanl",
         "updated_at": "2026-08-30T23:43:48.689194+00:00"
+      },
+      {
+        "id": "fae656c369933673eb",
+        "sport": "Futebol",
+        "name": "Elche CF",
+        "normalized_name": "elche",
+        "updated_at": "2026-08-30T23:45:58.705998+00:00"
       }
     ],
     "team_sources": [
@@ -2190,6 +2197,12 @@
         "source": "ESPN",
         "provider_team_id": "232",
         "updated_at": "2026-08-30T23:43:48.689213+00:00"
+      },
+      {
+        "team_id": "fae656c369933673eb",
+        "source": "Football-Data.org",
+        "provider_team_id": "285",
+        "updated_at": "2026-08-30T23:45:58.706221+00:00"
       }
     ],
     "matches": [
@@ -5052,6 +5065,26 @@
         "source": "ESPN",
         "provider_match_id": "401876994",
         "updated_at": "2026-08-30T23:43:48.689266+00:00"
+      },
+      {
+        "id": "564642",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-23T19:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "fae656c369933673eb",
+        "home_name": "Elche CF",
+        "home_short": "ELC",
+        "away_id": "192a5a24657fd487e0",
+        "away_name": "FC Barcelona",
+        "away_short": "FCB",
+        "home_score": 0,
+        "away_score": 5,
+        "source": "Football-Data.org",
+        "provider_match_id": "564642",
+        "updated_at": "2026-08-30T23:45:58.706747+00:00"
       }
     ],
     "match_sources": [
@@ -5954,6 +5987,12 @@
         "source": "ESPN",
         "provider_match_id": "401876994",
         "updated_at": "2026-08-30T23:43:48.689424+00:00"
+      },
+      {
+        "match_id": "564642",
+        "source": "Football-Data.org",
+        "provider_match_id": "564642",
+        "updated_at": "2026-08-30T23:45:58.706971+00:00"
       }
     ],
     "match_stats": [
@@ -94187,8 +94226,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-08-30",
-        "calls": 3,
-        "last_call": "2026-08-30T23:43:47.954315+00:00",
+        "calls": 4,
+        "last_call": "2026-08-30T23:45:58.695496+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -94854,6 +94893,11 @@
         "id": 129,
         "provider": "FotMob",
         "created_at": "2026-08-30T23:45:06.574757+00:00"
+      },
+      {
+        "id": 130,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-30T23:45:58.695496+00:00"
       }
     ],
     "ai_match_samples": [
