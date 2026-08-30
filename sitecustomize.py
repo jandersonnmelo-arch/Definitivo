@@ -1,18 +1,28 @@
-"""Compatibilidade do histórico da interface.
+"""Compatibilidade de leitura para IDs canônicos e estatísticas individuais.
 
-O banco atual pode conter partidas históricas gravadas com o ID canônico da
-fonte, enquanto algumas partidas selecionadas ainda chegam com o vínculo de
-ID anterior. O motor de análise já encontra essas partidas por meio da base
-persistida; esta camada garante que a visualização do histórico use a mesma
-base, com fallback seguro pelo nome da equipe.
-
-Não faz chamadas de API e não altera os dados persistidos.
+A camada de leitura resolve divergências antigas de identidade sem fazer
+novas chamadas de API e sem alterar os registros persistidos.
 """
+
+import re
+import unicodedata
+
+
+def _norm(value):
+    s = unicodedata.normalize("NFKD", str(value or "")).encode("ascii", "ignore").decode().lower()
+    s = re.sub(r"\b(cr|ec|sc|se|ca|fc|cf|ac|club|football|futbol)\b", " ", s)
+    return re.sub(r"[^a-z0-9]+", " ", s).strip()
+
+
+def _same_team(a, b):
+    a, b = _norm(a), _norm(b)
+    return bool(a and b and (a == b or a in b or b in a))
 
 try:
     from core import db as _db
 
     _original_team_history = _db.team_history
+    _original_get_players = _db.get_players
 
     def team_history(team_id, before_iso=None, limit=10):
         rows = _original_team_history(team_id, before_iso, limit)
@@ -22,48 +32,27 @@ try:
         connection = _db.connect()
         try:
             team = connection.execute(
-                "SELECT name, normalized_name FROM teams WHERE id=?",
-                (team_id,),
+                "SELECT name, normalized_name FROM teams WHERE id=?", (team_id,)
             ).fetchone()
             if not team:
                 return rows
 
-            team_name = team["name"] or ""
-            normalized_name = team["normalized_name"] or ""
+            names = {team["name"] or "", team["normalized_name"] or ""}
             existing = {r.get("id") for r in rows}
-
-            # Fallback por nome é usado somente quando o vínculo de ID não
-            # trouxe os 10 jogos. Assim, partidas persistidas continuam sendo
-            # a única fonte e não há qualquer nova chamada externa.
-            sql = """
-                SELECT * FROM matches
-                WHERE sport='Futebol'
-                  AND status='FINISHED'
-                  AND (
-                      home_id=? OR away_id=? OR
-                      LOWER(home_name)=LOWER(?) OR
-                      LOWER(away_name)=LOWER(?) OR
-                      LOWER(home_name)=LOWER(?) OR
-                      LOWER(away_name)=LOWER(?)
-                  )
-            """
-            params = [
-                team_id,
-                team_id,
-                team_name,
-                team_name,
-                normalized_name,
-                normalized_name,
-            ]
+            query = "SELECT * FROM matches WHERE sport='Futebol' AND status='FINISHED'"
+            params = []
             if before_iso:
-                sql += " AND start_time<?"
+                query += " AND start_time<?"
                 params.append(before_iso)
-            sql += " ORDER BY start_time DESC LIMIT ?"
-            params.append(limit)
+            query += " ORDER BY start_time DESC"
 
-            for row in connection.execute(sql, params).fetchall():
-                item = dict(row)
-                if item.get("id") not in existing:
+            # Resolve o nome em Python para usar exatamente a mesma
+            # normalização de equipes do restante do sistema.
+            for raw in connection.execute(query, params).fetchall():
+                item = dict(raw)
+                if item.get("id") in existing:
+                    continue
+                if any(_same_team(name, item.get("home_name")) or _same_team(name, item.get("away_name")) for name in names if name):
                     rows.append(item)
                     existing.add(item.get("id"))
                     if len(rows) >= limit:
@@ -74,11 +63,51 @@ try:
         finally:
             connection.close()
 
+    def get_players(match_id):
+        """Lê todos os jogadores persistidos da partida.
+
+        O filtro antigo exigia que ps.team_id coincidisse literalmente com
+        home_id/away_id. Isso ocultava jogadores quando uma fonte usava outro
+        ID canônico para a mesma equipe. A partida já restringe o conjunto,
+        então é seguro recuperar todos os player_stats daquele match e mapear
+        a equipe pelo nome/identidade quando necessário.
+        """
+        connection = _db.connect()
+        try:
+            match = connection.execute(
+                "SELECT home_id,home_name,away_id,away_name FROM matches WHERE id=?",
+                (match_id,),
+            ).fetchone()
+            if not match:
+                return []
+
+            rows = [dict(r) for r in connection.execute(
+                """SELECT p.id,p.team_id,p.name,p.position,ps.metric,ps.value,ps.source
+                   FROM players p
+                   JOIN player_stats ps ON ps.player_id=p.id
+                  WHERE ps.match_id=?
+                  ORDER BY ps.team_id,p.name,ps.metric""",
+                (match_id,),
+            ).fetchall()]
+
+            for row in rows:
+                if row.get("team_id") in (match["home_id"], match["away_id"]):
+                    continue
+                team = connection.execute(
+                    "SELECT name FROM teams WHERE id=?", (row.get("team_id"),)
+                ).fetchone()
+                team_name = team["name"] if team else ""
+                if _same_team(team_name, match["home_name"]):
+                    row["team_id"] = match["home_id"]
+                elif _same_team(team_name, match["away_name"]):
+                    row["team_id"] = match["away_id"]
+            return rows
+        finally:
+            connection.close()
+
     _db.team_history = team_history
-    _db.history_coverage = lambda team_id, before_iso=None: len(
-        team_history(team_id, before_iso, 10)
-    )
+    _db.history_coverage = lambda team_id, before_iso=None: len(team_history(team_id, before_iso, 10))
+    _db.get_players = get_players
 except Exception:
-    # Nunca impedir a inicialização da aplicação por causa desta
-    # compatibilidade. O módulo original continua disponível.
+    # Compatibilidade nunca deve impedir a aplicação de iniciar.
     pass
