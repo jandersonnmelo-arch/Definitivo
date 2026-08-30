@@ -52,7 +52,9 @@ def _collect_team_history_from_football_data(team_id,before_iso,days=HISTORY_DAY
     provider=FootballDataProvider()
     if not provider.available():return []
     provider_id=get_team_provider_id(team_id,provider.name)
-    if not provider_id:return []
+    if not provider_id:
+        add_diagnostic('historico','WARNING',f'{provider.name}: ID do provedor não encontrado para a equipe {team_id}; histórico não será gravado por esta fonte.',provider.name)
+        return []
     before=_parse_start(before_iso) or datetime.now(timezone.utc)
     try:rows=provider.team_matches(provider_id,(before-timedelta(days=days)).date().isoformat(),before.date().isoformat(),limit=100)
     except Exception as e:add_diagnostic('historico','ERROR',f'{provider.name}: {e}',provider.name);return []
@@ -151,7 +153,13 @@ def _save_ai_sample(match,training_ready):
     except Exception as e:add_diagnostic('ia_dataset','ERROR',f'Falha ao salvar amostra da IA: {e}','SYSTEM',match.get('id'));return False
 
 def build_history_for_match(match,matches_per_team=HISTORY_MATCHES_PER_TEAM,days=HISTORY_DAYS):
-    init_ai_db();_reconcile_for_history(match);before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat();team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x];serie_b=_is_serie_b(match.get('competition'))
+    init_ai_db()
+    _reconcile_for_history(match)
+    # A reconciliação pode trocar o ID canônico da equipe. Sempre recarregar a partida antes de consultar o histórico.
+    match=get_match(match.get('id')) or match
+    before_iso=match.get('start_time') or datetime.now(timezone.utc).isoformat()
+    team_ids=[x for x in (match.get('home_id'),match.get('away_id')) if x]
+    serie_b=_is_serie_b(match.get('competition'))
     for team_id in team_ids:
         team_name=match['home_name'] if team_id==match.get('home_id') else match['away_name']
         if serie_b:_collect_team_history_from_dados_futebol(team_id,team_name,before_iso,days)
