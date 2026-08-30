@@ -80,8 +80,19 @@ def init_db():
             except Exception:pass
 
 def _team_id(c,sport,name,source=None,provider_id=None):
-    cid=canonical_team_id(sport,name);c.execute("INSERT INTO teams(id,sport,name,normalized_name,updated_at) VALUES(?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name,updated_at=excluded.updated_at",(cid,sport,name,_norm(name),now_iso()))
-    if source and provider_id is not None:c.execute("INSERT INTO team_sources(team_id,source,provider_team_id,updated_at) VALUES(?,?,?,?) ON CONFLICT(team_id,source) DO UPDATE SET provider_team_id=excluded.provider_team_id,updated_at=excluded.updated_at",(cid,source,str(provider_id),now_iso()))
+    # Primeiro respeita o vínculo já existente entre fonte + ID do provedor.
+    # Isso evita SQLITE UNIQUE quando uma versão anterior do banco associou
+    # esse ID a um nome/identidade canônica diferente.
+    if source and provider_id is not None:
+        existing=c.execute("SELECT team_id FROM team_sources WHERE source=? AND provider_team_id=?",(source,str(provider_id))).fetchone()
+        if existing:
+            team_id=existing["team_id"]
+            c.execute("UPDATE teams SET name=?,normalized_name=?,updated_at=? WHERE id=?",(name,_norm(name),now_iso(),team_id))
+            return team_id
+    cid=canonical_team_id(sport,name)
+    c.execute("INSERT INTO teams(id,sport,name,normalized_name,updated_at) VALUES(?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name,updated_at=excluded.updated_at",(cid,sport,name,_norm(name),now_iso()))
+    if source and provider_id is not None:
+        c.execute("INSERT INTO team_sources(team_id,source,provider_team_id,updated_at) VALUES(?,?,?,?) ON CONFLICT(team_id,source) DO UPDATE SET provider_team_id=excluded.provider_team_id,updated_at=excluded.updated_at",(cid,source,str(provider_id),now_iso()))
     return cid
 
 def record_api_usage(provider,remaining_day=None,remaining_minute=None):
@@ -202,7 +213,6 @@ def history_coverage(team_id,before_iso=None):return len(team_history(team_id,be
 
 def player_history_summary(team_id=None,match_id=None,before_iso=None,limit=20):
     """Agrega estatísticas individuais históricas da equipe sem misturar jogadores."""
-    # Compatibilidade com a chamada antiga player_history_summary(team_id, before, limit=20).
     if match_id and before_iso is None and isinstance(match_id,str) and ("T" in match_id or "-" in match_id):
         before_iso=match_id;match_id=None
     c=connect()
