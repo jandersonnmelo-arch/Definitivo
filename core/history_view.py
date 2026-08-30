@@ -1,6 +1,6 @@
 import re
 import unicodedata
-from core.db import connect, player_history_summary
+from core.db import connect, player_history_summary, team_history
 
 
 def _norm(value):
@@ -15,12 +15,6 @@ def _same(a,b):
 
 
 def _finished_match(item):
-    """Aceita partidas históricas mesmo quando a fonte legada gravou outro status.
-
-    O banco atual normaliza normalmente para FINISHED, mas registros antigos podem
-    ter FT/FINALIZADO/FINAL ou status vazio. Se houver placar dos dois lados, a
-    partida também é inequivocamente concluída para fins de histórico visual.
-    """
     status=str(item.get('status') or '').strip().upper()
     if status in {'FINISHED','FT','FINAL','FINALIZADO','AET','PEN','POSTGAME'}:
         return True
@@ -28,38 +22,53 @@ def _finished_match(item):
 
 
 def team_history_for_view(team_id,team_name,before_iso,limit=10):
-    """Recupera o histórico visual pela identidade canônica ou pelo nome.
+    """Usa exatamente a mesma fonte de histórico do motor de análise.
 
-    O fallback é somente de leitura: não cria partidas nem chama qualquer API.
-    Também aceita registros históricos legados cujo status não foi normalizado,
-    desde que exista placar completo.
+    Isso evita que a análise encontre 10 jogos enquanto a visualização encontre 0.
+    A primeira consulta é a função oficial team_history() do banco. Se o ID
+    canônico não resolver, fazemos um fallback somente de leitura por nome.
+    Nenhuma API é chamada aqui.
     """
+    if not team_id and not team_name:
+        return []
+
+    # Caminho principal: exatamente a consulta que já alimenta o motor.
+    if team_id:
+        try:
+            rows=team_history(team_id,before_iso,limit)
+            if rows:
+                return rows[:limit]
+        except Exception:
+            pass
+
+    # Fallback legado por nome, somente leitura.
     if not team_name:
         return []
+
     c=connect()
     try:
         sql="SELECT * FROM matches"
         params=[]
         if before_iso:
-            sql+=" WHERE start_time<?";params.append(before_iso)
-        sql+=" ORDER BY start_time DESC LIMIT ?";params.append(max(limit*20,limit))
+            sql+=" WHERE start_time<?"
+            params.append(before_iso)
+        sql+=" ORDER BY start_time DESC LIMIT ?"
+        params.append(max(limit*50,limit))
         rows=[]
         for r in c.execute(sql,params).fetchall():
             item=dict(r)
             if not _finished_match(item):
                 continue
-            if team_id and (item.get('home_id')==team_id or item.get('away_id')==team_id):
+            if _same(team_name,item.get('home_name')) or _same(team_name,item.get('away_name')):
                 rows.append(item)
-            elif _same(team_name,item.get('home_name')) or _same(team_name,item.get('away_name')):
-                rows.append(item)
-            if len(rows)>=limit:
-                break
+                if len(rows)>=limit:
+                    break
         return rows
-    finally:c.close()
+    finally:
+        c.close()
 
 
 def player_history_for_view(team_id,team_name,before_iso,limit=20):
-    """Mantém a consulta individual pelo ID canônico e tenta IDs encontrados por nome."""
     result=player_history_summary(team_id,before_iso=before_iso,limit=limit) if team_id else []
     if result or not team_name:
         return result
@@ -67,7 +76,8 @@ def player_history_for_view(team_id,team_name,before_iso,limit=20):
     try:
         rows=c.execute("SELECT id,name FROM teams WHERE sport='Futebol'").fetchall()
         ids=[r['id'] for r in rows if _same(team_name,r['name'])]
-    finally:c.close()
+    finally:
+        c.close()
     merged=[];seen=set()
     for tid in ids:
         for row in player_history_summary(tid,before_iso=before_iso,limit=limit):
