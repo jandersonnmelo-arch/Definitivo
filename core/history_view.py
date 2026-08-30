@@ -3,10 +3,19 @@ import unicodedata
 from core.db import connect, player_history_summary, team_history
 
 
+TEAM_ALIASES={
+    'rayo vallecano de madrid':'rayo vallecano',
+    'rayo vallecano':'rayo vallecano',
+    'fc barcelona':'barcelona',
+    'barcelona':'barcelona',
+}
+
+
 def _norm(value):
     s=unicodedata.normalize('NFKD',str(value or '')).encode('ascii','ignore').decode().lower()
     s=re.sub(r'\b(cr|ec|sc|se|ca|fc|cf|ac|club|clube|football|futbol)\b',' ',s)
-    return re.sub(r'[^a-z0-9]+',' ',s).strip()
+    s=re.sub(r'[^a-z0-9]+',' ',s).strip()
+    return TEAM_ALIASES.get(s,s)
 
 
 def _same(a,b):
@@ -22,38 +31,37 @@ def _finished_match(item):
 
 
 def team_history_for_view(team_id,team_name,before_iso,limit=10):
-    """Usa exatamente a mesma fonte de histórico do motor de análise.
+    """Recupera o histórico persistido sem depender exclusivamente do ID canônico.
 
-    Isso evita que a análise encontre 10 jogos enquanto a visualização encontre 0.
-    A primeira consulta é a função oficial team_history() do banco. Se o ID
-    canônico não resolver, fazemos um fallback somente de leitura por nome.
-    Nenhuma API é chamada aqui.
+    A análise já usa os mesmos registros para calcular as médias. A visualização
+    deve encontrar esses registros mesmo quando o provedor mudou o nome/ID da
+    equipe. O filtro por nome é feito depois de buscar todos os jogos elegíveis,
+    evitando que um LIMIT global esconda o histórico de uma equipe que joga em
+    uma competição com muitos eventos recentes.
     """
     if not team_id and not team_name:
         return []
 
-    # Caminho principal: exatamente a consulta que já alimenta o motor.
-    if team_id:
-        try:
-            rows=team_history(team_id,before_iso,limit)
-            if rows:
-                return rows[:limit]
-        except Exception:
-            pass
-
-    # Fallback legado por nome, somente leitura.
-    if not team_name:
-        return []
-
     c=connect()
     try:
-        sql="SELECT * FROM matches"
+        # 1) Caminho por identidade canônica. Mantemos como primeira tentativa.
+        if team_id:
+            try:
+                rows=team_history(team_id,before_iso,limit)
+                if rows:
+                    return rows[:limit]
+            except Exception:
+                pass
+
+        # 2) Busca ampla no banco e resolução por nome normalizado/alias.
+        # Não usamos LIMIT antes de identificar a equipe: isso era capaz de
+        # retornar 0 mesmo existindo histórico persistido mais antigo.
+        sql="SELECT * FROM matches WHERE sport='Futebol'"
         params=[]
         if before_iso:
-            sql+=" WHERE start_time<?"
+            sql+=" AND start_time<?"
             params.append(before_iso)
-        sql+=" ORDER BY start_time DESC LIMIT ?"
-        params.append(max(limit*50,limit))
+        sql+=" ORDER BY start_time DESC"
         rows=[]
         for r in c.execute(sql,params).fetchall():
             item=dict(r)
