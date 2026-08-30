@@ -187,7 +187,6 @@ try:
         'fluminense fc':'fluminense', 'fluminense':'fluminense',
         'atletico mineiro':'atletico mineiro', 'atletico mg':'atletico mineiro',
         'ca mineiro':'atletico mineiro', 'clube atletico mineiro':'atletico mineiro',
-        'atletico mg':'atletico mineiro',
         'ca paranaense':'athletico paranaense', 'atletico pr':'athletico paranaense',
         'atletico paranaense':'athletico paranaense', 'athletico paranaense':'athletico paranaense',
         'athletico pr':'athletico paranaense',
@@ -209,7 +208,6 @@ try:
         'vila nova fc':'vila nova', 'vila nova':'vila nova',
         'novorizontino':'novorizontino', 'gremio novorizontino':'novorizontino',
         'operario ferroviario ec':'operario', 'operario':'operario',
-        'athletico pr':'athletico paranaense',
     }
 
     def _view_team_key(value):
@@ -255,9 +253,6 @@ try:
         rows=_original_team_history(team_id,before_iso,limit)
         if len(rows)>=limit:
             return [_canonicalize_match_view(x) for x in rows[:limit]]
-
-        # Recupera duplicatas históricas que ficaram associadas a outra
-        # identidade canônica do mesmo time em uma fonte diferente.
         try:
             c=_db.connect()
             team=c.execute('SELECT name,normalized_name FROM teams WHERE id=?', (team_id,)).fetchone()
@@ -285,5 +280,63 @@ try:
     _db.get_matches=_safe_get_matches
     _db.get_match=_safe_get_match
     _db.team_history=_safe_team_history
+except Exception:
+    pass
+
+# Deduplicação visual de eventos equivalentes vindos de múltiplas fontes.
+# Mantém uma única partida na lista e consolida source como "multi".
+try:
+    from datetime import datetime as _dt_datetime
+    from zoneinfo import ZoneInfo as _ZoneInfo
+
+    _original_get_matches_dedup = _db.get_matches
+    _MANAUS_VIEW = _ZoneInfo("America/Manaus")
+
+    def _dedup_match_key(row):
+        try:
+            raw = str(row.get("start_time") or "").replace("Z", "+00:00")
+            dt = _dt_datetime.fromisoformat(raw)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=_ZoneInfo("UTC"))
+            local = dt.astimezone(_MANAUS_VIEW)
+            start_key = local.strftime("%Y-%m-%d %H:%M")
+        except Exception:
+            start_key = str(row.get("start_time") or "")[:16]
+        competition = _view_team_key(row.get("competition") or "")
+        home = _view_team_key(row.get("home_name"))
+        away = _view_team_key(row.get("away_name"))
+        return (str(row.get("sport") or "Futebol"), competition, home, away, start_key)
+
+    def _merge_match_views(rows):
+        merged=[]
+        positions={}
+        for raw in rows:
+            item=_canonicalize_match_view(raw)
+            key=_dedup_match_key(item)
+            if key not in positions:
+                item["source"] = item.get("source") or "unknown"
+                merged.append(item)
+                positions[key]=len(merged)-1
+                continue
+            idx=positions[key]
+            current=merged[idx]
+            sources={str(current.get("source") or "").strip(),str(item.get("source") or "").strip()}
+            sources.discard("")
+            current["source"]="multi" if len(sources)>1 else (next(iter(sources)) if sources else "unknown")
+            if current.get("home_score") is None and item.get("home_score") is not None:
+                current["home_score"]=item.get("home_score")
+            if current.get("away_score") is None and item.get("away_score") is not None:
+                current["away_score"]=item.get("away_score")
+            if current.get("status") in (None,"SCHEDULED") and item.get("status") not in (None,"SCHEDULED"):
+                current["status"]=item.get("status")
+            for field in ("competition","season","start_time","minute"):
+                if not current.get(field) and item.get(field):
+                    current[field]=item.get(field)
+        return merged
+
+    def _safe_get_matches_dedup(*args,**kwargs):
+        return _merge_match_views(_original_get_matches_dedup(*args,**kwargs))
+
+    _db.get_matches = _safe_get_matches_dedup
 except Exception:
     pass
