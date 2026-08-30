@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-30T14:05:46.451409+00:00",
+  "created_at": "2026-08-30T14:05:56.581866+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -5525,56 +5525,56 @@
       {
         "id": 3,
         "match_id": null,
-        "source": "API-Futebol",
-        "stage": "coleta",
-        "status": "INFO",
-        "message": "Série B: fase encontrada id=1112 nome=Fase Única",
-        "created_at": "2026-08-30T13:55:53.258957+00:00"
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "WARNING",
+        "message": "Football-Data.org: ID do provedor não encontrado para a equipe 207f17fd2b1750e642; histórico não será gravado por esta fonte.",
+        "created_at": "2026-08-30T14:05:50.654944+00:00"
       },
       {
         "id": 4,
         "match_id": null,
-        "source": "API-Futebol",
-        "stage": "coleta",
-        "status": "INFO",
-        "message": "Série B DATA FIX: brutas=380; válidas=380; inválidas=0; rodadas candidatas=0; detalhes consultados=0; datas corrigidas=0",
-        "created_at": "2026-08-30T13:55:54.672242+00:00"
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN fallback limitado: 0 partidas para Vila Nova em 35 dias; serie_b=True",
+        "created_at": "2026-08-30T14:05:55.023814+00:00"
       },
       {
         "id": 5,
         "match_id": null,
-        "source": "API-Futebol",
-        "stage": "coleta",
-        "status": "INFO",
-        "message": "Série B DATA FIX: partidas no período=16",
-        "created_at": "2026-08-30T13:55:54.672847+00:00"
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "WARNING",
+        "message": "Football-Data.org: ID do provedor não encontrado para a equipe 2071f11a627bf816bf; histórico não será gravado por esta fonte.",
+        "created_at": "2026-08-30T14:05:55.032428+00:00"
       },
       {
         "id": 6,
         "match_id": null,
-        "source": "API-Futebol",
-        "stage": "coleta",
+        "source": "ESPN",
+        "stage": "historico",
         "status": "OK",
-        "message": "API-Futebol: 16 partidas recebidas e persistidas",
-        "created_at": "2026-08-30T13:55:54.799137+00:00"
+        "message": "ESPN fallback limitado: 0 partidas para Ceará em 35 dias; serie_b=True",
+        "created_at": "2026-08-30T14:05:55.251537+00:00"
       },
       {
         "id": 7,
-        "match_id": null,
-        "source": "ESPN",
-        "stage": "coleta",
+        "match_id": "95c20dbf7e5ccd2eea02",
+        "source": "SYSTEM",
+        "stage": "qualidade_dados",
         "status": "OK",
-        "message": "ESPN: 37 partidas recebidas e persistidas",
-        "created_at": "2026-08-30T13:55:58.676400+00:00"
+        "message": "Reconciliação pós-coleta: equipes=0, jogadores=0, estatísticas migradas=0, duplicadas removidas=0, partidas Série B consolidadas=0",
+        "created_at": "2026-08-30T14:05:55.259676+00:00"
       },
       {
         "id": 8,
-        "match_id": null,
+        "match_id": "95c20dbf7e5ccd2eea02",
         "source": "Dados Futebol",
-        "stage": "historico",
+        "stage": "diagnostico_jogadores",
         "status": "ERROR",
-        "message": "Dados Futebol histórico: HTTP 401: {'erro': 'Não autorizado', 'mensagem': 'API Key inválida ou inativa'}",
-        "created_at": "2026-08-30T13:56:22.483219+00:00"
+        "message": "Dados Futebol detalhes: HTTP 401: {'erro': 'Não autorizado', 'mensagem': 'API Key inválida ou inativa'}",
+        "created_at": "2026-08-30T14:05:56.220844+00:00"
       },
       {
         "id": 9,
@@ -5633,8 +5633,8 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-08-30",
-        "calls": 29,
-        "last_call": "2026-08-30T14:05:29.452299+00:00",
+        "calls": 65,
+        "last_call": "2026-08-30T14:05:55.008707+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -5793,17 +5793,182 @@
       {
         "id": 31,
         "provider": "ESPN",
-        "created_at": "2026-08-30T13:55:57.651373+00:00"
+        "created_at": "2026-08-30T14:05:50.848443+00:00"
       },
       {
         "id": 32,
         "provider": "ESPN",
-        "created_at": "2026-08-30T13:55:57.872195+00:00"
+        "created_at": "2026-08-30T14:05:50.942292+00:00"
       },
       {
         "id": 33,
         "provider": "ESPN",
-        "created_at": "2026-08-30T13:55:57.991038+00:00"
+        "created_at": "2026-08-30T14:05:51.019246+00:00"
+      },
+      {
+        "id": 34,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:51.101040+00:00"
+      },
+      {
+        "id": 35,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:51.290233+00:00"
+      },
+      {
+        "id": 36,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:51.386786+00:00"
+      },
+      {
+        "id": 37,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:51.506050+00:00"
+      },
+      {
+        "id": 38,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:51.646964+00:00"
+      },
+      {
+        "id": 39,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:51.763759+00:00"
+      },
+      {
+        "id": 40,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:51.860309+00:00"
+      },
+      {
+        "id": 41,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:52.135696+00:00"
+      },
+      {
+        "id": 42,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:52.240209+00:00"
+      },
+      {
+        "id": 43,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:52.356260+00:00"
+      },
+      {
+        "id": 44,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:52.503021+00:00"
+      },
+      {
+        "id": 45,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:52.600618+00:00"
+      },
+      {
+        "id": 46,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:52.698159+00:00"
+      },
+      {
+        "id": 47,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:52.801116+00:00"
+      },
+      {
+        "id": 48,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:52.891489+00:00"
+      },
+      {
+        "id": 49,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:52.987144+00:00"
+      },
+      {
+        "id": 50,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:53.097917+00:00"
+      },
+      {
+        "id": 51,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:53.197846+00:00"
+      },
+      {
+        "id": 52,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:53.316758+00:00"
+      },
+      {
+        "id": 53,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:53.406121+00:00"
+      },
+      {
+        "id": 54,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:53.498830+00:00"
+      },
+      {
+        "id": 55,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:53.651835+00:00"
+      },
+      {
+        "id": 56,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:53.755419+00:00"
+      },
+      {
+        "id": 57,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:53.909208+00:00"
+      },
+      {
+        "id": 58,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:54.029848+00:00"
+      },
+      {
+        "id": 59,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:54.141429+00:00"
+      },
+      {
+        "id": 60,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:54.245207+00:00"
+      },
+      {
+        "id": 61,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:54.365539+00:00"
+      },
+      {
+        "id": 62,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:54.463931+00:00"
+      },
+      {
+        "id": 63,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:54.623090+00:00"
+      },
+      {
+        "id": 64,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:54.775051+00:00"
+      },
+      {
+        "id": 65,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:54.901265+00:00"
+      },
+      {
+        "id": 66,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T14:05:55.008707+00:00"
       }
     ],
     "ai_match_samples": [
@@ -5811,7 +5976,7 @@
         "id": 1,
         "match_id": "95c20dbf7e5ccd2eea02",
         "dataset_version": "1",
-        "created_at": "2026-08-30T13:56:33.750138+00:00",
+        "created_at": "2026-08-30T14:05:56.263755+00:00",
         "cutoff_time": "2026-08-30T21:30Z",
         "sport": "Futebol",
         "competition": "🇧🇷 Campeonato Brasileiro Série B",
