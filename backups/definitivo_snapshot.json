@@ -1,11 +1,11 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-30T13:56:35.924119+00:00",
+  "created_at": "2026-08-30T14:05:24.923409+00:00",
   "tables": {
     "schema_meta": [
       {
         "key": "data_quality_v4",
-        "value": "2026-08-30T13:55:47.486836+00:00"
+        "value": "2026-08-30T14:05:22.416157+00:00"
       },
       {
         "key": "schema",
@@ -18,14 +18,14 @@
         "sport": "Futebol",
         "name": "Vasco",
         "normalized_name": "vasco",
-        "updated_at": "2026-08-30T13:55:58.660483+00:00"
+        "updated_at": "2026-08-30T14:05:24.667038+00:00"
       },
       {
         "id": "bff457c9c7114e8deb",
         "sport": "Futebol",
         "name": "Cruzeiro",
         "normalized_name": "cruzeiro",
-        "updated_at": "2026-08-30T13:55:58.640974+00:00"
+        "updated_at": "2026-08-30T14:05:24.667160+00:00"
       },
       {
         "id": "45744402425d537790",
@@ -1090,13 +1090,13 @@
         "team_id": "b7dc25efe9d18ad729",
         "source": "Football-Data.org",
         "provider_team_id": "1780",
-        "updated_at": "2026-08-30T13:55:49.703171+00:00"
+        "updated_at": "2026-08-30T14:05:24.667101+00:00"
       },
       {
         "team_id": "bff457c9c7114e8deb",
         "source": "Football-Data.org",
         "provider_team_id": "1771",
-        "updated_at": "2026-08-30T13:55:49.703240+00:00"
+        "updated_at": "2026-08-30T14:05:24.667170+00:00"
       },
       {
         "team_id": "45744402425d537790",
@@ -2230,11 +2230,11 @@
         "away_id": "bff457c9c7114e8deb",
         "away_name": "Cruzeiro",
         "away_short": "CRU",
-        "home_score": null,
-        "away_score": null,
+        "home_score": 3,
+        "away_score": 1,
         "source": "Football-Data.org",
         "provider_match_id": "554989",
-        "updated_at": "2026-08-30T13:55:49.703269+00:00"
+        "updated_at": "2026-08-30T14:05:24.667201+00:00"
       },
       {
         "id": "5e9f106fa41fea38ff0a",
@@ -4642,7 +4642,7 @@
         "match_id": "20912d9303c20fdb624e",
         "source": "Football-Data.org",
         "provider_match_id": "554989",
-        "updated_at": "2026-08-30T13:55:49.703341+00:00"
+        "updated_at": "2026-08-30T14:05:24.667285+00:00"
       },
       {
         "match_id": "5e9f106fa41fea38ff0a",
@@ -5618,7 +5618,7 @@
         "provider": "Football-Data.org",
         "day_utc": "2026-08-30",
         "calls": 1,
-        "last_call": "2026-08-30T13:55:49.683733+00:00",
+        "last_call": "2026-08-30T14:05:24.646981+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -5643,7 +5643,7 @@
       {
         "id": 1,
         "provider": "Football-Data.org",
-        "created_at": "2026-08-30T13:55:49.683733+00:00"
+        "created_at": "2026-08-30T14:05:24.646981+00:00"
       },
       {
         "id": 2,
