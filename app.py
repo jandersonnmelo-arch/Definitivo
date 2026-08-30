@@ -5,6 +5,7 @@ import pandas as pd
 from core.db import init_db,get_matches,get_match,get_stats,get_players,get_diagnostics,usage_today,team_history,player_history_summary
 from core.football import collect,enrich
 from core.history import build_history_for_match
+from core.history_view import team_history_for_view,player_history_for_view
 from core.engine import build_pre_match_analysis
 from core.competitions import FIXED_COMPETITIONS,OPTIONAL_COMPETITIONS,selected_labels,canonical_competition_label
 from core.normalizer import manaos_time,status_label,position_label,format_metric_value,MATCH_DISPLAY_ORDER,MATCH_DISPLAY_LABELS,PLAYER_DISPLAY_ORDER,PLAYER_DISPLAY_LABELS,canonical_match_metric,canonical_player_metric,choose_preferred_stat
@@ -80,8 +81,8 @@ if selected:
         with st.expander(f'📊 {m["home_name"]} × {m["away_name"]}',expanded=True):
             st.caption(f'🏆 {canonical_competition_label(m.get("competition"))} • 🕐 {manaos_time(m.get("start_time"))} • {status_label(m.get("status"))}')
             before=m.get('start_time') or ''
-            home_hist=team_history(m['home_id'],before,10) if m.get('home_id') else []
-            away_hist=team_history(m['away_id'],before,10) if m.get('away_id') else []
+            home_hist=team_history_for_view(m.get('home_id'),m.get('home_name'),before,10)
+            away_hist=team_history_for_view(m.get('away_id'),m.get('away_name'),before,10)
             if m.get('status')=='SCHEDULED':
                 if st.button('📚 Atualizar histórico + estatísticas + jogadores',key=f'h_{selected}',use_container_width=True,type='primary'):
                     with st.spinner('Preparando 10 jogos de cada equipe, estatísticas e jogadores...'):result=build_history_for_match(m)
@@ -153,10 +154,10 @@ if selected:
                     (st.success if ok else st.error)(detail)
                 for tid,tname in ((m.get('home_id'),m.get('home_name')),(m.get('away_id'),m.get('away_name'))):
                     if not tid:continue
-                    summary=player_history_summary(tid,before,limit=20);st.markdown(f'#### 👥 Jogadores da análise — {tname}')
+                    summary=player_history_for_view(tid,tname,before,limit=20);st.markdown(f'#### 👥 Jogadores da análise — {tname}')
                     if summary:
                         st.caption('Médias por jogo nos registros individuais disponíveis; Jogos = número de partidas com dados persistidos para o jogador.')
-                        st.dataframe(pd.DataFrame([{'Jogador':x['name'],'Posição':position_label(x.get('position')),'Jogos':x.get('matches',x.get('jogos',0)),'Gols':format_metric_value('goals',player_avg(x.get('goals',x.get('gols')),x.get('matches',x.get('jogos',0)))),'Assistências':format_metric_value('assists',player_avg(x.get('assists',x.get('assistencias')),x.get('matches',x.get('jogos',0)))),'Finalizações certas':format_metric_value('shots_on_target',player_avg(x.get('shots_on_target'),x.get('matches',x.get('jogos',0)))),'Finalizações no gol':format_metric_value('shots',player_avg(x.get('shots'),x.get('matches',x.get('jogos',0)))),'Passes certos':format_metric_value('passes_completed',player_avg(x.get('passes_completed'),x.get('matches',x.get('jogos',0)))),'Desarmes':format_metric_value('tackles',player_avg(x.get('tackles'),x.get('matches',x.get('jogos',0)))),'Faltas cometidas':format_metric_value('fouls',player_avg(x.get('fouls'),x.get('matches',x.get('jogos',0)))),'Faltas sofridas':format_metric_value('was_fouled',player_avg(x.get('was_fouled'),x.get('matches',x.get('jogos',0))))} for x in summary]),hide_index=True,use_container_width=True)
+                        st.dataframe(pd.DataFrame([{'Jogador':x['name'],'Posição':position_label(x.get('position')),'Jogos':x.get('matches',x.get('jogos',0)),'Gols':format_metric_value('goals',player_avg(x.get('goals',x.get('gols')),x.get('matches',x.get('jogos',0)))),'Assistências':format_metric_value('assists',player_avg(x.get('assists',x.get('assistencias')),x.get('matches',x.get('jogos',0)))),'Finalizações certas':format_metric_value('shots_on_target',player_avg(x.get('shots_on_target'),x.get('matches',x.get('jogos',0)))),'Finalizações no gol':format_metric_value('shots',player_avg(x.get('shots'),x.get('matches',x.get('jogos',0)))),'Passes certos':format_metric_value('passes_completed',player_avg(x.get('passes_completed'),x.get('matches',x.get('jogos',0)))),'Desarmes':format_metric_value('tackles',player_avg(x.get('tackles'),x.get('matches',x.get('jogos',0)))),'Faltas cometidas':format_metric_value('fouls',player_avg(x.get('fouls',x.get('fouls')),x.get('matches',x.get('jogos',0)))),'Faltas sofridas':format_metric_value('was_fouled',player_avg(x.get('was_fouled'),x.get('matches',x.get('jogos',0))))} for x in summary]),hide_index=True,use_container_width=True)
                     else:st.info('Nenhum dado individual histórico persistido para esta equipe.')
             players=get_players(selected);unique_players={x['id']:x for x in players};st.subheader(f'👥 Jogadores da partida • {len(unique_players)}')
             if players:
