@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-30T23:46:48.860086+00:00",
+  "created_at": "2026-08-30T23:46:51.166900+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -16269,6 +16269,70 @@
         "value": 19.0,
         "source": "ESPN",
         "observed_at": "2026-08-30T23:46:45.821789+00:00"
+      },
+      {
+        "match_id": "c0945fe192e626d14d5f",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "goal_difference",
+        "value": 7.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:46:50.449236+00:00"
+      },
+      {
+        "match_id": "c0945fe192e626d14d5f",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "total_goals",
+        "value": 7.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:46:50.449433+00:00"
+      },
+      {
+        "match_id": "c0945fe192e626d14d5f",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "goal_assists",
+        "value": 5.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:46:50.449466+00:00"
+      },
+      {
+        "match_id": "c0945fe192e626d14d5f",
+        "team_id": "192a5a24657fd487e0",
+        "metric": "goals_conceded",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:46:50.449487+00:00"
+      },
+      {
+        "match_id": "c0945fe192e626d14d5f",
+        "team_id": "837cd5f727853c03f5",
+        "metric": "goal_difference",
+        "value": -1.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:46:50.449505+00:00"
+      },
+      {
+        "match_id": "c0945fe192e626d14d5f",
+        "team_id": "837cd5f727853c03f5",
+        "metric": "total_goals",
+        "value": 2.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:46:50.449531+00:00"
+      },
+      {
+        "match_id": "c0945fe192e626d14d5f",
+        "team_id": "837cd5f727853c03f5",
+        "metric": "goal_assists",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:46:50.449568+00:00"
+      },
+      {
+        "match_id": "c0945fe192e626d14d5f",
+        "team_id": "837cd5f727853c03f5",
+        "metric": "goals_conceded",
+        "value": 3.0,
+        "source": "ESPN",
+        "observed_at": "2026-08-30T23:46:50.449587+00:00"
       }
     ],
     "players": [
@@ -155010,6 +155074,33 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-08-30T23:46:47.370305+00:00"
+      },
+      {
+        "id": 96,
+        "match_id": "c0945fe192e626d14d5f",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "INFO",
+        "message": "ESPN: jogadores=0, estatísticas individuais reais=0, presença=0, amostra=[nenhum nome retornado]",
+        "created_at": "2026-08-30T23:46:50.442264+00:00"
+      },
+      {
+        "id": 97,
+        "match_id": "c0945fe192e626d14d5f",
+        "source": "ESPN",
+        "stage": "partida",
+        "status": "OK",
+        "message": "ESPN: 8 estatísticas, 0 jogadores, 0 estatísticas individuais reais, 0 presenças",
+        "created_at": "2026-08-30T23:46:50.685170+00:00"
+      },
+      {
+        "id": 98,
+        "match_id": "c0945fe192e626d14d5f",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-08-30T23:46:51.105934+00:00"
       }
     ],
     "api_usage": [
@@ -155024,16 +155115,16 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-08-30",
-        "calls": 89,
-        "last_call": "2026-08-30T23:46:45.370019+00:00",
+        "calls": 90,
+        "last_call": "2026-08-30T23:46:50.045592+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
       {
         "provider": "FotMob",
         "day_utc": "2026-08-30",
-        "calls": 73,
-        "last_call": "2026-08-30T23:46:47.362213+00:00",
+        "calls": 75,
+        "last_call": "2026-08-30T23:46:51.096302+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -155873,6 +155964,21 @@
         "id": 167,
         "provider": "FotMob",
         "created_at": "2026-08-30T23:46:47.362213+00:00"
+      },
+      {
+        "id": 168,
+        "provider": "ESPN",
+        "created_at": "2026-08-30T23:46:50.045592+00:00"
+      },
+      {
+        "id": 169,
+        "provider": "FotMob",
+        "created_at": "2026-08-30T23:46:50.965935+00:00"
+      },
+      {
+        "id": 170,
+        "provider": "FotMob",
+        "created_at": "2026-08-30T23:46:51.096302+00:00"
       }
     ],
     "ai_match_samples": [
@@ -156505,6 +156611,27 @@
         "target_total_goals": 4.0,
         "target_btts": 1,
         "is_training_ready": 1
+      },
+      {
+        "id": 31,
+        "match_id": "c0945fe192e626d14d5f",
+        "dataset_version": "1",
+        "created_at": "2026-08-30T23:46:51.159208+00:00",
+        "cutoff_time": "2026-08-31T19:30:00Z",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "home_team_id": "192a5a24657fd487e0",
+        "home_team_name": "FC Barcelona",
+        "away_team_id": "9b2cbb4b6b5a74fcda",
+        "away_team_name": "Rayo Vallecano de Madrid",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":7,\"sample_away\":2,\"xg_home\":2.32,\"xg_away\":0.93,\"probabilities\":{\"home\":68.5,\"draw\":18.0,\"away\":13.5},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":7,\"away\":0},\"shots_on_target\":{\"home\":7,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":7,\"away\":0},\"corners\":{\"home\":7,\"away\":0},\"fouls\":{\"home\":7,\"away\":0},\"saves\":{\"home\":7,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":7,\"away\":0},\"red_cards\":{\"home\":7,\"away\":0},\"offsides\":{\"home\":7,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":7,\"away\":0}},\"home\":{\"sample\":7,\"goals_for\":3.14,\"goals_against\":0.86,\"shots\":17.71,\"shots_sample\":7,\"shots_on_target\":7.43,\"shots_on_target_sample\":7,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":14.0,\"effectivetackles_sample\":7,\"corners\":6.86,\"corners_sample\":7,\"fouls\":9.0,\"fouls_sample\":7,\"saves\":1.57,\"saves_sample\":7,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":1.29,\"yellow_cards_sample\":7,\"red_cards\":0.0,\"red_cards_sample\":7,\"offsides\":2.71,\"offsides_sample\":7,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":581.86,\"passes_completed_sample\":7,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":2,\"goals_for\":1.0,\"goals_against\":1.5,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":3.25,\"total_expected\":3.25,\"line\":3.5,\"lines\":{\"3.5\":40.9},\"under_lines\":{\"3.5\":59.1},\"over\":{\"3.5\":40.9},\"under\":{\"3.5\":59.1},\"over_probability\":40.9,\"under_probability\":59.1,\"exact_total\":{\"0\":3.9,\"1\":12.6,\"2\":20.5,\"3\":22.2,\"4+\":40.9},\"ambas_marcam\":54.6},\"finalizacoes\":{\"home\":17.71,\"away\":null,\"total_expected\":17.71,\"line\":19.5,\"over\":32.4,\"under\":67.6,\"over_probability\":32.4,\"under_probability\":67.6,\"lines\":{\"19.5\":32.4},\"under_lines\":{\"19.5\":67.6}},\"finalizacoes_no_alvo\":{\"home\":7.43,\"away\":null,\"total_expected\":7.43,\"line\":7.5,\"over\":46.5,\"under\":53.5,\"over_probability\":46.5,\"under_probability\":53.5,\"lines\":{\"7.5\":46.5},\"under_lines\":{\"7.5\":53.5}},\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":{\"home\":14.0,\"away\":null,\"total_expected\":14.0,\"line\":19.5,\"over\":7.7,\"under\":92.3,\"over_probability\":7.7,\"under_probability\":92.3,\"lines\":{\"19.5\":7.7},\"under_lines\":{\"19.5\":92.3}},\"escanteios\":{\"home\":6.86,\"away\":null,\"total_expected\":6.86,\"line\":7.5,\"over\":38.0,\"under\":62.0,\"over_probability\":38.0,\"under_probability\":62.0,\"lines\":{\"7.5\":38.0},\"under_lines\":{\"7.5\":62.0}},\"faltas\":{\"home\":9.0,\"away\":null,\"total_expected\":9.0,\"line\":19.5,\"over\":0.1,\"under\":99.9,\"over_probability\":0.1,\"under_probability\":99.9,\"lines\":{\"19.5\":0.1},\"under_lines\":{\"19.5\":99.9}},\"defesas\":{\"home\":1.57,\"away\":null,\"total_expected\":1.57,\"line\":4.5,\"over\":2.2,\"under\":97.8,\"over_probability\":2.2,\"under_probability\":97.8,\"lines\":{\"4.5\":2.2},\"under_lines\":{\"4.5\":97.8}},\"laterais\":null,\"cartoes_amarelos\":{\"home\":1.29,\"away\":null,\"total_expected\":1.29,\"line\":2.5,\"over\":14.1,\"under\":85.9,\"over_probability\":14.1,\"under_probability\":85.9,\"lines\":{\"2.5\":14.1},\"under_lines\":{\"2.5\":85.9}},\"cartoes_vermelhos\":{\"home\":0.0,\"away\":null,\"total_expected\":0.0,\"line\":0.5,\"over\":0.0,\"under\":100.0,\"over_probability\":0.0,\"under_probability\":100.0,\"lines\":{\"0.5\":0.0},\"under_lines\":{\"0.5\":100.0}},\"impedimentos\":{\"home\":2.71,\"away\":null,\"total_expected\":2.71,\"line\":2.5,\"over\":50.9,\"under\":49.1,\"over_probability\":50.9,\"under_probability\":49.1,\"lines\":{\"2.5\":50.9},\"under_lines\":{\"2.5\":49.1}},\"tiros_de_meta\":null,\"passes_certos\":{\"home\":581.86,\"away\":null,\"total_expected\":581.86,\"line\":500.5,\"over\":100.0,\"under\":0.0,\"over_probability\":100.0,\"under_probability\":0.0,\"lines\":{\"500.5\":100.0},\"under_lines\":{\"500.5\":0.0}}},\"projections\":{\"goals\":{\"home\":2.32,\"away\":0.93,\"total\":3.25,\"sample_home\":7,\"sample_away\":2},\"shots\":{\"home\":17.71,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0},\"shots_on_target\":{\"home\":7.43,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":14.0,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0},\"corners\":{\"home\":6.86,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0},\"fouls\":{\"home\":9.0,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0},\"saves\":{\"home\":1.57,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":1.29,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0},\"red_cards\":{\"home\":0.0,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0},\"offsides\":{\"home\":2.71,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":581.86,\"away\":null,\"total\":null,\"sample_home\":7,\"sample_away\":0}}}",
+        "target_home_goals": null,
+        "target_away_goals": null,
+        "target_result": null,
+        "target_total_goals": null,
+        "target_btts": null,
+        "is_training_ready": 0
       }
     ],
     "ai_player_samples": [],
