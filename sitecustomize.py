@@ -23,6 +23,7 @@ try:
 
     _original_team_history = _db.team_history
     _original_get_players = _db.get_players
+    _original_player_history_summary = _db.player_history_summary
 
     def team_history(team_id, before_iso=None, limit=10):
         rows = _original_team_history(team_id, before_iso, limit)
@@ -46,8 +47,6 @@ try:
                 params.append(before_iso)
             query += " ORDER BY start_time DESC"
 
-            # Resolve o nome em Python para usar exatamente a mesma
-            # normalização de equipes do restante do sistema.
             for raw in connection.execute(query, params).fetchall():
                 item = dict(raw)
                 if item.get("id") in existing:
@@ -64,14 +63,6 @@ try:
             connection.close()
 
     def get_players(match_id):
-        """Lê todos os jogadores persistidos da partida.
-
-        O filtro antigo exigia que ps.team_id coincidisse literalmente com
-        home_id/away_id. Isso ocultava jogadores quando uma fonte usava outro
-        ID canônico para a mesma equipe. A partida já restringe o conjunto,
-        então é seguro recuperar todos os player_stats daquele match e mapear
-        a equipe pelo nome/identidade quando necessário.
-        """
         connection = _db.connect()
         try:
             match = connection.execute(
@@ -105,9 +96,73 @@ try:
         finally:
             connection.close()
 
+    def player_history_summary(team_id=None, match_id=None, before_iso=None, limit=20):
+        rows = _original_player_history_summary(team_id, match_id, before_iso, limit)
+        if rows or not team_id:
+            return rows
+
+        connection = _db.connect()
+        try:
+            team = connection.execute(
+                "SELECT name,normalized_name FROM teams WHERE id=?", (team_id,)
+            ).fetchone()
+            if not team:
+                return rows
+            target_names = {team["name"] or "", team["normalized_name"] or ""}
+
+            sql = """SELECT p.id,p.team_id,p.name,p.position,ps.match_id,ps.metric,ps.value,
+                            m.start_time,m.home_name,m.away_name
+                       FROM players p
+                       JOIN player_stats ps ON ps.player_id=p.id
+                       JOIN matches m ON m.id=ps.match_id
+                      WHERE m.status='FINISHED'"""
+            params = []
+            if before_iso:
+                sql += " AND m.start_time<?"
+                params.append(before_iso)
+            sql += " ORDER BY m.start_time DESC"
+
+            grouped = {}
+            for raw in connection.execute(sql, params).fetchall():
+                item = dict(raw)
+                if not any(_same_team(name, item.get("home_name")) or _same_team(name, item.get("away_name")) for name in target_names if name):
+                    continue
+                key = item["id"]
+                g = grouped.setdefault(key, {
+                    "team_id": team_id, "name": item["name"], "position": item.get("position"),
+                    "_matches": set(), "gols": 0.0, "assistencias": 0.0, "shots": 0.0,
+                    "shots_on_target": 0.0, "passes_completed": 0.0, "tackles": 0.0,
+                    "fouls": 0.0, "was_fouled": 0.0, "minutes": 0.0,
+                    "yellow_cards": 0.0, "red_cards": 0.0,
+                })
+                g["_matches"].add(item["match_id"])
+                metric = item.get("metric")
+                value = item.get("value")
+                try: value = float(value)
+                except Exception: continue
+                mapping = {
+                    "goals":"gols", "assists":"assistencias", "shots":"shots",
+                    "shots_on_target":"shots_on_target", "passes_completed":"passes_completed",
+                    "tackles":"tackles", "effectivetackles":"tackles", "fouls":"fouls",
+                    "was_fouled":"was_fouled", "minutes":"minutes", "minutes_played":"minutes",
+                    "yellow_cards":"yellow_cards", "red_cards":"red_cards",
+                }
+                if metric in mapping:
+                    g[mapping[metric]] += value
+
+            out = []
+            for g in grouped.values():
+                g["jogos"] = len(g.pop("_matches"))
+                out.append(g)
+            out.sort(key=lambda x: x.get("name") or "")
+            return out[:limit]
+        finally:
+            connection.close()
+
     _db.team_history = team_history
     _db.history_coverage = lambda team_id, before_iso=None: len(team_history(team_id, before_iso, 10))
     _db.get_players = get_players
+    _db.player_history_summary = player_history_summary
 except Exception:
     # Compatibilidade nunca deve impedir a aplicação de iniciar.
     pass
