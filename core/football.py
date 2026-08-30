@@ -1,7 +1,6 @@
 from providers.football_data import FootballDataProvider
 from providers.espn import ESPNProvider
 from providers.espn_calendar import ESPNCalendarProvider
-from providers.api_futebol_calendar_fixed import ApiFutebolCalendarProviderFixed
 from providers.fotmob import FotMobProvider
 from providers.tribuna import TribunaProvider
 from providers.api_football import ApiFootballProvider
@@ -23,11 +22,10 @@ def providers():
 
 
 def collection_providers():
-    # Dados Futebol é a API exclusiva da Série B para ENRIQUECIMENTO.
-    # Ela não participa mais do calendário/coleta. O calendário da Série B
-    # vem das mesmas fontes gerais dos demais campeonatos, evitando chamadas
-    # repetidas ao endpoint exclusivo apenas para descobrir partidas.
-    return [FootballDataProvider(), ApiFutebolCalendarProviderFixed(), ESPNCalendarProvider()]
+    # CALENDÁRIO: somente as fontes gerais do aplicativo.
+    # A API Dados Futebol e a API-Futebol NÃO participam da coleta/calendário.
+    # Dados Futebol é reservada exclusivamente ao enriquecimento da Série B.
+    return [FootballDataProvider(), ESPNCalendarProvider()]
 
 
 def _with_player_presence(players, player_stats):
