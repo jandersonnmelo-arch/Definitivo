@@ -17,11 +17,94 @@ from core.db import (
     get_diagnostics, team_history,
 )
 
+# Nome único de apresentação para a mesma equipe quando diferentes fontes
+# usam abreviações/sufixos distintos. A identidade do jogo continua sendo
+# baseada no nome normalizado + data/hora, portanto os aliases não criam
+# partidas diferentes no banco.
+TEAM_CANONICAL_ALIASES = {
+    'flamengo': 'Flamengo',
+    'cr flamengo': 'Flamengo',
+    'flamengo rj': 'Flamengo',
+    'corinthians': 'Corinthians',
+    'sc corinthians paulista': 'Corinthians',
+    'sport club corinthians paulista': 'Corinthians',
+    'santos': 'Santos',
+    'santos fc': 'Santos',
+    'botafogo': 'Botafogo',
+    'botafogo fr': 'Botafogo',
+    'botafogo rj': 'Botafogo',
+    'palmeiras': 'Palmeiras',
+    'se palmeiras': 'Palmeiras',
+    'sao paulo': 'São Paulo',
+    'sao paulo fc': 'São Paulo',
+    'spfc': 'São Paulo',
+    'atletico mineiro': 'Atlético-MG',
+    'atletico mg': 'Atlético-MG',
+    'atletico mg': 'Atlético-MG',
+    'atletico go': 'Atlético-GO',
+    'atletico goianiense': 'Atlético-GO',
+    'atletico paranaense': 'Athletico-PR',
+    'athletico paranaense': 'Athletico-PR',
+    'athletico pr': 'Athletico-PR',
+    'cruzeiro': 'Cruzeiro',
+    'cruzeiro ec': 'Cruzeiro',
+    'gremio': 'Grêmio',
+    'gremio fbpa': 'Grêmio',
+    'internacional': 'Internacional',
+    'sport club internacional': 'Internacional',
+    'vasco': 'Vasco',
+    'vasco da gama': 'Vasco',
+    'vasco da gama saf': 'Vasco',
+    'bahia': 'Bahia',
+    'ec bahia': 'Bahia',
+    'fortaleza': 'Fortaleza',
+    'fortaleza ec': 'Fortaleza',
+    'ceara': 'Ceará',
+    'ceara sc': 'Ceará',
+    'bragantino': 'Bragantino',
+    'red bull bragantino': 'Bragantino',
+    'rb bragantino': 'Bragantino',
+    'juventude': 'Juventude',
+    'ec juventude': 'Juventude',
+    'sport': 'Sport',
+    'sport recife': 'Sport',
+    'avai': 'Avaí',
+    'avai fc': 'Avaí',
+    'atletico go': 'Atlético-GO',
+    'america mineiro': 'América-MG',
+    'america mg': 'América-MG',
+    'goias': 'Goiás',
+    'vitoria': 'Vitória',
+    'coritiba': 'Coritiba',
+    'chapecoense': 'Chapecoense',
+}
+
 
 def _norm_name(value):
     s = unicodedata.normalize('NFKD', str(value or '')).encode('ascii','ignore').decode().lower()
     s = re.sub(r'\b(cr|ec|sc|se|ca|fc|cf|ac|club|football|futbol)\b', ' ', s)
     return re.sub(r'[^a-z0-9]+', ' ', s).strip()
+
+
+def canonical_team_name(value):
+    """Return the canonical display name for a team/provider alias."""
+    raw = str(value or '').strip()
+    if not raw or raw == '—':
+        return raw
+    key = _norm_name(raw)
+    if key in TEAM_CANONICAL_ALIASES:
+        return TEAM_CANONICAL_ALIASES[key]
+
+    # Fallback seguro para nomes que diferem apenas por prefixos/sufixos
+    # institucionais. Não tenta adivinhar clubes desconhecidos.
+    cleaned = re.sub(r'\s+', ' ', re.sub(
+        r'\b(football club|futbol club|sport club|sociedade esportiva|clube de regatas|futebol clube)\b',
+        ' ', raw, flags=re.I
+    )).strip(' -')
+    cleaned_key = _norm_name(cleaned)
+    if cleaned_key in TEAM_CANONICAL_ALIASES:
+        return TEAM_CANONICAL_ALIASES[cleaned_key]
+    return cleaned or raw
 
 
 def _same_team_name(a, b):
@@ -31,8 +114,6 @@ def _same_team_name(a, b):
         return False
     if a == b or a in b or b in a:
         return True
-    # Some providers use short forms such as "Racing Santander" while the
-    # canonical source stores "Real Racing Club de Santander".
     ta = set(a.split()) - {'real', 'de', 'da', 'do', 'dos', 'das'}
     tb = set(b.split()) - {'real', 'de', 'da', 'do', 'dos', 'das'}
     common = ta & tb
@@ -109,6 +190,10 @@ def _merge_duplicate_matches(c, target_id, duplicate_ids):
 def upsert_match(match):
     """Write a match under one canonical ID and merge old provider duplicates."""
     m = dict(match or {})
+    # Canonicaliza somente a apresentação; a identidade continua sendo
+    # calculada pela forma normalizada dos nomes.
+    m['home_name'] = canonical_team_name(m.get('home_name'))
+    m['away_name'] = canonical_team_name(m.get('away_name'))
     mid = canonical_id(m)
     m['id'] = mid
     with connect() as c:
@@ -121,7 +206,7 @@ def upsert_match(match):
             if not target_exists:
                 best = max(candidates, key=lambda r: _row_richness(c,r['id']))
                 old_id = best['id']
-                c.execute('UPDATE matches SET id=? WHERE id=?',(mid,old_id))
+                c.execute('UPDATE matches SET id=?,home_name=?,away_name=? WHERE id=?',(mid,m['home_name'],m['away_name'],old_id))
                 c.execute('UPDATE match_stats SET match_id=? WHERE match_id=?',(mid,old_id))
                 c.execute('UPDATE player_stats SET match_id=? WHERE match_id=?',(mid,old_id))
                 c.execute('UPDATE match_sources SET match_id=? WHERE match_id=?',(mid,old_id))
@@ -157,18 +242,14 @@ def _canonical_team_for_match(c, match_id, team_name=None, raw_team_id=None):
 
 
 def upsert_players(players):
-    """Persist players while aligning provider team IDs with match teams.
-
-    The database layer historically accepted the provider team ID directly.
-    For player enrichment that can create a second team identity when a source
-    uses a different display name. Normalize that identity before the write.
-    """
+    """Persist players while aligning provider team IDs with match teams."""
     if not players:
         return
     normalized=[]
     with connect() as c:
         for p in players:
             row=dict(p)
+            row['team_name'] = canonical_team_name(row.get('team_name'))
             match_id=row.get('match_id')
             mapped=_canonical_team_for_match(c,match_id,row.get('team_name'),row.get('team_id'))
             if mapped is not None:
@@ -185,6 +266,7 @@ def upsert_player_stats(match_id, rows):
     with connect() as c:
         for r in rows:
             row=dict(r)
+            row['team_name'] = canonical_team_name(row.get('team_name'))
             mapped=_canonical_team_for_match(c,match_id,row.get('team_name'),row.get('team_id'))
             if mapped is not None:
                 row['team_id']=mapped
@@ -203,27 +285,28 @@ def dedupe_existing_matches():
         total = 0
         for mid, group in groups.items():
             if len(group) < 2 and group[0]['id'] == mid:
+                # Mesmo que não haja duplicata, atualiza nomes antigos para o
+                # padrão canônico sem alterar o ID nem as estatísticas.
+                cn_home = canonical_team_name(group[0].get('home_name'))
+                cn_away = canonical_team_name(group[0].get('away_name'))
+                if cn_home != group[0].get('home_name') or cn_away != group[0].get('away_name'):
+                    c.execute('UPDATE matches SET home_name=?,away_name=? WHERE id=?',(cn_home,cn_away,mid))
                 continue
             target = max(group, key=lambda r: _row_richness(c,r['id']))
             target_old = target['id']
+            cn_home = canonical_team_name(target.get('home_name'))
+            cn_away = canonical_team_name(target.get('away_name'))
             if target_old != mid:
                 if c.execute('SELECT 1 FROM matches WHERE id=?',(mid,)).fetchone():
                     _merge_duplicate_matches(c,mid,[target_old])
                 else:
-                    c.execute('UPDATE matches SET id=? WHERE id=?',(mid,target_old))
+                    c.execute('UPDATE matches SET id=?,home_name=?,away_name=? WHERE id=?',(mid,cn_home,cn_away,target_old))
                     c.execute('UPDATE match_stats SET match_id=? WHERE match_id=?',(mid,target_old))
                     c.execute('UPDATE player_stats SET match_id=? WHERE match_id=?',(mid,target_old))
                     c.execute('UPDATE match_sources SET match_id=? WHERE match_id=?',(mid,target_old))
                     c.execute('UPDATE diagnostics SET match_id=? WHERE match_id=?',(mid,target_old))
+            else:
+                c.execute('UPDATE matches SET home_name=?,away_name=? WHERE id=?',(cn_home,cn_away,mid))
             total += _merge_duplicate_matches(c,mid,[r['id'] for r in group if r['id'] != mid])
         c.commit()
     return total
-
-
-__all__ = [
-    'canonical_id','canonical_player_id','canonical_team_id','connect','init_db',
-    'record_api_usage','usage_today','calls_last_minute','upsert_match',
-    'get_provider_id','upsert_match_stats','upsert_players','upsert_player_stats',
-    'add_diagnostic','get_matches','get_match','get_stats','get_players',
-    'get_diagnostics','team_history','dedupe_existing_matches'
-]
