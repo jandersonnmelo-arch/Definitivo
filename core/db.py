@@ -22,6 +22,12 @@ def connect():
 def now_iso():return datetime.now(timezone.utc).isoformat()
 def _norm(x):
     s=unicodedata.normalize("NFKD",str(x or "")).encode("ascii","ignore").decode().lower();s=re.sub(r"\b(cr|ec|sc|se|ca|fc|cf|ac)\b"," ",s);return re.sub(r"[^a-z0-9]+"," ",s).strip()
+def _same_team_name(a,b):
+    a,b=_norm(a),_norm(b)
+    if not a or not b:return False
+    if a==b or a in b or b in a:return True
+    ta,tb=set(a.split()),set(b.split());common=ta & tb
+    return len(common)>=2 and len(common)>=min(len(ta),len(tb))
 def canonical_id(m):return hashlib.sha1("|".join([_norm(m.get("sport","Futebol")),_norm(m.get("home_name")),_norm(m.get("away_name")),str(m.get("start_time") or "")[:16]]).encode()).hexdigest()[:20]
 def canonical_player_id(source,provider_id):return int(hashlib.sha1(f"{source}:{provider_id}".encode()).hexdigest()[:15],16)
 def canonical_team_id(sport,name):return hashlib.sha1(f"{sport}:{_norm(name)}".encode()).hexdigest()[:18]
@@ -80,9 +86,6 @@ def init_db():
             except Exception:pass
 
 def _team_id(c,sport,name,source=None,provider_id=None):
-    # Primeiro respeita o vínculo já existente entre fonte + ID do provedor.
-    # Isso evita SQLITE UNIQUE quando uma versão anterior do banco associou
-    # esse ID a um nome/identidade canônica diferente.
     if source and provider_id is not None:
         existing=c.execute("SELECT team_id FROM team_sources WHERE source=? AND provider_team_id=?",(source,str(provider_id))).fetchone()
         if existing:
@@ -139,6 +142,14 @@ def get_team_provider_id(team_id,source):
     try:r=c.execute("SELECT provider_team_id FROM team_sources WHERE team_id=? AND source=?",(team_id,source)).fetchone();return r["provider_team_id"] if r else None
     finally:c.close()
 def _canonical_stat_team(c,match_id,source,provider_team_id,team_name):
+    # As estatísticas vindas de ESPN/FotMob usam IDs próprios. O app, porém,
+    # exibe os dados usando os IDs canônicos gravados na partida. Resolva
+    # primeiro contra a própria partida, por nome/alias, para impedir que um
+    # ID do provedor crie uma segunda identidade para o mesmo time.
+    m=c.execute("SELECT home_id,home_name,away_id,away_name FROM matches WHERE id=?",(match_id,)).fetchone()
+    if m:
+        if _same_team_name(team_name,m["home_name"]):return m["home_id"]
+        if _same_team_name(team_name,m["away_name"]):return m["away_id"]
     r=c.execute("SELECT team_id FROM team_sources WHERE source=? AND provider_team_id=?",(source,str(provider_team_id))).fetchone()
     if r:return r["team_id"]
     m=c.execute("SELECT sport FROM matches WHERE id=?",(match_id,)).fetchone();return _team_id(c,m["sport"] if m else "Futebol",team_name or str(provider_team_id),source,provider_team_id)
