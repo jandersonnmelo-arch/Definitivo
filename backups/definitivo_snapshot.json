@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-31T14:54:28.578513+00:00",
+  "created_at": "2026-08-31T14:55:44.710464+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-31T14:55:44.541676+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-31T14:54:28.564027+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -137,7 +137,7 @@
         "sport": "Futebol",
         "name": "Mirassol",
         "normalized_name": "mirassol",
-        "updated_at": "2026-08-31T14:51:25.842688+00:00"
+        "updated_at": "2026-08-31T14:55:44.573435+00:00"
       },
       {
         "id": "0b06e9b9967767637f",
@@ -1012,7 +1012,7 @@
         "sport": "Futebol",
         "name": "Remo",
         "normalized_name": "remo",
-        "updated_at": "2026-08-31T14:51:25.906177+00:00"
+        "updated_at": "2026-08-31T14:55:44.573509+00:00"
       },
       {
         "id": "ae486e255b7574cdfc",
@@ -5453,6 +5453,26 @@
         "source": "ESPN",
         "provider_match_id": "401882908",
         "updated_at": "2026-08-31T14:53:37.377073+00:00"
+      },
+      {
+        "id": "401841170",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-07-29T22:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "590c1e0cd091eaf7e1",
+        "home_name": "Mirassol",
+        "home_short": "MIR",
+        "away_id": "85fe60cf642c9168d5",
+        "away_name": "Remo",
+        "away_short": "REMO",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401841170",
+        "updated_at": "2026-08-31T14:55:44.573544+00:00"
       }
     ],
     "match_sources": [
@@ -6307,6 +6327,12 @@
         "source": "ESPN",
         "provider_match_id": "401882908",
         "updated_at": "2026-08-31T14:53:37.377205+00:00"
+      },
+      {
+        "match_id": "401841170",
+        "source": "ESPN",
+        "provider_match_id": "401841170",
+        "updated_at": "2026-08-31T14:55:44.573641+00:00"
       }
     ],
     "match_stats": [
@@ -125801,6 +125827,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-08-31T14:54:25.086801+00:00"
+      },
+      {
+        "id": 77,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "WARNING",
+        "message": "Football-Data.org: ID do provedor não encontrado para a equipe 85fe60cf642c9168d5; histórico não será gravado por esta fonte.",
+        "created_at": "2026-08-31T14:55:44.553026+00:00"
       }
     ],
     "api_usage": [
