@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-31T00:19:26.209314+00:00",
+  "created_at": "2026-08-31T00:19:30.232123+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
-      },
-      {
         "key": "data_quality_v4",
         "value": "2026-08-31T00:19:05.197750+00:00"
+      },
+      {
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -16276,7 +16276,7 @@
         "metric": "goal_difference",
         "value": 7.0,
         "source": "ESPN",
-        "observed_at": "2026-08-31T00:04:23.534323+00:00"
+        "observed_at": "2026-08-31T00:19:29.181673+00:00"
       },
       {
         "match_id": "c0945fe192e626d14d5f",
@@ -16284,7 +16284,7 @@
         "metric": "total_goals",
         "value": 7.0,
         "source": "ESPN",
-        "observed_at": "2026-08-31T00:04:23.534432+00:00"
+        "observed_at": "2026-08-31T00:19:29.181764+00:00"
       },
       {
         "match_id": "c0945fe192e626d14d5f",
@@ -16292,7 +16292,7 @@
         "metric": "goal_assists",
         "value": 5.0,
         "source": "ESPN",
-        "observed_at": "2026-08-31T00:04:23.534463+00:00"
+        "observed_at": "2026-08-31T00:19:29.181780+00:00"
       },
       {
         "match_id": "c0945fe192e626d14d5f",
@@ -16300,7 +16300,7 @@
         "metric": "goals_conceded",
         "value": 0.0,
         "source": "ESPN",
-        "observed_at": "2026-08-31T00:04:23.534485+00:00"
+        "observed_at": "2026-08-31T00:19:29.181790+00:00"
       },
       {
         "match_id": "c0945fe192e626d14d5f",
@@ -16308,7 +16308,7 @@
         "metric": "goal_difference",
         "value": -1.0,
         "source": "ESPN",
-        "observed_at": "2026-08-31T00:04:23.534503+00:00"
+        "observed_at": "2026-08-31T00:19:29.181801+00:00"
       },
       {
         "match_id": "c0945fe192e626d14d5f",
@@ -16316,7 +16316,7 @@
         "metric": "total_goals",
         "value": 2.0,
         "source": "ESPN",
-        "observed_at": "2026-08-31T00:04:23.534526+00:00"
+        "observed_at": "2026-08-31T00:19:29.181812+00:00"
       },
       {
         "match_id": "c0945fe192e626d14d5f",
@@ -16324,7 +16324,7 @@
         "metric": "goal_assists",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-08-31T00:04:23.534558+00:00"
+        "observed_at": "2026-08-31T00:19:29.181823+00:00"
       },
       {
         "match_id": "c0945fe192e626d14d5f",
@@ -16332,7 +16332,7 @@
         "metric": "goals_conceded",
         "value": 3.0,
         "source": "ESPN",
-        "observed_at": "2026-08-31T00:04:23.534571+00:00"
+        "observed_at": "2026-08-31T00:19:29.181833+00:00"
       }
     ],
     "players": [
@@ -155146,6 +155146,33 @@
         "status": "OK",
         "message": "Reconciliação pós-coleta: equipes=1, jogadores=0, estatísticas migradas=0, duplicadas removidas=0, partidas Série B consolidadas=0",
         "created_at": "2026-08-31T00:19:05.208370+00:00"
+      },
+      {
+        "id": 104,
+        "match_id": "c0945fe192e626d14d5f",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "INFO",
+        "message": "ESPN: jogadores=0, estatísticas individuais reais=0, presença=0, amostra=[nenhum nome retornado]",
+        "created_at": "2026-08-31T00:19:29.173302+00:00"
+      },
+      {
+        "id": 105,
+        "match_id": "c0945fe192e626d14d5f",
+        "source": "ESPN",
+        "stage": "partida",
+        "status": "OK",
+        "message": "ESPN: 8 estatísticas, 0 jogadores, 0 estatísticas individuais reais, 0 presenças",
+        "created_at": "2026-08-31T00:19:29.347752+00:00"
+      },
+      {
+        "id": 106,
+        "match_id": "c0945fe192e626d14d5f",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-08-31T00:19:30.160824+00:00"
       }
     ],
     "api_usage": [
@@ -155160,16 +155187,16 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-08-31",
-        "calls": 126,
-        "last_call": "2026-08-31T00:19:02.856095+00:00",
+        "calls": 127,
+        "last_call": "2026-08-31T00:19:28.771821+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
       {
         "provider": "FotMob",
         "day_utc": "2026-08-31",
-        "calls": 75,
-        "last_call": "2026-08-31T00:04:24.060766+00:00",
+        "calls": 78,
+        "last_call": "2026-08-31T00:19:30.150726+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -156214,6 +156241,26 @@
         "id": 208,
         "provider": "Football-Data.org",
         "created_at": "2026-08-31T00:19:03.526598+00:00"
+      },
+      {
+        "id": 209,
+        "provider": "ESPN",
+        "created_at": "2026-08-31T00:19:28.771821+00:00"
+      },
+      {
+        "id": 210,
+        "provider": "FotMob",
+        "created_at": "2026-08-31T00:19:29.661692+00:00"
+      },
+      {
+        "id": 211,
+        "provider": "FotMob",
+        "created_at": "2026-08-31T00:19:29.796857+00:00"
+      },
+      {
+        "id": 212,
+        "provider": "FotMob",
+        "created_at": "2026-08-31T00:19:30.150726+00:00"
       }
     ],
     "ai_match_samples": [
@@ -156851,7 +156898,7 @@
         "id": 31,
         "match_id": "c0945fe192e626d14d5f",
         "dataset_version": "1",
-        "created_at": "2026-08-31T00:04:24.125685+00:00",
+        "created_at": "2026-08-31T00:19:30.223719+00:00",
         "cutoff_time": "2026-08-31T19:30:00Z",
         "sport": "Futebol",
         "competition": "Primera Division",
