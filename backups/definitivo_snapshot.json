@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-31T14:52:20.903933+00:00",
+  "created_at": "2026-08-31T14:52:22.789680+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -448,13 +448,6 @@
         "updated_at": "2026-08-31T14:51:16.601405+00:00"
       },
       {
-        "id": "75f564e3d16ab2ec31",
-        "sport": "Futebol",
-        "name": "Athletic Club",
-        "normalized_name": "athletic club",
-        "updated_at": "2026-08-31T14:51:16.609811+00:00"
-      },
-      {
         "id": "f5fd03ff72746d9a82",
         "sport": "Futebol",
         "name": "Club Atlético de Madrid",
@@ -530,13 +523,6 @@
         "name": "FC Schalke 04",
         "normalized_name": "schalke 04",
         "updated_at": "2026-08-31T14:51:16.656789+00:00"
-      },
-      {
-        "id": "2be6218d69d398541a",
-        "sport": "Futebol",
-        "name": "FC Bayern München",
-        "normalized_name": "bayern munchen",
-        "updated_at": "2026-08-31T14:51:16.656911+00:00"
       },
       {
         "id": "78f7aceccec7234876",
@@ -677,13 +663,6 @@
         "name": "São Paulo",
         "normalized_name": "sao paulo",
         "updated_at": "2026-08-31T14:51:25.800606+00:00"
-      },
-      {
-        "id": "cfee4cccf2f07aeae1",
-        "sport": "Futebol",
-        "name": "CA Mineiro",
-        "normalized_name": "mineiro",
-        "updated_at": "2026-08-31T14:51:16.768736+00:00"
       },
       {
         "id": "0b87c3ffb6e9585c89",
@@ -1669,12 +1648,6 @@
         "updated_at": "2026-08-31T14:51:16.601424+00:00"
       },
       {
-        "team_id": "75f564e3d16ab2ec31",
-        "source": "Football-Data.org",
-        "provider_team_id": "77",
-        "updated_at": "2026-08-31T14:51:16.609883+00:00"
-      },
-      {
         "team_id": "f5fd03ff72746d9a82",
         "source": "Football-Data.org",
         "provider_team_id": "78",
@@ -1739,12 +1712,6 @@
         "source": "Football-Data.org",
         "provider_team_id": "6",
         "updated_at": "2026-08-31T14:51:16.656841+00:00"
-      },
-      {
-        "team_id": "2be6218d69d398541a",
-        "source": "Football-Data.org",
-        "provider_team_id": "5",
-        "updated_at": "2026-08-31T14:51:16.656928+00:00"
       },
       {
         "team_id": "78f7aceccec7234876",
@@ -1865,12 +1832,6 @@
         "source": "Football-Data.org",
         "provider_team_id": "1776",
         "updated_at": "2026-08-31T14:51:16.768680+00:00"
-      },
-      {
-        "team_id": "cfee4cccf2f07aeae1",
-        "source": "Football-Data.org",
-        "provider_team_id": "1766",
-        "updated_at": "2026-08-31T14:51:16.768746+00:00"
       },
       {
         "team_id": "0b87c3ffb6e9585c89",
@@ -37033,8 +36994,8 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-08-31",
-        "calls": 71,
-        "last_call": "2026-08-31T14:52:19.292838+00:00",
+        "calls": 72,
+        "last_call": "2026-08-31T14:52:22.628083+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -37502,6 +37463,11 @@
         "id": 91,
         "provider": "FotMob",
         "created_at": "2026-08-31T14:52:20.484466+00:00"
+      },
+      {
+        "id": 92,
+        "provider": "ESPN",
+        "created_at": "2026-08-31T14:52:22.628083+00:00"
       }
     ],
     "ai_match_samples": [
@@ -37631,6 +37597,10 @@
         "target_btts": 1,
         "is_training_ready": 1
       }
-    ]
+    ],
+    "ai_player_samples": [],
+    "ai_predictions": [],
+    "ai_model_runs": [],
+    "ai_dataset_v1": []
   }
 }
