@@ -1,11 +1,11 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-31T00:01:10.351710+00:00",
+  "created_at": "2026-08-31T00:01:37.751922+00:00",
   "tables": {
     "schema_meta": [
       {
         "key": "data_quality_v4",
-        "value": "2026-08-31T00:00:47.334235+00:00"
+        "value": "2026-08-31T00:01:36.743127+00:00"
       },
       {
         "key": "schema",
@@ -338,9 +338,9 @@
       {
         "id": "7ce26de4dc6960a5e7",
         "sport": "Futebol",
-        "name": "Corinthians",
-        "normalized_name": "corinthians",
-        "updated_at": "2026-08-31T00:00:55.899959+00:00"
+        "name": "SC Corinthians Paulista",
+        "normalized_name": "corinthians paulista",
+        "updated_at": "2026-08-31T00:01:37.340594+00:00"
       },
       {
         "id": "f541c69bd4ee4d9180",
@@ -536,7 +536,7 @@
         "sport": "Futebol",
         "name": "Clube do Remo",
         "normalized_name": "clube do remo",
-        "updated_at": "2026-08-31T00:00:50.407307+00:00"
+        "updated_at": "2026-08-31T00:01:37.340738+00:00"
       },
       {
         "id": "7db41a535db1869ad4",
@@ -2555,7 +2555,7 @@
         "home_id": "625066e0d50c1a6094",
         "home_name": "RC Celta de Vigo",
         "home_short": "CEL",
-        "away_id": "75f564e3d16ab2ec31",
+        "away_id": "f0744d7d6c6fa9d40a",
         "away_name": "Athletic Club",
         "away_short": "ATH",
         "home_score": 0,
@@ -3272,7 +3272,7 @@
         "start_time": "2026-09-05T14:15:00Z",
         "status": "SCHEDULED",
         "minute": null,
-        "home_id": "75f564e3d16ab2ec31",
+        "home_id": "f0744d7d6c6fa9d40a",
         "home_name": "Athletic Club",
         "home_short": "ATH",
         "away_id": "f5fd03ff72746d9a82",
@@ -3655,7 +3655,7 @@
         "home_id": "09a7997a6af73b43f7",
         "home_name": "São Paulo",
         "home_short": "PAU",
-        "away_id": "cfee4cccf2f07aeae1",
+        "away_id": "eae0e92669d99715d5",
         "away_name": "CA Mineiro",
         "away_short": "CAM",
         "home_score": null,
@@ -4283,6 +4283,26 @@
         "source": "ESPN",
         "provider_match_id": "401909114",
         "updated_at": "2026-08-31T00:00:56.150223+00:00"
+      },
+      {
+        "id": "554923",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-23T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "SC Corinthians Paulista",
+        "home_short": "COR",
+        "away_id": "7f612db037dc322ddd",
+        "away_name": "Clube do Remo",
+        "away_short": "CRE",
+        "home_score": 3,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "554923",
+        "updated_at": "2026-08-31T00:01:37.340793+00:00"
       }
     ],
     "match_sources": [
@@ -4999,6 +5019,12 @@
         "source": "ESPN",
         "provider_match_id": "401909114",
         "updated_at": "2026-08-31T00:00:56.150342+00:00"
+      },
+      {
+        "match_id": "554923",
+        "source": "Football-Data.org",
+        "provider_match_id": "554923",
+        "updated_at": "2026-08-31T00:01:37.340949+00:00"
       }
     ],
     "diagnostics": [
@@ -5025,8 +5051,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-08-31",
-        "calls": 1,
-        "last_call": "2026-08-31T00:00:49.189308+00:00",
+        "calls": 2,
+        "last_call": "2026-08-31T00:01:37.335586+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -5189,6 +5215,11 @@
         "id": 30,
         "provider": "ESPN",
         "created_at": "2026-08-31T00:00:55.374587+00:00"
+      },
+      {
+        "id": 31,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-31T00:01:37.335586+00:00"
       }
     ]
   }
