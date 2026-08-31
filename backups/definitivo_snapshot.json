@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-31T00:04:38.078453+00:00",
+  "created_at": "2026-08-31T00:18:49.988027+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-08-31T00:18:49.196170+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-08-31T00:04:26.552559+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -513,9 +513,9 @@
       {
         "id": "192a5a24657fd487e0",
         "sport": "Futebol",
-        "name": "Barcelona",
+        "name": "FC Barcelona",
         "normalized_name": "barcelona",
-        "updated_at": "2026-08-31T00:04:19.230456+00:00"
+        "updated_at": "2026-08-31T00:18:49.832897+00:00"
       },
       {
         "id": "9b2cbb4b6b5a74fcda",
@@ -1129,9 +1129,9 @@
       {
         "id": "fae656c369933673eb",
         "sport": "Futebol",
-        "name": "Elche",
+        "name": "Elche CF",
         "normalized_name": "elche",
-        "updated_at": "2026-08-31T00:03:33.411090+00:00"
+        "updated_at": "2026-08-31T00:18:49.832598+00:00"
       },
       {
         "id": "75f564e3d16ab2ec31",
@@ -5322,7 +5322,7 @@
         "away_score": 5,
         "source": "Football-Data.org",
         "provider_match_id": "564642",
-        "updated_at": "2026-08-31T00:03:32.080183+00:00"
+        "updated_at": "2026-08-31T00:18:49.833109+00:00"
       },
       {
         "id": "da558a434b7e7f4b4f99",
@@ -6590,7 +6590,7 @@
         "match_id": "b7e264f86e2a07636632",
         "source": "Football-Data.org",
         "provider_match_id": "564642",
-        "updated_at": "2026-08-31T00:03:32.080315+00:00"
+        "updated_at": "2026-08-31T00:18:49.833230+00:00"
       },
       {
         "match_id": "da558a434b7e7f4b4f99",
@@ -155107,8 +155107,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-08-31",
-        "calls": 5,
-        "last_call": "2026-08-31T00:03:35.268354+00:00",
+        "calls": 6,
+        "last_call": "2026-08-31T00:18:49.814841+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -155979,6 +155979,11 @@
         "id": 170,
         "provider": "FotMob",
         "created_at": "2026-08-31T00:04:24.060766+00:00"
+      },
+      {
+        "id": 171,
+        "provider": "Football-Data.org",
+        "created_at": "2026-08-31T00:18:49.814841+00:00"
       }
     ],
     "ai_match_samples": [
