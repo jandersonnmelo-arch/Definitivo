@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-01T01:11:38.379639+00:00",
+  "created_at": "2026-09-01T11:38:56.527498+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-01T11:38:56.109016+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-01T01:11:23.339781+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -632,9 +632,9 @@
       {
         "id": "c70e342520628d90be",
         "sport": "Futebol",
-        "name": "Bragantino",
-        "normalized_name": "bragantino",
-        "updated_at": "2026-09-01T01:10:25.783150+00:00"
+        "name": "Red Bull Bragantino",
+        "normalized_name": "red bull bragantino",
+        "updated_at": "2026-09-01T11:38:56.273015+00:00"
       },
       {
         "id": "9f563292bea3f50f07",
@@ -1404,7 +1404,7 @@
         "sport": "Futebol",
         "name": "Atlético-MG",
         "normalized_name": "atletico mg",
-        "updated_at": "2026-09-01T01:10:30.813991+00:00"
+        "updated_at": "2026-09-01T11:38:56.272837+00:00"
       },
       {
         "id": "f0744d7d6c6fa9d40a",
@@ -5912,6 +5912,26 @@
         "source": "Football-Data.org",
         "provider_match_id": "554973",
         "updated_at": "2026-08-31T14:56:52.617959+00:00"
+      },
+      {
+        "id": "401841168",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-07-29T18:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "eae0e92669d99715d5",
+        "home_name": "Atlético-MG",
+        "home_short": "CAM",
+        "away_id": "c70e342520628d90be",
+        "away_name": "Red Bull Bragantino",
+        "away_short": "BRA",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401841168",
+        "updated_at": "2026-09-01T11:38:56.273077+00:00"
       }
     ],
     "match_sources": [
@@ -6886,6 +6906,12 @@
         "source": "Football-Data.org",
         "provider_match_id": "554973",
         "updated_at": "2026-08-31T14:56:52.618045+00:00"
+      },
+      {
+        "match_id": "401841168",
+        "source": "ESPN",
+        "provider_match_id": "401841168",
+        "updated_at": "2026-09-01T11:38:56.273227+00:00"
       }
     ],
     "match_stats": [
@@ -197774,6 +197800,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-01T01:11:20.232415+00:00"
+      },
+      {
+        "id": 147,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "WARNING",
+        "message": "Football-Data.org: ID do provedor não encontrado para a equipe eae0e92669d99715d5; histórico não será gravado por esta fonte.",
+        "created_at": "2026-09-01T11:38:56.127371+00:00"
       }
     ],
     "api_usage": [
@@ -197812,8 +197847,8 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-09-01",
-        "calls": 67,
-        "last_call": "2026-09-01T01:11:18.580664+00:00",
+        "calls": 68,
+        "last_call": "2026-09-01T11:38:56.243950+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -199251,6 +199286,11 @@
         "id": 285,
         "provider": "FotMob",
         "created_at": "2026-09-01T01:11:20.224219+00:00"
+      },
+      {
+        "id": 286,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:38:56.243950+00:00"
       }
     ],
     "ai_match_samples": [
