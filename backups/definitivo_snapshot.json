@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-08-31T14:58:20.035729+00:00",
+  "created_at": "2026-09-01T01:09:45.028841+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
-      },
-      {
         "key": "data_quality_v4",
         "value": "2026-08-31T14:58:05.081434+00:00"
+      },
+      {
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -18,14 +18,14 @@
         "sport": "Futebol",
         "name": "US Lecce",
         "normalized_name": "us lecce",
-        "updated_at": "2026-08-31T14:51:14.524663+00:00"
+        "updated_at": "2026-09-01T01:09:44.819626+00:00"
       },
       {
         "id": "30a42a6fb391da1f6d",
         "sport": "Futebol",
         "name": "AS Roma",
         "normalized_name": "as roma",
-        "updated_at": "2026-08-31T14:51:16.731029+00:00"
+        "updated_at": "2026-09-01T01:09:44.819703+00:00"
       },
       {
         "id": "00c50df0c16981dc92",
@@ -2797,7 +2797,7 @@
         "away_score": null,
         "source": "Football-Data.org",
         "provider_match_id": "558621",
-        "updated_at": "2026-08-31T14:51:14.524835+00:00"
+        "updated_at": "2026-09-01T01:09:44.819745+00:00"
       },
       {
         "id": "f5ce687dce9afdde046d",
@@ -5925,7 +5925,7 @@
         "match_id": "527a62bd4a4c4b385741",
         "source": "Football-Data.org",
         "provider_match_id": "558621",
-        "updated_at": "2026-08-31T14:51:14.524911+00:00"
+        "updated_at": "2026-09-01T01:09:44.819834+00:00"
       },
       {
         "match_id": "f5ce687dce9afdde046d",
@@ -191432,6 +191432,14 @@
         "last_call": "2026-08-31T14:58:01.419757+00:00",
         "remaining_day": null,
         "remaining_minute": null
+      },
+      {
+        "provider": "Football-Data.org",
+        "day_utc": "2026-09-01",
+        "calls": 1,
+        "last_call": "2026-09-01T01:09:44.792634+00:00",
+        "remaining_day": null,
+        "remaining_minute": null
       }
     ],
     "api_call_log": [
@@ -192494,6 +192502,11 @@
         "id": 212,
         "provider": "FotMob",
         "created_at": "2026-08-31T14:58:01.419757+00:00"
+      },
+      {
+        "id": 213,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-01T01:09:44.792634+00:00"
       }
     ],
     "ai_match_samples": [
