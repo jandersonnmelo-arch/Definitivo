@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-01T11:40:33.907067+00:00",
+  "created_at": "2026-09-01T11:43:00.487601+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
-      },
-      {
         "key": "data_quality_v4",
         "value": "2026-09-01T11:40:33.886799+00:00"
+      },
+      {
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -1054,7 +1054,7 @@
         "sport": "Futebol",
         "name": "Operário PR",
         "normalized_name": "operario pr",
-        "updated_at": "2026-09-01T01:10:30.457432+00:00"
+        "updated_at": "2026-09-01T11:43:00.205684+00:00"
       },
       {
         "id": "96d118a7e4b9df7bcc",
@@ -1068,7 +1068,7 @@
         "sport": "Futebol",
         "name": "Juventude",
         "normalized_name": "juventude",
-        "updated_at": "2026-09-01T11:39:00.062757+00:00"
+        "updated_at": "2026-09-01T11:43:00.205813+00:00"
       },
       {
         "id": "44a17e6df941ebfe60",
@@ -6172,6 +6172,26 @@
         "source": "Football-Data.org",
         "provider_match_id": "554989",
         "updated_at": "2026-09-01T11:39:09.329500+00:00"
+      },
+      {
+        "id": "401873965",
+        "sport": "Futebol",
+        "competition": "🇧🇷 Campeonato Brasileiro Série B",
+        "season": "2026",
+        "start_time": "2026-06-05T23:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "fc545f03a62c420875",
+        "home_name": "Operário PR",
+        "home_short": "OPE",
+        "away_id": "ac643ac98a96d64adc",
+        "away_name": "Juventude",
+        "away_short": "JUV",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401873965",
+        "updated_at": "2026-09-01T11:43:00.205922+00:00"
       }
     ],
     "match_sources": [
@@ -7224,6 +7244,12 @@
         "source": "Football-Data.org",
         "provider_match_id": "554989",
         "updated_at": "2026-09-01T11:39:09.329677+00:00"
+      },
+      {
+        "match_id": "401873965",
+        "source": "ESPN",
+        "provider_match_id": "401873965",
+        "updated_at": "2026-09-01T11:43:00.206010+00:00"
       }
     ],
     "match_stats": [
@@ -237070,8 +237096,8 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-09-01",
-        "calls": 113,
-        "last_call": "2026-09-01T11:40:29.970517+00:00",
+        "calls": 142,
+        "last_call": "2026-09-01T11:42:59.904643+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -238874,6 +238900,151 @@
         "id": 358,
         "provider": "ESPN",
         "created_at": "2026-09-01T11:40:29.970517+00:00"
+      },
+      {
+        "id": 359,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:50.886900+00:00"
+      },
+      {
+        "id": 360,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:51.664597+00:00"
+      },
+      {
+        "id": 361,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:52.030684+00:00"
+      },
+      {
+        "id": 362,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:52.143344+00:00"
+      },
+      {
+        "id": 363,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:52.377186+00:00"
+      },
+      {
+        "id": 364,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:52.496688+00:00"
+      },
+      {
+        "id": 365,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:52.597338+00:00"
+      },
+      {
+        "id": 366,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:52.759593+00:00"
+      },
+      {
+        "id": 367,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:52.896446+00:00"
+      },
+      {
+        "id": 368,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:53.221727+00:00"
+      },
+      {
+        "id": 369,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:53.323104+00:00"
+      },
+      {
+        "id": 370,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:54.513166+00:00"
+      },
+      {
+        "id": 371,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:54.680485+00:00"
+      },
+      {
+        "id": 372,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:54.823094+00:00"
+      },
+      {
+        "id": 373,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:55.203913+00:00"
+      },
+      {
+        "id": 374,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:55.526828+00:00"
+      },
+      {
+        "id": 375,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:55.722511+00:00"
+      },
+      {
+        "id": 376,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:56.068156+00:00"
+      },
+      {
+        "id": 377,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:56.293965+00:00"
+      },
+      {
+        "id": 378,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:56.702302+00:00"
+      },
+      {
+        "id": 379,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:57.076161+00:00"
+      },
+      {
+        "id": 380,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:57.336450+00:00"
+      },
+      {
+        "id": 381,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:57.688067+00:00"
+      },
+      {
+        "id": 382,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:58.122153+00:00"
+      },
+      {
+        "id": 383,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:58.429410+00:00"
+      },
+      {
+        "id": 384,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:58.747489+00:00"
+      },
+      {
+        "id": 385,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:59.156681+00:00"
+      },
+      {
+        "id": 386,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:59.488373+00:00"
+      },
+      {
+        "id": 387,
+        "provider": "ESPN",
+        "created_at": "2026-09-01T11:42:59.904643+00:00"
       }
     ],
     "ai_match_samples": [
