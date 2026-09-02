@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-02T02:27:18.070104+00:00",
+  "created_at": "2026-09-02T02:27:42.868357+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-02T02:27:42.068567+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-02T02:27:01.724825+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -613,7 +613,7 @@
         "sport": "Futebol",
         "name": "CR Vasco da Gama",
         "normalized_name": "vasco da gama",
-        "updated_at": "2026-09-02T02:25:28.287468+00:00"
+        "updated_at": "2026-09-02T02:27:42.670411+00:00"
       },
       {
         "id": "1c12cf7508bd433cbc",
@@ -865,7 +865,7 @@
         "sport": "Futebol",
         "name": "EC Vitória",
         "normalized_name": "vitoria",
-        "updated_at": "2026-09-02T02:25:27.701159+00:00"
+        "updated_at": "2026-09-02T02:27:42.670250+00:00"
       },
       {
         "id": "88475f3398d621b540",
@@ -5557,6 +5557,26 @@
         "source": "Football-Data.org",
         "provider_match_id": "554977",
         "updated_at": "2026-09-02T02:25:28.287533+00:00"
+      },
+      {
+        "id": "554929",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-16T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "5220b1187a985dca02",
+        "home_name": "EC Vitória",
+        "home_short": "VIT",
+        "away_id": "b7dc25efe9d18ad729",
+        "away_name": "CR Vasco da Gama",
+        "away_short": "VAS",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "554929",
+        "updated_at": "2026-09-02T02:27:42.670473+00:00"
       }
     ],
     "match_sources": [
@@ -6495,6 +6515,12 @@
         "source": "Football-Data.org",
         "provider_match_id": "554977",
         "updated_at": "2026-09-02T02:25:28.287690+00:00"
+      },
+      {
+        "match_id": "554929",
+        "source": "Football-Data.org",
+        "provider_match_id": "554929",
+        "updated_at": "2026-09-02T02:27:42.670633+00:00"
       }
     ],
     "match_stats": [
@@ -127365,8 +127391,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-02",
-        "calls": 5,
-        "last_call": "2026-09-02T02:25:27.495872+00:00",
+        "calls": 6,
+        "last_call": "2026-09-02T02:27:42.655482+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -128272,6 +128298,11 @@
         "id": 177,
         "provider": "ESPN",
         "created_at": "2026-09-02T02:26:58.255381+00:00"
+      },
+      {
+        "id": 178,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-02T02:27:42.655482+00:00"
       }
     ],
     "ai_match_samples": [
