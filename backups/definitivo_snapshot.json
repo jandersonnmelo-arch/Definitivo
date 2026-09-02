@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-02T06:29:58.954333+00:00",
+  "created_at": "2026-09-02T06:30:01.398573+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -18,7 +18,7 @@
         "sport": "Futebol",
         "name": "Flamengo",
         "normalized_name": "flamengo",
-        "updated_at": "2026-09-02T06:29:56.019483+00:00"
+        "updated_at": "2026-09-02T06:29:58.842246+00:00"
       },
       {
         "id": "590c1e0cd091eaf7e1",
@@ -926,9 +926,9 @@
       {
         "id": "bff457c9c7114e8deb",
         "sport": "Futebol",
-        "name": "Cruzeiro EC",
+        "name": "Cruzeiro",
         "normalized_name": "cruzeiro",
-        "updated_at": "2026-09-02T06:29:55.827318+00:00"
+        "updated_at": "2026-09-02T06:29:58.842139+00:00"
       },
       {
         "id": "71cf9e0f0db3eef124",
@@ -5019,6 +5019,26 @@
         "source": "ESPN",
         "provider_match_id": "401841171",
         "updated_at": "2026-09-02T06:29:56.019527+00:00"
+      },
+      {
+        "id": "401874153",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-13T00:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "bff457c9c7114e8deb",
+        "home_name": "Cruzeiro",
+        "home_short": "CRU",
+        "away_id": "178d02ecb65a6640af",
+        "away_name": "Flamengo",
+        "away_short": "FLA",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401874153",
+        "updated_at": "2026-09-02T06:29:58.842301+00:00"
       }
     ],
     "match_sources": [
@@ -5819,6 +5839,12 @@
         "source": "ESPN",
         "provider_match_id": "401841171",
         "updated_at": "2026-09-02T06:29:56.019633+00:00"
+      },
+      {
+        "match_id": "401874153",
+        "source": "ESPN",
+        "provider_match_id": "401874153",
+        "updated_at": "2026-09-02T06:29:58.842456+00:00"
       }
     ],
     "diagnostics": [
@@ -5862,8 +5888,8 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-09-02",
-        "calls": 43,
-        "last_call": "2026-09-02T06:29:58.521931+00:00",
+        "calls": 44,
+        "last_call": "2026-09-02T06:29:58.814419+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -6093,6 +6119,11 @@
         "id": 45,
         "provider": "ESPN",
         "created_at": "2026-09-02T06:29:58.521931+00:00"
+      },
+      {
+        "id": 46,
+        "provider": "ESPN",
+        "created_at": "2026-09-02T06:29:58.814419+00:00"
       }
     ]
   }
