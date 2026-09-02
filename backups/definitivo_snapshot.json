@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-02T02:23:52.222793+00:00",
+  "created_at": "2026-09-02T02:25:22.291668+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-02T02:25:21.580760+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-02T02:23:52.216376+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -928,7 +928,7 @@
         "sport": "Futebol",
         "name": "Santos FC",
         "normalized_name": "santos",
-        "updated_at": "2026-09-02T02:22:45.434458+00:00"
+        "updated_at": "2026-09-02T02:25:22.188642+00:00"
       },
       {
         "id": "7f612db037dc322ddd",
@@ -970,7 +970,7 @@
         "sport": "Futebol",
         "name": "Botafogo FR",
         "normalized_name": "botafogo fr",
-        "updated_at": "2026-09-02T02:22:37.253387+00:00"
+        "updated_at": "2026-09-02T02:25:22.188528+00:00"
       },
       {
         "id": "9a3c152825daa730cb",
@@ -4960,6 +4960,26 @@
         "source": "ESPN",
         "provider_match_id": "401874142",
         "updated_at": "2026-09-02T02:22:45.799698+00:00"
+      },
+      {
+        "id": "554921",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-16T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "3b748ab976a81dcbcd",
+        "home_name": "Botafogo FR",
+        "home_short": "BOT",
+        "away_id": "f541c69bd4ee4d9180",
+        "away_name": "Santos FC",
+        "away_short": "SAN",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "554921",
+        "updated_at": "2026-09-02T02:25:22.188702+00:00"
       }
     ],
     "match_sources": [
@@ -5754,6 +5774,12 @@
         "source": "ESPN",
         "provider_match_id": "401874142",
         "updated_at": "2026-09-02T02:22:45.799816+00:00"
+      },
+      {
+        "match_id": "554921",
+        "source": "Football-Data.org",
+        "provider_match_id": "554921",
+        "updated_at": "2026-09-02T02:25:22.188842+00:00"
       }
     ],
     "match_stats": [
@@ -57571,8 +57597,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-02",
-        "calls": 3,
-        "last_call": "2026-09-02T02:22:45.279525+00:00",
+        "calls": 4,
+        "last_call": "2026-09-02T02:25:22.183042+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -58193,6 +58219,11 @@
         "id": 120,
         "provider": "FotMob",
         "created_at": "2026-09-02T02:23:49.862077+00:00"
+      },
+      {
+        "id": 121,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-02T02:25:22.183042+00:00"
       }
     ],
     "ai_match_samples": [
