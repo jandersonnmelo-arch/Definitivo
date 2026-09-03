@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-03T14:04:10.310016+00:00",
+  "created_at": "2026-09-03T14:04:17.344901+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-03T14:04:09.575030+00:00"
-      },
-      {
         "key": "schema",
         "value": "15"
+      },
+      {
+        "key": "data_quality_v4",
+        "value": "2026-09-03T14:04:16.209306+00:00"
       }
     ],
     "teams": [
@@ -32,14 +32,14 @@
         "sport": "Futebol",
         "name": "Real Sociedad de Fútbol",
         "normalized_name": "real sociedad de futbol",
-        "updated_at": "2026-09-03T14:04:10.205840+00:00"
+        "updated_at": "2026-09-03T14:04:13.439467+00:00"
       },
       {
         "id": "625066e0d50c1a6094",
         "sport": "Futebol",
         "name": "RC Celta de Vigo",
         "normalized_name": "rc celta de vigo",
-        "updated_at": "2026-09-03T14:01:21.900754+00:00"
+        "updated_at": "2026-09-03T14:04:15.763429+00:00"
       },
       {
         "id": "f7715410c3c77c20c4",
@@ -121,9 +121,9 @@
       {
         "id": "041a41a9e5d46f7396",
         "sport": "Futebol",
-        "name": "Real Madrid CF",
+        "name": "Real Madrid",
         "normalized_name": "real madrid",
-        "updated_at": "2026-09-03T14:01:22.010721+00:00"
+        "updated_at": "2026-09-03T14:04:14.233414+00:00"
       },
       {
         "id": "69dee0aaa3e7b50573",
@@ -732,7 +732,7 @@
         "sport": "Futebol",
         "name": "Valencia CF",
         "normalized_name": "valencia",
-        "updated_at": "2026-09-03T14:01:21.673926+00:00"
+        "updated_at": "2026-09-03T14:04:15.537199+00:00"
       },
       {
         "id": "192a5a24657fd487e0",
@@ -793,9 +793,9 @@
       {
         "id": "19b18c8a61ace3568b",
         "sport": "Futebol",
-        "name": "Chelsea FC",
+        "name": "Chelsea",
         "normalized_name": "chelsea",
-        "updated_at": "2026-09-03T14:01:21.709839+00:00"
+        "updated_at": "2026-09-03T14:04:14.777931+00:00"
       },
       {
         "id": "dbb6dd4bacc9ca434f",
@@ -837,7 +837,7 @@
         "sport": "Futebol",
         "name": "CA Osasuna",
         "normalized_name": "osasuna",
-        "updated_at": "2026-09-03T14:01:21.741929+00:00"
+        "updated_at": "2026-09-03T14:04:15.663831+00:00"
       },
       {
         "id": "bd4aa81e67081b754d",
@@ -942,7 +942,7 @@
         "sport": "Futebol",
         "name": "RCD Espanyol de Barcelona",
         "normalized_name": "rcd espanyol de barcelona",
-        "updated_at": "2026-09-03T14:01:21.833338+00:00"
+        "updated_at": "2026-09-03T14:04:13.439577+00:00"
       },
       {
         "id": "b87e63b916d310fb08",
@@ -1160,13 +1160,6 @@
         "name": "Cuiabá",
         "normalized_name": "cuiaba",
         "updated_at": "2026-09-03T14:01:28.763837+00:00"
-      },
-      {
-        "id": "f0744d7d6c6fa9d40a",
-        "sport": "Futebol",
-        "name": "Athletic",
-        "normalized_name": "athletic",
-        "updated_at": "2026-09-03T14:01:28.763897+00:00"
       },
       {
         "id": "207f17fd2b1750e642",
@@ -1419,6 +1412,55 @@
         "name": "Deportivo Pasto",
         "normalized_name": "deportivo pasto",
         "updated_at": "2026-09-03T14:01:57.408825+00:00"
+      },
+      {
+        "id": "5b394b5ae209d29363",
+        "sport": "Futebol",
+        "name": "FC Cologne",
+        "normalized_name": "cologne",
+        "updated_at": "2026-09-03T14:04:13.657731+00:00"
+      },
+      {
+        "id": "318c0df56f889ea0e5",
+        "sport": "Futebol",
+        "name": "Real Sociedad",
+        "normalized_name": "real sociedad",
+        "updated_at": "2026-09-03T14:04:14.891851+00:00"
+      },
+      {
+        "id": "c435ac543f483ddd8d",
+        "sport": "Futebol",
+        "name": "Real Betis",
+        "normalized_name": "real betis",
+        "updated_at": "2026-09-03T14:04:14.035240+00:00"
+      },
+      {
+        "id": "27eae8e167461a1f1f",
+        "sport": "Futebol",
+        "name": "Espanyol",
+        "normalized_name": "espanyol",
+        "updated_at": "2026-09-03T14:04:14.501860+00:00"
+      },
+      {
+        "id": "f878a9e162586e533d",
+        "sport": "Futebol",
+        "name": "Dux Logroño",
+        "normalized_name": "dux logrono",
+        "updated_at": "2026-09-03T14:04:14.608754+00:00"
+      },
+      {
+        "id": "4f0de9519b983e72b6",
+        "sport": "Futebol",
+        "name": "Celta Vigo",
+        "normalized_name": "celta vigo",
+        "updated_at": "2026-09-03T14:04:14.892028+00:00"
+      },
+      {
+        "id": "75f564e3d16ab2ec31",
+        "sport": "Futebol",
+        "name": "Athletic Club",
+        "normalized_name": "athletic club",
+        "updated_at": "2026-09-03T14:04:15.763542+00:00"
       }
     ],
     "team_sources": [
@@ -2491,12 +2533,6 @@
         "updated_at": "2026-09-03T14:01:28.680323+00:00"
       },
       {
-        "team_id": "f0744d7d6c6fa9d40a",
-        "source": "ESPN",
-        "provider_team_id": "20851",
-        "updated_at": "2026-09-03T14:01:28.688571+00:00"
-      },
-      {
         "team_id": "207f17fd2b1750e642",
         "source": "ESPN",
         "provider_team_id": "9973",
@@ -2711,6 +2747,60 @@
         "source": "ESPN",
         "provider_team_id": "5485",
         "updated_at": "2026-09-03T14:01:57.408876+00:00"
+      },
+      {
+        "team_id": "5b394b5ae209d29363",
+        "source": "ESPN",
+        "provider_team_id": "122",
+        "updated_at": "2026-09-03T14:04:13.657836+00:00"
+      },
+      {
+        "team_id": "318c0df56f889ea0e5",
+        "source": "ESPN",
+        "provider_team_id": "89",
+        "updated_at": "2026-09-03T14:04:14.891936+00:00"
+      },
+      {
+        "team_id": "19b18c8a61ace3568b",
+        "source": "ESPN",
+        "provider_team_id": "19970",
+        "updated_at": "2026-09-03T14:04:14.338232+00:00"
+      },
+      {
+        "team_id": "c435ac543f483ddd8d",
+        "source": "ESPN",
+        "provider_team_id": "244",
+        "updated_at": "2026-09-03T14:04:14.035321+00:00"
+      },
+      {
+        "team_id": "041a41a9e5d46f7396",
+        "source": "ESPN",
+        "provider_team_id": "86",
+        "updated_at": "2026-09-03T14:04:14.233501+00:00"
+      },
+      {
+        "team_id": "27eae8e167461a1f1f",
+        "source": "ESPN",
+        "provider_team_id": "88",
+        "updated_at": "2026-09-03T14:04:14.501877+00:00"
+      },
+      {
+        "team_id": "f878a9e162586e533d",
+        "source": "ESPN",
+        "provider_team_id": "21175",
+        "updated_at": "2026-09-03T14:04:14.608773+00:00"
+      },
+      {
+        "team_id": "4f0de9519b983e72b6",
+        "source": "ESPN",
+        "provider_team_id": "85",
+        "updated_at": "2026-09-03T14:04:14.892043+00:00"
+      },
+      {
+        "team_id": "75f564e3d16ab2ec31",
+        "source": "Football-Data.org",
+        "provider_team_id": "77",
+        "updated_at": "2026-09-03T14:04:15.763579+00:00"
       }
     ],
     "matches": [
@@ -3162,7 +3252,7 @@
         "start_time": "2026-09-05T14:15:00Z",
         "status": "SCHEDULED",
         "minute": null,
-        "home_id": "f0744d7d6c6fa9d40a",
+        "home_id": "75f564e3d16ab2ec31",
         "home_name": "Athletic Club",
         "home_short": "ATH",
         "away_id": "f5fd03ff72746d9a82",
@@ -4722,7 +4812,7 @@
         "start_time": "2026-09-04T23:30Z",
         "status": "SCHEDULED",
         "minute": null,
-        "home_id": "f0744d7d6c6fa9d40a",
+        "home_id": "75f564e3d16ab2ec31",
         "home_name": "Athletic",
         "home_short": "ACMG",
         "away_id": "207f17fd2b1750e642",
@@ -4885,7 +4975,7 @@
         "home_id": "173dab27777d6de841",
         "home_name": "Cuiabá",
         "home_short": "CUI",
-        "away_id": "f0744d7d6c6fa9d40a",
+        "away_id": "75f564e3d16ab2ec31",
         "away_name": "Athletic",
         "away_short": "ACMG",
         "home_score": null,
@@ -5815,7 +5905,7 @@
         "updated_at": "2026-09-03T14:01:57.408966+00:00"
       },
       {
-        "id": "564647",
+        "id": "42cba8ba842fa06bc940",
         "sport": "Futebol",
         "competition": "Primera Division",
         "season": "2026",
@@ -5833,6 +5923,286 @@
         "source": "Football-Data.org",
         "provider_match_id": "564647",
         "updated_at": "2026-09-03T14:04:10.205894+00:00"
+      },
+      {
+        "id": "6d3f7f470d6d1efe1312",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-26T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "041a41a9e5d46f7396",
+        "home_name": "Real Madrid CF",
+        "home_short": "RMA",
+        "away_id": "719084a08a71e4d678",
+        "away_name": "Real Sociedad de Fútbol",
+        "away_short": "RSO",
+        "home_score": 4,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "564631",
+        "updated_at": "2026-09-03T14:04:13.377149+00:00"
+      },
+      {
+        "id": "6e9cc3f8348632cbd000",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-29T17:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "719084a08a71e4d678",
+        "home_name": "Real Sociedad de Fútbol",
+        "home_short": "RSO",
+        "away_id": "6abc6ca322c00ebef4",
+        "away_name": "RCD Espanyol de Barcelona",
+        "away_short": "ESP",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "564653",
+        "updated_at": "2026-09-03T14:04:13.439639+00:00"
+      },
+      {
+        "id": "4756a0c1bcd350a2a632",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-08T13:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "5b394b5ae209d29363",
+        "home_name": "FC Cologne",
+        "home_short": "KOE",
+        "away_id": "318c0df56f889ea0e5",
+        "away_name": "Real Sociedad",
+        "away_short": "RSO",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401906401",
+        "updated_at": "2026-09-03T14:04:13.657993+00:00"
+      },
+      {
+        "id": "6813a195ca9119fe58c9",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-15T13:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "19b18c8a61ace3568b",
+        "home_name": "Chelsea",
+        "home_short": "CHE",
+        "away_id": "318c0df56f889ea0e5",
+        "away_name": "Real Sociedad",
+        "away_short": "RSO",
+        "home_score": 3,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401900324",
+        "updated_at": "2026-09-03T14:04:13.859540+00:00"
+      },
+      {
+        "id": "af96009a1cb85b498c9b",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-21T19:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "c435ac543f483ddd8d",
+        "home_name": "Real Betis",
+        "home_short": "BET",
+        "away_id": "318c0df56f889ea0e5",
+        "away_name": "Real Sociedad",
+        "away_short": "RSO",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401882914",
+        "updated_at": "2026-09-03T14:04:14.035465+00:00"
+      },
+      {
+        "id": "57020353abe3bbd1ed76",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-26T19:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "041a41a9e5d46f7396",
+        "home_name": "Real Madrid",
+        "home_short": "RMA",
+        "away_id": "318c0df56f889ea0e5",
+        "away_name": "Real Sociedad",
+        "away_short": "RSO",
+        "home_score": 4,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401882919",
+        "updated_at": "2026-09-03T14:04:14.233640+00:00"
+      },
+      {
+        "id": "739320fe697a72f00ba0",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-26T17:45Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "19b18c8a61ace3568b",
+        "home_name": "Chelsea",
+        "home_short": "CHE",
+        "away_id": "318c0df56f889ea0e5",
+        "away_name": "Real Sociedad",
+        "away_short": "RSO",
+        "home_score": 5,
+        "away_score": 2,
+        "source": "ESPN",
+        "provider_match_id": "401909083",
+        "updated_at": "2026-09-03T14:04:14.338522+00:00"
+      },
+      {
+        "id": "6e6c20f0d6ef3cea4915",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-29T17:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "318c0df56f889ea0e5",
+        "home_name": "Real Sociedad",
+        "home_short": "RSO",
+        "away_id": "27eae8e167461a1f1f",
+        "away_name": "Espanyol",
+        "away_short": "ESP",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401882898",
+        "updated_at": "2026-09-03T14:04:14.501935+00:00"
+      },
+      {
+        "id": "4b3d183a147f50ac983b",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-29T10:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "318c0df56f889ea0e5",
+        "home_name": "Real Sociedad",
+        "home_short": "RSO",
+        "away_id": "f878a9e162586e533d",
+        "away_name": "Dux Logroño",
+        "away_short": "DUX",
+        "home_score": 0,
+        "away_score": 2,
+        "source": "ESPN",
+        "provider_match_id": "401882533",
+        "updated_at": "2026-09-03T14:04:14.608866+00:00"
+      },
+      {
+        "id": "a0aa8c74edd01dcc360e",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-09-02T17:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "318c0df56f889ea0e5",
+        "home_name": "Real Sociedad",
+        "home_short": "RSO",
+        "away_id": "19b18c8a61ace3568b",
+        "away_name": "Chelsea",
+        "away_short": "CHE",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401909077",
+        "updated_at": "2026-09-03T14:04:14.777981+00:00"
+      },
+      {
+        "id": "e2698e5790555c0db671",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-09-03T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "318c0df56f889ea0e5",
+        "home_name": "Real Sociedad",
+        "home_short": "RSO",
+        "away_id": "4f0de9519b983e72b6",
+        "away_name": "Celta Vigo",
+        "away_short": "CEL",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401882867",
+        "updated_at": "2026-09-03T14:04:14.892086+00:00"
+      },
+      {
+        "id": "1d8de2b23d300206fd5c",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-22T17:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "65aafafbe092920271",
+        "home_name": "Valencia CF",
+        "home_short": "VAL",
+        "away_id": "625066e0d50c1a6094",
+        "away_name": "RC Celta de Vigo",
+        "away_short": "CEL",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "564643",
+        "updated_at": "2026-09-03T14:04:15.537359+00:00"
+      },
+      {
+        "id": "c778c6208a6d8b39f708",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-27T18:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "625066e0d50c1a6094",
+        "home_name": "RC Celta de Vigo",
+        "home_short": "CEL",
+        "away_id": "00c50df0c16981dc92",
+        "away_name": "CA Osasuna",
+        "away_short": "OSA",
+        "home_score": 1,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "564636",
+        "updated_at": "2026-09-03T14:04:15.664996+00:00"
+      },
+      {
+        "id": "7d2bdfe783ee2a0014f0",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-30T19:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "625066e0d50c1a6094",
+        "home_name": "RC Celta de Vigo",
+        "home_short": "CEL",
+        "away_id": "75f564e3d16ab2ec31",
+        "away_name": "Athletic Club",
+        "away_short": "ATH",
+        "home_score": 0,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "564652",
+        "updated_at": "2026-09-03T14:04:15.763639+00:00"
       }
     ],
     "match_sources": [
@@ -6797,10 +7167,94 @@
         "updated_at": "2026-09-03T14:01:57.409103+00:00"
       },
       {
-        "match_id": "564647",
+        "match_id": "42cba8ba842fa06bc940",
         "source": "Football-Data.org",
         "provider_match_id": "564647",
         "updated_at": "2026-09-03T14:04:10.206007+00:00"
+      },
+      {
+        "match_id": "6d3f7f470d6d1efe1312",
+        "source": "Football-Data.org",
+        "provider_match_id": "564631",
+        "updated_at": "2026-09-03T14:04:13.377249+00:00"
+      },
+      {
+        "match_id": "6e9cc3f8348632cbd000",
+        "source": "Football-Data.org",
+        "provider_match_id": "564653",
+        "updated_at": "2026-09-03T14:04:13.439815+00:00"
+      },
+      {
+        "match_id": "4756a0c1bcd350a2a632",
+        "source": "ESPN",
+        "provider_match_id": "401906401",
+        "updated_at": "2026-09-03T14:04:13.658119+00:00"
+      },
+      {
+        "match_id": "6813a195ca9119fe58c9",
+        "source": "ESPN",
+        "provider_match_id": "401900324",
+        "updated_at": "2026-09-03T14:04:13.859677+00:00"
+      },
+      {
+        "match_id": "af96009a1cb85b498c9b",
+        "source": "ESPN",
+        "provider_match_id": "401882914",
+        "updated_at": "2026-09-03T14:04:14.035591+00:00"
+      },
+      {
+        "match_id": "57020353abe3bbd1ed76",
+        "source": "ESPN",
+        "provider_match_id": "401882919",
+        "updated_at": "2026-09-03T14:04:14.233805+00:00"
+      },
+      {
+        "match_id": "739320fe697a72f00ba0",
+        "source": "ESPN",
+        "provider_match_id": "401909083",
+        "updated_at": "2026-09-03T14:04:14.338753+00:00"
+      },
+      {
+        "match_id": "6e6c20f0d6ef3cea4915",
+        "source": "ESPN",
+        "provider_match_id": "401882898",
+        "updated_at": "2026-09-03T14:04:14.502062+00:00"
+      },
+      {
+        "match_id": "4b3d183a147f50ac983b",
+        "source": "ESPN",
+        "provider_match_id": "401882533",
+        "updated_at": "2026-09-03T14:04:14.608989+00:00"
+      },
+      {
+        "match_id": "a0aa8c74edd01dcc360e",
+        "source": "ESPN",
+        "provider_match_id": "401909077",
+        "updated_at": "2026-09-03T14:04:14.778107+00:00"
+      },
+      {
+        "match_id": "e2698e5790555c0db671",
+        "source": "ESPN",
+        "provider_match_id": "401882867",
+        "updated_at": "2026-09-03T14:04:14.892215+00:00"
+      },
+      {
+        "match_id": "1d8de2b23d300206fd5c",
+        "source": "Football-Data.org",
+        "provider_match_id": "564643",
+        "updated_at": "2026-09-03T14:04:15.537476+00:00"
+      },
+      {
+        "match_id": "c778c6208a6d8b39f708",
+        "source": "Football-Data.org",
+        "provider_match_id": "564636",
+        "updated_at": "2026-09-03T14:04:15.665237+00:00"
+      },
+      {
+        "match_id": "7d2bdfe783ee2a0014f0",
+        "source": "Football-Data.org",
+        "provider_match_id": "564652",
+        "updated_at": "2026-09-03T14:04:15.763725+00:00"
       }
     ],
     "match_stats": [
@@ -65913,14 +66367,68 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-03T14:03:22.658998+00:00"
+      },
+      {
+        "id": 62,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "OK",
+        "message": "Football-Data.org: 3 partidas históricas coletadas para a equipe",
+        "created_at": "2026-09-03T14:04:13.509215+00:00"
+      },
+      {
+        "id": 63,
+        "match_id": null,
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN fallback limitado: 9 partidas para Real Sociedad de Fútbol em 35 dias; serie_b=False",
+        "created_at": "2026-09-03T14:04:14.999724+00:00"
+      },
+      {
+        "id": 64,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "OK",
+        "message": "Football-Data.org: 3 partidas históricas coletadas para a equipe",
+        "created_at": "2026-09-03T14:04:15.819542+00:00"
+      },
+      {
+        "id": 65,
+        "match_id": null,
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN fallback limitado: 0 partidas para RC Celta de Vigo em 35 dias; serie_b=False",
+        "created_at": "2026-09-03T14:04:16.177215+00:00"
+      },
+      {
+        "id": 66,
+        "match_id": "0f766ac38bce7b220db5",
+        "source": "SYSTEM",
+        "stage": "qualidade_dados",
+        "status": "OK",
+        "message": "Reconciliação pós-coleta: equipes=1, jogadores=0, estatísticas migradas=0, duplicadas removidas=0, partidas Série B consolidadas=0",
+        "created_at": "2026-09-03T14:04:16.214096+00:00"
+      },
+      {
+        "id": 67,
+        "match_id": "7d2bdfe783ee2a0014f0",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-03T14:04:17.272686+00:00"
       }
     ],
     "api_usage": [
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-03",
-        "calls": 4,
-        "last_call": "2026-09-03T14:04:10.201481+00:00",
+        "calls": 5,
+        "last_call": "2026-09-03T14:04:15.527095+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -65935,8 +66443,8 @@
       {
         "provider": "FotMob",
         "day_utc": "2026-09-03",
-        "calls": 44,
-        "last_call": "2026-09-03T14:03:19.704700+00:00",
+        "calls": 47,
+        "last_call": "2026-09-03T14:04:17.264147+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -66596,6 +67104,26 @@
         "id": 131,
         "provider": "Football-Data.org",
         "created_at": "2026-09-03T14:04:10.201481+00:00"
+      },
+      {
+        "id": 132,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-03T14:04:15.527095+00:00"
+      },
+      {
+        "id": 133,
+        "provider": "FotMob",
+        "created_at": "2026-09-03T14:04:16.638901+00:00"
+      },
+      {
+        "id": 134,
+        "provider": "FotMob",
+        "created_at": "2026-09-03T14:04:16.933521+00:00"
+      },
+      {
+        "id": 135,
+        "provider": "FotMob",
+        "created_at": "2026-09-03T14:04:17.264147+00:00"
       }
     ],
     "ai_match_samples": [
@@ -67018,6 +67546,27 @@
         "target_total_goals": null,
         "target_btts": null,
         "is_training_ready": 0
+      },
+      {
+        "id": 21,
+        "match_id": "7d2bdfe783ee2a0014f0",
+        "dataset_version": "1",
+        "created_at": "2026-09-03T14:04:17.337562+00:00",
+        "cutoff_time": "2026-08-30T19:30:00Z",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "home_team_id": "625066e0d50c1a6094",
+        "home_team_name": "RC Celta de Vigo",
+        "away_team_id": "75f564e3d16ab2ec31",
+        "away_team_name": "Athletic Club",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":2,\"sample_away\":0,\"xg_home\":0.5,\"xg_away\":1.0,\"probabilities\":{\"home\":18.1,\"draw\":34.9,\"away\":47.0},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":2,\"goals_for\":0.5,\"goals_against\":1.0,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":1.5,\"total_expected\":1.5,\"line\":1.5,\"lines\":{\"1.5\":44.2},\"under_lines\":{\"1.5\":55.8},\"over\":{\"1.5\":44.2},\"under\":{\"1.5\":55.8},\"over_probability\":44.2,\"under_probability\":55.8,\"exact_total\":{\"0\":22.3,\"1\":33.5,\"2\":25.1,\"3\":12.6,\"4+\":6.6},\"ambas_marcam\":24.9},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":0.5,\"away\":1.0,\"total\":1.5,\"sample_home\":2,\"sample_away\":0},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "target_home_goals": 0.0,
+        "target_away_goals": 2.0,
+        "target_result": "AWAY",
+        "target_total_goals": 2.0,
+        "target_btts": 0,
+        "is_training_ready": 1
       }
     ],
     "ai_player_samples": [],
