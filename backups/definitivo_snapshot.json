@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-04T15:14:50.937560+00:00",
+  "created_at": "2026-09-04T15:15:26.588596+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-04T15:15:25.772597+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-04T15:14:50.917054+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -102,7 +102,7 @@
         "sport": "Futebol",
         "name": "Paris Saint-Germain FC",
         "normalized_name": "paris saint germain",
-        "updated_at": "2026-09-04T15:10:48.961420+00:00"
+        "updated_at": "2026-09-04T15:15:26.387497+00:00"
       },
       {
         "id": "f5396ab988c301d482",
@@ -753,7 +753,7 @@
         "sport": "Futebol",
         "name": "Stade Rennais FC 1901",
         "normalized_name": "stade rennais 1901",
-        "updated_at": "2026-09-04T15:10:48.481184+00:00"
+        "updated_at": "2026-09-04T15:15:26.387390+00:00"
       },
       {
         "id": "11772e395749fdc0f9",
@@ -6340,6 +6340,26 @@
         "source": "ESPN",
         "provider_match_id": "401909161",
         "updated_at": "2026-09-04T15:13:20.345260+00:00"
+      },
+      {
+        "id": "559713",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-08-23T18:45:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "ccc8935de6e6e210aa",
+        "home_name": "Stade Rennais FC 1901",
+        "home_short": "REN",
+        "away_id": "69dee0aaa3e7b50573",
+        "away_name": "Paris Saint-Germain FC",
+        "away_short": "PSG",
+        "home_score": 2,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "559713",
+        "updated_at": "2026-09-04T15:15:26.387557+00:00"
       }
     ],
     "match_sources": [
@@ -7386,6 +7406,12 @@
         "source": "ESPN",
         "provider_match_id": "401909161",
         "updated_at": "2026-09-04T15:13:20.345353+00:00"
+      },
+      {
+        "match_id": "559713",
+        "source": "Football-Data.org",
+        "provider_match_id": "559713",
+        "updated_at": "2026-09-04T15:15:26.387704+00:00"
       }
     ],
     "match_stats": [
@@ -137746,8 +137772,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-04",
-        "calls": 5,
-        "last_call": "2026-09-04T15:13:18.952088+00:00",
+        "calls": 6,
+        "last_call": "2026-09-04T15:15:26.375721+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -138608,6 +138634,11 @@
         "id": 168,
         "provider": "FotMob",
         "created_at": "2026-09-04T15:14:43.145210+00:00"
+      },
+      {
+        "id": 169,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-04T15:15:26.375721+00:00"
       }
     ],
     "ai_match_samples": [
