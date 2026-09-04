@@ -1,11 +1,11 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-04T15:11:08.279075+00:00",
+  "created_at": "2026-09-04T15:11:24.452840+00:00",
   "tables": {
     "schema_meta": [
       {
         "key": "data_quality_v4",
-        "value": "2026-09-04T15:10:45.635374+00:00"
+        "value": "2026-09-04T15:11:22.439856+00:00"
       },
       {
         "key": "schema",
@@ -74,14 +74,14 @@
         "sport": "Futebol",
         "name": "Real Betis Balompié",
         "normalized_name": "real betis balompie",
-        "updated_at": "2026-09-04T15:10:48.856091+00:00"
+        "updated_at": "2026-09-04T15:11:15.354343+00:00"
       },
       {
         "id": "041a41a9e5d46f7396",
         "sport": "Futebol",
-        "name": "Real Madrid CF",
+        "name": "Real Madrid",
         "normalized_name": "real madrid",
-        "updated_at": "2026-09-04T15:10:48.779178+00:00"
+        "updated_at": "2026-09-04T15:11:22.379403+00:00"
       },
       {
         "id": "c06044b267ac04e9cc",
@@ -366,9 +366,9 @@
       {
         "id": "582e350ad18db82585",
         "sport": "Futebol",
-        "name": "FC Schalke 04",
+        "name": "Schalke 04",
         "normalized_name": "schalke 04",
-        "updated_at": "2026-09-04T15:10:48.283337+00:00"
+        "updated_at": "2026-09-04T15:11:21.864751+00:00"
       },
       {
         "id": "2be6218d69d398541a",
@@ -716,9 +716,9 @@
       {
         "id": "65aafafbe092920271",
         "sport": "Futebol",
-        "name": "Valencia CF",
+        "name": "Valencia",
         "normalized_name": "valencia",
-        "updated_at": "2026-09-04T15:10:48.460414+00:00"
+        "updated_at": "2026-09-04T15:11:19.151915+00:00"
       },
       {
         "id": "192a5a24657fd487e0",
@@ -772,9 +772,9 @@
       {
         "id": "11772e395749fdc0f9",
         "sport": "Futebol",
-        "name": "Arsenal FC",
+        "name": "Arsenal",
         "normalized_name": "arsenal",
-        "updated_at": "2026-09-04T15:10:48.934455+00:00"
+        "updated_at": "2026-09-04T15:11:16.251830+00:00"
       },
       {
         "id": "19b18c8a61ace3568b",
@@ -814,16 +814,16 @@
       {
         "id": "bd4aa81e67081b754d",
         "sport": "Futebol",
-        "name": "Málaga CF",
+        "name": "Málaga",
         "normalized_name": "malaga",
-        "updated_at": "2026-09-04T15:10:48.508466+00:00"
+        "updated_at": "2026-09-04T15:11:22.237476+00:00"
       },
       {
         "id": "91922391b586b97f41",
         "sport": "Futebol",
         "name": "Levante UD",
         "normalized_name": "levante ud",
-        "updated_at": "2026-09-04T15:10:48.508646+00:00"
+        "updated_at": "2026-09-04T15:11:15.354265+00:00"
       },
       {
         "id": "44c4d3ce86d9f2724c",
@@ -914,7 +914,7 @@
         "sport": "Futebol",
         "name": "RCD Espanyol de Barcelona",
         "normalized_name": "rcd espanyol de barcelona",
-        "updated_at": "2026-09-04T15:10:48.566841+00:00"
+        "updated_at": "2026-09-04T15:11:21.462005+00:00"
       },
       {
         "id": "b87e63b916d310fb08",
@@ -1047,7 +1047,7 @@
         "sport": "Futebol",
         "name": "Real Sociedad de Fútbol",
         "normalized_name": "real sociedad de futbol",
-        "updated_at": "2026-09-04T15:10:48.655668+00:00"
+        "updated_at": "2026-09-04T15:11:21.483029+00:00"
       },
       {
         "id": "c0eb691b941f2978d1",
@@ -1377,6 +1377,111 @@
         "name": "Montevideo City Torque",
         "normalized_name": "montevideo city torque",
         "updated_at": "2026-09-04T15:11:00.533209+00:00"
+      },
+      {
+        "id": "c435ac543f483ddd8d",
+        "sport": "Futebol",
+        "name": "Real Betis",
+        "normalized_name": "real betis",
+        "updated_at": "2026-09-04T15:11:22.379070+00:00"
+      },
+      {
+        "id": "1284cb640db534f19d",
+        "sport": "Futebol",
+        "name": "Internazionale",
+        "normalized_name": "internazionale",
+        "updated_at": "2026-09-04T15:11:17.649069+00:00"
+      },
+      {
+        "id": "318c0df56f889ea0e5",
+        "sport": "Futebol",
+        "name": "Real Sociedad",
+        "normalized_name": "real sociedad",
+        "updated_at": "2026-09-04T15:11:22.104259+00:00"
+      },
+      {
+        "id": "f5da5ab2d5ab764ae4",
+        "sport": "Futebol",
+        "name": "Levante",
+        "normalized_name": "levante",
+        "updated_at": "2026-09-04T15:11:19.889589+00:00"
+      },
+      {
+        "id": "64e0c422a9f46d25bc",
+        "sport": "Futebol",
+        "name": "Fiorentina",
+        "normalized_name": "fiorentina",
+        "updated_at": "2026-09-04T15:11:21.554578+00:00"
+      },
+      {
+        "id": "901993267d4aa114e8",
+        "sport": "Futebol",
+        "name": "Deportivo",
+        "normalized_name": "deportivo",
+        "updated_at": "2026-09-04T15:11:21.717065+00:00"
+      },
+      {
+        "id": "dc7cc1d0c2f0acc44b",
+        "sport": "Futebol",
+        "name": "Real Madrid Castilla",
+        "normalized_name": "real madrid castilla",
+        "updated_at": "2026-09-04T15:11:21.964808+00:00"
+      },
+      {
+        "id": "6135965f4ea1a01feb",
+        "sport": "Futebol",
+        "name": "Mirandés",
+        "normalized_name": "mirandes",
+        "updated_at": "2026-09-04T15:11:21.798687+00:00"
+      },
+      {
+        "id": "b5cf51f3252c636e52",
+        "sport": "Futebol",
+        "name": "Ponferradina",
+        "normalized_name": "ponferradina",
+        "updated_at": "2026-09-04T15:11:21.923038+00:00"
+      },
+      {
+        "id": "06387f24af25995cf1",
+        "sport": "Futebol",
+        "name": "Zamora CF",
+        "normalized_name": "zamora",
+        "updated_at": "2026-09-04T15:11:21.965004+00:00"
+      },
+      {
+        "id": "27eae8e167461a1f1f",
+        "sport": "Futebol",
+        "name": "Espanyol",
+        "normalized_name": "espanyol",
+        "updated_at": "2026-09-04T15:11:22.019675+00:00"
+      },
+      {
+        "id": "cab9aed292ecc01f2f",
+        "sport": "Futebol",
+        "name": "Ajax Amsterdam",
+        "normalized_name": "ajax amsterdam",
+        "updated_at": "2026-09-04T15:11:22.322191+00:00"
+      },
+      {
+        "id": "00e1a271f66757ea7c",
+        "sport": "Futebol",
+        "name": "Gimnastica Segoviana",
+        "normalized_name": "gimnastica segoviana",
+        "updated_at": "2026-09-04T15:11:22.196027+00:00"
+      },
+      {
+        "id": "92c12b9a65b95da9e1",
+        "sport": "Futebol",
+        "name": "Real Madrid III",
+        "normalized_name": "real madrid iii",
+        "updated_at": "2026-09-04T15:11:22.196240+00:00"
+      },
+      {
+        "id": "e742a86283e3dc7b56",
+        "sport": "Futebol",
+        "name": "Atlético Madrid",
+        "normalized_name": "atletico madrid",
+        "updated_at": "2026-09-04T15:11:22.259780+00:00"
       }
     ],
     "team_sources": [
@@ -2633,6 +2738,126 @@
         "source": "ESPN",
         "provider_team_id": "19002",
         "updated_at": "2026-09-04T15:11:00.533232+00:00"
+      },
+      {
+        "team_id": "11772e395749fdc0f9",
+        "source": "ESPN",
+        "provider_team_id": "359",
+        "updated_at": "2026-09-04T15:11:16.251928+00:00"
+      },
+      {
+        "team_id": "c435ac543f483ddd8d",
+        "source": "ESPN",
+        "provider_team_id": "244",
+        "updated_at": "2026-09-04T15:11:16.252084+00:00"
+      },
+      {
+        "team_id": "1284cb640db534f19d",
+        "source": "ESPN",
+        "provider_team_id": "110",
+        "updated_at": "2026-09-04T15:11:17.649182+00:00"
+      },
+      {
+        "team_id": "318c0df56f889ea0e5",
+        "source": "ESPN",
+        "provider_team_id": "89",
+        "updated_at": "2026-09-04T15:11:18.548570+00:00"
+      },
+      {
+        "team_id": "65aafafbe092920271",
+        "source": "ESPN",
+        "provider_team_id": "94",
+        "updated_at": "2026-09-04T15:11:19.152222+00:00"
+      },
+      {
+        "team_id": "f5da5ab2d5ab764ae4",
+        "source": "ESPN",
+        "provider_team_id": "1538",
+        "updated_at": "2026-09-04T15:11:19.889690+00:00"
+      },
+      {
+        "team_id": "041a41a9e5d46f7396",
+        "source": "ESPN",
+        "provider_team_id": "86",
+        "updated_at": "2026-09-04T15:11:22.379525+00:00"
+      },
+      {
+        "team_id": "64e0c422a9f46d25bc",
+        "source": "ESPN",
+        "provider_team_id": "109",
+        "updated_at": "2026-09-04T15:11:21.554679+00:00"
+      },
+      {
+        "team_id": "901993267d4aa114e8",
+        "source": "ESPN",
+        "provider_team_id": "90",
+        "updated_at": "2026-09-04T15:11:21.717255+00:00"
+      },
+      {
+        "team_id": "dc7cc1d0c2f0acc44b",
+        "source": "ESPN",
+        "provider_team_id": "7000",
+        "updated_at": "2026-09-04T15:11:21.798566+00:00"
+      },
+      {
+        "team_id": "6135965f4ea1a01feb",
+        "source": "ESPN",
+        "provider_team_id": "4515",
+        "updated_at": "2026-09-04T15:11:21.798710+00:00"
+      },
+      {
+        "team_id": "582e350ad18db82585",
+        "source": "ESPN",
+        "provider_team_id": "133",
+        "updated_at": "2026-09-04T15:11:21.864939+00:00"
+      },
+      {
+        "team_id": "b5cf51f3252c636e52",
+        "source": "ESPN",
+        "provider_team_id": "5463",
+        "updated_at": "2026-09-04T15:11:21.923243+00:00"
+      },
+      {
+        "team_id": "06387f24af25995cf1",
+        "source": "ESPN",
+        "provider_team_id": "17565",
+        "updated_at": "2026-09-04T15:11:21.965106+00:00"
+      },
+      {
+        "team_id": "27eae8e167461a1f1f",
+        "source": "ESPN",
+        "provider_team_id": "88",
+        "updated_at": "2026-09-04T15:11:22.019772+00:00"
+      },
+      {
+        "team_id": "cab9aed292ecc01f2f",
+        "source": "ESPN",
+        "provider_team_id": "20796",
+        "updated_at": "2026-09-04T15:11:22.123320+00:00"
+      },
+      {
+        "team_id": "00e1a271f66757ea7c",
+        "source": "ESPN",
+        "provider_team_id": "6825",
+        "updated_at": "2026-09-04T15:11:22.196155+00:00"
+      },
+      {
+        "team_id": "92c12b9a65b95da9e1",
+        "source": "ESPN",
+        "provider_team_id": "132944",
+        "updated_at": "2026-09-04T15:11:22.196254+00:00"
+      },
+      {
+        "team_id": "bd4aa81e67081b754d",
+        "source": "ESPN",
+        "provider_team_id": "99",
+        "updated_at": "2026-09-04T15:11:22.237505+00:00"
+      },
+      {
+        "team_id": "e742a86283e3dc7b56",
+        "source": "ESPN",
+        "provider_team_id": "20093",
+        "updated_at": "2026-09-04T15:11:22.259809+00:00"
       }
     ],
     "matches": [
@@ -3044,7 +3269,7 @@
         "start_time": "2026-09-05T14:15:00Z",
         "status": "SCHEDULED",
         "minute": null,
-        "home_id": "75f564e3d16ab2ec31",
+        "home_id": "f0744d7d6c6fa9d40a",
         "home_name": "Athletic Club",
         "home_short": "ATH",
         "away_id": "f5fd03ff72746d9a82",
@@ -3427,7 +3652,7 @@
         "home_id": "09a7997a6af73b43f7",
         "home_name": "São Paulo",
         "home_short": "PAU",
-        "away_id": "cfee4cccf2f07aeae1",
+        "away_id": "eae0e92669d99715d5",
         "away_name": "CA Mineiro",
         "away_short": "CAM",
         "home_score": null,
@@ -5255,6 +5480,486 @@
         "source": "ESPN",
         "provider_match_id": "401913074",
         "updated_at": "2026-09-04T15:11:00.533283+00:00"
+      },
+      {
+        "id": "42cba8ba842fa06bc940",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-21T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "f8ba9ee2acf6651c58",
+        "home_name": "Real Betis Balompié",
+        "home_short": "BET",
+        "away_id": "719084a08a71e4d678",
+        "away_name": "Real Sociedad de Fútbol",
+        "away_short": "RSO",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "564647",
+        "updated_at": "2026-09-04T15:11:15.334434+00:00"
+      },
+      {
+        "id": "9c08a9db9eca9bd329d5",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-25T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "65aafafbe092920271",
+        "home_name": "Valencia CF",
+        "home_short": "VAL",
+        "away_id": "f8ba9ee2acf6651c58",
+        "away_name": "Real Betis Balompié",
+        "away_short": "BET",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "564637",
+        "updated_at": "2026-09-04T15:11:15.345306+00:00"
+      },
+      {
+        "id": "c866b7a64350c34265a0",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-29T15:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "91922391b586b97f41",
+        "home_name": "Levante UD",
+        "home_short": "LEV",
+        "away_id": "f8ba9ee2acf6651c58",
+        "away_name": "Real Betis Balompié",
+        "away_short": "BET",
+        "home_score": 5,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "564655",
+        "updated_at": "2026-09-04T15:11:15.354379+00:00"
+      },
+      {
+        "id": "f86ba9cc25dfad10e48c",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-05T18:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "11772e395749fdc0f9",
+        "home_name": "Arsenal",
+        "home_short": "ARS",
+        "away_id": "c435ac543f483ddd8d",
+        "away_name": "Real Betis",
+        "away_short": "BET",
+        "home_score": 1,
+        "away_score": 3,
+        "source": "ESPN",
+        "provider_match_id": "401867142",
+        "updated_at": "2026-09-04T15:11:16.252588+00:00"
+      },
+      {
+        "id": "4268e23545c665436ceb",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-15T17:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "1284cb640db534f19d",
+        "home_name": "Internazionale",
+        "home_short": "INT",
+        "away_id": "c435ac543f483ddd8d",
+        "away_name": "Real Betis",
+        "away_short": "BET",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401905173",
+        "updated_at": "2026-09-04T15:11:17.649324+00:00"
+      },
+      {
+        "id": "af96009a1cb85b498c9b",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-21T19:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "c435ac543f483ddd8d",
+        "home_name": "Real Betis",
+        "home_short": "BET",
+        "away_id": "318c0df56f889ea0e5",
+        "away_name": "Real Sociedad",
+        "away_short": "RSO",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401882914",
+        "updated_at": "2026-09-04T15:11:18.548710+00:00"
+      },
+      {
+        "id": "d7bdf262754ade3e5ec9",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-25T19:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "65aafafbe092920271",
+        "home_name": "Valencia",
+        "home_short": "VAL",
+        "away_id": "c435ac543f483ddd8d",
+        "away_name": "Real Betis",
+        "away_short": "BET",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401882917",
+        "updated_at": "2026-09-04T15:11:19.152471+00:00"
+      },
+      {
+        "id": "77898825c2f9ddc69973",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-29T15:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "f5da5ab2d5ab764ae4",
+        "home_name": "Levante",
+        "home_short": "LEV",
+        "away_id": "c435ac543f483ddd8d",
+        "away_name": "Real Betis",
+        "away_short": "BET",
+        "home_score": 5,
+        "away_score": 2,
+        "source": "ESPN",
+        "provider_match_id": "401882902",
+        "updated_at": "2026-09-04T15:11:19.889955+00:00"
+      },
+      {
+        "id": "1b30b01ef32f9fa423b9",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-09-04T19:00Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "c435ac543f483ddd8d",
+        "home_name": "Real Betis",
+        "home_short": "BET",
+        "away_id": "041a41a9e5d46f7396",
+        "away_name": "Real Madrid",
+        "away_short": "RMA",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401882894",
+        "updated_at": "2026-09-04T15:11:22.379652+00:00"
+      },
+      {
+        "id": "98825533ff4fe831f7bd",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-22T19:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "6abc6ca322c00ebef4",
+        "home_name": "RCD Espanyol de Barcelona",
+        "home_short": "ESP",
+        "away_id": "041a41a9e5d46f7396",
+        "away_name": "Real Madrid CF",
+        "away_short": "RMA",
+        "home_score": 1,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "564645",
+        "updated_at": "2026-09-04T15:11:21.462234+00:00"
+      },
+      {
+        "id": "6d3f7f470d6d1efe1312",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-26T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "041a41a9e5d46f7396",
+        "home_name": "Real Madrid CF",
+        "home_short": "RMA",
+        "away_id": "719084a08a71e4d678",
+        "away_name": "Real Sociedad de Fútbol",
+        "away_short": "RSO",
+        "home_score": 4,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "564631",
+        "updated_at": "2026-09-04T15:11:21.483089+00:00"
+      },
+      {
+        "id": "7891ef3ae427a4d7bb85",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-30T15:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "041a41a9e5d46f7396",
+        "home_name": "Real Madrid CF",
+        "home_short": "RMA",
+        "away_id": "bd4aa81e67081b754d",
+        "away_name": "Málaga CF",
+        "away_short": "MAL",
+        "home_score": 4,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "564656",
+        "updated_at": "2026-09-04T15:11:21.504674+00:00"
+      },
+      {
+        "id": "ec36cd33f19a39711821",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-01T16:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "041a41a9e5d46f7396",
+        "home_name": "Real Madrid",
+        "home_short": "RMA",
+        "away_id": "64e0c422a9f46d25bc",
+        "away_name": "Fiorentina",
+        "away_short": "FIO",
+        "home_score": 2,
+        "away_score": 2,
+        "source": "ESPN",
+        "provider_match_id": "401888842",
+        "updated_at": "2026-09-04T15:11:21.554771+00:00"
+      },
+      {
+        "id": "184f9de13aa8fdca9bcd",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-12T19:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "901993267d4aa114e8",
+        "home_name": "Deportivo",
+        "home_short": "DEP",
+        "away_id": "041a41a9e5d46f7396",
+        "away_name": "Real Madrid",
+        "away_short": "RMA",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401887955",
+        "updated_at": "2026-09-04T15:11:21.717671+00:00"
+      },
+      {
+        "id": "2d00271b7011fee4faf5",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-15T09:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "dc7cc1d0c2f0acc44b",
+        "home_name": "Real Madrid Castilla",
+        "home_short": "RMA",
+        "away_id": "6135965f4ea1a01feb",
+        "away_name": "Mirandés",
+        "away_short": "MIR",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401906290",
+        "updated_at": "2026-09-04T15:11:21.798758+00:00"
+      },
+      {
+        "id": "e1f979f38f2b00b0b0e4",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-16T15:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "582e350ad18db82585",
+        "home_name": "Schalke 04",
+        "home_short": "S04",
+        "away_id": "041a41a9e5d46f7396",
+        "away_name": "Real Madrid",
+        "away_short": "RMA",
+        "home_score": 0,
+        "away_score": 3,
+        "source": "ESPN",
+        "provider_match_id": "401902578",
+        "updated_at": "2026-09-04T15:11:21.865247+00:00"
+      },
+      {
+        "id": "5116c817019e0a93c2fe",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-19T18:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "b5cf51f3252c636e52",
+        "home_name": "Ponferradina",
+        "home_short": "PON",
+        "away_id": "dc7cc1d0c2f0acc44b",
+        "away_name": "Real Madrid Castilla",
+        "away_short": "RMA",
+        "home_score": 2,
+        "away_score": 2,
+        "source": "ESPN",
+        "provider_match_id": "401906284",
+        "updated_at": "2026-09-04T15:11:21.923463+00:00"
+      },
+      {
+        "id": "e9e03f32961b529180bd",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-20T18:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "dc7cc1d0c2f0acc44b",
+        "home_name": "Real Madrid Castilla",
+        "home_short": "RMA",
+        "away_id": "06387f24af25995cf1",
+        "away_name": "Zamora CF",
+        "away_short": "ZAM",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401906451",
+        "updated_at": "2026-09-04T15:11:21.965295+00:00"
+      },
+      {
+        "id": "a73b9dde7f91848f7b46",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-22T19:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "27eae8e167461a1f1f",
+        "home_name": "Espanyol",
+        "home_short": "ESP",
+        "away_id": "041a41a9e5d46f7396",
+        "away_name": "Real Madrid",
+        "away_short": "RMA",
+        "home_score": 1,
+        "away_score": 2,
+        "source": "ESPN",
+        "provider_match_id": "401882912",
+        "updated_at": "2026-09-04T15:11:22.019950+00:00"
+      },
+      {
+        "id": "57020353abe3bbd1ed76",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-26T19:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "041a41a9e5d46f7396",
+        "home_name": "Real Madrid",
+        "home_short": "RMA",
+        "away_id": "318c0df56f889ea0e5",
+        "away_name": "Real Sociedad",
+        "away_short": "RSO",
+        "home_score": 4,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401882919",
+        "updated_at": "2026-09-04T15:11:22.104305+00:00"
+      },
+      {
+        "id": "c8fc7f155109e5c72ca0",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-26T17:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "cab9aed292ecc01f2f",
+        "home_name": "Ajax Amsterdam",
+        "home_short": "AJA",
+        "away_id": "041a41a9e5d46f7396",
+        "away_name": "Real Madrid",
+        "away_short": "RMA",
+        "home_score": 0,
+        "away_score": 2,
+        "source": "ESPN",
+        "provider_match_id": "401909082",
+        "updated_at": "2026-09-04T15:11:22.123446+00:00"
+      },
+      {
+        "id": "0cc8e25951f56d731f08",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-29T09:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "00e1a271f66757ea7c",
+        "home_name": "Gimnastica Segoviana",
+        "home_short": "GSCF",
+        "away_id": "92c12b9a65b95da9e1",
+        "away_name": "Real Madrid III",
+        "away_short": "RM3",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401914322",
+        "updated_at": "2026-09-04T15:11:22.196291+00:00"
+      },
+      {
+        "id": "41706743bc96b93b8a39",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-30T19:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "041a41a9e5d46f7396",
+        "home_name": "Real Madrid",
+        "home_short": "RMA",
+        "away_id": "e742a86283e3dc7b56",
+        "away_name": "Atlético Madrid",
+        "away_short": "ATL",
+        "home_score": 3,
+        "away_score": 2,
+        "source": "ESPN",
+        "provider_match_id": "401882534",
+        "updated_at": "2026-09-04T15:11:22.259927+00:00"
+      },
+      {
+        "id": "1d650c37dce4c936e910",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-09-02T18:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "041a41a9e5d46f7396",
+        "home_name": "Real Madrid",
+        "home_short": "RMA",
+        "away_id": "cab9aed292ecc01f2f",
+        "away_name": "Ajax Amsterdam",
+        "away_short": "AJA",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401908954",
+        "updated_at": "2026-09-04T15:11:22.322286+00:00"
       }
     ],
     "match_sources": [
@@ -6073,6 +6778,892 @@
         "source": "ESPN",
         "provider_match_id": "401913074",
         "updated_at": "2026-09-04T15:11:00.533401+00:00"
+      },
+      {
+        "match_id": "42cba8ba842fa06bc940",
+        "source": "Football-Data.org",
+        "provider_match_id": "564647",
+        "updated_at": "2026-09-04T15:11:15.334550+00:00"
+      },
+      {
+        "match_id": "9c08a9db9eca9bd329d5",
+        "source": "Football-Data.org",
+        "provider_match_id": "564637",
+        "updated_at": "2026-09-04T15:11:15.345406+00:00"
+      },
+      {
+        "match_id": "c866b7a64350c34265a0",
+        "source": "Football-Data.org",
+        "provider_match_id": "564655",
+        "updated_at": "2026-09-04T15:11:15.354457+00:00"
+      },
+      {
+        "match_id": "f86ba9cc25dfad10e48c",
+        "source": "ESPN",
+        "provider_match_id": "401867142",
+        "updated_at": "2026-09-04T15:11:16.252751+00:00"
+      },
+      {
+        "match_id": "4268e23545c665436ceb",
+        "source": "ESPN",
+        "provider_match_id": "401905173",
+        "updated_at": "2026-09-04T15:11:17.649456+00:00"
+      },
+      {
+        "match_id": "af96009a1cb85b498c9b",
+        "source": "ESPN",
+        "provider_match_id": "401882914",
+        "updated_at": "2026-09-04T15:11:18.548806+00:00"
+      },
+      {
+        "match_id": "d7bdf262754ade3e5ec9",
+        "source": "ESPN",
+        "provider_match_id": "401882917",
+        "updated_at": "2026-09-04T15:11:19.152624+00:00"
+      },
+      {
+        "match_id": "77898825c2f9ddc69973",
+        "source": "ESPN",
+        "provider_match_id": "401882902",
+        "updated_at": "2026-09-04T15:11:19.890133+00:00"
+      },
+      {
+        "match_id": "1b30b01ef32f9fa423b9",
+        "source": "ESPN",
+        "provider_match_id": "401882894",
+        "updated_at": "2026-09-04T15:11:22.379819+00:00"
+      },
+      {
+        "match_id": "98825533ff4fe831f7bd",
+        "source": "Football-Data.org",
+        "provider_match_id": "564645",
+        "updated_at": "2026-09-04T15:11:21.462577+00:00"
+      },
+      {
+        "match_id": "6d3f7f470d6d1efe1312",
+        "source": "Football-Data.org",
+        "provider_match_id": "564631",
+        "updated_at": "2026-09-04T15:11:21.483221+00:00"
+      },
+      {
+        "match_id": "7891ef3ae427a4d7bb85",
+        "source": "Football-Data.org",
+        "provider_match_id": "564656",
+        "updated_at": "2026-09-04T15:11:21.504815+00:00"
+      },
+      {
+        "match_id": "ec36cd33f19a39711821",
+        "source": "ESPN",
+        "provider_match_id": "401888842",
+        "updated_at": "2026-09-04T15:11:21.554903+00:00"
+      },
+      {
+        "match_id": "184f9de13aa8fdca9bcd",
+        "source": "ESPN",
+        "provider_match_id": "401887955",
+        "updated_at": "2026-09-04T15:11:21.717806+00:00"
+      },
+      {
+        "match_id": "2d00271b7011fee4faf5",
+        "source": "ESPN",
+        "provider_match_id": "401906290",
+        "updated_at": "2026-09-04T15:11:21.798883+00:00"
+      },
+      {
+        "match_id": "e1f979f38f2b00b0b0e4",
+        "source": "ESPN",
+        "provider_match_id": "401902578",
+        "updated_at": "2026-09-04T15:11:21.865383+00:00"
+      },
+      {
+        "match_id": "5116c817019e0a93c2fe",
+        "source": "ESPN",
+        "provider_match_id": "401906284",
+        "updated_at": "2026-09-04T15:11:21.923593+00:00"
+      },
+      {
+        "match_id": "e9e03f32961b529180bd",
+        "source": "ESPN",
+        "provider_match_id": "401906451",
+        "updated_at": "2026-09-04T15:11:21.965449+00:00"
+      },
+      {
+        "match_id": "a73b9dde7f91848f7b46",
+        "source": "ESPN",
+        "provider_match_id": "401882912",
+        "updated_at": "2026-09-04T15:11:22.020102+00:00"
+      },
+      {
+        "match_id": "57020353abe3bbd1ed76",
+        "source": "ESPN",
+        "provider_match_id": "401882919",
+        "updated_at": "2026-09-04T15:11:22.104422+00:00"
+      },
+      {
+        "match_id": "c8fc7f155109e5c72ca0",
+        "source": "ESPN",
+        "provider_match_id": "401909082",
+        "updated_at": "2026-09-04T15:11:22.123543+00:00"
+      },
+      {
+        "match_id": "0cc8e25951f56d731f08",
+        "source": "ESPN",
+        "provider_match_id": "401914322",
+        "updated_at": "2026-09-04T15:11:22.196416+00:00"
+      },
+      {
+        "match_id": "41706743bc96b93b8a39",
+        "source": "ESPN",
+        "provider_match_id": "401882534",
+        "updated_at": "2026-09-04T15:11:22.260090+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "source": "ESPN",
+        "provider_match_id": "401908954",
+        "updated_at": "2026-09-04T15:11:22.322427+00:00"
+      }
+    ],
+    "players": [
+      {
+        "id": "730353551187734895",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Merle Frohms",
+        "position": "G",
+        "source": "ESPN",
+        "provider_player_id": "281478",
+        "updated_at": "2026-09-04T15:11:23.155029+00:00"
+      },
+      {
+        "id": "106256935786534287",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Bella Andersson",
+        "position": "CD-L",
+        "source": "ESPN",
+        "provider_player_id": "392932",
+        "updated_at": "2026-09-04T15:11:23.155199+00:00"
+      },
+      {
+        "id": "536674905711698535",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "María Méndez",
+        "position": "CD-R",
+        "source": "ESPN",
+        "provider_player_id": "335785",
+        "updated_at": "2026-09-04T15:11:23.155257+00:00"
+      },
+      {
+        "id": "620798440100666563",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Janou Levels",
+        "position": "LB",
+        "source": "ESPN",
+        "provider_player_id": "309949",
+        "updated_at": "2026-09-04T15:11:23.155307+00:00"
+      },
+      {
+        "id": "603594275175761085",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Eva Navarro",
+        "position": "RB",
+        "source": "ESPN",
+        "provider_player_id": "288443",
+        "updated_at": "2026-09-04T15:11:23.155355+00:00"
+      },
+      {
+        "id": "1116771216996576205",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Maëlle Lakrar",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "347099",
+        "updated_at": "2026-09-04T15:11:23.155744+00:00"
+      },
+      {
+        "id": "278681695133103657",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Sandie Toletti",
+        "position": "CM",
+        "source": "ESPN",
+        "provider_player_id": "248832",
+        "updated_at": "2026-09-04T15:11:23.155918+00:00"
+      },
+      {
+        "id": "554545696767182514",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Linda Caicedo",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "298768",
+        "updated_at": "2026-09-04T15:11:23.155956+00:00"
+      },
+      {
+        "id": "595319815121744204",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Andreia Jacinto",
+        "position": "LM",
+        "source": "ESPN",
+        "provider_player_id": "320143",
+        "updated_at": "2026-09-04T15:11:23.155984+00:00"
+      },
+      {
+        "id": "106998938611821094",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Elisa Senß",
+        "position": "RM",
+        "source": "ESPN",
+        "provider_player_id": "377165",
+        "updated_at": "2026-09-04T15:11:23.156006+00:00"
+      },
+      {
+        "id": "931945826375946629",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Felicia Schröder",
+        "position": "F",
+        "source": "ESPN",
+        "provider_player_id": "374921",
+        "updated_at": "2026-09-04T15:11:23.156077+00:00"
+      },
+      {
+        "id": "555963925503630122",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Filippa Angeldahl",
+        "position": "LF",
+        "source": "ESPN",
+        "provider_player_id": "285225",
+        "updated_at": "2026-09-04T15:11:23.156115+00:00"
+      },
+      {
+        "id": "569904030987060001",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Arianna Caruso",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "311197",
+        "updated_at": "2026-09-04T15:11:23.156140+00:00"
+      },
+      {
+        "id": "180780928082232998",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Lotte Keukelaar",
+        "position": "RF",
+        "source": "ESPN",
+        "provider_player_id": "369800",
+        "updated_at": "2026-09-04T15:11:23.156164+00:00"
+      },
+      {
+        "id": "165290416542885985",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Lineth Beerensteyn",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "246056",
+        "updated_at": "2026-09-04T15:11:23.156184+00:00"
+      },
+      {
+        "id": "355408757103411475",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Candela Rodríguez",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "405092",
+        "updated_at": "2026-09-04T15:11:23.156204+00:00"
+      },
+      {
+        "id": "310471078692679630",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Paula Rubio",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "376531",
+        "updated_at": "2026-09-04T15:11:23.156223+00:00"
+      },
+      {
+        "id": "564124905494199237",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Yasmine Zouhir",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "351974",
+        "updated_at": "2026-09-04T15:11:23.156242+00:00"
+      },
+      {
+        "id": "351348653111083296",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Oihane San Martín",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "398967",
+        "updated_at": "2026-09-04T15:11:23.156260+00:00"
+      },
+      {
+        "id": "761249313167872807",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Claudia De La Cuerda",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "386735",
+        "updated_at": "2026-09-04T15:11:23.156281+00:00"
+      },
+      {
+        "id": "1063067101086306481",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Cristina Águeda Losada",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "3130166",
+        "updated_at": "2026-09-04T15:11:23.156301+00:00"
+      },
+      {
+        "id": "884358661402408634",
+        "team_id": "041a41a9e5d46f7396",
+        "name": "Noelia Llamas",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "352172",
+        "updated_at": "2026-09-04T15:11:23.156319+00:00"
+      },
+      {
+        "id": "629361264417788734",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Femke Liefting",
+        "position": "G",
+        "source": "ESPN",
+        "provider_player_id": "318530",
+        "updated_at": "2026-09-04T15:11:23.156355+00:00"
+      },
+      {
+        "id": "650583758785799358",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Anna Knol",
+        "position": "CD-L",
+        "source": "ESPN",
+        "provider_player_id": "350365",
+        "updated_at": "2026-09-04T15:11:23.156388+00:00"
+      },
+      {
+        "id": "892455395429961085",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Sari Kees",
+        "position": "CD-R",
+        "source": "ESPN",
+        "provider_player_id": "330334",
+        "updated_at": "2026-09-04T15:11:23.156417+00:00"
+      },
+      {
+        "id": "45801412385957037",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Amber Visscher",
+        "position": "LB",
+        "source": "ESPN",
+        "provider_player_id": "334880",
+        "updated_at": "2026-09-04T15:11:23.156444+00:00"
+      },
+      {
+        "id": "876068371685942904",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Kealyn Thomas",
+        "position": "RB",
+        "source": "ESPN",
+        "provider_player_id": "359614",
+        "updated_at": "2026-09-04T15:11:23.156471+00:00"
+      },
+      {
+        "id": "706376080642884178",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Danielle Noordermeer",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "309894",
+        "updated_at": "2026-09-04T15:11:23.156497+00:00"
+      },
+      {
+        "id": "555883618630594528",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Ella Touon",
+        "position": "CM-L",
+        "source": "ESPN",
+        "provider_player_id": "336342",
+        "updated_at": "2026-09-04T15:11:23.156523+00:00"
+      },
+      {
+        "id": "33761725679437363",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Joelle Smits",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "309950",
+        "updated_at": "2026-09-04T15:11:23.156548+00:00"
+      },
+      {
+        "id": "1142853049642169083",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Sherida Spitse",
+        "position": "CM-R",
+        "source": "ESPN",
+        "provider_player_id": "95226",
+        "updated_at": "2026-09-04T15:11:23.156577+00:00"
+      },
+      {
+        "id": "523891818965937888",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Nadine Noordam",
+        "position": "AM",
+        "source": "ESPN",
+        "provider_player_id": "309978",
+        "updated_at": "2026-09-04T15:11:23.156604+00:00"
+      },
+      {
+        "id": "1150974505674813238",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Jade Van Hensbergen",
+        "position": "LM",
+        "source": "ESPN",
+        "provider_player_id": "380462",
+        "updated_at": "2026-09-04T15:11:23.156629+00:00"
+      },
+      {
+        "id": "84210313473514518",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Sophie Te Brake",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "325603",
+        "updated_at": "2026-09-04T15:11:23.156655+00:00"
+      },
+      {
+        "id": "62593342753012483",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Mirte Van Koppen",
+        "position": "RM",
+        "source": "ESPN",
+        "provider_player_id": "380474",
+        "updated_at": "2026-09-04T15:11:23.156681+00:00"
+      },
+      {
+        "id": "582924318475066149",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Kyara Deitelzweig Senior",
+        "position": null,
+        "source": "ESPN",
+        "provider_player_id": "411215",
+        "updated_at": "2026-09-04T15:11:23.156706+00:00"
+      },
+      {
+        "id": "5338381217272885",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Katja Snoeijs",
+        "position": "F",
+        "source": "ESPN",
+        "provider_player_id": "270037",
+        "updated_at": "2026-09-04T15:11:23.156731+00:00"
+      },
+      {
+        "id": "606111703127265692",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Danae Van Der Vliet",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "374083",
+        "updated_at": "2026-09-04T15:11:23.156757+00:00"
+      },
+      {
+        "id": "640181056322654247",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Bo Van Egmond",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "355039",
+        "updated_at": "2026-09-04T15:11:23.156783+00:00"
+      },
+      {
+        "id": "658482489298409349",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Jade Otterman",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "411216",
+        "updated_at": "2026-09-04T15:11:23.156816+00:00"
+      },
+      {
+        "id": "581098653978746608",
+        "team_id": "cab9aed292ecc01f2f",
+        "name": "Julia Van Rijsewijk",
+        "position": "SUB",
+        "source": "ESPN",
+        "provider_player_id": "412674",
+        "updated_at": "2026-09-04T15:11:23.156843+00:00"
+      }
+    ],
+    "player_stats": [
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "730353551187734895",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.177375+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "106256935786534287",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.177626+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "536674905711698535",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.177679+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "620798440100666563",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.177719+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "603594275175761085",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.177754+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "1116771216996576205",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.177788+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "278681695133103657",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.177822+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "554545696767182514",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.177878+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "595319815121744204",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178172+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "106998938611821094",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178226+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "931945826375946629",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178263+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "555963925503630122",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178299+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "569904030987060001",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178333+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "180780928082232998",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178368+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "165290416542885985",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178404+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "355408757103411475",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178439+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "310471078692679630",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178475+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "564124905494199237",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178511+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "351348653111083296",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178545+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "761249313167872807",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178583+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "1063067101086306481",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178618+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "884358661402408634",
+        "team_id": "041a41a9e5d46f7396",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178653+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "629361264417788734",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178726+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "650583758785799358",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178778+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "892455395429961085",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178825+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "45801412385957037",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178872+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "876068371685942904",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178918+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "706376080642884178",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.178964+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "555883618630594528",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179030+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "33761725679437363",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179092+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "1142853049642169083",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179140+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "523891818965937888",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179188+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "1150974505674813238",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179234+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "84210313473514518",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179281+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "62593342753012483",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179335+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "582924318475066149",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179383+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "5338381217272885",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179430+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "606111703127265692",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179478+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "640181056322654247",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179525+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "658482489298409349",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179575+00:00"
+      },
+      {
+        "match_id": "1d650c37dce4c936e910",
+        "player_id": "581098653978746608",
+        "team_id": "cab9aed292ecc01f2f",
+        "metric": "__player_presence__",
+        "value": 1.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:11:23.179625+00:00"
       }
     ],
     "diagnostics": [
@@ -6093,22 +7684,102 @@
         "status": "OK",
         "message": "ESPN: 38 partidas recebidas e persistidas",
         "created_at": "2026-09-04T15:11:00.546514+00:00"
+      },
+      {
+        "id": 3,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "OK",
+        "message": "Football-Data.org: 3 partidas históricas coletadas para a equipe",
+        "created_at": "2026-09-04T15:11:15.361873+00:00"
+      },
+      {
+        "id": 4,
+        "match_id": null,
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN fallback limitado: 6 partidas para Real Betis Balompié em 35 dias; serie_b=False",
+        "created_at": "2026-09-04T15:11:20.851301+00:00"
+      },
+      {
+        "id": 5,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "OK",
+        "message": "Football-Data.org: 3 partidas históricas coletadas para a equipe",
+        "created_at": "2026-09-04T15:11:21.525198+00:00"
+      },
+      {
+        "id": 6,
+        "match_id": null,
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN fallback limitado: 14 partidas para Real Madrid CF em 35 dias; serie_b=False",
+        "created_at": "2026-09-04T15:11:22.403149+00:00"
+      },
+      {
+        "id": 7,
+        "match_id": "ed0e7baba850f3b48bb0",
+        "source": "SYSTEM",
+        "stage": "qualidade_dados",
+        "status": "OK",
+        "message": "Reconciliação pós-coleta: equipes=0, jogadores=0, estatísticas migradas=0, duplicadas removidas=0, partidas Série B consolidadas=0",
+        "created_at": "2026-09-04T15:11:22.445528+00:00"
+      },
+      {
+        "id": 8,
+        "match_id": "1d650c37dce4c936e910",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "OK",
+        "message": "ESPN: jogadores=41, estatísticas individuais reais=0, presença=0, amostra=[Merle Frohms, Bella Andersson, María Méndez, Janou Levels, Eva Navarro, Maëlle Lakrar, Sandie Toletti, Linda Caicedo]",
+        "created_at": "2026-09-04T15:11:23.148171+00:00"
+      },
+      {
+        "id": 9,
+        "match_id": "1d650c37dce4c936e910",
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN: 0 estatísticas, 41 jogadores, 0 estatísticas individuais reais, 41 presenças",
+        "created_at": "2026-09-04T15:11:23.201396+00:00"
+      },
+      {
+        "id": 10,
+        "match_id": "1d650c37dce4c936e910",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-04T15:11:24.137335+00:00"
       }
     ],
     "api_usage": [
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-04",
-        "calls": 1,
-        "last_call": "2026-09-04T15:10:47.025373+00:00",
+        "calls": 3,
+        "last_call": "2026-09-04T15:11:21.450484+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
       {
         "provider": "ESPN",
         "day_utc": "2026-09-04",
-        "calls": 29,
-        "last_call": "2026-09-04T15:10:59.546976+00:00",
+        "calls": 66,
+        "last_call": "2026-09-04T15:11:22.583265+00:00",
+        "remaining_day": null,
+        "remaining_minute": null
+      },
+      {
+        "provider": "FotMob",
+        "day_utc": "2026-09-04",
+        "calls": 3,
+        "last_call": "2026-09-04T15:11:24.126315+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -6263,6 +7934,239 @@
         "id": 30,
         "provider": "ESPN",
         "created_at": "2026-09-04T15:10:59.546976+00:00"
+      },
+      {
+        "id": 31,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-04T15:11:15.330813+00:00"
+      },
+      {
+        "id": 32,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:15.493694+00:00"
+      },
+      {
+        "id": 33,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:15.649628+00:00"
+      },
+      {
+        "id": 34,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:15.779487+00:00"
+      },
+      {
+        "id": 35,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:15.926612+00:00"
+      },
+      {
+        "id": 36,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:16.076902+00:00"
+      },
+      {
+        "id": 37,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:16.227512+00:00"
+      },
+      {
+        "id": 38,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:16.386627+00:00"
+      },
+      {
+        "id": 39,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:16.537353+00:00"
+      },
+      {
+        "id": 40,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:16.657232+00:00"
+      },
+      {
+        "id": 41,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:16.791719+00:00"
+      },
+      {
+        "id": 42,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:16.898656+00:00"
+      },
+      {
+        "id": 43,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:17.024137+00:00"
+      },
+      {
+        "id": 44,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:17.166374+00:00"
+      },
+      {
+        "id": 45,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:17.302158+00:00"
+      },
+      {
+        "id": 46,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:17.464628+00:00"
+      },
+      {
+        "id": 47,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:17.625594+00:00"
+      },
+      {
+        "id": 48,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:17.812555+00:00"
+      },
+      {
+        "id": 49,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:17.952541+00:00"
+      },
+      {
+        "id": 50,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:18.123947+00:00"
+      },
+      {
+        "id": 51,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:18.290388+00:00"
+      },
+      {
+        "id": 52,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:18.408279+00:00"
+      },
+      {
+        "id": 53,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:18.525774+00:00"
+      },
+      {
+        "id": 54,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:18.722627+00:00"
+      },
+      {
+        "id": 55,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:18.852808+00:00"
+      },
+      {
+        "id": 56,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:18.972641+00:00"
+      },
+      {
+        "id": 57,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:19.122580+00:00"
+      },
+      {
+        "id": 58,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:19.277681+00:00"
+      },
+      {
+        "id": 59,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:19.445825+00:00"
+      },
+      {
+        "id": 60,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:19.721379+00:00"
+      },
+      {
+        "id": 61,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:19.862220+00:00"
+      },
+      {
+        "id": 62,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:20.011442+00:00"
+      },
+      {
+        "id": 63,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:20.145331+00:00"
+      },
+      {
+        "id": 64,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:20.253471+00:00"
+      },
+      {
+        "id": 65,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:20.406903+00:00"
+      },
+      {
+        "id": 66,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:20.594422+00:00"
+      },
+      {
+        "id": 67,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:20.801343+00:00"
+      },
+      {
+        "id": 68,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-04T15:11:21.450484+00:00"
+      },
+      {
+        "id": 69,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:11:22.583265+00:00"
+      },
+      {
+        "id": 70,
+        "provider": "FotMob",
+        "created_at": "2026-09-04T15:11:23.646779+00:00"
+      },
+      {
+        "id": 71,
+        "provider": "FotMob",
+        "created_at": "2026-09-04T15:11:23.986162+00:00"
+      },
+      {
+        "id": 72,
+        "provider": "FotMob",
+        "created_at": "2026-09-04T15:11:24.126315+00:00"
+      }
+    ],
+    "ai_match_samples": [
+      {
+        "id": 1,
+        "match_id": "1d650c37dce4c936e910",
+        "dataset_version": "1",
+        "created_at": "2026-09-04T15:11:24.199638+00:00",
+        "cutoff_time": "2026-09-02T18:00Z",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "home_team_id": "041a41a9e5d46f7396",
+        "home_team_name": "Real Madrid",
+        "away_team_id": "cab9aed292ecc01f2f",
+        "away_team_name": "Ajax Amsterdam",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":10,\"sample_away\":1,\"xg_home\":2.35,\"xg_away\":0.4,\"probabilities\":{\"home\":81.3,\"draw\":14.0,\"away\":4.7},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":10,\"goals_for\":2.7,\"goals_against\":0.8,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":1,\"goals_for\":0.0,\"goals_against\":2.0,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":2.75,\"total_expected\":2.75,\"line\":2.5,\"lines\":{\"2.5\":51.9},\"under_lines\":{\"2.5\":48.1},\"over\":{\"2.5\":51.9},\"under\":{\"2.5\":48.1},\"over_probability\":51.9,\"under_probability\":48.1,\"exact_total\":{\"0\":6.4,\"1\":17.6,\"2\":24.2,\"3\":22.2,\"4+\":29.7},\"ambas_marcam\":29.8},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":2.35,\"away\":0.4,\"total\":2.75,\"sample_home\":10,\"sample_away\":1},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "target_home_goals": 2.0,
+        "target_away_goals": 1.0,
+        "target_result": "HOME",
+        "target_total_goals": 3.0,
+        "target_btts": 1,
+        "is_training_ready": 1
       }
     ]
   }
