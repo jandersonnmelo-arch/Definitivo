@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-04T15:12:30.596101+00:00",
+  "created_at": "2026-09-04T15:13:14.159725+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-04T15:13:13.456608+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-04T15:12:30.583417+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -88,7 +88,7 @@
         "sport": "Futebol",
         "name": "Ipswich Town FC",
         "normalized_name": "ipswich town",
-        "updated_at": "2026-09-04T15:10:48.123357+00:00"
+        "updated_at": "2026-09-04T15:13:14.038088+00:00"
       },
       {
         "id": "acf77e31bd33648cc7",
@@ -249,7 +249,7 @@
         "sport": "Futebol",
         "name": "Sunderland AFC",
         "normalized_name": "sunderland afc",
-        "updated_at": "2026-09-04T15:10:48.216113+00:00"
+        "updated_at": "2026-09-04T15:13:14.038205+00:00"
       },
       {
         "id": "b8fd7430177f4e6a06",
@@ -5934,6 +5934,26 @@
         "source": "ESPN",
         "provider_match_id": "401908954",
         "updated_at": "2026-09-04T15:11:22.322286+00:00"
+      },
+      {
+        "id": "560544",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-22T14:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "c06044b267ac04e9cc",
+        "home_name": "Ipswich Town FC",
+        "home_short": "IPS",
+        "away_id": "beb50cb8f137d21e4d",
+        "away_name": "Sunderland AFC",
+        "away_short": "SUN",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "560544",
+        "updated_at": "2026-09-04T15:13:14.038260+00:00"
       }
     ],
     "match_sources": [
@@ -6896,6 +6916,12 @@
         "source": "ESPN",
         "provider_match_id": "401908954",
         "updated_at": "2026-09-04T15:11:22.322427+00:00"
+      },
+      {
+        "match_id": "560544",
+        "source": "Football-Data.org",
+        "provider_match_id": "560544",
+        "updated_at": "2026-09-04T15:13:14.038390+00:00"
       }
     ],
     "match_stats": [
@@ -77619,8 +77645,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-04",
-        "calls": 3,
-        "last_call": "2026-09-04T15:11:21.450484+00:00",
+        "calls": 4,
+        "last_call": "2026-09-04T15:13:14.027611+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -78221,6 +78247,11 @@
         "id": 116,
         "provider": "FotMob",
         "created_at": "2026-09-04T15:12:24.098083+00:00"
+      },
+      {
+        "id": 117,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-04T15:13:14.027611+00:00"
       }
     ],
     "ai_match_samples": [
