@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-04T15:18:59.415214+00:00",
+  "created_at": "2026-09-04T15:19:05.026056+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
-      },
-      {
         "key": "data_quality_v4",
         "value": "2026-09-04T15:18:11.931664+00:00"
+      },
+      {
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -22456,7 +22456,7 @@
         "metric": "goal_difference",
         "value": 0.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:17:57.280788+00:00"
+        "observed_at": "2026-09-04T15:19:04.729584+00:00"
       },
       {
         "match_id": "7141bde14a07be9b4b48",
@@ -22464,7 +22464,7 @@
         "metric": "total_goals",
         "value": 4.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:17:57.281226+00:00"
+        "observed_at": "2026-09-04T15:19:04.729935+00:00"
       },
       {
         "match_id": "7141bde14a07be9b4b48",
@@ -22472,7 +22472,7 @@
         "metric": "goal_assists",
         "value": 4.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:17:57.281345+00:00"
+        "observed_at": "2026-09-04T15:19:04.730074+00:00"
       },
       {
         "match_id": "7141bde14a07be9b4b48",
@@ -22480,7 +22480,7 @@
         "metric": "goals_conceded",
         "value": 4.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:17:57.281430+00:00"
+        "observed_at": "2026-09-04T15:19:04.730124+00:00"
       },
       {
         "match_id": "7141bde14a07be9b4b48",
@@ -22488,7 +22488,7 @@
         "metric": "goal_difference",
         "value": 3.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:17:57.281490+00:00"
+        "observed_at": "2026-09-04T15:19:04.730185+00:00"
       },
       {
         "match_id": "7141bde14a07be9b4b48",
@@ -22496,7 +22496,7 @@
         "metric": "total_goals",
         "value": 3.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:17:57.281528+00:00"
+        "observed_at": "2026-09-04T15:19:04.730219+00:00"
       },
       {
         "match_id": "7141bde14a07be9b4b48",
@@ -22504,7 +22504,7 @@
         "metric": "goal_assists",
         "value": 3.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:17:57.281563+00:00"
+        "observed_at": "2026-09-04T15:19:04.730249+00:00"
       },
       {
         "match_id": "7141bde14a07be9b4b48",
@@ -22512,7 +22512,7 @@
         "metric": "goals_conceded",
         "value": 0.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:17:57.281590+00:00"
+        "observed_at": "2026-09-04T15:19:04.730277+00:00"
       }
     ],
     "players": [
@@ -217072,6 +217072,33 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-04T15:18:54.415038+00:00"
+      },
+      {
+        "id": 192,
+        "match_id": "7141bde14a07be9b4b48",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "INFO",
+        "message": "ESPN: jogadores=0, estatísticas individuais reais=0, presença=0, amostra=[nenhum nome retornado]",
+        "created_at": "2026-09-04T15:19:04.723330+00:00"
+      },
+      {
+        "id": 193,
+        "match_id": "7141bde14a07be9b4b48",
+        "source": "ESPN",
+        "stage": "partida",
+        "status": "OK",
+        "message": "ESPN: 8 estatísticas, 0 jogadores, 0 estatísticas individuais reais, 0 presenças",
+        "created_at": "2026-09-04T15:19:04.926365+00:00"
+      },
+      {
+        "id": 194,
+        "match_id": "7141bde14a07be9b4b48",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-04T15:19:04.932722+00:00"
       }
     ],
     "api_usage": [
@@ -219228,7 +219255,7 @@
         "id": 54,
         "match_id": "7141bde14a07be9b4b48",
         "dataset_version": "1",
-        "created_at": "2026-09-04T15:17:58.818510+00:00",
+        "created_at": "2026-09-04T15:19:05.019144+00:00",
         "cutoff_time": "2026-09-04T19:05:00Z",
         "sport": "Futebol",
         "competition": "Ligue 1",
