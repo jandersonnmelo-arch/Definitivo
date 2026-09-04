@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-04T15:17:56.225744+00:00",
+  "created_at": "2026-09-04T15:18:02.724769+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -22449,6 +22449,70 @@
         "value": 13.0,
         "source": "ESPN",
         "observed_at": "2026-09-04T15:17:44.266126+00:00"
+      },
+      {
+        "match_id": "7141bde14a07be9b4b48",
+        "team_id": "69dee0aaa3e7b50573",
+        "metric": "goal_difference",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:17:57.280788+00:00"
+      },
+      {
+        "match_id": "7141bde14a07be9b4b48",
+        "team_id": "69dee0aaa3e7b50573",
+        "metric": "total_goals",
+        "value": 4.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:17:57.281226+00:00"
+      },
+      {
+        "match_id": "7141bde14a07be9b4b48",
+        "team_id": "69dee0aaa3e7b50573",
+        "metric": "goal_assists",
+        "value": 4.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:17:57.281345+00:00"
+      },
+      {
+        "match_id": "7141bde14a07be9b4b48",
+        "team_id": "69dee0aaa3e7b50573",
+        "metric": "goals_conceded",
+        "value": 4.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:17:57.281430+00:00"
+      },
+      {
+        "match_id": "7141bde14a07be9b4b48",
+        "team_id": "f5396ab988c301d482",
+        "metric": "goal_difference",
+        "value": 3.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:17:57.281490+00:00"
+      },
+      {
+        "match_id": "7141bde14a07be9b4b48",
+        "team_id": "f5396ab988c301d482",
+        "metric": "total_goals",
+        "value": 3.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:17:57.281528+00:00"
+      },
+      {
+        "match_id": "7141bde14a07be9b4b48",
+        "team_id": "f5396ab988c301d482",
+        "metric": "goal_assists",
+        "value": 3.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:17:57.281563+00:00"
+      },
+      {
+        "match_id": "7141bde14a07be9b4b48",
+        "team_id": "f5396ab988c301d482",
+        "metric": "goals_conceded",
+        "value": 0.0,
+        "source": "ESPN",
+        "observed_at": "2026-09-04T15:17:57.281590+00:00"
       }
     ],
     "players": [
@@ -27211,7 +27275,7 @@
         "position": "G",
         "source": "ESPN",
         "provider_player_id": "282876",
-        "updated_at": "2026-09-04T15:17:27.847559+00:00"
+        "updated_at": "2026-09-04T15:18:01.792825+00:00"
       },
       {
         "id": "128969022206685202",
@@ -27220,7 +27284,7 @@
         "position": "CD-L",
         "source": "ESPN",
         "provider_player_id": "282870",
-        "updated_at": "2026-09-04T15:17:27.847726+00:00"
+        "updated_at": "2026-09-04T15:18:01.792853+00:00"
       },
       {
         "id": "1012993991216977062",
@@ -27229,7 +27293,7 @@
         "position": null,
         "source": "ESPN",
         "provider_player_id": "347226",
-        "updated_at": "2026-09-04T15:17:27.847765+00:00"
+        "updated_at": "2026-09-04T15:18:01.793075+00:00"
       },
       {
         "id": "471896766624132318",
@@ -27238,7 +27302,7 @@
         "position": "CD-R",
         "source": "ESPN",
         "provider_player_id": "293407",
-        "updated_at": "2026-09-04T15:17:27.847793+00:00"
+        "updated_at": "2026-09-04T15:18:01.792900+00:00"
       },
       {
         "id": "864130232581591482",
@@ -27247,16 +27311,16 @@
         "position": "LB",
         "source": "ESPN",
         "provider_player_id": "344401",
-        "updated_at": "2026-09-04T15:17:27.847822+00:00"
+        "updated_at": "2026-09-04T15:18:01.792931+00:00"
       },
       {
         "id": "831897098301902972",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Jade Le Guilly",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "311234",
-        "updated_at": "2026-09-04T15:17:27.847848+00:00"
+        "updated_at": "2026-09-04T15:18:01.793372+00:00"
       },
       {
         "id": "741260244846733195",
@@ -27265,52 +27329,52 @@
         "position": "RB",
         "source": "ESPN",
         "provider_player_id": "344298",
-        "updated_at": "2026-09-04T15:17:27.847872+00:00"
+        "updated_at": "2026-09-04T15:18:01.792958+00:00"
       },
       {
         "id": "476947547258997861",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Sakina Karchaoui",
-        "position": "AM",
+        "position": "CF-R",
         "source": "ESPN",
         "provider_player_id": "240297",
-        "updated_at": "2026-09-04T15:17:27.847898+00:00"
+        "updated_at": "2026-09-04T15:18:01.793291+00:00"
       },
       {
         "id": "1136372758705483741",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Jennifer Echegini",
-        "position": "LM",
+        "position": "CM-R",
         "source": "ESPN",
         "provider_player_id": "292902",
-        "updated_at": "2026-09-04T15:17:27.847919+00:00"
+        "updated_at": "2026-09-04T15:18:01.793123+00:00"
       },
       {
         "id": "1020290157232708598",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Anaïs Ebayilin",
-        "position": "RM",
+        "position": "CM-L",
         "source": "ESPN",
         "provider_player_id": "380029",
-        "updated_at": "2026-09-04T15:17:27.847940+00:00"
+        "updated_at": "2026-09-04T15:18:01.792985+00:00"
       },
       {
         "id": "837417999535446588",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Vitória Yaya",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "296481",
-        "updated_at": "2026-09-04T15:17:27.847961+00:00"
+        "updated_at": "2026-09-04T15:18:01.793320+00:00"
       },
       {
         "id": "913265394940398469",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Romée Leuchter",
-        "position": "F",
+        "position": "CF-L",
         "source": "ESPN",
         "provider_player_id": "309944",
-        "updated_at": "2026-09-04T15:17:27.847982+00:00"
+        "updated_at": "2026-09-04T15:18:01.793235+00:00"
       },
       {
         "id": "91389792908034129",
@@ -27325,37 +27389,37 @@
         "id": "852643522052480819",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Naomie Feller",
-        "position": "AM-L",
+        "position": "LM",
         "source": "ESPN",
         "provider_player_id": "330335",
-        "updated_at": "2026-09-04T15:17:27.848068+00:00"
+        "updated_at": "2026-09-04T15:18:01.793154+00:00"
       },
       {
         "id": "976109974008318727",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Florianne Jourde",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "368733",
-        "updated_at": "2026-09-04T15:17:27.848112+00:00"
+        "updated_at": "2026-09-04T15:18:01.793478+00:00"
       },
       {
         "id": "855636240535834055",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Merveille Kanjinga",
-        "position": "AM-R",
+        "position": "RM",
         "source": "ESPN",
         "provider_player_id": "399707",
-        "updated_at": "2026-09-04T15:17:27.848175+00:00"
+        "updated_at": "2026-09-04T15:18:01.793181+00:00"
       },
       {
         "id": "1054410122538880011",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Marie Estella Lafontaine",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "411668",
-        "updated_at": "2026-09-04T15:17:27.848214+00:00"
+        "updated_at": "2026-09-04T15:18:01.793346+00:00"
       },
       {
         "id": "136010785640904251",
@@ -27364,7 +27428,7 @@
         "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "405044",
-        "updated_at": "2026-09-04T15:17:27.848254+00:00"
+        "updated_at": "2026-09-04T15:18:01.793399+00:00"
       },
       {
         "id": "221719623089318259",
@@ -27373,7 +27437,7 @@
         "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "336594",
-        "updated_at": "2026-09-04T15:17:27.848301+00:00"
+        "updated_at": "2026-09-04T15:18:01.793505+00:00"
       },
       {
         "id": "887142241900809374",
@@ -27382,16 +27446,16 @@
         "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "392293",
-        "updated_at": "2026-09-04T15:17:27.848348+00:00"
+        "updated_at": "2026-09-04T15:18:01.793425+00:00"
       },
       {
         "id": "247751817674045621",
         "team_id": "69dee0aaa3e7b50573",
         "name": "Alyssa Charlier",
-        "position": "SUB",
+        "position": null,
         "source": "ESPN",
         "provider_player_id": "3132793",
-        "updated_at": "2026-09-04T15:17:27.848383+00:00"
+        "updated_at": "2026-09-04T15:18:01.793208+00:00"
       },
       {
         "id": "703778745418062239",
@@ -27400,7 +27464,7 @@
         "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "405045",
-        "updated_at": "2026-09-04T15:17:27.848429+00:00"
+        "updated_at": "2026-09-04T15:18:01.793452+00:00"
       },
       {
         "id": "77515037123799185",
@@ -27409,7 +27473,7 @@
         "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "412742",
-        "updated_at": "2026-09-04T15:17:27.848475+00:00"
+        "updated_at": "2026-09-04T15:18:01.793532+00:00"
       },
       {
         "id": "890490580604129482",
@@ -27418,7 +27482,7 @@
         "position": null,
         "source": "ESPN",
         "provider_player_id": "295720",
-        "updated_at": "2026-09-04T15:17:27.848543+00:00"
+        "updated_at": "2026-09-04T15:18:01.792294+00:00"
       },
       {
         "id": "985486987496248201",
@@ -27427,7 +27491,7 @@
         "position": null,
         "source": "ESPN",
         "provider_player_id": "309073",
-        "updated_at": "2026-09-04T15:17:27.848620+00:00"
+        "updated_at": "2026-09-04T15:18:01.792368+00:00"
       },
       {
         "id": "79506561188533900",
@@ -27436,52 +27500,52 @@
         "position": null,
         "source": "ESPN",
         "provider_player_id": "372764",
-        "updated_at": "2026-09-04T15:17:27.848696+00:00"
+        "updated_at": "2026-09-04T15:18:01.792394+00:00"
       },
       {
         "id": "681135334118033365",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Hanna Bennison",
-        "position": null,
+        "position": "CM",
         "source": "ESPN",
         "provider_player_id": "298670",
-        "updated_at": "2026-09-04T15:17:27.848769+00:00"
+        "updated_at": "2026-09-04T15:18:01.792531+00:00"
       },
       {
         "id": "1050383586546077576",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Danique Tolhoek",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "369799",
-        "updated_at": "2026-09-04T15:17:27.848849+00:00"
+        "updated_at": "2026-09-04T15:18:01.792677+00:00"
       },
       {
         "id": "405169855360497962",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Sara Doorsoun",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "231202",
-        "updated_at": "2026-09-04T15:17:27.848965+00:00"
+        "updated_at": "2026-09-04T15:18:01.792756+00:00"
       },
       {
         "id": "532833719289441257",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Janne Krumme",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "416950",
-        "updated_at": "2026-09-04T15:17:27.849099+00:00"
+        "updated_at": "2026-09-04T15:18:01.792637+00:00"
       },
       {
         "id": "1064988138528807557",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Vivienne Lia",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "370240",
-        "updated_at": "2026-09-04T15:17:27.849162+00:00"
+        "updated_at": "2026-09-04T15:18:01.792794+00:00"
       },
       {
         "id": "62393164308144680",
@@ -27490,16 +27554,16 @@
         "position": null,
         "source": "ESPN",
         "provider_player_id": "339479",
-        "updated_at": "2026-09-04T15:17:27.849195+00:00"
+        "updated_at": "2026-09-04T15:18:01.792422+00:00"
       },
       {
         "id": "123855444778321185",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Ainhoa Alguacil",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "333556",
-        "updated_at": "2026-09-04T15:17:27.849227+00:00"
+        "updated_at": "2026-09-04T15:18:01.792696+00:00"
       },
       {
         "id": "143424710098002790",
@@ -27508,61 +27572,61 @@
         "position": null,
         "source": "ESPN",
         "provider_player_id": "296500",
-        "updated_at": "2026-09-04T15:17:27.849256+00:00"
+        "updated_at": "2026-09-04T15:18:01.792251+00:00"
       },
       {
         "id": "1133687701834280866",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Sofie Lundgaard",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "314960",
-        "updated_at": "2026-09-04T15:17:27.849314+00:00"
+        "updated_at": "2026-09-04T15:18:01.792717+00:00"
       },
       {
         "id": "251742042063198199",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Dilara Açikgöz",
-        "position": null,
+        "position": "LM",
         "source": "ESPN",
         "provider_player_id": "374914",
-        "updated_at": "2026-09-04T15:17:27.849368+00:00"
+        "updated_at": "2026-09-04T15:18:01.792591+00:00"
       },
       {
         "id": "426211071520583366",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Jarne Teulings",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "312248",
-        "updated_at": "2026-09-04T15:17:27.849422+00:00"
+        "updated_at": "2026-09-04T15:18:01.792736+00:00"
       },
       {
         "id": "77196306279775552",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Katharina Jeppe",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "3114551",
-        "updated_at": "2026-09-04T15:17:27.849477+00:00"
+        "updated_at": "2026-09-04T15:18:01.792775+00:00"
       },
       {
         "id": "405879482421085572",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Jamilla Rankin",
-        "position": null,
+        "position": "SUB",
         "source": "ESPN",
         "provider_player_id": "300748",
-        "updated_at": "2026-09-04T15:17:27.849522+00:00"
+        "updated_at": "2026-09-04T15:18:01.792657+00:00"
       },
       {
         "id": "617599840930261589",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Nina Lührßen",
-        "position": null,
+        "position": "LB",
         "source": "ESPN",
         "provider_player_id": "416664",
-        "updated_at": "2026-09-04T15:17:27.849564+00:00"
+        "updated_at": "2026-09-04T15:18:01.792511+00:00"
       },
       {
         "id": "649202787450843223",
@@ -27571,7 +27635,7 @@
         "position": "G",
         "source": "ESPN",
         "provider_player_id": "344451",
-        "updated_at": "2026-09-04T15:17:27.849594+00:00"
+        "updated_at": "2026-09-04T15:18:01.792450+00:00"
       },
       {
         "id": "655773110242087724",
@@ -27580,7 +27644,7 @@
         "position": "CD-L",
         "source": "ESPN",
         "provider_player_id": "349179",
-        "updated_at": "2026-09-04T15:17:27.849624+00:00"
+        "updated_at": "2026-09-04T15:18:01.792471+00:00"
       },
       {
         "id": "1020308774848434120",
@@ -27589,25 +27653,25 @@
         "position": "CD-R",
         "source": "ESPN",
         "provider_player_id": "188004",
-        "updated_at": "2026-09-04T15:17:27.849653+00:00"
+        "updated_at": "2026-09-04T15:18:01.792491+00:00"
       },
       {
         "id": "110613349540934772",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Hayley Raso",
-        "position": "M",
+        "position": null,
         "source": "ESPN",
         "provider_player_id": "219818",
-        "updated_at": "2026-09-04T15:17:27.849691+00:00"
+        "updated_at": "2026-09-04T15:18:01.792079+00:00"
       },
       {
         "id": "831337927213845306",
         "team_id": "dbb6dd4bacc9ca434f",
         "name": "Laura Freigang",
-        "position": "AM",
+        "position": "CF-R",
         "source": "ESPN",
         "provider_player_id": "262757",
-        "updated_at": "2026-09-04T15:17:27.849878+00:00"
+        "updated_at": "2026-09-04T15:18:01.792616+00:00"
       },
       {
         "id": "284443257841025816",
@@ -28363,7 +28427,7 @@
         "position": "AM",
         "source": "ESPN",
         "provider_player_id": "419405",
-        "updated_at": "2026-09-04T15:16:16.204170+00:00"
+        "updated_at": "2026-09-04T15:18:01.792560+00:00"
       },
       {
         "id": "957570087891277715",
@@ -28372,7 +28436,7 @@
         "position": null,
         "source": "ESPN",
         "provider_player_id": "235658",
-        "updated_at": "2026-09-04T15:16:16.205743+00:00"
+        "updated_at": "2026-09-04T15:18:01.793263+00:00"
       },
       {
         "id": "700611538431711818",
@@ -171537,7 +171601,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496519+00:00"
+        "observed_at": "2026-09-04T15:18:02.052064+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171546,7 +171610,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496661+00:00"
+        "observed_at": "2026-09-04T15:18:02.052288+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171555,7 +171619,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496701+00:00"
+        "observed_at": "2026-09-04T15:18:02.052348+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171564,7 +171628,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496751+00:00"
+        "observed_at": "2026-09-04T15:18:02.052402+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171573,7 +171637,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496782+00:00"
+        "observed_at": "2026-09-04T15:18:02.052444+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171582,7 +171646,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496810+00:00"
+        "observed_at": "2026-09-04T15:18:02.052489+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171591,7 +171655,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496839+00:00"
+        "observed_at": "2026-09-04T15:18:02.052539+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171600,7 +171664,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496877+00:00"
+        "observed_at": "2026-09-04T15:18:02.052586+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171609,7 +171673,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496911+00:00"
+        "observed_at": "2026-09-04T15:18:02.052630+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171618,7 +171682,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496940+00:00"
+        "observed_at": "2026-09-04T15:18:02.052669+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171627,7 +171691,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.496979+00:00"
+        "observed_at": "2026-09-04T15:18:02.052707+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171636,7 +171700,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497084+00:00"
+        "observed_at": "2026-09-04T15:18:02.052744+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171645,7 +171709,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497132+00:00"
+        "observed_at": "2026-09-04T15:18:02.052782+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171654,7 +171718,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497174+00:00"
+        "observed_at": "2026-09-04T15:18:02.052829+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171663,7 +171727,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497207+00:00"
+        "observed_at": "2026-09-04T15:18:02.052879+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171672,7 +171736,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497245+00:00"
+        "observed_at": "2026-09-04T15:18:02.052940+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171681,7 +171745,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497286+00:00"
+        "observed_at": "2026-09-04T15:18:02.052983+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171690,7 +171754,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497319+00:00"
+        "observed_at": "2026-09-04T15:18:02.053087+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171699,7 +171763,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497355+00:00"
+        "observed_at": "2026-09-04T15:18:02.053135+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171708,7 +171772,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497383+00:00"
+        "observed_at": "2026-09-04T15:18:02.053174+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171717,7 +171781,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497410+00:00"
+        "observed_at": "2026-09-04T15:18:02.053211+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171726,7 +171790,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497436+00:00"
+        "observed_at": "2026-09-04T15:18:02.053257+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171735,7 +171799,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497463+00:00"
+        "observed_at": "2026-09-04T15:18:02.053304+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171744,7 +171808,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497506+00:00"
+        "observed_at": "2026-09-04T15:18:02.053366+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171753,7 +171817,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497557+00:00"
+        "observed_at": "2026-09-04T15:18:02.053441+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171762,7 +171826,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497591+00:00"
+        "observed_at": "2026-09-04T15:18:02.053501+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171771,7 +171835,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497638+00:00"
+        "observed_at": "2026-09-04T15:18:02.053563+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171780,7 +171844,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497674+00:00"
+        "observed_at": "2026-09-04T15:18:02.053621+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171789,7 +171853,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497714+00:00"
+        "observed_at": "2026-09-04T15:18:02.053716+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171798,7 +171862,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497749+00:00"
+        "observed_at": "2026-09-04T15:18:02.053790+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171807,7 +171871,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497783+00:00"
+        "observed_at": "2026-09-04T15:18:02.053851+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171816,7 +171880,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497819+00:00"
+        "observed_at": "2026-09-04T15:18:02.053905+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171825,7 +171889,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497855+00:00"
+        "observed_at": "2026-09-04T15:18:02.053959+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171834,7 +171898,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497890+00:00"
+        "observed_at": "2026-09-04T15:18:02.054046+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171843,7 +171907,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497936+00:00"
+        "observed_at": "2026-09-04T15:18:02.054116+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171852,7 +171916,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.497977+00:00"
+        "observed_at": "2026-09-04T15:18:02.054178+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171861,7 +171925,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498040+00:00"
+        "observed_at": "2026-09-04T15:18:02.054238+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171870,7 +171934,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498095+00:00"
+        "observed_at": "2026-09-04T15:18:02.054295+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171879,7 +171943,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498129+00:00"
+        "observed_at": "2026-09-04T15:18:02.054348+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171888,7 +171952,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498174+00:00"
+        "observed_at": "2026-09-04T15:18:02.054404+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171897,7 +171961,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498221+00:00"
+        "observed_at": "2026-09-04T15:18:02.054467+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171906,7 +171970,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498252+00:00"
+        "observed_at": "2026-09-04T15:18:02.054528+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171915,7 +171979,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498282+00:00"
+        "observed_at": "2026-09-04T15:18:02.054588+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171924,7 +171988,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498320+00:00"
+        "observed_at": "2026-09-04T15:18:02.054642+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171933,7 +171997,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498355+00:00"
+        "observed_at": "2026-09-04T15:18:02.054694+00:00"
       },
       {
         "match_id": "188b706979bc97420776",
@@ -171942,7 +172006,7 @@
         "metric": "__player_presence__",
         "value": 1.0,
         "source": "ESPN",
-        "observed_at": "2026-09-04T15:16:16.498396+00:00"
+        "observed_at": "2026-09-04T15:18:02.054753+00:00"
       },
       {
         "match_id": "284f4522fd39d95d7b91",
@@ -216891,6 +216955,69 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-04T15:17:46.248930+00:00"
+      },
+      {
+        "id": 179,
+        "match_id": "7141bde14a07be9b4b48",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "INFO",
+        "message": "ESPN: jogadores=0, estatísticas individuais reais=0, presença=0, amostra=[nenhum nome retornado]",
+        "created_at": "2026-09-04T15:17:57.275120+00:00"
+      },
+      {
+        "id": 180,
+        "match_id": "7141bde14a07be9b4b48",
+        "source": "ESPN",
+        "stage": "partida",
+        "status": "OK",
+        "message": "ESPN: 8 estatísticas, 0 jogadores, 0 estatísticas individuais reais, 0 presenças",
+        "created_at": "2026-09-04T15:17:57.564278+00:00"
+      },
+      {
+        "id": 181,
+        "match_id": "7141bde14a07be9b4b48",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-04T15:17:58.711355+00:00"
+      },
+      {
+        "id": 182,
+        "match_id": "401909085",
+        "source": "ESPN",
+        "stage": "diagnostico_vinicius",
+        "status": "OK",
+        "message": "VINICIUS_DEBUG path=root.news.articles[4].images[0]; object=node; id=49518435; name=None; position=None; important_pairs=[]",
+        "created_at": "2026-09-04T15:18:01.745847+00:00"
+      },
+      {
+        "id": 183,
+        "match_id": "188b706979bc97420776",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "OK",
+        "message": "ESPN: jogadores=46, estatísticas individuais reais=0, presença=0, amostra=[Hayley Raso, Rebecka Blomqvist, Pia-Sophie Wolter, Paulina Krumbiegel, Noemi Ivelj, Erëleta Memeti, Lina Altenburg, Marthine Østenstad]",
+        "created_at": "2026-09-04T15:18:01.785574+00:00"
+      },
+      {
+        "id": 184,
+        "match_id": "188b706979bc97420776",
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN: 0 estatísticas, 46 jogadores, 0 estatísticas individuais reais, 46 presenças",
+        "created_at": "2026-09-04T15:18:02.396907+00:00"
+      },
+      {
+        "id": 185,
+        "match_id": "188b706979bc97420776",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-04T15:18:02.404530+00:00"
       }
     ],
     "api_usage": [
@@ -216905,16 +217032,16 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-09-04",
-        "calls": 105,
-        "last_call": "2026-09-04T15:17:43.522389+00:00",
+        "calls": 106,
+        "last_call": "2026-09-04T15:17:56.924637+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
       {
         "provider": "FotMob",
         "day_utc": "2026-09-04",
-        "calls": 115,
-        "last_call": "2026-09-04T15:17:46.238887+00:00",
+        "calls": 118,
+        "last_call": "2026-09-04T15:17:58.701397+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -218054,6 +218181,26 @@
         "id": 227,
         "provider": "FotMob",
         "created_at": "2026-09-04T15:17:46.238887+00:00"
+      },
+      {
+        "id": 228,
+        "provider": "ESPN",
+        "created_at": "2026-09-04T15:17:56.924637+00:00"
+      },
+      {
+        "id": 229,
+        "provider": "FotMob",
+        "created_at": "2026-09-04T15:17:57.950319+00:00"
+      },
+      {
+        "id": 230,
+        "provider": "FotMob",
+        "created_at": "2026-09-04T15:17:58.298118+00:00"
+      },
+      {
+        "id": 231,
+        "provider": "FotMob",
+        "created_at": "2026-09-04T15:17:58.701397+00:00"
       }
     ],
     "ai_match_samples": [
@@ -218796,7 +218943,7 @@
         "id": 36,
         "match_id": "188b706979bc97420776",
         "dataset_version": "1",
-        "created_at": "2026-09-04T15:16:17.210277+00:00",
+        "created_at": "2026-09-04T15:18:02.503834+00:00",
         "cutoff_time": "2026-08-26T17:00Z",
         "sport": "Futebol",
         "competition": null,
@@ -218805,7 +218952,7 @@
         "home_team_name": "Eintracht Frankfurt",
         "away_team_id": "69dee0aaa3e7b50573",
         "away_team_name": "Paris Saint-Germain",
-        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":0,\"sample_away\":6,\"xg_home\":1.67,\"xg_away\":1.17,\"probabilities\":{\"home\":49.1,\"draw\":24.2,\"away\":26.7},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":6,\"goals_for\":1.17,\"goals_against\":1.67,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":2.84,\"total_expected\":2.84,\"line\":2.5,\"lines\":{\"2.5\":54.0},\"under_lines\":{\"2.5\":46.0},\"over\":{\"2.5\":54.0},\"under\":{\"2.5\":46.0},\"over_probability\":54.0,\"under_probability\":46.0,\"exact_total\":{\"0\":5.8,\"1\":16.6,\"2\":23.6,\"3\":22.3,\"4+\":31.7},\"ambas_marcam\":56.0},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":1.67,\"away\":1.17,\"total\":2.84,\"sample_home\":0,\"sample_away\":6},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":0,\"sample_away\":6,\"xg_home\":1.67,\"xg_away\":1.17,\"probabilities\":{\"home\":49.1,\"draw\":24.2,\"away\":26.7},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":6},\"shots_on_target\":{\"home\":0,\"away\":6},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":6},\"corners\":{\"home\":0,\"away\":6},\"fouls\":{\"home\":0,\"away\":6},\"saves\":{\"home\":0,\"away\":6},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":6},\"red_cards\":{\"home\":0,\"away\":6},\"offsides\":{\"home\":0,\"away\":6},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":6}},\"home\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":6,\"goals_for\":1.17,\"goals_against\":1.67,\"shots\":14.33,\"shots_sample\":6,\"shots_on_target\":4.67,\"shots_on_target_sample\":6,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":18.33,\"effectivetackles_sample\":6,\"corners\":5.33,\"corners_sample\":6,\"fouls\":8.33,\"fouls_sample\":6,\"saves\":2.0,\"saves_sample\":6,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":1.17,\"yellow_cards_sample\":6,\"red_cards\":0.17,\"red_cards_sample\":6,\"offsides\":3.17,\"offsides_sample\":6,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":656.17,\"passes_completed_sample\":6,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":2.84,\"total_expected\":2.84,\"line\":2.5,\"lines\":{\"2.5\":54.0},\"under_lines\":{\"2.5\":46.0},\"over\":{\"2.5\":54.0},\"under\":{\"2.5\":46.0},\"over_probability\":54.0,\"under_probability\":46.0,\"exact_total\":{\"0\":5.8,\"1\":16.6,\"2\":23.6,\"3\":22.3,\"4+\":31.7},\"ambas_marcam\":56.0},\"finalizacoes\":{\"home\":null,\"away\":14.33,\"total_expected\":14.33,\"line\":9.5,\"over\":90.5,\"under\":9.5,\"over_probability\":90.5,\"under_probability\":9.5,\"lines\":{\"9.5\":90.5},\"under_lines\":{\"9.5\":9.5}},\"finalizacoes_no_alvo\":{\"home\":null,\"away\":4.67,\"total_expected\":4.67,\"line\":5.5,\"over\":32.6,\"under\":67.4,\"over_probability\":32.6,\"under_probability\":67.4,\"lines\":{\"5.5\":32.6},\"under_lines\":{\"5.5\":67.4}},\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":{\"home\":null,\"away\":18.33,\"total_expected\":18.33,\"line\":19.5,\"over\":37.9,\"under\":62.1,\"over_probability\":37.9,\"under_probability\":62.1,\"lines\":{\"19.5\":37.9},\"under_lines\":{\"19.5\":62.1}},\"escanteios\":{\"home\":null,\"away\":5.33,\"total_expected\":5.33,\"line\":7.5,\"over\":17.0,\"under\":83.0,\"over_probability\":17.0,\"under_probability\":83.0,\"lines\":{\"7.5\":17.0},\"under_lines\":{\"7.5\":83.0}},\"faltas\":{\"home\":null,\"away\":8.33,\"total_expected\":8.33,\"line\":19.5,\"over\":0.0,\"under\":100.0,\"over_probability\":0.0,\"under_probability\":100.0,\"lines\":{\"19.5\":0.0},\"under_lines\":{\"19.5\":100.0}},\"defesas\":{\"home\":null,\"away\":2.0,\"total_expected\":2.0,\"line\":4.5,\"over\":5.3,\"under\":94.7,\"over_probability\":5.3,\"under_probability\":94.7,\"lines\":{\"4.5\":5.3},\"under_lines\":{\"4.5\":94.7}},\"laterais\":null,\"cartoes_amarelos\":{\"home\":null,\"away\":1.17,\"total_expected\":1.17,\"line\":2.5,\"over\":11.4,\"under\":88.6,\"over_probability\":11.4,\"under_probability\":88.6,\"lines\":{\"2.5\":11.4},\"under_lines\":{\"2.5\":88.6}},\"cartoes_vermelhos\":{\"home\":null,\"away\":0.17,\"total_expected\":0.17,\"line\":0.5,\"over\":15.6,\"under\":84.4,\"over_probability\":15.6,\"under_probability\":84.4,\"lines\":{\"0.5\":15.6},\"under_lines\":{\"0.5\":84.4}},\"impedimentos\":{\"home\":null,\"away\":3.17,\"total_expected\":3.17,\"line\":3.5,\"over\":39.1,\"under\":60.9,\"over_probability\":39.1,\"under_probability\":60.9,\"lines\":{\"3.5\":39.1},\"under_lines\":{\"3.5\":60.9}},\"tiros_de_meta\":null,\"passes_certos\":{\"home\":null,\"away\":656.17,\"total_expected\":656.17,\"line\":700.5,\"over\":4.3,\"under\":95.7,\"over_probability\":4.3,\"under_probability\":95.7,\"lines\":{\"700.5\":4.3},\"under_lines\":{\"700.5\":95.7}}},\"projections\":{\"goals\":{\"home\":1.67,\"away\":1.17,\"total\":2.84,\"sample_home\":0,\"sample_away\":6},\"shots\":{\"home\":null,\"away\":14.33,\"total\":null,\"sample_home\":0,\"sample_away\":6},\"shots_on_target\":{\"home\":null,\"away\":4.67,\"total\":null,\"sample_home\":0,\"sample_away\":6},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":18.33,\"total\":null,\"sample_home\":0,\"sample_away\":6},\"corners\":{\"home\":null,\"away\":5.33,\"total\":null,\"sample_home\":0,\"sample_away\":6},\"fouls\":{\"home\":null,\"away\":8.33,\"total\":null,\"sample_home\":0,\"sample_away\":6},\"saves\":{\"home\":null,\"away\":2.0,\"total\":null,\"sample_home\":0,\"sample_away\":6},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":1.17,\"total\":null,\"sample_home\":0,\"sample_away\":6},\"red_cards\":{\"home\":null,\"away\":0.17,\"total\":null,\"sample_home\":0,\"sample_away\":6},\"offsides\":{\"home\":null,\"away\":3.17,\"total\":null,\"sample_home\":0,\"sample_away\":6},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":656.17,\"total\":null,\"sample_home\":0,\"sample_away\":6}}}",
         "target_home_goals": 1.0,
         "target_away_goals": 1.0,
         "target_result": "DRAW",
@@ -219022,6 +219169,27 @@
         "target_total_goals": 3.0,
         "target_btts": 0,
         "is_training_ready": 1
+      },
+      {
+        "id": 54,
+        "match_id": "7141bde14a07be9b4b48",
+        "dataset_version": "1",
+        "created_at": "2026-09-04T15:17:58.818510+00:00",
+        "cutoff_time": "2026-09-04T19:05:00Z",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "home_team_id": "69dee0aaa3e7b50573",
+        "home_team_name": "Paris Saint-Germain FC",
+        "away_team_id": "f5396ab988c301d482",
+        "away_team_name": "AS Monaco FC",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":10,\"sample_away\":8,\"xg_home\":1.29,\"xg_away\":1.8,\"probabilities\":{\"home\":27.5,\"draw\":23.1,\"away\":49.4},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":8,\"away\":6},\"shots_on_target\":{\"home\":8,\"away\":6},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":8,\"away\":6},\"corners\":{\"home\":8,\"away\":6},\"fouls\":{\"home\":8,\"away\":6},\"saves\":{\"home\":8,\"away\":6},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":8,\"away\":6},\"red_cards\":{\"home\":8,\"away\":6},\"offsides\":{\"home\":8,\"away\":6},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":8,\"away\":6}},\"home\":{\"sample\":10,\"goals_for\":1.7,\"goals_against\":1.6,\"shots\":15.25,\"shots_sample\":8,\"shots_on_target\":4.5,\"shots_on_target_sample\":8,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":17.0,\"effectivetackles_sample\":8,\"corners\":5.25,\"corners_sample\":8,\"fouls\":8.0,\"fouls_sample\":8,\"saves\":2.0,\"saves_sample\":8,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":1.12,\"yellow_cards_sample\":8,\"red_cards\":0.12,\"red_cards_sample\":8,\"offsides\":2.38,\"offsides_sample\":8,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":694.12,\"passes_completed_sample\":8,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":8,\"goals_for\":2.0,\"goals_against\":0.88,\"shots\":13.33,\"shots_sample\":6,\"shots_on_target\":6.17,\"shots_on_target_sample\":6,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":17.5,\"effectivetackles_sample\":6,\"corners\":4.5,\"corners_sample\":6,\"fouls\":10.83,\"fouls_sample\":6,\"saves\":3.17,\"saves_sample\":6,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":2.17,\"yellow_cards_sample\":6,\"red_cards\":0.0,\"red_cards_sample\":6,\"offsides\":1.83,\"offsides_sample\":6,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":452.67,\"passes_completed_sample\":6,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":3.09,\"total_expected\":3.09,\"line\":3.5,\"lines\":{\"3.5\":37.3},\"under_lines\":{\"3.5\":62.7},\"over\":{\"3.5\":37.3},\"under\":{\"3.5\":62.7},\"over_probability\":37.3,\"under_probability\":62.7,\"exact_total\":{\"0\":4.6,\"1\":14.1,\"2\":21.7,\"3\":22.4,\"4+\":37.3},\"ambas_marcam\":60.5},\"finalizacoes\":{\"home\":15.25,\"away\":13.33,\"total_expected\":28.58,\"line\":27.5,\"over\":56.8,\"under\":43.2,\"over_probability\":56.8,\"under_probability\":43.2,\"lines\":{\"27.5\":56.8},\"under_lines\":{\"27.5\":43.2}},\"finalizacoes_no_alvo\":{\"home\":4.5,\"away\":6.17,\"total_expected\":10.67,\"line\":11.5,\"over\":38.1,\"under\":61.9,\"over_probability\":38.1,\"under_probability\":61.9,\"lines\":{\"11.5\":38.1},\"under_lines\":{\"11.5\":61.9}},\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":{\"home\":17.0,\"away\":17.5,\"total_expected\":34.5,\"line\":34.5,\"over\":48.9,\"under\":51.1,\"over_probability\":48.9,\"under_probability\":51.1,\"lines\":{\"34.5\":48.9},\"under_lines\":{\"34.5\":51.1}},\"escanteios\":{\"home\":5.25,\"away\":4.5,\"total_expected\":9.75,\"line\":9.5,\"over\":51.0,\"under\":49.0,\"over_probability\":51.0,\"under_probability\":49.0,\"lines\":{\"9.5\":51.0},\"under_lines\":{\"9.5\":49.0}},\"faltas\":{\"home\":8.0,\"away\":10.83,\"total_expected\":18.83,\"line\":19.5,\"over\":42.4,\"under\":57.6,\"over_probability\":42.4,\"under_probability\":57.6,\"lines\":{\"19.5\":42.4},\"under_lines\":{\"19.5\":57.6}},\"defesas\":{\"home\":2.0,\"away\":3.17,\"total_expected\":5.17,\"line\":4.5,\"over\":58.9,\"under\":41.1,\"over_probability\":58.9,\"under_probability\":41.1,\"lines\":{\"4.5\":58.9},\"under_lines\":{\"4.5\":41.1}},\"laterais\":null,\"cartoes_amarelos\":{\"home\":1.12,\"away\":2.17,\"total_expected\":3.29,\"line\":3.5,\"over\":41.7,\"under\":58.3,\"over_probability\":41.7,\"under_probability\":58.3,\"lines\":{\"3.5\":41.7},\"under_lines\":{\"3.5\":58.3}},\"cartoes_vermelhos\":{\"home\":0.12,\"away\":0.0,\"total_expected\":0.12,\"line\":0.5,\"over\":11.3,\"under\":88.7,\"over_probability\":11.3,\"under_probability\":88.7,\"lines\":{\"0.5\":11.3},\"under_lines\":{\"0.5\":88.7}},\"impedimentos\":{\"home\":2.38,\"away\":1.83,\"total_expected\":4.21,\"line\":4.5,\"over\":41.2,\"under\":58.8,\"over_probability\":41.2,\"under_probability\":58.8,\"lines\":{\"4.5\":41.2},\"under_lines\":{\"4.5\":58.8}},\"tiros_de_meta\":null,\"passes_certos\":{\"home\":694.12,\"away\":452.67,\"total_expected\":1146.79,\"line\":1100.5,\"over\":91.5,\"under\":8.5,\"over_probability\":91.5,\"under_probability\":8.5,\"lines\":{\"1100.5\":91.5},\"under_lines\":{\"1100.5\":8.5}}},\"projections\":{\"goals\":{\"home\":1.29,\"away\":1.8,\"total\":3.09,\"sample_home\":10,\"sample_away\":8},\"shots\":{\"home\":15.25,\"away\":13.33,\"total\":28.58,\"sample_home\":8,\"sample_away\":6},\"shots_on_target\":{\"home\":4.5,\"away\":6.17,\"total\":10.67,\"sample_home\":8,\"sample_away\":6},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":17.0,\"away\":17.5,\"total\":34.5,\"sample_home\":8,\"sample_away\":6},\"corners\":{\"home\":5.25,\"away\":4.5,\"total\":9.75,\"sample_home\":8,\"sample_away\":6},\"fouls\":{\"home\":8.0,\"away\":10.83,\"total\":18.83,\"sample_home\":8,\"sample_away\":6},\"saves\":{\"home\":2.0,\"away\":3.17,\"total\":5.17,\"sample_home\":8,\"sample_away\":6},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":1.12,\"away\":2.17,\"total\":3.29,\"sample_home\":8,\"sample_away\":6},\"red_cards\":{\"home\":0.12,\"away\":0.0,\"total\":0.12,\"sample_home\":8,\"sample_away\":6},\"offsides\":{\"home\":2.38,\"away\":1.83,\"total\":4.21,\"sample_home\":8,\"sample_away\":6},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":694.12,\"away\":452.67,\"total\":1146.79,\"sample_home\":8,\"sample_away\":6}}}",
+        "target_home_goals": null,
+        "target_away_goals": null,
+        "target_result": null,
+        "target_total_goals": null,
+        "target_btts": null,
+        "is_training_ready": 0
       }
     ],
     "ai_player_samples": [],
