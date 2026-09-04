@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-04T15:18:31.902004+00:00",
+  "created_at": "2026-09-04T15:18:36.003044+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -217018,6 +217018,33 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-04T15:18:02.404530+00:00"
+      },
+      {
+        "id": 186,
+        "match_id": "578c3ddab58e73ab9c35",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "INFO",
+        "message": "ESPN: jogadores=0, estatísticas individuais reais=0, presença=0, amostra=[nenhum nome retornado]",
+        "created_at": "2026-09-04T15:18:35.889117+00:00"
+      },
+      {
+        "id": 187,
+        "match_id": "578c3ddab58e73ab9c35",
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN: 0 estatísticas, 0 jogadores, 0 estatísticas individuais reais, 0 presenças",
+        "created_at": "2026-09-04T15:18:35.898153+00:00"
+      },
+      {
+        "id": 188,
+        "match_id": "578c3ddab58e73ab9c35",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-04T15:18:35.906456+00:00"
       }
     ],
     "api_usage": [
@@ -219069,7 +219096,7 @@
         "id": 42,
         "match_id": "578c3ddab58e73ab9c35",
         "dataset_version": "1",
-        "created_at": "2026-09-04T15:17:03.269401+00:00",
+        "created_at": "2026-09-04T15:18:35.994569+00:00",
         "cutoff_time": "2026-08-14T18:30Z",
         "sport": "Futebol",
         "competition": null,
