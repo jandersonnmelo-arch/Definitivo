@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:23:08.397318+00:00",
+  "created_at": "2026-09-05T12:23:13.245719+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -497811,6 +497811,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-05T12:23:08.309463+00:00"
+      },
+      {
+        "id": 406,
+        "match_id": "31daa644bd5c9d6c1a1d",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-05T12:23:13.170734+00:00"
       }
     ],
     "api_usage": [
@@ -497825,16 +497834,16 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-09-05",
-        "calls": 202,
-        "last_call": "2026-09-05T12:23:07.542610+00:00",
+        "calls": 203,
+        "last_call": "2026-09-05T12:23:12.945978+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
       {
         "provider": "FotMob",
         "day_utc": "2026-09-05",
-        "calls": 321,
-        "last_call": "2026-09-05T12:23:08.297550+00:00",
+        "calls": 322,
+        "last_call": "2026-09-05T12:23:13.161925+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -500564,6 +500573,16 @@
         "id": 545,
         "provider": "FotMob",
         "created_at": "2026-09-05T12:23:08.297550+00:00"
+      },
+      {
+        "id": 546,
+        "provider": "ESPN",
+        "created_at": "2026-09-05T12:23:12.945978+00:00"
+      },
+      {
+        "id": 547,
+        "provider": "FotMob",
+        "created_at": "2026-09-05T12:23:13.161925+00:00"
       }
     ],
     "ai_match_samples": [
@@ -502062,7 +502081,7 @@
         "id": 74,
         "match_id": "31daa644bd5c9d6c1a1d",
         "dataset_version": "1",
-        "created_at": "2026-09-05T12:10:07.547235+00:00",
+        "created_at": "2026-09-05T12:23:13.234818+00:00",
         "cutoff_time": "2026-07-23T00:30:00Z",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
