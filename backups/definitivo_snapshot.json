@@ -1,11 +1,11 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:12:14.930040+00:00",
+  "created_at": "2026-09-05T12:12:59.623003+00:00",
   "tables": {
     "schema_meta": [
       {
         "key": "data_quality_v4",
-        "value": "2026-09-05T12:12:01.204345+00:00"
+        "value": "2026-09-05T12:12:58.527553+00:00"
       },
       {
         "key": "schema",
@@ -571,7 +571,7 @@
         "sport": "Futebol",
         "name": "Coritiba FBC",
         "normalized_name": "coritiba fbc",
-        "updated_at": "2026-09-05T12:08:48.855376+00:00"
+        "updated_at": "2026-09-05T12:12:59.148526+00:00"
       },
       {
         "id": "590c1e0cd091eaf7e1",
@@ -830,7 +830,7 @@
         "sport": "Futebol",
         "name": "SE Palmeiras",
         "normalized_name": "palmeiras",
-        "updated_at": "2026-09-05T12:09:57.667386+00:00"
+        "updated_at": "2026-09-05T12:12:59.148645+00:00"
       },
       {
         "id": "7ce26de4dc6960a5e7",
@@ -9523,6 +9523,26 @@
         "source": "ESPN",
         "provider_match_id": "401909111",
         "updated_at": "2026-09-05T12:10:00.722296+00:00"
+      },
+      {
+        "id": "554924",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-22T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7db41a535db1869ad4",
+        "home_name": "Coritiba FBC",
+        "home_short": "COR",
+        "away_id": "9a3c152825daa730cb",
+        "away_name": "SE Palmeiras",
+        "away_short": "PAL",
+        "home_score": 1,
+        "away_score": 3,
+        "source": "Football-Data.org",
+        "provider_match_id": "554924",
+        "updated_at": "2026-09-05T12:12:59.148706+00:00"
       }
     ],
     "match_sources": [
@@ -11271,6 +11291,12 @@
         "source": "ESPN",
         "provider_match_id": "401909111",
         "updated_at": "2026-09-05T12:10:00.722446+00:00"
+      },
+      {
+        "match_id": "554924",
+        "source": "Football-Data.org",
+        "provider_match_id": "554924",
+        "updated_at": "2026-09-05T12:12:59.148849+00:00"
       }
     ],
     "match_stats": [
@@ -286861,8 +286887,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-05",
-        "calls": 14,
-        "last_call": "2026-09-05T12:09:56.384715+00:00",
+        "calls": 15,
+        "last_call": "2026-09-05T12:12:59.133481+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -288638,6 +288664,11 @@
         "id": 351,
         "provider": "ESPN",
         "created_at": "2026-09-05T12:11:55.105930+00:00"
+      },
+      {
+        "id": 352,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-05T12:12:59.133481+00:00"
       }
     ],
     "ai_match_samples": [
