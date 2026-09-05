@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:07:56.636610+00:00",
+  "created_at": "2026-09-05T12:08:44.949238+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-05T12:08:44.115930+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-05T12:07:55.233128+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -438,7 +438,7 @@
         "sport": "Futebol",
         "name": "São Paulo FC",
         "normalized_name": "sao paulo",
-        "updated_at": "2026-09-05T12:06:25.953335+00:00"
+        "updated_at": "2026-09-05T12:08:44.656118+00:00"
       },
       {
         "id": "0b87c3ffb6e9585c89",
@@ -788,7 +788,7 @@
         "sport": "Futebol",
         "name": "CA Paranaense",
         "normalized_name": "paranaense",
-        "updated_at": "2026-09-05T12:06:25.524484+00:00"
+        "updated_at": "2026-09-05T12:08:44.656390+00:00"
       },
       {
         "id": "bd162042f98d9dd2b6",
@@ -8646,6 +8646,26 @@
         "source": "Football-Data.org",
         "provider_match_id": "554982",
         "updated_at": "2026-09-05T12:06:31.232473+00:00"
+      },
+      {
+        "id": "554928",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-23T00:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "09a7997a6af73b43f7",
+        "home_name": "São Paulo FC",
+        "home_short": "PAU",
+        "away_id": "71cf9e0f0db3eef124",
+        "away_name": "CA Paranaense",
+        "away_short": "CAP",
+        "home_score": 1,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "554928",
+        "updated_at": "2026-09-05T12:08:44.656546+00:00"
       }
     ],
     "match_sources": [
@@ -10166,6 +10186,12 @@
         "source": "Football-Data.org",
         "provider_match_id": "554982",
         "updated_at": "2026-09-05T12:06:31.232603+00:00"
+      },
+      {
+        "match_id": "554928",
+        "source": "Football-Data.org",
+        "provider_match_id": "554928",
+        "updated_at": "2026-09-05T12:08:44.656674+00:00"
       }
     ],
     "match_stats": [
@@ -208889,8 +208915,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-05",
-        "calls": 10,
-        "last_call": "2026-09-05T12:06:29.420560+00:00",
+        "calls": 11,
+        "last_call": "2026-09-05T12:08:44.645750+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -210266,6 +210292,11 @@
         "id": 271,
         "provider": "FotMob",
         "created_at": "2026-09-05T12:07:50.701805+00:00"
+      },
+      {
+        "id": 272,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-05T12:08:44.645750+00:00"
       }
     ],
     "ai_match_samples": [
