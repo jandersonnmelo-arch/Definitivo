@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T11:57:15.023485+00:00",
+  "created_at": "2026-09-05T11:57:17.368459+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -18,7 +18,7 @@
         "sport": "Futebol",
         "name": "Newcastle United",
         "normalized_name": "newcastle united",
-        "updated_at": "2026-09-05T11:57:14.536274+00:00"
+        "updated_at": "2026-09-05T11:57:14.961623+00:00"
       },
       {
         "id": "a6d70aa2a233a12551",
@@ -1335,6 +1335,13 @@
         "name": "Strasbourg",
         "normalized_name": "strasbourg",
         "updated_at": "2026-09-05T11:57:13.746347+00:00"
+      },
+      {
+        "id": "0f9dc2d308d47b0dfe",
+        "sport": "Futebol",
+        "name": "West Bromwich Albion",
+        "normalized_name": "west bromwich albion",
+        "updated_at": "2026-09-05T11:57:14.962039+00:00"
       }
     ],
     "team_sources": [
@@ -2573,6 +2580,12 @@
         "source": "ESPN",
         "provider_team_id": "364",
         "updated_at": "2026-09-05T11:57:14.536596+00:00"
+      },
+      {
+        "team_id": "0f9dc2d308d47b0dfe",
+        "source": "ESPN",
+        "provider_team_id": "383",
+        "updated_at": "2026-09-05T11:57:14.962155+00:00"
       }
     ],
     "matches": [
@@ -5395,6 +5408,26 @@
         "source": "ESPN",
         "provider_match_id": "401879319",
         "updated_at": "2026-09-05T11:57:14.536694+00:00"
+      },
+      {
+        "id": "401908125",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-26T18:45Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "92596fc166955d857f",
+        "home_name": "Newcastle United",
+        "home_short": "NEW",
+        "away_id": "0f9dc2d308d47b0dfe",
+        "away_name": "West Bromwich Albion",
+        "away_short": "WBA",
+        "home_score": 3,
+        "away_score": 2,
+        "source": "ESPN",
+        "provider_match_id": "401908125",
+        "updated_at": "2026-09-05T11:57:14.962351+00:00"
       }
     ],
     "match_sources": [
@@ -6273,6 +6306,12 @@
         "source": "ESPN",
         "provider_match_id": "401879319",
         "updated_at": "2026-09-05T11:57:14.536840+00:00"
+      },
+      {
+        "match_id": "401908125",
+        "source": "ESPN",
+        "provider_match_id": "401908125",
+        "updated_at": "2026-09-05T11:57:14.962485+00:00"
       }
     ],
     "diagnostics": [
@@ -6316,8 +6355,8 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-09-05",
-        "calls": 53,
-        "last_call": "2026-09-05T11:57:14.655768+00:00",
+        "calls": 55,
+        "last_call": "2026-09-05T11:57:14.935640+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -6597,6 +6636,16 @@
         "id": 55,
         "provider": "ESPN",
         "created_at": "2026-09-05T11:57:14.655768+00:00"
+      },
+      {
+        "id": 56,
+        "provider": "ESPN",
+        "created_at": "2026-09-05T11:57:14.818039+00:00"
+      },
+      {
+        "id": 57,
+        "provider": "ESPN",
+        "created_at": "2026-09-05T11:57:14.935640+00:00"
       }
     ]
   }
