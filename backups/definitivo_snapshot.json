@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:33:16.655937+00:00",
+  "created_at": "2026-09-05T13:03:44.067312+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-05T13:03:42.713759+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-05T12:33:06.805188+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -746,7 +746,7 @@
         "sport": "Futebol",
         "name": "Clube do Remo",
         "normalized_name": "clube do remo",
-        "updated_at": "2026-09-05T12:24:20.750981+00:00"
+        "updated_at": "2026-09-05T13:03:43.320410+00:00"
       },
       {
         "id": "178d02ecb65a6640af",
@@ -830,7 +830,7 @@
         "sport": "Futebol",
         "name": "SC Corinthians Paulista",
         "normalized_name": "corinthians paulista",
-        "updated_at": "2026-09-05T12:24:35.446509+00:00"
+        "updated_at": "2026-09-05T13:03:43.320297+00:00"
       },
       {
         "id": "76ad233033c62ff5ca",
@@ -10713,7 +10713,7 @@
         "status": "FINISHED",
         "minute": null,
         "home_id": "7ce26de4dc6960a5e7",
-        "home_name": "Corinthians",
+        "home_name": "SC Corinthians Paulista",
         "home_short": "COR",
         "away_id": "7f612db037dc322ddd",
         "away_name": "Clube do Remo",
@@ -10722,7 +10722,7 @@
         "away_score": 0,
         "source": "Football-Data.org",
         "provider_match_id": "554923",
-        "updated_at": "2026-09-05T12:18:05.670619+00:00"
+        "updated_at": "2026-09-05T13:03:43.320477+00:00"
       },
       {
         "id": "8b51c4946ddf06440cea",
@@ -13872,7 +13872,7 @@
         "match_id": "d55e339ebbfa28bc6f0b",
         "source": "Football-Data.org",
         "provider_match_id": "554923",
-        "updated_at": "2026-09-05T12:18:05.670750+00:00"
+        "updated_at": "2026-09-05T13:03:43.320654+00:00"
       },
       {
         "match_id": "8b51c4946ddf06440cea",
@@ -630749,8 +630749,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-05",
-        "calls": 26,
-        "last_call": "2026-09-05T12:29:32.166097+00:00",
+        "calls": 27,
+        "last_call": "2026-09-05T13:03:43.307434+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -634201,6 +634201,11 @@
         "id": 686,
         "provider": "FotMob",
         "created_at": "2026-09-05T12:32:59.815982+00:00"
+      },
+      {
+        "id": 687,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-05T13:03:43.307434+00:00"
       }
     ],
     "ai_match_samples": [
