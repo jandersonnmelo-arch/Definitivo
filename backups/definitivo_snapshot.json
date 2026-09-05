@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:01:35.328089+00:00",
+  "created_at": "2026-09-05T12:05:09.201085+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-05T12:05:08.386480+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-05T12:01:34.208985+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -242,7 +242,7 @@
         "sport": "Futebol",
         "name": "FC Schalke 04",
         "normalized_name": "schalke 04",
-        "updated_at": "2026-09-05T11:56:34.291899+00:00"
+        "updated_at": "2026-09-05T12:05:08.955764+00:00"
       },
       {
         "id": "2be6218d69d398541a",
@@ -662,7 +662,7 @@
         "sport": "Futebol",
         "name": "FC Augsburg",
         "normalized_name": "augsburg",
-        "updated_at": "2026-09-05T11:56:33.772908+00:00"
+        "updated_at": "2026-09-05T12:05:08.955655+00:00"
       },
       {
         "id": "fb7723b516c14d5dc0",
@@ -7734,6 +7734,26 @@
         "source": "Football-Data.org",
         "provider_match_id": "564649",
         "updated_at": "2026-09-05T12:00:29.311320+00:00"
+      },
+      {
+        "id": "565782",
+        "sport": "Futebol",
+        "competition": "Bundesliga",
+        "season": "2026",
+        "start_time": "2026-08-30T15:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "01fe9c9db8edf60ba6",
+        "home_name": "FC Augsburg",
+        "home_short": "FCA",
+        "away_id": "582e350ad18db82585",
+        "away_name": "FC Schalke 04",
+        "away_short": "S04",
+        "home_score": 3,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "565782",
+        "updated_at": "2026-09-05T12:05:08.955815+00:00"
       }
     ],
     "match_sources": [
@@ -9038,6 +9058,12 @@
         "source": "Football-Data.org",
         "provider_match_id": "564649",
         "updated_at": "2026-09-05T12:00:29.311453+00:00"
+      },
+      {
+        "match_id": "565782",
+        "source": "Football-Data.org",
+        "provider_match_id": "565782",
+        "updated_at": "2026-09-05T12:05:08.955939+00:00"
       }
     ],
     "match_stats": [
@@ -144632,8 +144658,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-05",
-        "calls": 6,
-        "last_call": "2026-09-05T12:00:28.873817+00:00",
+        "calls": 7,
+        "last_call": "2026-09-05T12:05:08.944981+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -145609,6 +145635,11 @@
         "id": 191,
         "provider": "FotMob",
         "created_at": "2026-09-05T12:01:31.688819+00:00"
+      },
+      {
+        "id": 192,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-05T12:05:08.944981+00:00"
       }
     ],
     "ai_match_samples": [
