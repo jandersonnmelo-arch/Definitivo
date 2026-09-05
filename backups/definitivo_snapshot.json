@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:10:44.013839+00:00",
+  "created_at": "2026-09-05T12:10:48.053595+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -249006,6 +249006,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-05T12:10:43.920617+00:00"
+      },
+      {
+        "id": 222,
+        "match_id": "20a10e412bfac784ed20",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "OK",
+        "message": "ESPN: jogadores=46, estatísticas individuais reais=644, presença=0, amostra=[Nicolás Bolcato, Sheyko Studer, Leonard Costa, Juan Manuel Elordi, Ivan Villalba, Ezequiel Bonifacio, Alex Vigo, José Florentín]",
+        "created_at": "2026-09-05T12:10:48.053505+00:00"
       }
     ],
     "api_usage": [
@@ -249020,8 +249029,8 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-09-05",
-        "calls": 124,
-        "last_call": "2026-09-05T12:10:41.317570+00:00",
+        "calls": 125,
+        "last_call": "2026-09-05T12:10:47.350337+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -250674,6 +250683,11 @@
         "id": 328,
         "provider": "FotMob",
         "created_at": "2026-09-05T12:10:43.910668+00:00"
+      },
+      {
+        "id": 329,
+        "provider": "ESPN",
+        "created_at": "2026-09-05T12:10:47.350337+00:00"
       }
     ],
     "ai_match_samples": [
