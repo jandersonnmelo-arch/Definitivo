@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:14:19.236133+00:00",
+  "created_at": "2026-09-05T12:14:24.303138+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -270,7 +270,7 @@
         "sport": "Futebol",
         "name": "Rayo Vallecano de Madrid",
         "normalized_name": "rayo vallecano de madrid",
-        "updated_at": "2026-09-05T11:56:33.548192+00:00"
+        "updated_at": "2026-09-05T12:14:22.340265+00:00"
       },
       {
         "id": "78f7aceccec7234876",
@@ -585,14 +585,14 @@
         "sport": "Futebol",
         "name": "Valencia",
         "normalized_name": "valencia",
-        "updated_at": "2026-09-05T12:14:19.159275+00:00"
+        "updated_at": "2026-09-05T12:14:20.210569+00:00"
       },
       {
         "id": "192a5a24657fd487e0",
         "sport": "Futebol",
         "name": "Barcelona",
         "normalized_name": "barcelona",
-        "updated_at": "2026-09-05T12:00:25.969239+00:00"
+        "updated_at": "2026-09-05T12:14:24.231641+00:00"
       },
       {
         "id": "36a156eb56cf255395",
@@ -907,7 +907,7 @@
         "sport": "Futebol",
         "name": "Elche CF",
         "normalized_name": "elche",
-        "updated_at": "2026-09-05T11:56:33.982768+00:00"
+        "updated_at": "2026-09-05T12:14:21.440533+00:00"
       },
       {
         "id": "719084a08a71e4d678",
@@ -1516,7 +1516,7 @@
         "sport": "Futebol",
         "name": "Athletic Club",
         "normalized_name": "athletic club",
-        "updated_at": "2026-09-05T12:00:27.605463+00:00"
+        "updated_at": "2026-09-05T12:14:21.861304+00:00"
       },
       {
         "id": "376065af66dc9eef8e",
@@ -2000,6 +2000,41 @@
         "name": "Madrid CFF",
         "normalized_name": "madrid cff",
         "updated_at": "2026-09-05T12:14:19.159389+00:00"
+      },
+      {
+        "id": "b2676e62cf3368eb2d",
+        "sport": "Futebol",
+        "name": "Leones",
+        "normalized_name": "leones",
+        "updated_at": "2026-09-05T12:14:22.699857+00:00"
+      },
+      {
+        "id": "2c9df1261b72e0981c",
+        "sport": "Futebol",
+        "name": "FC Basel",
+        "normalized_name": "basel",
+        "updated_at": "2026-09-05T12:14:23.316373+00:00"
+      },
+      {
+        "id": "7152c1a3da574194a4",
+        "sport": "Futebol",
+        "name": "Barcelona B",
+        "normalized_name": "barcelona b",
+        "updated_at": "2026-09-05T12:14:23.760982+00:00"
+      },
+      {
+        "id": "8d81497dbde643aa26",
+        "sport": "Futebol",
+        "name": "CE Europa",
+        "normalized_name": "ce europa",
+        "updated_at": "2026-09-05T12:14:23.761269+00:00"
+      },
+      {
+        "id": "05b809b825d515a558",
+        "sport": "Futebol",
+        "name": "Al Ahly",
+        "normalized_name": "al ahly",
+        "updated_at": "2026-09-05T12:14:24.231777+00:00"
       }
     ],
     "team_sources": [
@@ -3627,7 +3662,7 @@
         "team_id": "192a5a24657fd487e0",
         "source": "ESPN",
         "provider_team_id": "83",
-        "updated_at": "2026-09-05T12:00:25.969346+00:00"
+        "updated_at": "2026-09-05T12:14:23.316598+00:00"
       },
       {
         "team_id": "4cc656d2315bb67f99",
@@ -3860,8 +3895,8 @@
       {
         "team_id": "65aafafbe092920271",
         "source": "ESPN",
-        "provider_team_id": "21374",
-        "updated_at": "2026-09-05T12:14:18.520514+00:00"
+        "provider_team_id": "94",
+        "updated_at": "2026-09-05T12:14:20.210735+00:00"
       },
       {
         "team_id": "a3ed102b21ce5d91aa",
@@ -3898,6 +3933,42 @@
         "source": "ESPN",
         "provider_team_id": "21425",
         "updated_at": "2026-09-05T12:14:19.159430+00:00"
+      },
+      {
+        "team_id": "75f564e3d16ab2ec31",
+        "source": "Football-Data.org",
+        "provider_team_id": "77",
+        "updated_at": "2026-09-05T12:14:21.861367+00:00"
+      },
+      {
+        "team_id": "b2676e62cf3368eb2d",
+        "source": "ESPN",
+        "provider_team_id": "131702",
+        "updated_at": "2026-09-05T12:14:22.699955+00:00"
+      },
+      {
+        "team_id": "2c9df1261b72e0981c",
+        "source": "ESPN",
+        "provider_team_id": "989",
+        "updated_at": "2026-09-05T12:14:23.316488+00:00"
+      },
+      {
+        "team_id": "7152c1a3da574194a4",
+        "source": "ESPN",
+        "provider_team_id": "5462",
+        "updated_at": "2026-09-05T12:14:23.761168+00:00"
+      },
+      {
+        "team_id": "8d81497dbde643aa26",
+        "source": "ESPN",
+        "provider_team_id": "21290",
+        "updated_at": "2026-09-05T12:14:23.761284+00:00"
+      },
+      {
+        "team_id": "05b809b825d515a558",
+        "source": "ESPN",
+        "provider_team_id": "10207",
+        "updated_at": "2026-09-05T12:14:24.231964+00:00"
       }
     ],
     "matches": [
@@ -10100,6 +10171,166 @@
         "source": "ESPN",
         "provider_match_id": "401882525",
         "updated_at": "2026-09-05T12:14:19.159495+00:00"
+      },
+      {
+        "id": "401882888",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-09-06T14:15Z",
+        "status": "SCHEDULED",
+        "minute": null,
+        "home_id": "65aafafbe092920271",
+        "home_name": "Valencia",
+        "home_short": "VAL",
+        "away_id": "192a5a24657fd487e0",
+        "away_name": "Barcelona",
+        "away_short": "BAR",
+        "home_score": null,
+        "away_score": null,
+        "source": "ESPN",
+        "provider_match_id": "401882888",
+        "updated_at": "2026-09-05T12:14:20.211169+00:00"
+      },
+      {
+        "id": "564642",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-23T19:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "fae656c369933673eb",
+        "home_name": "Elche CF",
+        "home_short": "ELC",
+        "away_id": "192a5a24657fd487e0",
+        "away_name": "FC Barcelona",
+        "away_short": "FCB",
+        "home_score": 0,
+        "away_score": 5,
+        "source": "Football-Data.org",
+        "provider_match_id": "564642",
+        "updated_at": "2026-09-05T12:14:21.440744+00:00"
+      },
+      {
+        "id": "564630",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-27T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "192a5a24657fd487e0",
+        "home_name": "FC Barcelona",
+        "home_short": "FCB",
+        "away_id": "75f564e3d16ab2ec31",
+        "away_name": "Athletic Club",
+        "away_short": "ATH",
+        "home_score": 2,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "564630",
+        "updated_at": "2026-09-05T12:14:21.861465+00:00"
+      },
+      {
+        "id": "564650",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-31T19:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "192a5a24657fd487e0",
+        "home_name": "FC Barcelona",
+        "home_short": "FCB",
+        "away_id": "9b2cbb4b6b5a74fcda",
+        "away_name": "Rayo Vallecano de Madrid",
+        "away_short": "RAY",
+        "home_score": 5,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "564650",
+        "updated_at": "2026-09-05T12:14:22.340373+00:00"
+      },
+      {
+        "id": "401859718",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-02T23:10Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "b2676e62cf3368eb2d",
+        "home_name": "Leones",
+        "home_short": "Leones",
+        "away_id": "192a5a24657fd487e0",
+        "away_name": "Barcelona SC",
+        "away_short": "BAR",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401859718",
+        "updated_at": "2026-09-05T12:14:22.700144+00:00"
+      },
+      {
+        "id": "401906710",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-16T14:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "2c9df1261b72e0981c",
+        "home_name": "FC Basel",
+        "home_short": "FCB",
+        "away_id": "192a5a24657fd487e0",
+        "away_name": "Barcelona",
+        "away_short": "BAR",
+        "home_score": 2,
+        "away_score": 5,
+        "source": "ESPN",
+        "provider_match_id": "401906710",
+        "updated_at": "2026-09-05T12:14:23.316651+00:00"
+      },
+      {
+        "id": "401911784",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-19T08:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7152c1a3da574194a4",
+        "home_name": "Barcelona B",
+        "home_short": "BAR",
+        "away_id": "8d81497dbde643aa26",
+        "away_name": "CE Europa",
+        "away_short": "CEE",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401911784",
+        "updated_at": "2026-09-05T12:14:23.761331+00:00"
+      },
+      {
+        "id": "401900551",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-19T18:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "192a5a24657fd487e0",
+        "home_name": "Barcelona",
+        "home_short": "BAR",
+        "away_id": "05b809b825d515a558",
+        "away_name": "Al Ahly",
+        "away_short": "AHL",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401900551",
+        "updated_at": "2026-09-05T12:14:24.232404+00:00"
       }
     ],
     "match_sources": [
@@ -11992,6 +12223,54 @@
         "source": "ESPN",
         "provider_match_id": "401882525",
         "updated_at": "2026-09-05T12:14:19.159797+00:00"
+      },
+      {
+        "match_id": "401882888",
+        "source": "ESPN",
+        "provider_match_id": "401882888",
+        "updated_at": "2026-09-05T12:14:20.211346+00:00"
+      },
+      {
+        "match_id": "564642",
+        "source": "Football-Data.org",
+        "provider_match_id": "564642",
+        "updated_at": "2026-09-05T12:14:21.440875+00:00"
+      },
+      {
+        "match_id": "564630",
+        "source": "Football-Data.org",
+        "provider_match_id": "564630",
+        "updated_at": "2026-09-05T12:14:21.861614+00:00"
+      },
+      {
+        "match_id": "564650",
+        "source": "Football-Data.org",
+        "provider_match_id": "564650",
+        "updated_at": "2026-09-05T12:14:22.340531+00:00"
+      },
+      {
+        "match_id": "401859718",
+        "source": "ESPN",
+        "provider_match_id": "401859718",
+        "updated_at": "2026-09-05T12:14:22.700254+00:00"
+      },
+      {
+        "match_id": "401906710",
+        "source": "ESPN",
+        "provider_match_id": "401906710",
+        "updated_at": "2026-09-05T12:14:23.316765+00:00"
+      },
+      {
+        "match_id": "401911784",
+        "source": "ESPN",
+        "provider_match_id": "401911784",
+        "updated_at": "2026-09-05T12:14:23.761430+00:00"
+      },
+      {
+        "match_id": "401900551",
+        "source": "ESPN",
+        "provider_match_id": "401900551",
+        "updated_at": "2026-09-05T12:14:24.232581+00:00"
       }
     ],
     "match_stats": [
@@ -300675,14 +300954,41 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-05T12:14:19.151789+00:00"
+      },
+      {
+        "id": 265,
+        "match_id": null,
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN fallback limitado: 7 partidas para Valencia CF em 35 dias; serie_b=False",
+        "created_at": "2026-09-05T12:14:20.887313+00:00"
+      },
+      {
+        "id": 266,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "OK",
+        "message": "Football-Data.org: 3 partidas históricas coletadas para a equipe",
+        "created_at": "2026-09-05T12:14:22.675794+00:00"
+      },
+      {
+        "id": 267,
+        "match_id": "de97ad7d465239c20f4f",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-05T12:14:24.224317+00:00"
       }
     ],
     "api_usage": [
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-05",
-        "calls": 17,
-        "last_call": "2026-09-05T12:14:13.558782+00:00",
+        "calls": 18,
+        "last_call": "2026-09-05T12:14:21.424236+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -302738,6 +303044,11 @@
         "id": 407,
         "provider": "Football-Data.org",
         "created_at": "2026-09-05T12:14:13.558782+00:00"
+      },
+      {
+        "id": 408,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-05T12:14:21.424236+00:00"
       }
     ],
     "ai_match_samples": [
@@ -304775,6 +305086,27 @@
         "target_away_goals": 5.0,
         "target_result": "AWAY",
         "target_total_goals": 6.0,
+        "target_btts": 1,
+        "is_training_ready": 1
+      },
+      {
+        "id": 104,
+        "match_id": "de97ad7d465239c20f4f",
+        "dataset_version": "1",
+        "created_at": "2026-09-05T12:14:24.300891+00:00",
+        "cutoff_time": "2026-08-13T22:00:00Z",
+        "sport": "Futebol",
+        "competition": "Copa Libertadores",
+        "season": "2026",
+        "home_team_id": "590c1e0cd091eaf7e1",
+        "home_team_name": "Mirassol FC",
+        "away_team_id": "f3d4abde1aea2b6a77",
+        "away_team_name": "LDU de Quito",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":4,\"sample_away\":0,\"xg_home\":1.5,\"xg_away\":1.5,\"probabilities\":{\"home\":37.8,\"draw\":24.3,\"away\":37.8},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":4,\"goals_for\":1.5,\"goals_against\":1.5,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":3.0,\"total_expected\":3.0,\"line\":2.5,\"lines\":{\"2.5\":57.7},\"under_lines\":{\"2.5\":42.3},\"over\":{\"2.5\":57.7},\"under\":{\"2.5\":42.3},\"over_probability\":57.7,\"under_probability\":42.3,\"exact_total\":{\"0\":5.0,\"1\":14.9,\"2\":22.4,\"3\":22.4,\"4+\":35.3},\"ambas_marcam\":60.4},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":1.5,\"away\":1.5,\"total\":3.0,\"sample_home\":4,\"sample_away\":0},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "target_home_goals": 1.0,
+        "target_away_goals": 1.0,
+        "target_result": "DRAW",
+        "target_total_goals": 2.0,
         "target_btts": 1,
         "is_training_ready": 1
       }
