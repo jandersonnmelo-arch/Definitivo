@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:23:18.999177+00:00",
+  "created_at": "2026-09-05T12:23:23.639889+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-05T12:21:20.124776+00:00"
-      },
-      {
         "key": "schema",
         "value": "15"
+      },
+      {
+        "key": "data_quality_v4",
+        "value": "2026-09-05T12:23:23.621787+00:00"
       }
     ],
     "teams": [
@@ -8558,7 +8558,7 @@
         "updated_at": "2026-09-05T12:06:25.320491+00:00"
       },
       {
-        "id": "87b9b9b0c269a835265e",
+        "id": "eb0b7952fdfa071601ba",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
         "season": "2026",
@@ -9638,7 +9638,7 @@
         "updated_at": "2026-09-05T12:09:57.667632+00:00"
       },
       {
-        "id": "8a6db5b08e4e737c03fd",
+        "id": "20912d9303c20fdb624e",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
         "season": "2026",
@@ -10718,7 +10718,7 @@
         "updated_at": "2026-09-05T12:20:55.926776+00:00"
       },
       {
-        "id": "b51ac404c2de1db34863",
+        "id": "82ff2d6551b11e964d4b",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
         "season": "2026",
@@ -10738,7 +10738,7 @@
         "updated_at": "2026-09-05T12:20:56.607284+00:00"
       },
       {
-        "id": "72bed60ca801324545b1",
+        "id": "c4055fd36705c8ac235b",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
         "season": "2026",
@@ -10858,7 +10858,7 @@
         "updated_at": "2026-09-05T12:21:15.207346+00:00"
       },
       {
-        "id": "b5dbd0724f1fdc549f71",
+        "id": "004bf882d8713cd00918",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
         "season": "2026",
@@ -10898,7 +10898,7 @@
         "updated_at": "2026-09-05T12:21:16.636324+00:00"
       },
       {
-        "id": "a2be1baf13dcd8427726",
+        "id": "fb39d5083f1339fe0fb8",
         "sport": "Futebol",
         "competition": "Campeonato Brasileiro Série A",
         "season": "2026",
@@ -12312,7 +12312,7 @@
         "updated_at": "2026-09-05T12:06:25.320632+00:00"
       },
       {
-        "match_id": "87b9b9b0c269a835265e",
+        "match_id": "eb0b7952fdfa071601ba",
         "source": "Football-Data.org",
         "provider_match_id": "554960",
         "updated_at": "2026-09-05T12:21:17.301087+00:00"
@@ -12636,7 +12636,7 @@
         "updated_at": "2026-09-05T12:09:57.667786+00:00"
       },
       {
-        "match_id": "8a6db5b08e4e737c03fd",
+        "match_id": "20912d9303c20fdb624e",
         "source": "Football-Data.org",
         "provider_match_id": "554989",
         "updated_at": "2026-09-05T12:21:07.975826+00:00"
@@ -12960,13 +12960,13 @@
         "updated_at": "2026-09-05T12:20:55.926903+00:00"
       },
       {
-        "match_id": "b51ac404c2de1db34863",
+        "match_id": "82ff2d6551b11e964d4b",
         "source": "Football-Data.org",
         "provider_match_id": "554933",
         "updated_at": "2026-09-05T12:20:56.607404+00:00"
       },
       {
-        "match_id": "72bed60ca801324545b1",
+        "match_id": "c4055fd36705c8ac235b",
         "source": "Football-Data.org",
         "provider_match_id": "554963",
         "updated_at": "2026-09-05T12:21:04.976398+00:00"
@@ -13002,7 +13002,7 @@
         "updated_at": "2026-09-05T12:21:15.207500+00:00"
       },
       {
-        "match_id": "b5dbd0724f1fdc549f71",
+        "match_id": "004bf882d8713cd00918",
         "source": "Football-Data.org",
         "provider_match_id": "554943",
         "updated_at": "2026-09-05T12:21:15.925032+00:00"
@@ -13014,7 +13014,7 @@
         "updated_at": "2026-09-05T12:21:16.636455+00:00"
       },
       {
-        "match_id": "a2be1baf13dcd8427726",
+        "match_id": "fb39d5083f1339fe0fb8",
         "source": "Football-Data.org",
         "provider_match_id": "554970",
         "updated_at": "2026-09-05T12:21:17.929325+00:00"
@@ -495501,7 +495501,7 @@
       },
       {
         "id": 149,
-        "match_id": "87b9b9b0c269a835265e",
+        "match_id": "eb0b7952fdfa071601ba",
         "source": "FotMob",
         "stage": "diagnostico_jogadores",
         "status": "ERROR",
@@ -496077,7 +496077,7 @@
       },
       {
         "id": 213,
-        "match_id": "8a6db5b08e4e737c03fd",
+        "match_id": "20912d9303c20fdb624e",
         "source": "FotMob",
         "stage": "diagnostico_jogadores",
         "status": "ERROR",
@@ -497634,7 +497634,7 @@
       },
       {
         "id": 386,
-        "match_id": "8a6db5b08e4e737c03fd",
+        "match_id": "20912d9303c20fdb624e",
         "source": "FotMob",
         "stage": "diagnostico_jogadores",
         "status": "ERROR",
@@ -497670,7 +497670,7 @@
       },
       {
         "id": 390,
-        "match_id": "a2be1baf13dcd8427726",
+        "match_id": "fb39d5083f1339fe0fb8",
         "source": "FotMob",
         "stage": "diagnostico_jogadores",
         "status": "ERROR",
@@ -497688,7 +497688,7 @@
       },
       {
         "id": 392,
-        "match_id": "72bed60ca801324545b1",
+        "match_id": "c4055fd36705c8ac235b",
         "source": "FotMob",
         "stage": "diagnostico_jogadores",
         "status": "ERROR",
@@ -497697,7 +497697,7 @@
       },
       {
         "id": 393,
-        "match_id": "87b9b9b0c269a835265e",
+        "match_id": "eb0b7952fdfa071601ba",
         "source": "FotMob",
         "stage": "diagnostico_jogadores",
         "status": "ERROR",
@@ -497796,7 +497796,7 @@
       },
       {
         "id": 404,
-        "match_id": "b5dbd0724f1fdc549f71",
+        "match_id": "004bf882d8713cd00918",
         "source": "FotMob",
         "stage": "diagnostico_jogadores",
         "status": "ERROR",
