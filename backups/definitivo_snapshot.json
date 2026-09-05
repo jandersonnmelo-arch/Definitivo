@@ -1,11 +1,11 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T11:59:32.472396+00:00",
+  "created_at": "2026-09-05T12:00:18.489598+00:00",
   "tables": {
     "schema_meta": [
       {
         "key": "data_quality_v4",
-        "value": "2026-09-05T11:58:47.323429+00:00"
+        "value": "2026-09-05T12:00:18.286992+00:00"
       },
       {
         "key": "schema",
@@ -1405,6 +1405,20 @@
         "name": "Hull City",
         "normalized_name": "hull city",
         "updated_at": "2026-09-05T11:58:46.827646+00:00"
+      },
+      {
+        "id": "c9408bcf3c62659324",
+        "sport": "Futebol",
+        "name": "Loudoun United FC",
+        "normalized_name": "loudoun united",
+        "updated_at": "2026-09-05T12:00:18.336296+00:00"
+      },
+      {
+        "id": "263f15891ad8f19ab4",
+        "sport": "Futebol",
+        "name": "Hartford Athletic",
+        "normalized_name": "hartford athletic",
+        "updated_at": "2026-09-05T12:00:18.336507+00:00"
       }
     ],
     "team_sources": [
@@ -2739,6 +2753,18 @@
         "source": "ESPN",
         "provider_team_id": "306",
         "updated_at": "2026-09-05T11:58:46.827805+00:00"
+      },
+      {
+        "team_id": "c9408bcf3c62659324",
+        "source": "ESPN",
+        "provider_team_id": "19410",
+        "updated_at": "2026-09-05T12:00:18.336398+00:00"
+      },
+      {
+        "team_id": "263f15891ad8f19ab4",
+        "source": "ESPN",
+        "provider_team_id": "19411",
+        "updated_at": "2026-09-05T12:00:18.336527+00:00"
       }
     ],
     "matches": [
@@ -5861,6 +5887,26 @@
         "source": "ESPN",
         "provider_match_id": "401879316",
         "updated_at": "2026-09-05T11:58:46.827929+00:00"
+      },
+      {
+        "id": "401842047",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-01T23:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "c9408bcf3c62659324",
+        "home_name": "Loudoun United FC",
+        "home_short": "LOU",
+        "away_id": "263f15891ad8f19ab4",
+        "away_name": "Hartford Athletic",
+        "away_short": "HFD",
+        "home_score": 2,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401842047",
+        "updated_at": "2026-09-05T12:00:18.336586+00:00"
       }
     ],
     "match_sources": [
@@ -6829,6 +6875,12 @@
         "source": "ESPN",
         "provider_match_id": "401879316",
         "updated_at": "2026-09-05T11:58:46.828138+00:00"
+      },
+      {
+        "match_id": "401842047",
+        "source": "ESPN",
+        "provider_match_id": "401842047",
+        "updated_at": "2026-09-05T12:00:18.336744+00:00"
       }
     ],
     "match_stats": [
@@ -91614,6 +91666,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-05T11:59:31.104712+00:00"
+      },
+      {
+        "id": 73,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "WARNING",
+        "message": "Football-Data.org: ID do provedor não encontrado para a equipe f0744d7d6c6fa9d40a; histórico não será gravado por esta fonte.",
+        "created_at": "2026-09-05T12:00:18.306949+00:00"
       }
     ],
     "api_usage": [
