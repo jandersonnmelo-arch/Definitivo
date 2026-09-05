@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:20:31.685527+00:00",
+  "created_at": "2026-09-05T12:20:57.849191+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-05T12:20:55.323933+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-05T12:20:25.256520+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -571,7 +571,7 @@
         "sport": "Futebol",
         "name": "Coritiba FBC",
         "normalized_name": "coritiba fbc",
-        "updated_at": "2026-09-05T12:18:14.020558+00:00"
+        "updated_at": "2026-09-05T12:20:57.206652+00:00"
       },
       {
         "id": "590c1e0cd091eaf7e1",
@@ -774,7 +774,7 @@
         "sport": "Futebol",
         "name": "Cruzeiro EC",
         "normalized_name": "cruzeiro",
-        "updated_at": "2026-09-05T12:18:21.140222+00:00"
+        "updated_at": "2026-09-05T12:20:57.207073+00:00"
       },
       {
         "id": "71cf9e0f0db3eef124",
@@ -788,7 +788,7 @@
         "sport": "Futebol",
         "name": "SC Internacional",
         "normalized_name": "internacional",
-        "updated_at": "2026-09-05T12:18:18.555085+00:00"
+        "updated_at": "2026-09-05T12:20:55.926500+00:00"
       },
       {
         "id": "f541c69bd4ee4d9180",
@@ -816,7 +816,7 @@
         "sport": "Futebol",
         "name": "Botafogo FR",
         "normalized_name": "botafogo fr",
-        "updated_at": "2026-09-05T12:18:21.825633+00:00"
+        "updated_at": "2026-09-05T12:20:56.607110+00:00"
       },
       {
         "id": "9a3c152825daa730cb",
@@ -9769,13 +9769,13 @@
         "home_name": "Coritiba FBC",
         "home_short": "COR",
         "away_id": "bff457c9c7114e8deb",
-        "away_name": "Cruzeiro",
+        "away_name": "Cruzeiro EC",
         "away_short": "CRU",
         "home_score": 0,
         "away_score": 1,
         "source": "Football-Data.org",
         "provider_match_id": "554944",
-        "updated_at": "2026-09-05T12:13:03.553203+00:00"
+        "updated_at": "2026-09-05T12:20:57.207225+00:00"
       },
       {
         "id": "a8785c66fd91042b0227",
@@ -10696,6 +10696,46 @@
         "source": "Football-Data.org",
         "provider_match_id": "554984",
         "updated_at": "2026-09-05T12:18:21.825771+00:00"
+      },
+      {
+        "id": "554926",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-23T00:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "bd162042f98d9dd2b6",
+        "home_name": "SC Internacional",
+        "home_short": "SCI",
+        "away_id": "bff457c9c7114e8deb",
+        "away_name": "Cruzeiro EC",
+        "away_short": "CRU",
+        "home_score": 1,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "554926",
+        "updated_at": "2026-09-05T12:20:55.926776+00:00"
+      },
+      {
+        "id": "554933",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-26T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "bff457c9c7114e8deb",
+        "home_name": "Cruzeiro EC",
+        "home_short": "CRU",
+        "away_id": "3b748ab976a81dcbcd",
+        "away_name": "Botafogo FR",
+        "away_short": "BOT",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "554933",
+        "updated_at": "2026-09-05T12:20:56.607284+00:00"
       }
     ],
     "match_sources": [
@@ -12455,7 +12495,7 @@
         "match_id": "05393975f2f506a3f3d2",
         "source": "Football-Data.org",
         "provider_match_id": "554944",
-        "updated_at": "2026-09-05T12:13:03.553343+00:00"
+        "updated_at": "2026-09-05T12:20:57.207383+00:00"
       },
       {
         "match_id": "a8785c66fd91042b0227",
@@ -12732,6 +12772,18 @@
         "source": "Football-Data.org",
         "provider_match_id": "554984",
         "updated_at": "2026-09-05T12:18:21.826074+00:00"
+      },
+      {
+        "match_id": "554926",
+        "source": "Football-Data.org",
+        "provider_match_id": "554926",
+        "updated_at": "2026-09-05T12:20:55.926903+00:00"
+      },
+      {
+        "match_id": "554933",
+        "source": "Football-Data.org",
+        "provider_match_id": "554933",
+        "updated_at": "2026-09-05T12:20:56.607404+00:00"
       }
     ],
     "match_stats": [
@@ -472314,8 +472366,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-05",
-        "calls": 20,
-        "last_call": "2026-09-05T12:18:17.422647+00:00",
+        "calls": 21,
+        "last_call": "2026-09-05T12:20:55.914904+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -474921,6 +474973,11 @@
         "id": 517,
         "provider": "FotMob",
         "created_at": "2026-09-05T12:20:20.535786+00:00"
+      },
+      {
+        "id": 518,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-05T12:20:55.914904+00:00"
       }
     ],
     "ai_match_samples": [
