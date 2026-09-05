@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:17:04.266462+00:00",
+  "created_at": "2026-09-05T12:17:05.404063+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -427719,6 +427719,15 @@
         "status": "OK",
         "message": "ESPN: 56 estatísticas, 46 jogadores, 644 estatísticas individuais reais, 0 presenças",
         "created_at": "2026-09-05T12:17:03.887259+00:00"
+      },
+      {
+        "id": 338,
+        "match_id": "e0fb9dd9154c1698305c",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-05T12:17:05.274340+00:00"
       }
     ],
     "api_usage": [
@@ -427741,8 +427750,8 @@
       {
         "provider": "FotMob",
         "day_utc": "2026-09-05",
-        "calls": 280,
-        "last_call": "2026-09-05T12:17:04.229489+00:00",
+        "calls": 282,
+        "last_call": "2026-09-05T12:17:05.260768+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -430162,6 +430171,16 @@
         "id": 483,
         "provider": "FotMob",
         "created_at": "2026-09-05T12:17:04.229489+00:00"
+      },
+      {
+        "id": 484,
+        "provider": "FotMob",
+        "created_at": "2026-09-05T12:17:04.600855+00:00"
+      },
+      {
+        "id": 485,
+        "provider": "FotMob",
+        "created_at": "2026-09-05T12:17:05.260768+00:00"
       }
     ],
     "ai_match_samples": [
@@ -432682,6 +432701,27 @@
         "target_away_goals": 5.0,
         "target_result": "AWAY",
         "target_total_goals": 7.0,
+        "target_btts": 1,
+        "is_training_ready": 1
+      },
+      {
+        "id": 130,
+        "match_id": "e0fb9dd9154c1698305c",
+        "dataset_version": "1",
+        "created_at": "2026-09-05T12:17:05.393420+00:00",
+        "cutoff_time": "2026-08-02T23:10Z",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "home_team_id": "b2676e62cf3368eb2d",
+        "home_team_name": "Leones",
+        "away_team_id": "192a5a24657fd487e0",
+        "away_team_name": "Barcelona SC",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":0,\"sample_away\":0,\"xg_home\":null,\"xg_away\":null,\"probabilities\":{\"home\":null,\"draw\":null,\"away\":null},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":null,\"total_expected\":null,\"line\":null,\"lines\":{},\"under_lines\":{},\"over\":{},\"under\":{},\"over_probability\":null,\"under_probability\":null,\"exact_total\":{},\"ambas_marcam\":null},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "target_home_goals": 1.0,
+        "target_away_goals": 1.0,
+        "target_result": "DRAW",
+        "target_total_goals": 2.0,
         "target_btts": 1,
         "is_training_ready": 1
       }
