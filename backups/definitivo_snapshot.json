@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T12:05:45.861869+00:00",
+  "created_at": "2026-09-05T12:06:22.725793+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-05T12:06:21.968556+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-05T12:05:45.846392+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -380,9 +380,9 @@
       {
         "id": "c70e342520628d90be",
         "sport": "Futebol",
-        "name": "Bragantino",
-        "normalized_name": "bragantino",
-        "updated_at": "2026-09-05T11:56:41.295177+00:00"
+        "name": "RB Bragantino",
+        "normalized_name": "rb bragantino",
+        "updated_at": "2026-09-05T12:06:22.554473+00:00"
       },
       {
         "id": "9f563292bea3f50f07",
@@ -443,9 +443,9 @@
       {
         "id": "0b87c3ffb6e9585c89",
         "sport": "Futebol",
-        "name": "Fluminense",
+        "name": "Fluminense FC",
         "normalized_name": "fluminense",
-        "updated_at": "2026-09-05T11:56:41.544227+00:00"
+        "updated_at": "2026-09-05T12:06:22.554331+00:00"
       },
       {
         "id": "b7dc25efe9d18ad729",
@@ -8096,6 +8096,26 @@
         "source": "ESPN",
         "provider_match_id": "401853990",
         "updated_at": "2026-09-05T12:05:15.751686+00:00"
+      },
+      {
+        "id": "554925",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-17T23:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "0b87c3ffb6e9585c89",
+        "home_name": "Fluminense FC",
+        "home_short": "FLU",
+        "away_id": "c70e342520628d90be",
+        "away_name": "RB Bragantino",
+        "away_short": "RBB",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "554925",
+        "updated_at": "2026-09-05T12:06:22.554579+00:00"
       }
     ],
     "match_sources": [
@@ -9472,6 +9492,12 @@
         "source": "ESPN",
         "provider_match_id": "401853990",
         "updated_at": "2026-09-05T12:05:15.751818+00:00"
+      },
+      {
+        "match_id": "554925",
+        "source": "Football-Data.org",
+        "provider_match_id": "554925",
+        "updated_at": "2026-09-05T12:06:22.554715+00:00"
       }
     ],
     "match_stats": [
@@ -162892,8 +162918,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-05",
-        "calls": 8,
-        "last_call": "2026-09-05T12:05:13.690659+00:00",
+        "calls": 9,
+        "last_call": "2026-09-05T12:06:22.545312+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -163984,6 +164010,11 @@
         "id": 214,
         "provider": "FotMob",
         "created_at": "2026-09-05T12:05:42.726182+00:00"
+      },
+      {
+        "id": 215,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-05T12:06:22.545312+00:00"
       }
     ],
     "ai_match_samples": [
