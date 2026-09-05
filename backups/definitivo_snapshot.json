@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T11:58:07.994211+00:00",
+  "created_at": "2026-09-05T11:58:41.825523+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-05T11:58:41.172907+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-05T11:58:00.763732+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -25,7 +25,7 @@
         "sport": "Futebol",
         "name": "AFC Bournemouth",
         "normalized_name": "afc bournemouth",
-        "updated_at": "2026-09-05T11:57:21.660997+00:00"
+        "updated_at": "2026-09-05T11:58:41.769594+00:00"
       },
       {
         "id": "68d1e8d49c1c8fefc6",
@@ -135,9 +135,9 @@
       {
         "id": "630e0be9d7e0b6d045",
         "sport": "Futebol",
-        "name": "Manchester City",
+        "name": "Manchester City FC",
         "normalized_name": "manchester city",
-        "updated_at": "2026-09-05T11:57:21.434776+00:00"
+        "updated_at": "2026-09-05T11:58:41.769497+00:00"
       },
       {
         "id": "c6ce9442c38867d5a3",
@@ -5445,7 +5445,7 @@
         "away_score": 1,
         "source": "Football-Data.org",
         "provider_match_id": "560548",
-        "updated_at": "2026-09-05T11:57:20.927918+00:00"
+        "updated_at": "2026-09-05T11:58:41.769647+00:00"
       },
       {
         "id": "4067189c58467862f4a1",
@@ -6389,7 +6389,7 @@
         "match_id": "397e8237273e0adfa02a",
         "source": "Football-Data.org",
         "provider_match_id": "560548",
-        "updated_at": "2026-09-05T11:57:20.928116+00:00"
+        "updated_at": "2026-09-05T11:58:41.769760+00:00"
       },
       {
         "match_id": "4067189c58467862f4a1",
@@ -41637,8 +41637,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-05",
-        "calls": 3,
-        "last_call": "2026-09-05T11:57:20.915507+00:00",
+        "calls": 4,
+        "last_call": "2026-09-05T11:58:41.765511+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -42179,6 +42179,11 @@
         "id": 104,
         "provider": "FotMob",
         "created_at": "2026-09-05T11:57:59.013389+00:00"
+      },
+      {
+        "id": 105,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-05T11:58:41.765511+00:00"
       }
     ],
     "ai_match_samples": [
