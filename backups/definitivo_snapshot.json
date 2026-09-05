@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-05T11:57:43.620334+00:00",
+  "created_at": "2026-09-05T11:57:46.250296+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -98,13 +98,6 @@
         "updated_at": "2026-09-05T11:56:33.440257+00:00"
       },
       {
-        "id": "02c67b3096b32878b0",
-        "sport": "Futebol",
-        "name": "Bayer 04 Leverkusen",
-        "normalized_name": "bayer 04 leverkusen",
-        "updated_at": "2026-09-05T11:56:33.447978+00:00"
-      },
-      {
         "id": "0ab4d3bec69c195da4",
         "sport": "Futebol",
         "name": "1. FC Union Berlin",
@@ -180,13 +173,6 @@
         "name": "Leeds United FC",
         "normalized_name": "leeds united",
         "updated_at": "2026-09-05T11:56:33.489408+00:00"
-      },
-      {
-        "id": "75f564e3d16ab2ec31",
-        "sport": "Futebol",
-        "name": "Athletic Club",
-        "normalized_name": "athletic club",
-        "updated_at": "2026-09-05T11:56:33.495884+00:00"
       },
       {
         "id": "f5fd03ff72746d9a82",
@@ -453,13 +439,6 @@
         "name": "São Paulo",
         "normalized_name": "sao paulo",
         "updated_at": "2026-09-05T11:56:41.616299+00:00"
-      },
-      {
-        "id": "cfee4cccf2f07aeae1",
-        "sport": "Futebol",
-        "name": "CA Mineiro",
-        "normalized_name": "mineiro",
-        "updated_at": "2026-09-05T11:56:33.650466+00:00"
       },
       {
         "id": "0b87c3ffb6e9585c89",
@@ -1439,12 +1418,6 @@
         "updated_at": "2026-09-05T11:56:33.440275+00:00"
       },
       {
-        "team_id": "02c67b3096b32878b0",
-        "source": "Football-Data.org",
-        "provider_team_id": "3",
-        "updated_at": "2026-09-05T11:56:33.448097+00:00"
-      },
-      {
         "team_id": "0ab4d3bec69c195da4",
         "source": "Football-Data.org",
         "provider_team_id": "28",
@@ -1509,12 +1482,6 @@
         "source": "Football-Data.org",
         "provider_team_id": "341",
         "updated_at": "2026-09-05T11:56:33.489421+00:00"
-      },
-      {
-        "team_id": "75f564e3d16ab2ec31",
-        "source": "Football-Data.org",
-        "provider_team_id": "77",
-        "updated_at": "2026-09-05T11:56:33.495938+00:00"
       },
       {
         "team_id": "f5fd03ff72746d9a82",
@@ -1743,12 +1710,6 @@
         "source": "Football-Data.org",
         "provider_team_id": "1776",
         "updated_at": "2026-09-05T11:56:33.650380+00:00"
-      },
-      {
-        "team_id": "cfee4cccf2f07aeae1",
-        "source": "Football-Data.org",
-        "provider_team_id": "1766",
-        "updated_at": "2026-09-05T11:56:33.650481+00:00"
       },
       {
         "team_id": "0b87c3ffb6e9585c89",
@@ -5347,146 +5308,6 @@
         "updated_at": "2026-09-05T11:56:41.650048+00:00"
       },
       {
-        "id": "560550",
-        "sport": "Futebol",
-        "competition": "Premier League",
-        "season": "2026",
-        "start_time": "2026-08-23T15:30:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "92596fc166955d857f",
-        "home_name": "Newcastle United FC",
-        "home_short": "NEW",
-        "away_id": "acf77e31bd33648cc7",
-        "away_name": "Liverpool FC",
-        "away_short": "LIV",
-        "home_score": 2,
-        "away_score": 2,
-        "source": "Football-Data.org",
-        "provider_match_id": "560550",
-        "updated_at": "2026-09-05T11:57:11.204718+00:00"
-      },
-      {
-        "id": "560558",
-        "sport": "Futebol",
-        "competition": "Premier League",
-        "season": "2026",
-        "start_time": "2026-08-29T16:30:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "9f1cfe532350c1b92f",
-        "home_name": "Tottenham Hotspur FC",
-        "home_short": "TOT",
-        "away_id": "92596fc166955d857f",
-        "away_name": "Newcastle United FC",
-        "away_short": "NEW",
-        "home_score": 0,
-        "away_score": 2,
-        "source": "Football-Data.org",
-        "provider_match_id": "560558",
-        "updated_at": "2026-09-05T11:57:11.220470+00:00"
-      },
-      {
-        "id": "401905959",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-08-12T16:15Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "92596fc166955d857f",
-        "home_name": "Newcastle United",
-        "home_short": "NEW",
-        "away_id": "0933e968d71de4159d",
-        "away_name": "Everton",
-        "away_short": "EVE",
-        "home_score": 1,
-        "away_score": 3,
-        "source": "ESPN",
-        "provider_match_id": "401905959",
-        "updated_at": "2026-09-05T11:57:13.129582+00:00"
-      },
-      {
-        "id": "401905961",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-08-15T14:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "92596fc166955d857f",
-        "home_name": "Newcastle United",
-        "home_short": "NEW",
-        "away_id": "e5f88c2e2b52895d97",
-        "away_name": "Bayer Leverkusen",
-        "away_short": "B04",
-        "home_score": 1,
-        "away_score": 2,
-        "source": "ESPN",
-        "provider_match_id": "401905961",
-        "updated_at": "2026-09-05T11:57:13.568125+00:00"
-      },
-      {
-        "id": "401905967",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-08-16T15:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "92596fc166955d857f",
-        "home_name": "Newcastle United",
-        "home_short": "NEW",
-        "away_id": "ed6954a64a6bc051de",
-        "away_name": "Strasbourg",
-        "away_short": "STR",
-        "home_score": 1,
-        "away_score": 1,
-        "source": "ESPN",
-        "provider_match_id": "401905967",
-        "updated_at": "2026-09-05T11:57:13.746551+00:00"
-      },
-      {
-        "id": "401879319",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-08-23T15:30Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "92596fc166955d857f",
-        "home_name": "Newcastle United",
-        "home_short": "NEW",
-        "away_id": "acf77e31bd33648cc7",
-        "away_name": "Liverpool",
-        "away_short": "LIV",
-        "home_score": 2,
-        "away_score": 2,
-        "source": "ESPN",
-        "provider_match_id": "401879319",
-        "updated_at": "2026-09-05T11:57:14.536694+00:00"
-      },
-      {
-        "id": "401908125",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-08-26T18:45Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "92596fc166955d857f",
-        "home_name": "Newcastle United",
-        "home_short": "NEW",
-        "away_id": "0f9dc2d308d47b0dfe",
-        "away_name": "West Bromwich Albion",
-        "away_short": "WBA",
-        "home_score": 3,
-        "away_score": 2,
-        "source": "ESPN",
-        "provider_match_id": "401908125",
-        "updated_at": "2026-09-05T11:57:14.962351+00:00"
-      },
-      {
         "id": "c3fc9e8ab4a13312f1e9",
         "sport": "Futebol",
         "competition": "Premier League",
@@ -6527,48 +6348,6 @@
         "source": "ESPN",
         "provider_match_id": "401913074",
         "updated_at": "2026-09-05T11:56:41.650166+00:00"
-      },
-      {
-        "match_id": "560550",
-        "source": "Football-Data.org",
-        "provider_match_id": "560550",
-        "updated_at": "2026-09-05T11:57:11.204845+00:00"
-      },
-      {
-        "match_id": "560558",
-        "source": "Football-Data.org",
-        "provider_match_id": "560558",
-        "updated_at": "2026-09-05T11:57:11.220556+00:00"
-      },
-      {
-        "match_id": "401905959",
-        "source": "ESPN",
-        "provider_match_id": "401905959",
-        "updated_at": "2026-09-05T11:57:13.129725+00:00"
-      },
-      {
-        "match_id": "401905961",
-        "source": "ESPN",
-        "provider_match_id": "401905961",
-        "updated_at": "2026-09-05T11:57:13.568219+00:00"
-      },
-      {
-        "match_id": "401905967",
-        "source": "ESPN",
-        "provider_match_id": "401905967",
-        "updated_at": "2026-09-05T11:57:13.746700+00:00"
-      },
-      {
-        "match_id": "401879319",
-        "source": "ESPN",
-        "provider_match_id": "401879319",
-        "updated_at": "2026-09-05T11:57:14.536840+00:00"
-      },
-      {
-        "match_id": "401908125",
-        "source": "ESPN",
-        "provider_match_id": "401908125",
-        "updated_at": "2026-09-05T11:57:14.962485+00:00"
       },
       {
         "match_id": "c3fc9e8ab4a13312f1e9",
@@ -35402,6 +35181,33 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-05T11:57:40.855874+00:00"
+      },
+      {
+        "id": 23,
+        "match_id": "06949e3edea6503faddb",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "INFO",
+        "message": "ESPN: jogadores=0, estatísticas individuais reais=0, presença=0, amostra=[nenhum nome retornado]",
+        "created_at": "2026-09-05T11:57:45.512876+00:00"
+      },
+      {
+        "id": 24,
+        "match_id": "06949e3edea6503faddb",
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN: 0 estatísticas, 0 jogadores, 0 estatísticas individuais reais, 0 presenças",
+        "created_at": "2026-09-05T11:57:45.519861+00:00"
+      },
+      {
+        "id": 25,
+        "match_id": "06949e3edea6503faddb",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-05T11:57:46.192100+00:00"
       }
     ],
     "api_usage": [
@@ -35416,16 +35222,16 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-09-05",
-        "calls": 70,
-        "last_call": "2026-09-05T11:57:39.297378+00:00",
+        "calls": 71,
+        "last_call": "2026-09-05T11:57:45.063479+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
       {
         "provider": "FotMob",
         "day_utc": "2026-09-05",
-        "calls": 15,
-        "last_call": "2026-09-05T11:57:40.843799+00:00",
+        "calls": 17,
+        "last_call": "2026-09-05T11:57:46.183504+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -35870,6 +35676,21 @@
         "id": 88,
         "provider": "FotMob",
         "created_at": "2026-09-05T11:57:40.843799+00:00"
+      },
+      {
+        "id": 89,
+        "provider": "ESPN",
+        "created_at": "2026-09-05T11:57:45.063479+00:00"
+      },
+      {
+        "id": 90,
+        "provider": "FotMob",
+        "created_at": "2026-09-05T11:57:45.850697+00:00"
+      },
+      {
+        "id": 91,
+        "provider": "FotMob",
+        "created_at": "2026-09-05T11:57:46.183504+00:00"
       }
     ],
     "ai_match_samples": [
@@ -35977,7 +35798,32 @@
         "target_total_goals": 3.0,
         "target_btts": 1,
         "is_training_ready": 1
+      },
+      {
+        "id": 6,
+        "match_id": "06949e3edea6503faddb",
+        "dataset_version": "1",
+        "created_at": "2026-09-05T11:57:46.242506+00:00",
+        "cutoff_time": "2026-08-16T15:00Z",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "home_team_id": "92596fc166955d857f",
+        "home_team_name": "Newcastle United",
+        "away_team_id": "ed6954a64a6bc051de",
+        "away_team_name": "Strasbourg",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":2,\"sample_away\":0,\"xg_home\":1.0,\"xg_away\":2.5,\"probabilities\":{\"home\":13.1,\"draw\":16.8,\"away\":70.0},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":2,\"goals_for\":1.0,\"goals_against\":2.5,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":3.5,\"total_expected\":3.5,\"line\":3.5,\"lines\":{\"3.5\":46.3},\"under_lines\":{\"3.5\":53.7},\"over\":{\"3.5\":46.3},\"under\":{\"3.5\":53.7},\"over_probability\":46.3,\"under_probability\":53.7,\"exact_total\":{\"0\":3.0,\"1\":10.6,\"2\":18.5,\"3\":21.6,\"4+\":46.3},\"ambas_marcam\":58.0},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":1.0,\"away\":2.5,\"total\":3.5,\"sample_home\":2,\"sample_away\":0},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "target_home_goals": 1.0,
+        "target_away_goals": 1.0,
+        "target_result": "DRAW",
+        "target_total_goals": 2.0,
+        "target_btts": 1,
+        "is_training_ready": 1
       }
-    ]
+    ],
+    "ai_player_samples": [],
+    "ai_predictions": [],
+    "ai_model_runs": [],
+    "ai_dataset_v1": []
   }
 }
