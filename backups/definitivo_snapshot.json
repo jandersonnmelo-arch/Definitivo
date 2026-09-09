@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-09T23:32:53.929281+00:00",
+  "created_at": "2026-09-09T23:32:55.926110+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -114151,6 +114151,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-09T23:32:53.823101+00:00"
+      },
+      {
+        "id": 63,
+        "match_id": "7aedb7b14760d735e0f4",
+        "source": "Dados Futebol",
+        "stage": "enriquecimento",
+        "status": "ERROR",
+        "message": "Dados Futebol: HTTP 401: {'erro': 'Não autorizado', 'mensagem': 'API Key inválida ou inativa'}",
+        "created_at": "2026-09-09T23:32:55.918954+00:00"
       }
     ],
     "api_usage": [
