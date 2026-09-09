@@ -1,11 +1,11 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-09T23:33:24.296904+00:00",
+  "created_at": "2026-09-09T23:35:40.537225+00:00",
   "tables": {
     "schema_meta": [
       {
         "key": "data_quality_v4",
-        "value": "2026-09-09T23:33:12.728661+00:00"
+        "value": "2026-09-09T23:35:39.770665+00:00"
       },
       {
         "key": "schema",
@@ -144,7 +144,7 @@
         "sport": "Futebol",
         "name": "Estudiantes de La Plata",
         "normalized_name": "estudiantes de la plata",
-        "updated_at": "2026-09-09T23:31:02.826726+00:00"
+        "updated_at": "2026-09-09T23:35:40.390320+00:00"
       },
       {
         "id": "7ce26de4dc6960a5e7",
@@ -1440,6 +1440,13 @@
         "name": "PSV Eindhoven",
         "normalized_name": "psv eindhoven",
         "updated_at": "2026-09-09T23:31:28.261995+00:00"
+      },
+      {
+        "id": "fd23fef2dc4f652049",
+        "sport": "Futebol",
+        "name": "CD Universidad Católica",
+        "normalized_name": "cd universidad catolica",
+        "updated_at": "2026-09-09T23:35:40.390471+00:00"
       }
     ],
     "team_sources": [
@@ -2828,6 +2835,12 @@
         "source": "ESPN",
         "provider_team_id": "20802",
         "updated_at": "2026-09-09T23:31:28.262012+00:00"
+      },
+      {
+        "team_id": "fd23fef2dc4f652049",
+        "source": "Football-Data.org",
+        "provider_team_id": "6993",
+        "updated_at": "2026-09-09T23:35:40.390510+00:00"
       }
     ],
     "matches": [
@@ -5930,6 +5943,26 @@
         "source": "ESPN",
         "provider_match_id": "401882173",
         "updated_at": "2026-09-09T23:31:28.262065+00:00"
+      },
+      {
+        "id": "564456",
+        "sport": "Futebol",
+        "competition": "Copa Libertadores",
+        "season": "2026",
+        "start_time": "2026-08-12T00:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "e8c7be8152d900f4cc",
+        "home_name": "Estudiantes de La Plata",
+        "home_short": "EST",
+        "away_id": "fd23fef2dc4f652049",
+        "away_name": "CD Universidad Católica",
+        "away_short": "CAT",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "564456",
+        "updated_at": "2026-09-09T23:35:40.390578+00:00"
       }
     ],
     "match_sources": [
@@ -6910,6 +6943,12 @@
         "source": "ESPN",
         "provider_match_id": "401882173",
         "updated_at": "2026-09-09T23:31:28.262192+00:00"
+      },
+      {
+        "match_id": "564456",
+        "source": "Football-Data.org",
+        "provider_match_id": "564456",
+        "updated_at": "2026-09-09T23:35:40.390744+00:00"
       }
     ],
     "match_stats": [
@@ -133756,8 +133795,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-09",
-        "calls": 4,
-        "last_call": "2026-09-09T23:32:56.519299+00:00",
+        "calls": 5,
+        "last_call": "2026-09-09T23:35:40.380126+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -134496,6 +134535,11 @@
         "id": 142,
         "provider": "ESPN",
         "created_at": "2026-09-09T23:33:08.914607+00:00"
+      },
+      {
+        "id": 143,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-09T23:35:40.380126+00:00"
       }
     ],
     "ai_match_samples": [
