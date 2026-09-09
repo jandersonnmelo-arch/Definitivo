@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-09T23:35:40.537225+00:00",
+  "created_at": "2026-09-09T23:35:49.264344+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-09T23:35:39.770665+00:00"
-      },
-      {
         "key": "schema",
         "value": "15"
+      },
+      {
+        "key": "data_quality_v4",
+        "value": "2026-09-09T23:35:47.996614+00:00"
       }
     ],
     "teams": [
@@ -144,14 +144,14 @@
         "sport": "Futebol",
         "name": "Estudiantes de La Plata",
         "normalized_name": "estudiantes de la plata",
-        "updated_at": "2026-09-09T23:35:40.390320+00:00"
+        "updated_at": "2026-09-09T23:35:45.160893+00:00"
       },
       {
         "id": "7ce26de4dc6960a5e7",
         "sport": "Futebol",
-        "name": "Corinthians",
-        "normalized_name": "corinthians",
-        "updated_at": "2026-09-09T23:31:02.826559+00:00"
+        "name": "SC Corinthians Paulista",
+        "normalized_name": "corinthians paulista",
+        "updated_at": "2026-09-09T23:35:47.742071+00:00"
       },
       {
         "id": "b08aa26394bb9aaf6c",
@@ -340,14 +340,14 @@
         "sport": "Futebol",
         "name": "Coritiba FBC",
         "normalized_name": "coritiba fbc",
-        "updated_at": "2026-09-09T23:30:53.723571+00:00"
+        "updated_at": "2026-09-09T23:35:47.391085+00:00"
       },
       {
         "id": "71cf9e0f0db3eef124",
         "sport": "Futebol",
         "name": "CA Paranaense",
         "normalized_name": "paranaense",
-        "updated_at": "2026-09-09T23:30:53.723847+00:00"
+        "updated_at": "2026-09-09T23:35:46.506314+00:00"
       },
       {
         "id": "78f7aceccec7234876",
@@ -788,7 +788,7 @@
         "sport": "Futebol",
         "name": "Chapecoense AF",
         "normalized_name": "chapecoense af",
-        "updated_at": "2026-09-09T23:30:54.149312+00:00"
+        "updated_at": "2026-09-09T23:35:47.742317+00:00"
       },
       {
         "id": "bd162042f98d9dd2b6",
@@ -814,23 +814,23 @@
       {
         "id": "c70e342520628d90be",
         "sport": "Futebol",
-        "name": "Bragantino",
-        "normalized_name": "bragantino",
-        "updated_at": "2026-09-09T23:31:01.723709+00:00"
+        "name": "RB Bragantino",
+        "normalized_name": "rb bragantino",
+        "updated_at": "2026-09-09T23:35:46.787775+00:00"
       },
       {
         "id": "f541c69bd4ee4d9180",
         "sport": "Futebol",
-        "name": "Santos",
+        "name": "Santos FC",
         "normalized_name": "santos",
-        "updated_at": "2026-09-09T23:31:03.233049+00:00"
+        "updated_at": "2026-09-09T23:35:47.591235+00:00"
       },
       {
         "id": "bff457c9c7114e8deb",
         "sport": "Futebol",
-        "name": "Cruzeiro",
+        "name": "Cruzeiro EC",
         "normalized_name": "cruzeiro",
-        "updated_at": "2026-09-09T23:31:01.739784+00:00"
+        "updated_at": "2026-09-09T23:35:47.084110+00:00"
       },
       {
         "id": "e935532b54e93aed78",
@@ -1122,16 +1122,16 @@
       {
         "id": "9f563292bea3f50f07",
         "sport": "Futebol",
-        "name": "Bahia",
+        "name": "EC Bahia",
         "normalized_name": "bahia",
-        "updated_at": "2026-09-09T23:31:01.896106+00:00"
+        "updated_at": "2026-09-09T23:35:46.304020+00:00"
       },
       {
         "id": "7f612db037dc322ddd",
         "sport": "Futebol",
         "name": "Clube do Remo",
         "normalized_name": "clube do remo",
-        "updated_at": "2026-09-09T23:30:54.696612+00:00"
+        "updated_at": "2026-09-09T23:35:46.141465+00:00"
       },
       {
         "id": "847e239c32f495e89c",
@@ -1446,7 +1446,42 @@
         "sport": "Futebol",
         "name": "CD Universidad Católica",
         "normalized_name": "cd universidad catolica",
-        "updated_at": "2026-09-09T23:35:40.390471+00:00"
+        "updated_at": "2026-09-09T23:35:43.496040+00:00"
+      },
+      {
+        "id": "0ad9d259ca96749e07",
+        "sport": "Futebol",
+        "name": "Universidad Católica",
+        "normalized_name": "universidad catolica",
+        "updated_at": "2026-09-09T23:35:44.029097+00:00"
+      },
+      {
+        "id": "b579166f65033ac631",
+        "sport": "Futebol",
+        "name": "Sarmiento (Junín)",
+        "normalized_name": "sarmiento junin",
+        "updated_at": "2026-09-09T23:35:44.241945+00:00"
+      },
+      {
+        "id": "9e007229ed2526990b",
+        "sport": "Futebol",
+        "name": "Barracas Central",
+        "normalized_name": "barracas central",
+        "updated_at": "2026-09-09T23:35:44.510139+00:00"
+      },
+      {
+        "id": "3fd8c9a7a22e2f79cc",
+        "sport": "Futebol",
+        "name": "Newell's Old Boys",
+        "normalized_name": "newell s old boys",
+        "updated_at": "2026-09-09T23:35:44.793845+00:00"
+      },
+      {
+        "id": "e836cb85acc475d96b",
+        "sport": "Futebol",
+        "name": "CA Rosario Central",
+        "normalized_name": "rosario central",
+        "updated_at": "2026-09-09T23:35:47.257532+00:00"
       }
     ],
     "team_sources": [
@@ -2841,6 +2876,36 @@
         "source": "Football-Data.org",
         "provider_team_id": "6993",
         "updated_at": "2026-09-09T23:35:40.390510+00:00"
+      },
+      {
+        "team_id": "0ad9d259ca96749e07",
+        "source": "ESPN",
+        "provider_team_id": "885",
+        "updated_at": "2026-09-09T23:35:43.710153+00:00"
+      },
+      {
+        "team_id": "b579166f65033ac631",
+        "source": "ESPN",
+        "provider_team_id": "10158",
+        "updated_at": "2026-09-09T23:35:44.242020+00:00"
+      },
+      {
+        "team_id": "9e007229ed2526990b",
+        "source": "ESPN",
+        "provider_team_id": "10060",
+        "updated_at": "2026-09-09T23:35:44.510214+00:00"
+      },
+      {
+        "team_id": "3fd8c9a7a22e2f79cc",
+        "source": "ESPN",
+        "provider_team_id": "14",
+        "updated_at": "2026-09-09T23:35:44.793951+00:00"
+      },
+      {
+        "team_id": "e836cb85acc475d96b",
+        "source": "Football-Data.org",
+        "provider_team_id": "2070",
+        "updated_at": "2026-09-09T23:35:46.917011+00:00"
       }
     ],
     "matches": [
@@ -3042,7 +3107,7 @@
         "away_score": null,
         "source": "multi",
         "provider_match_id": "401912541",
-        "updated_at": "2026-09-09T23:31:02.746258+00:00"
+        "updated_at": "2026-09-09T23:35:45.161118+00:00"
       },
       {
         "id": "474438f0df78a95dda56",
@@ -5945,7 +6010,7 @@
         "updated_at": "2026-09-09T23:31:28.262065+00:00"
       },
       {
-        "id": "564456",
+        "id": "07db0dd942317fcdd1fc",
         "sport": "Futebol",
         "competition": "Copa Libertadores",
         "season": "2026",
@@ -5963,6 +6028,326 @@
         "source": "Football-Data.org",
         "provider_match_id": "564456",
         "updated_at": "2026-09-09T23:35:40.390578+00:00"
+      },
+      {
+        "id": "93d46285b5b7f6a7f45a",
+        "sport": "Futebol",
+        "competition": "Copa Libertadores",
+        "season": "2026",
+        "start_time": "2026-08-19T00:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "fd23fef2dc4f652049",
+        "home_name": "CD Universidad Católica",
+        "home_short": "CAT",
+        "away_id": "e8c7be8152d900f4cc",
+        "away_name": "Estudiantes de La Plata",
+        "away_short": "EST",
+        "home_score": 0,
+        "away_score": 3,
+        "source": "Football-Data.org",
+        "provider_match_id": "564465",
+        "updated_at": "2026-09-09T23:35:43.496473+00:00"
+      },
+      {
+        "id": "a6beec91610685f58810",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-12T00:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "e8c7be8152d900f4cc",
+        "home_name": "Estudiantes de La Plata",
+        "home_short": "EST",
+        "away_id": "0ad9d259ca96749e07",
+        "away_name": "Universidad Católica",
+        "away_short": "CDUC",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401874145",
+        "updated_at": "2026-09-09T23:35:43.710386+00:00"
+      },
+      {
+        "id": "6e222d1284e1cb132389",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-19T00:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "0ad9d259ca96749e07",
+        "home_name": "Universidad Católica",
+        "home_short": "CDUC",
+        "away_id": "e8c7be8152d900f4cc",
+        "away_name": "Estudiantes de La Plata",
+        "away_short": "EST",
+        "home_score": 0,
+        "away_score": 3,
+        "source": "ESPN",
+        "provider_match_id": "401874163",
+        "updated_at": "2026-09-09T23:35:44.029390+00:00"
+      },
+      {
+        "id": "1eb9ccf70253514db575",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-23T17:45Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "b579166f65033ac631",
+        "home_name": "Sarmiento (Junín)",
+        "home_short": "SARM",
+        "away_id": "e8c7be8152d900f4cc",
+        "away_name": "Estudiantes de La Plata",
+        "away_short": "EST",
+        "home_score": 2,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401841519",
+        "updated_at": "2026-09-09T23:35:44.242140+00:00"
+      },
+      {
+        "id": "781876d4f55b3a9271f8",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-27T22:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "e8c7be8152d900f4cc",
+        "home_name": "Estudiantes de La Plata",
+        "home_short": "EST",
+        "away_id": "9e007229ed2526990b",
+        "away_name": "Barracas Central",
+        "away_short": "BAR",
+        "home_score": 3,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401874402",
+        "updated_at": "2026-09-09T23:35:44.510305+00:00"
+      },
+      {
+        "id": "1bd8070404cbdf183448",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-31T22:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "e8c7be8152d900f4cc",
+        "home_name": "Estudiantes de La Plata",
+        "home_short": "EST",
+        "away_id": "3fd8c9a7a22e2f79cc",
+        "away_name": "Newell's Old Boys",
+        "away_short": "NOB",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401841530",
+        "updated_at": "2026-09-09T23:35:44.794182+00:00"
+      },
+      {
+        "id": "c9bb5d35884b48ec5c36",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-23T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "7f612db037dc322ddd",
+        "away_name": "Clube do Remo",
+        "away_short": "CRE",
+        "home_score": 3,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "554923",
+        "updated_at": "2026-09-09T23:35:46.141534+00:00"
+      },
+      {
+        "id": "589324e377378c6862f1",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-26T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "9f563292bea3f50f07",
+        "home_name": "Bahia",
+        "home_short": "BAH",
+        "away_id": "7ce26de4dc6960a5e7",
+        "away_name": "Corinthians",
+        "away_short": "COR",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "554931",
+        "updated_at": "2026-09-09T23:35:46.304787+00:00"
+      },
+      {
+        "id": "b5dbd0724f1fdc549f71",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-30T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "71cf9e0f0db3eef124",
+        "away_name": "CA Paranaense",
+        "away_short": "CAP",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "554943",
+        "updated_at": "2026-09-09T23:35:46.506383+00:00"
+      },
+      {
+        "id": "0701efbac40702007632",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-09T21:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "c70e342520628d90be",
+        "home_name": "Bragantino",
+        "home_short": "RBB",
+        "away_id": "7ce26de4dc6960a5e7",
+        "away_name": "Corinthians",
+        "away_short": "COR",
+        "home_score": 0,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "554952",
+        "updated_at": "2026-09-09T23:35:46.787937+00:00"
+      },
+      {
+        "id": "6c1ad8914eceecd8638d",
+        "sport": "Futebol",
+        "competition": "Copa Libertadores",
+        "season": "2026",
+        "start_time": "2026-08-14T00:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "e836cb85acc475d96b",
+        "home_name": "CA Rosario Central",
+        "home_short": "ROS",
+        "away_id": "7ce26de4dc6960a5e7",
+        "away_name": "Corinthians",
+        "away_short": "COR",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "564462",
+        "updated_at": "2026-09-09T23:35:46.917557+00:00"
+      },
+      {
+        "id": "72bed60ca801324545b1",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-16T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "bff457c9c7114e8deb",
+        "away_name": "Cruzeiro",
+        "away_short": "CRU",
+        "home_score": 1,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "554963",
+        "updated_at": "2026-09-09T23:35:47.084169+00:00"
+      },
+      {
+        "id": "859307f1c4836981ce6f",
+        "sport": "Futebol",
+        "competition": "Copa Libertadores",
+        "season": "2026",
+        "start_time": "2026-08-21T00:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "e836cb85acc475d96b",
+        "away_name": "CA Rosario Central",
+        "away_short": "ROS",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "564470",
+        "updated_at": "2026-09-09T23:35:47.257592+00:00"
+      },
+      {
+        "id": "0eb3026fda6e02a3357c",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-23T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7db41a535db1869ad4",
+        "home_name": "Coritiba FBC",
+        "home_short": "COR",
+        "away_id": "7ce26de4dc6960a5e7",
+        "away_name": "Corinthians",
+        "away_short": "COR",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "554973",
+        "updated_at": "2026-09-09T23:35:47.391607+00:00"
+      },
+      {
+        "id": "78bdb9c5e6a74a886a23",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-08-30T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "f541c69bd4ee4d9180",
+        "away_name": "Santos",
+        "away_short": "SAN",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "554983",
+        "updated_at": "2026-09-09T23:35:47.591293+00:00"
+      },
+      {
+        "id": "1de234db1e890ace57ac",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-09-06T22:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "7ce26de4dc6960a5e7",
+        "home_name": "Corinthians",
+        "home_short": "COR",
+        "away_id": "76ad233033c62ff5ca",
+        "away_name": "Chapecoense AF",
+        "away_short": "CHA",
+        "home_score": 1,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "554992",
+        "updated_at": "2026-09-09T23:35:47.742378+00:00"
       }
     ],
     "match_sources": [
@@ -6744,7 +7129,7 @@
         "match_id": "ce129080e4285d097fcf",
         "source": "ESPN",
         "provider_match_id": "401912541",
-        "updated_at": "2026-09-09T23:31:02.746411+00:00"
+        "updated_at": "2026-09-09T23:35:45.161251+00:00"
       },
       {
         "match_id": "d4e9d7d207cfbf3bcf1b",
@@ -6945,10 +7330,106 @@
         "updated_at": "2026-09-09T23:31:28.262192+00:00"
       },
       {
-        "match_id": "564456",
+        "match_id": "07db0dd942317fcdd1fc",
         "source": "Football-Data.org",
         "provider_match_id": "564456",
         "updated_at": "2026-09-09T23:35:40.390744+00:00"
+      },
+      {
+        "match_id": "93d46285b5b7f6a7f45a",
+        "source": "Football-Data.org",
+        "provider_match_id": "564465",
+        "updated_at": "2026-09-09T23:35:43.496572+00:00"
+      },
+      {
+        "match_id": "a6beec91610685f58810",
+        "source": "ESPN",
+        "provider_match_id": "401874145",
+        "updated_at": "2026-09-09T23:35:43.710503+00:00"
+      },
+      {
+        "match_id": "6e222d1284e1cb132389",
+        "source": "ESPN",
+        "provider_match_id": "401874163",
+        "updated_at": "2026-09-09T23:35:44.029520+00:00"
+      },
+      {
+        "match_id": "1eb9ccf70253514db575",
+        "source": "ESPN",
+        "provider_match_id": "401841519",
+        "updated_at": "2026-09-09T23:35:44.242239+00:00"
+      },
+      {
+        "match_id": "781876d4f55b3a9271f8",
+        "source": "ESPN",
+        "provider_match_id": "401874402",
+        "updated_at": "2026-09-09T23:35:44.510448+00:00"
+      },
+      {
+        "match_id": "1bd8070404cbdf183448",
+        "source": "ESPN",
+        "provider_match_id": "401841530",
+        "updated_at": "2026-09-09T23:35:44.794341+00:00"
+      },
+      {
+        "match_id": "c9bb5d35884b48ec5c36",
+        "source": "Football-Data.org",
+        "provider_match_id": "554923",
+        "updated_at": "2026-09-09T23:35:46.141727+00:00"
+      },
+      {
+        "match_id": "589324e377378c6862f1",
+        "source": "Football-Data.org",
+        "provider_match_id": "554931",
+        "updated_at": "2026-09-09T23:35:46.304982+00:00"
+      },
+      {
+        "match_id": "b5dbd0724f1fdc549f71",
+        "source": "Football-Data.org",
+        "provider_match_id": "554943",
+        "updated_at": "2026-09-09T23:35:46.506523+00:00"
+      },
+      {
+        "match_id": "0701efbac40702007632",
+        "source": "Football-Data.org",
+        "provider_match_id": "554952",
+        "updated_at": "2026-09-09T23:35:46.788033+00:00"
+      },
+      {
+        "match_id": "6c1ad8914eceecd8638d",
+        "source": "Football-Data.org",
+        "provider_match_id": "564462",
+        "updated_at": "2026-09-09T23:35:46.917712+00:00"
+      },
+      {
+        "match_id": "72bed60ca801324545b1",
+        "source": "Football-Data.org",
+        "provider_match_id": "554963",
+        "updated_at": "2026-09-09T23:35:47.084309+00:00"
+      },
+      {
+        "match_id": "859307f1c4836981ce6f",
+        "source": "Football-Data.org",
+        "provider_match_id": "564470",
+        "updated_at": "2026-09-09T23:35:47.257780+00:00"
+      },
+      {
+        "match_id": "0eb3026fda6e02a3357c",
+        "source": "Football-Data.org",
+        "provider_match_id": "554973",
+        "updated_at": "2026-09-09T23:35:47.391914+00:00"
+      },
+      {
+        "match_id": "78bdb9c5e6a74a886a23",
+        "source": "Football-Data.org",
+        "provider_match_id": "554983",
+        "updated_at": "2026-09-09T23:35:47.591425+00:00"
+      },
+      {
+        "match_id": "1de234db1e890ace57ac",
+        "source": "Football-Data.org",
+        "provider_match_id": "554992",
+        "updated_at": "2026-09-09T23:35:47.742503+00:00"
       }
     ],
     "match_stats": [
@@ -133789,30 +134270,75 @@
         "status": "WARNING",
         "message": "Tribuna: HTTP 403",
         "created_at": "2026-09-09T23:33:16.944018+00:00"
+      },
+      {
+        "id": 80,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "OK",
+        "message": "Football-Data.org: 2 partidas históricas coletadas para a equipe",
+        "created_at": "2026-09-09T23:35:43.627364+00:00"
+      },
+      {
+        "id": 81,
+        "match_id": null,
+        "source": "ESPN",
+        "stage": "historico",
+        "status": "OK",
+        "message": "ESPN fallback limitado: 6 partidas para Estudiantes de La Plata em 35 dias; serie_b=False",
+        "created_at": "2026-09-09T23:35:45.608344+00:00"
+      },
+      {
+        "id": 82,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "OK",
+        "message": "Football-Data.org: 10 partidas históricas coletadas para a equipe",
+        "created_at": "2026-09-09T23:35:47.942403+00:00"
+      },
+      {
+        "id": 83,
+        "match_id": "ce129080e4285d097fcf",
+        "source": "SYSTEM",
+        "stage": "qualidade_dados",
+        "status": "OK",
+        "message": "Reconciliação pós-coleta: equipes=0, jogadores=0, estatísticas migradas=0, duplicadas removidas=0, partidas Série B consolidadas=0",
+        "created_at": "2026-09-09T23:35:48.006524+00:00"
+      },
+      {
+        "id": 84,
+        "match_id": "1de234db1e890ace57ac",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-09T23:35:49.165775+00:00"
       }
     ],
     "api_usage": [
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-09",
-        "calls": 5,
-        "last_call": "2026-09-09T23:35:40.380126+00:00",
+        "calls": 6,
+        "last_call": "2026-09-09T23:35:46.130754+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
       {
         "provider": "ESPN",
         "day_utc": "2026-09-09",
-        "calls": 83,
-        "last_call": "2026-09-09T23:33:08.914607+00:00",
+        "calls": 84,
+        "last_call": "2026-09-09T23:35:45.583555+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
       {
         "provider": "FotMob",
         "day_utc": "2026-09-09",
-        "calls": 54,
-        "last_call": "2026-09-09T23:33:06.351460+00:00",
+        "calls": 57,
+        "last_call": "2026-09-09T23:35:49.155981+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -134540,6 +135066,31 @@
         "id": 143,
         "provider": "Football-Data.org",
         "created_at": "2026-09-09T23:35:40.380126+00:00"
+      },
+      {
+        "id": 144,
+        "provider": "ESPN",
+        "created_at": "2026-09-09T23:35:45.583555+00:00"
+      },
+      {
+        "id": 145,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-09T23:35:46.130754+00:00"
+      },
+      {
+        "id": 146,
+        "provider": "FotMob",
+        "created_at": "2026-09-09T23:35:48.388589+00:00"
+      },
+      {
+        "id": 147,
+        "provider": "FotMob",
+        "created_at": "2026-09-09T23:35:48.825946+00:00"
+      },
+      {
+        "id": 148,
+        "provider": "FotMob",
+        "created_at": "2026-09-09T23:35:49.155981+00:00"
       }
     ],
     "ai_match_samples": [
@@ -134981,6 +135532,27 @@
         "target_away_goals": 1.0,
         "target_result": "HOME",
         "target_total_goals": 6.0,
+        "target_btts": 1,
+        "is_training_ready": 1
+      },
+      {
+        "id": 22,
+        "match_id": "1de234db1e890ace57ac",
+        "dataset_version": "1",
+        "created_at": "2026-09-09T23:35:49.255402+00:00",
+        "cutoff_time": "2026-09-06T22:30:00Z",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "home_team_id": "7ce26de4dc6960a5e7",
+        "home_team_name": "Corinthians",
+        "away_team_id": "76ad233033c62ff5ca",
+        "away_team_name": "Chapecoense AF",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":9,\"sample_away\":0,\"xg_home\":1.0,\"xg_away\":0.67,\"probabilities\":{\"home\":42.4,\"draw\":33.7,\"away\":23.9},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":9,\"goals_for\":1.0,\"goals_against\":0.67,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":1.67,\"total_expected\":1.67,\"line\":1.5,\"lines\":{\"1.5\":49.7},\"under_lines\":{\"1.5\":50.3},\"over\":{\"1.5\":49.7},\"under\":{\"1.5\":50.3},\"over_probability\":49.7,\"under_probability\":50.3,\"exact_total\":{\"0\":18.8,\"1\":31.4,\"2\":26.3,\"3\":14.6,\"4+\":8.9},\"ambas_marcam\":30.9},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":1.0,\"away\":0.67,\"total\":1.67,\"sample_home\":9,\"sample_away\":0},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "target_home_goals": 1.0,
+        "target_away_goals": 2.0,
+        "target_result": "AWAY",
+        "target_total_goals": 3.0,
         "target_btts": 1,
         "is_training_ready": 1
       }
