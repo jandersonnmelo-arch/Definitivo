@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-10T05:28:13.933377+00:00",
+  "created_at": "2026-09-10T05:29:10.917076+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-10T05:29:09.886221+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-10T05:28:13.913949+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -214,7 +214,7 @@
         "sport": "Futebol",
         "name": "Como 1907",
         "normalized_name": "como 1907",
-        "updated_at": "2026-09-09T23:30:54.578504+00:00"
+        "updated_at": "2026-09-10T05:29:10.516572+00:00"
       },
       {
         "id": "01ec1e8f3a4620b60c",
@@ -1075,7 +1075,7 @@
         "sport": "Futebol",
         "name": "Udinese Calcio",
         "normalized_name": "udinese calcio",
-        "updated_at": "2026-09-09T23:30:54.616420+00:00"
+        "updated_at": "2026-09-10T05:29:10.516458+00:00"
       },
       {
         "id": "edd16a2b82f0664400",
@@ -7350,6 +7350,26 @@
         "source": "ESPN",
         "provider_match_id": "401915422",
         "updated_at": "2026-09-10T05:27:26.345748+00:00"
+      },
+      {
+        "id": "558629",
+        "sport": "Futebol",
+        "competition": "Serie A",
+        "season": "2026",
+        "start_time": "2026-08-22T16:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "2eb0410c9f793ba273",
+        "home_name": "Udinese Calcio",
+        "home_short": "UDI",
+        "away_id": "30b7d3c7f0d40041e3",
+        "away_name": "Como 1907",
+        "away_short": "COM",
+        "home_score": 1,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "558629",
+        "updated_at": "2026-09-10T05:29:10.516708+00:00"
       }
     ],
     "match_sources": [
@@ -8642,6 +8662,12 @@
         "source": "ESPN",
         "provider_match_id": "401915422",
         "updated_at": "2026-09-10T05:27:26.345849+00:00"
+      },
+      {
+        "match_id": "558629",
+        "source": "Football-Data.org",
+        "provider_match_id": "558629",
+        "updated_at": "2026-09-10T05:29:10.516859+00:00"
       }
     ],
     "match_stats": [
@@ -294790,8 +294816,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-10",
-        "calls": 4,
-        "last_call": "2026-09-10T05:27:25.852538+00:00",
+        "calls": 5,
+        "last_call": "2026-09-10T05:29:10.505687+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -296272,6 +296298,11 @@
         "id": 292,
         "provider": "FotMob",
         "created_at": "2026-09-10T05:28:09.380824+00:00"
+      },
+      {
+        "id": 293,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-10T05:29:10.505687+00:00"
       }
     ],
     "ai_match_samples": [
