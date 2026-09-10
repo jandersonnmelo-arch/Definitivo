@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-10T05:36:04.836306+00:00",
+  "created_at": "2026-09-10T05:36:11.789026+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -427883,6 +427883,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-10T05:36:04.694518+00:00"
+      },
+      {
+        "id": 287,
+        "match_id": "55ab9be560fc8b52a5b7",
+        "source": "ESPN",
+        "stage": "diagnostico_jogadores",
+        "status": "OK",
+        "message": "ESPN: jogadores=40, estatísticas individuais reais=560, presença=0, amostra=[Filip Jørgensen, Andrew Omobamidele, Jeyland Mitchell, Lucas Høgsberg, Karim Coulibaly, Genesis Antwi, Pape Diop, Giovanni Reyna]",
+        "created_at": "2026-09-10T05:36:11.788489+00:00"
       }
     ],
     "api_usage": [
@@ -427929,8 +427938,8 @@
       {
         "provider": "ESPN",
         "day_utc": "2026-09-10",
-        "calls": 69,
-        "last_call": "2026-09-10T05:36:01.416134+00:00",
+        "calls": 70,
+        "last_call": "2026-09-10T05:36:11.102914+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -429883,6 +429892,11 @@
         "id": 388,
         "provider": "FotMob",
         "created_at": "2026-09-10T05:36:04.686804+00:00"
+      },
+      {
+        "id": 389,
+        "provider": "ESPN",
+        "created_at": "2026-09-10T05:36:11.102914+00:00"
       }
     ],
     "ai_match_samples": [
