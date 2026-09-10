@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-09T23:38:35.656525+00:00",
+  "created_at": "2026-09-10T05:24:52.528619+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-10T05:24:49.763063+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-09T23:38:29.417043+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -1482,6 +1482,20 @@
         "name": "CA Rosario Central",
         "normalized_name": "rosario central",
         "updated_at": "2026-09-09T23:35:47.257532+00:00"
+      },
+      {
+        "id": "ca76452623662cf052",
+        "sport": "Futebol",
+        "name": "SK Sturm Graz",
+        "normalized_name": "sk sturm graz",
+        "updated_at": "2026-09-10T05:24:52.271385+00:00"
+      },
+      {
+        "id": "6eb87afa144af33e15",
+        "sport": "Futebol",
+        "name": "Fenerbahce",
+        "normalized_name": "fenerbahce",
+        "updated_at": "2026-09-10T05:24:52.271711+00:00"
       }
     ],
     "team_sources": [
@@ -2906,6 +2920,18 @@
         "source": "Football-Data.org",
         "provider_team_id": "2070",
         "updated_at": "2026-09-09T23:35:46.917011+00:00"
+      },
+      {
+        "team_id": "ca76452623662cf052",
+        "source": "ESPN",
+        "provider_team_id": "3746",
+        "updated_at": "2026-09-10T05:24:52.271546+00:00"
+      },
+      {
+        "team_id": "6eb87afa144af33e15",
+        "source": "ESPN",
+        "provider_team_id": "436",
+        "updated_at": "2026-09-10T05:24:52.271738+00:00"
       }
     ],
     "matches": [
@@ -6348,6 +6374,26 @@
         "source": "Football-Data.org",
         "provider_match_id": "554992",
         "updated_at": "2026-09-09T23:35:47.742378+00:00"
+      },
+      {
+        "id": "401902700",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-11T18:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "ca76452623662cf052",
+        "home_name": "SK Sturm Graz",
+        "home_short": "STG",
+        "away_id": "6eb87afa144af33e15",
+        "away_name": "Fenerbahce",
+        "away_short": "FEN",
+        "home_score": 0,
+        "away_score": 1,
+        "source": "ESPN",
+        "provider_match_id": "401902700",
+        "updated_at": "2026-09-10T05:24:52.271829+00:00"
       }
     ],
     "match_sources": [
@@ -7430,6 +7476,12 @@
         "source": "Football-Data.org",
         "provider_match_id": "554992",
         "updated_at": "2026-09-09T23:35:47.742503+00:00"
+      },
+      {
+        "match_id": "401902700",
+        "source": "ESPN",
+        "provider_match_id": "401902700",
+        "updated_at": "2026-09-10T05:24:52.271981+00:00"
       }
     ],
     "match_stats": [
@@ -217673,6 +217725,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-09T23:38:26.019682+00:00"
+      },
+      {
+        "id": 144,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "OK",
+        "message": "Football-Data.org: 0 partidas históricas coletadas para a equipe",
+        "created_at": "2026-09-10T05:24:50.383383+00:00"
       }
     ],
     "api_usage": [
@@ -217705,6 +217766,22 @@
         "day_utc": "2026-09-09",
         "calls": 1,
         "last_call": "2026-09-09T23:32:57.589418+00:00",
+        "remaining_day": null,
+        "remaining_minute": null
+      },
+      {
+        "provider": "Football-Data.org",
+        "day_utc": "2026-09-10",
+        "calls": 1,
+        "last_call": "2026-09-10T05:24:50.367075+00:00",
+        "remaining_day": null,
+        "remaining_minute": null
+      },
+      {
+        "provider": "ESPN",
+        "day_utc": "2026-09-10",
+        "calls": 6,
+        "last_call": "2026-09-10T05:24:52.249601+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -218714,6 +218791,41 @@
         "id": 201,
         "provider": "FotMob",
         "created_at": "2026-09-09T23:37:41.536820+00:00"
+      },
+      {
+        "id": 202,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-10T05:24:50.367075+00:00"
+      },
+      {
+        "id": 203,
+        "provider": "ESPN",
+        "created_at": "2026-09-10T05:24:50.672189+00:00"
+      },
+      {
+        "id": 204,
+        "provider": "ESPN",
+        "created_at": "2026-09-10T05:24:50.984047+00:00"
+      },
+      {
+        "id": 205,
+        "provider": "ESPN",
+        "created_at": "2026-09-10T05:24:51.285324+00:00"
+      },
+      {
+        "id": 206,
+        "provider": "ESPN",
+        "created_at": "2026-09-10T05:24:51.573451+00:00"
+      },
+      {
+        "id": 207,
+        "provider": "ESPN",
+        "created_at": "2026-09-10T05:24:51.900412+00:00"
+      },
+      {
+        "id": 208,
+        "provider": "ESPN",
+        "created_at": "2026-09-10T05:24:52.249601+00:00"
       }
     ],
     "ai_match_samples": [
