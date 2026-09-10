@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-10T05:30:47.756953+00:00",
+  "created_at": "2026-09-10T05:31:35.980025+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-10T05:31:35.363690+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-10T05:30:47.734332+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -1664,6 +1664,20 @@
         "name": "Werder Bremen",
         "normalized_name": "werder bremen",
         "updated_at": "2026-09-10T05:29:23.139721+00:00"
+      },
+      {
+        "id": "486768baab5e8dcae9",
+        "sport": "Futebol",
+        "name": "Chicago Stars FC",
+        "normalized_name": "chicago stars",
+        "updated_at": "2026-09-10T05:31:35.451174+00:00"
+      },
+      {
+        "id": "a6f7153bb90a1f1733",
+        "sport": "Futebol",
+        "name": "Bay FC",
+        "normalized_name": "bay",
+        "updated_at": "2026-09-10T05:31:35.451426+00:00"
       }
     ],
     "team_sources": [
@@ -3316,6 +3330,18 @@
         "source": "ESPN",
         "provider_team_id": "137",
         "updated_at": "2026-09-10T05:29:23.139915+00:00"
+      },
+      {
+        "team_id": "486768baab5e8dcae9",
+        "source": "ESPN",
+        "provider_team_id": "15360",
+        "updated_at": "2026-09-10T05:31:35.451298+00:00"
+      },
+      {
+        "team_id": "a6f7153bb90a1f1733",
+        "source": "ESPN",
+        "provider_team_id": "22187",
+        "updated_at": "2026-09-10T05:31:35.451451+00:00"
       }
     ],
     "matches": [
@@ -7778,6 +7804,26 @@
         "source": "ESPN",
         "provider_match_id": "401884802",
         "updated_at": "2026-09-10T05:29:23.140273+00:00"
+      },
+      {
+        "id": "401853967",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-09T23:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "486768baab5e8dcae9",
+        "home_name": "Chicago Stars FC",
+        "home_short": "CHI",
+        "away_id": "a6f7153bb90a1f1733",
+        "away_name": "Bay FC",
+        "away_short": "BAY",
+        "home_score": 0,
+        "away_score": 0,
+        "source": "ESPN",
+        "provider_match_id": "401853967",
+        "updated_at": "2026-09-10T05:31:35.451519+00:00"
       }
     ],
     "match_sources": [
@@ -9166,6 +9212,12 @@
         "source": "ESPN",
         "provider_match_id": "401884802",
         "updated_at": "2026-09-10T05:29:23.140476+00:00"
+      },
+      {
+        "match_id": "401853967",
+        "source": "ESPN",
+        "provider_match_id": "401853967",
+        "updated_at": "2026-09-10T05:31:35.451793+00:00"
       }
     ],
     "match_stats": [
@@ -352777,6 +352829,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-10T05:30:43.085069+00:00"
+      },
+      {
+        "id": 232,
+        "match_id": null,
+        "source": "Football-Data.org",
+        "stage": "historico",
+        "status": "WARNING",
+        "message": "Football-Data.org: ID do provedor não encontrado para a equipe 036ca2f6c9dd6f89ce; histórico não será gravado por esta fonte.",
+        "created_at": "2026-09-10T05:31:35.388386+00:00"
       }
     ],
     "api_usage": [
