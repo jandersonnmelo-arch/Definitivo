@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-12T23:07:30.700027+00:00",
+  "created_at": "2026-09-12T23:08:03.318969+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-12T23:08:02.216124+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-12T23:07:30.683445+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -809,7 +809,7 @@
         "sport": "Futebol",
         "name": "Real Sociedad de Fútbol",
         "normalized_name": "real sociedad de futbol",
-        "updated_at": "2026-09-12T22:57:10.498104+00:00"
+        "updated_at": "2026-09-12T23:08:02.892169+00:00"
       },
       {
         "id": "f5fd03ff72746d9a82",
@@ -914,7 +914,7 @@
         "sport": "Futebol",
         "name": "Real Betis Balompié",
         "normalized_name": "real betis balompie",
-        "updated_at": "2026-09-12T22:59:00.496457+00:00"
+        "updated_at": "2026-09-12T23:08:02.892029+00:00"
       },
       {
         "id": "2fce916caa377bf3be",
@@ -7943,6 +7943,26 @@
         "source": "ESPN",
         "provider_match_id": "401896760",
         "updated_at": "2026-09-12T23:05:50.921817+00:00"
+      },
+      {
+        "id": "564647",
+        "sport": "Futebol",
+        "competition": "Primera Division",
+        "season": "2026",
+        "start_time": "2026-08-21T19:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "f8ba9ee2acf6651c58",
+        "home_name": "Real Betis Balompié",
+        "home_short": "BET",
+        "away_id": "719084a08a71e4d678",
+        "away_name": "Real Sociedad de Fútbol",
+        "away_short": "RSO",
+        "home_score": 1,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "564647",
+        "updated_at": "2026-09-12T23:08:02.892230+00:00"
       }
     ],
     "match_sources": [
@@ -9391,6 +9411,12 @@
         "source": "ESPN",
         "provider_match_id": "401896760",
         "updated_at": "2026-09-12T23:05:50.921962+00:00"
+      },
+      {
+        "match_id": "564647",
+        "source": "Football-Data.org",
+        "provider_match_id": "564647",
+        "updated_at": "2026-09-12T23:08:02.892362+00:00"
       }
     ],
     "match_stats": [
@@ -352709,8 +352735,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-12",
-        "calls": 11,
-        "last_call": "2026-09-12T23:05:41.534034+00:00",
+        "calls": 12,
+        "last_call": "2026-09-12T23:08:02.882028+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -354271,6 +354297,11 @@
         "id": 308,
         "provider": "FotMob",
         "created_at": "2026-09-12T23:07:22.561328+00:00"
+      },
+      {
+        "id": 309,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-12T23:08:02.882028+00:00"
       }
     ],
     "ai_match_samples": [
