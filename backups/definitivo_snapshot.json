@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-12T22:59:03.121794+00:00",
+  "created_at": "2026-09-12T22:59:03.244663+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -282,9 +282,9 @@
       {
         "id": "fae656c369933673eb",
         "sport": "Futebol",
-        "name": "Elche CF",
+        "name": "Elche",
         "normalized_name": "elche",
-        "updated_at": "2026-09-12T22:59:02.326242+00:00"
+        "updated_at": "2026-09-12T22:59:03.123058+00:00"
       },
       {
         "id": "5c56978c1e3101b3e2",
@@ -655,7 +655,7 @@
         "sport": "Futebol",
         "name": "Barcelona",
         "normalized_name": "barcelona",
-        "updated_at": "2026-09-12T22:59:02.946983+00:00"
+        "updated_at": "2026-09-12T22:59:03.123391+00:00"
       },
       {
         "id": "064dc9921966a25f57",
@@ -2571,8 +2571,8 @@
       {
         "team_id": "fae656c369933673eb",
         "source": "ESPN",
-        "provider_team_id": "21134",
-        "updated_at": "2026-09-12T22:59:01.373314+00:00"
+        "provider_team_id": "3751",
+        "updated_at": "2026-09-12T22:59:03.123226+00:00"
       },
       {
         "team_id": "192a5a24657fd487e0",
@@ -5591,6 +5591,26 @@
         "source": "ESPN",
         "provider_match_id": "401900551",
         "updated_at": "2026-09-12T22:59:02.947340+00:00"
+      },
+      {
+        "id": "401882913",
+        "sport": "Futebol",
+        "competition": null,
+        "season": "2026",
+        "start_time": "2026-08-23T19:30Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "fae656c369933673eb",
+        "home_name": "Elche",
+        "home_short": "ELC",
+        "away_id": "192a5a24657fd487e0",
+        "away_name": "Barcelona",
+        "away_short": "BAR",
+        "home_score": 0,
+        "away_score": 5,
+        "source": "ESPN",
+        "provider_match_id": "401882913",
+        "updated_at": "2026-09-12T22:59:03.123577+00:00"
       }
     ],
     "match_sources": [
