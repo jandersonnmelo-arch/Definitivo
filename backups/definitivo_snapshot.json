@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-12T23:04:51.034832+00:00",
+  "created_at": "2026-09-12T23:05:35.052299+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-12T23:05:34.083992+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-12T23:04:47.926632+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -676,7 +676,7 @@
         "sport": "Futebol",
         "name": "Le Mans FC",
         "normalized_name": "le mans",
-        "updated_at": "2026-09-12T22:57:10.000711+00:00"
+        "updated_at": "2026-09-12T23:05:34.617145+00:00"
       },
       {
         "id": "7aec4ac763fdfc9343",
@@ -795,7 +795,7 @@
         "sport": "Futebol",
         "name": "Stade Brestois 29",
         "normalized_name": "stade brestois 29",
-        "updated_at": "2026-09-12T22:57:10.433770+00:00"
+        "updated_at": "2026-09-12T23:05:34.617431+00:00"
       },
       {
         "id": "69dee0aaa3e7b50573",
@@ -7048,6 +7048,26 @@
         "source": "ESPN",
         "provider_match_id": "401885480",
         "updated_at": "2026-09-12T23:03:42.252765+00:00"
+      },
+      {
+        "id": "559711",
+        "sport": "Futebol",
+        "competition": "Ligue 1",
+        "season": "2026",
+        "start_time": "2026-08-22T18:45:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "d89bfd7223ab6fc905",
+        "home_name": "Le Mans FC",
+        "home_short": "LMF",
+        "away_id": "de0e72dd1ec0ef55f7",
+        "away_name": "Stade Brestois 29",
+        "away_short": "BRE",
+        "home_score": 2,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "559711",
+        "updated_at": "2026-09-12T23:05:34.617491+00:00"
       }
     ],
     "match_sources": [
@@ -8310,6 +8330,12 @@
         "source": "ESPN",
         "provider_match_id": "401885480",
         "updated_at": "2026-09-12T23:03:42.252854+00:00"
+      },
+      {
+        "match_id": "559711",
+        "source": "Football-Data.org",
+        "provider_match_id": "559711",
+        "updated_at": "2026-09-12T23:05:34.617668+00:00"
       }
     ],
     "match_stats": [
@@ -286652,8 +286678,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-12",
-        "calls": 9,
-        "last_call": "2026-09-12T23:03:40.892413+00:00",
+        "calls": 10,
+        "last_call": "2026-09-12T23:05:34.607201+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -287964,6 +287990,11 @@
         "id": 258,
         "provider": "FotMob",
         "created_at": "2026-09-12T23:04:44.032604+00:00"
+      },
+      {
+        "id": 259,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-12T23:05:34.607201+00:00"
       }
     ],
     "ai_match_samples": [
