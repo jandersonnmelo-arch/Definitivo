@@ -1,11 +1,11 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-12T09:52:33.003697+00:00",
+  "created_at": "2026-09-12T09:53:37.948780+00:00",
   "tables": {
     "schema_meta": [
       {
         "key": "data_quality_v4",
-        "value": "2026-09-12T09:52:11.005521+00:00"
+        "value": "2026-09-12T09:53:37.065854+00:00"
       },
       {
         "key": "schema",
@@ -172,7 +172,7 @@
         "sport": "Futebol",
         "name": "Aston Villa FC",
         "normalized_name": "aston villa",
-        "updated_at": "2026-09-12T09:52:12.725806+00:00"
+        "updated_at": "2026-09-12T09:53:37.688749+00:00"
       },
       {
         "id": "b8fd7430177f4e6a06",
@@ -641,7 +641,7 @@
         "sport": "Futebol",
         "name": "Brighton & Hove Albion FC",
         "normalized_name": "brighton hove albion",
-        "updated_at": "2026-09-12T09:52:13.027772+00:00"
+        "updated_at": "2026-09-12T09:53:37.688659+00:00"
       },
       {
         "id": "01ec1e8f3a4620b60c",
@@ -2854,7 +2854,7 @@
         "start_time": "2026-09-12T16:30:00Z",
         "status": "SCHEDULED",
         "minute": null,
-        "home_id": "75f564e3d16ab2ec31",
+        "home_id": "f0744d7d6c6fa9d40a",
         "home_name": "Athletic Club",
         "home_short": "ATH",
         "away_id": "fae656c369933673eb",
@@ -3114,7 +3114,7 @@
         "start_time": "2026-09-12T19:00:00Z",
         "status": "SCHEDULED",
         "minute": null,
-        "home_id": "cfee4cccf2f07aeae1",
+        "home_id": "eae0e92669d99715d5",
         "home_name": "CA Mineiro",
         "home_short": "CAM",
         "away_id": "0b87c3ffb6e9585c89",
@@ -4017,7 +4017,7 @@
         "home_id": "91922391b586b97f41",
         "home_name": "Levante UD",
         "home_short": "LEV",
-        "away_id": "75f564e3d16ab2ec31",
+        "away_id": "f0744d7d6c6fa9d40a",
         "away_name": "Athletic Club",
         "away_short": "ATH",
         "home_score": null,
@@ -4865,6 +4865,26 @@
         "source": "ESPN",
         "provider_match_id": "401913072",
         "updated_at": "2026-09-12T09:52:20.845669+00:00"
+      },
+      {
+        "id": "560549",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-23T13:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "07bb506f7ecae9cde3",
+        "home_name": "Brighton & Hove Albion FC",
+        "home_short": "BHA",
+        "away_id": "b34a03c29de23d2aa1",
+        "away_name": "Aston Villa FC",
+        "away_short": "AVL",
+        "home_score": 4,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "560549",
+        "updated_at": "2026-09-12T09:53:37.688800+00:00"
       }
     ],
     "match_sources": [
@@ -5647,6 +5667,12 @@
         "source": "ESPN",
         "provider_match_id": "401913072",
         "updated_at": "2026-09-12T09:52:20.845913+00:00"
+      },
+      {
+        "match_id": "560549",
+        "source": "Football-Data.org",
+        "provider_match_id": "560549",
+        "updated_at": "2026-09-12T09:53:37.688931+00:00"
       }
     ],
     "diagnostics": [
@@ -5673,8 +5699,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-12",
-        "calls": 1,
-        "last_call": "2026-09-12T09:52:11.593424+00:00",
+        "calls": 2,
+        "last_call": "2026-09-12T09:53:37.684638+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -5837,6 +5863,11 @@
         "id": 30,
         "provider": "ESPN",
         "created_at": "2026-09-12T09:52:19.251678+00:00"
+      },
+      {
+        "id": 31,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-12T09:53:37.684638+00:00"
       }
     ]
   }
