@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-12T23:09:23.606700+00:00",
+  "created_at": "2026-09-12T23:10:03.188305+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-12T23:10:01.818390+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-12T23:09:23.587071+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -464,9 +464,9 @@
       {
         "id": "c0eb691b941f2978d1",
         "sport": "Futebol",
-        "name": "Grêmio",
-        "normalized_name": "gremio",
-        "updated_at": "2026-09-12T22:57:18.883183+00:00"
+        "name": "Grêmio FBPA",
+        "normalized_name": "gremio fbpa",
+        "updated_at": "2026-09-12T23:10:02.644825+00:00"
       },
       {
         "id": "b7dc25efe9d18ad729",
@@ -800,9 +800,9 @@
       {
         "id": "590c1e0cd091eaf7e1",
         "sport": "Futebol",
-        "name": "Mirassol",
+        "name": "Mirassol FC",
         "normalized_name": "mirassol",
-        "updated_at": "2026-09-12T22:57:18.913369+00:00"
+        "updated_at": "2026-09-12T23:10:02.644680+00:00"
       },
       {
         "id": "719084a08a71e4d678",
@@ -8441,6 +8441,26 @@
         "source": "Football-Data.org",
         "provider_match_id": "575331",
         "updated_at": "2026-09-12T23:08:16.145869+00:00"
+      },
+      {
+        "id": "554927",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "start_time": "2026-07-17T23:00:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "590c1e0cd091eaf7e1",
+        "home_name": "Mirassol FC",
+        "home_short": "MIR",
+        "away_id": "c0eb691b941f2978d1",
+        "away_name": "Grêmio FBPA",
+        "away_short": "FBP",
+        "home_score": 2,
+        "away_score": 1,
+        "source": "Football-Data.org",
+        "provider_match_id": "554927",
+        "updated_at": "2026-09-12T23:10:02.644881+00:00"
       }
     ],
     "match_sources": [
@@ -10021,6 +10041,12 @@
         "source": "Football-Data.org",
         "provider_match_id": "575331",
         "updated_at": "2026-09-12T23:08:16.146000+00:00"
+      },
+      {
+        "match_id": "554927",
+        "source": "Football-Data.org",
+        "provider_match_id": "554927",
+        "updated_at": "2026-09-12T23:10:02.645026+00:00"
       }
     ],
     "match_stats": [
@@ -378655,8 +378681,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-12",
-        "calls": 13,
-        "last_call": "2026-09-12T23:08:14.214868+00:00",
+        "calls": 14,
+        "last_call": "2026-09-12T23:10:02.631468+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -380392,6 +380418,11 @@
         "id": 343,
         "provider": "FotMob",
         "created_at": "2026-09-12T23:09:19.465017+00:00"
+      },
+      {
+        "id": 344,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-12T23:10:02.631468+00:00"
       }
     ],
     "ai_match_samples": [
