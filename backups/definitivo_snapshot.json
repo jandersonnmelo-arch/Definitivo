@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-12T23:11:11.231994+00:00",
+  "created_at": "2026-09-12T23:11:20.282846+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -399011,6 +399011,15 @@
         "status": "ERROR",
         "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
         "created_at": "2026-09-12T23:11:11.154891+00:00"
+      },
+      {
+        "id": 260,
+        "match_id": "ec7964b1ebd8767aef72",
+        "source": "FotMob",
+        "stage": "diagnostico_jogadores",
+        "status": "ERROR",
+        "message": "FotMob detalhes: FotMob: partida não localizada por equipes/data",
+        "created_at": "2026-09-12T23:11:20.176274+00:00"
       }
     ],
     "api_usage": [
@@ -399033,8 +399042,8 @@
       {
         "provider": "FotMob",
         "day_utc": "2026-09-12",
-        "calls": 224,
-        "last_call": "2026-09-12T23:11:11.147088+00:00",
+        "calls": 226,
+        "last_call": "2026-09-12T23:11:20.166262+00:00",
         "remaining_day": null,
         "remaining_minute": null
       }
@@ -400884,6 +400893,16 @@
         "id": 369,
         "provider": "FotMob",
         "created_at": "2026-09-12T23:11:11.147088+00:00"
+      },
+      {
+        "id": 370,
+        "provider": "FotMob",
+        "created_at": "2026-09-12T23:11:19.846479+00:00"
+      },
+      {
+        "id": 371,
+        "provider": "FotMob",
+        "created_at": "2026-09-12T23:11:20.166262+00:00"
       }
     ],
     "ai_match_samples": [
@@ -402628,6 +402647,27 @@
         "target_result": "DRAW",
         "target_total_goals": 2.0,
         "target_btts": 1,
+        "is_training_ready": 1
+      },
+      {
+        "id": 84,
+        "match_id": "ec7964b1ebd8767aef72",
+        "dataset_version": "1",
+        "created_at": "2026-09-12T23:11:20.275336+00:00",
+        "cutoff_time": "2026-08-23T19:00:00Z",
+        "sport": "Futebol",
+        "competition": "Campeonato Brasileiro Série A",
+        "season": "2026",
+        "home_team_id": "5220b1187a985dca02",
+        "home_team_name": "Vitória",
+        "away_team_id": "9f563292bea3f50f07",
+        "away_team_name": "Bahia",
+        "feature_json": "{\"analysis_version\":\"1\",\"sample_home\":6,\"sample_away\":0,\"xg_home\":0.33,\"xg_away\":1.33,\"probabilities\":{\"home\":9.1,\"draw\":28.3,\"away\":62.6},\"coverage\":{\"goals\":{\"home\":0,\"away\":0},\"shots\":{\"home\":0,\"away\":0},\"shots_on_target\":{\"home\":0,\"away\":0},\"woodwork\":{\"home\":0,\"away\":0},\"effectivetackles\":{\"home\":0,\"away\":0},\"corners\":{\"home\":0,\"away\":0},\"fouls\":{\"home\":0,\"away\":0},\"saves\":{\"home\":0,\"away\":0},\"player_throws\":{\"home\":0,\"away\":0},\"yellow_cards\":{\"home\":0,\"away\":0},\"red_cards\":{\"home\":0,\"away\":0},\"offsides\":{\"home\":0,\"away\":0},\"goal_kicks\":{\"home\":0,\"away\":0},\"passes_completed\":{\"home\":0,\"away\":0}},\"home\":{\"sample\":6,\"goals_for\":0.33,\"goals_against\":1.33,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"away\":{\"sample\":0,\"goals_for\":null,\"goals_against\":null,\"shots\":null,\"shots_sample\":0,\"shots_on_target\":null,\"shots_on_target_sample\":0,\"woodwork\":null,\"woodwork_sample\":0,\"effectivetackles\":null,\"effectivetackles_sample\":0,\"corners\":null,\"corners_sample\":0,\"fouls\":null,\"fouls_sample\":0,\"saves\":null,\"saves_sample\":0,\"player_throws\":null,\"player_throws_sample\":0,\"yellow_cards\":null,\"yellow_cards_sample\":0,\"red_cards\":null,\"red_cards_sample\":0,\"offsides\":null,\"offsides_sample\":0,\"goal_kicks\":null,\"goal_kicks_sample\":0,\"passes_completed\":null,\"passes_completed_sample\":0,\"xg\":null,\"xg_sample\":0},\"markets\":{\"gols\":{\"expected\":1.66,\"total_expected\":1.66,\"line\":1.5,\"lines\":{\"1.5\":49.4},\"under_lines\":{\"1.5\":50.6},\"over\":{\"1.5\":49.4},\"under\":{\"1.5\":50.6},\"over_probability\":49.4,\"under_probability\":50.6,\"exact_total\":{\"0\":19.0,\"1\":31.6,\"2\":26.2,\"3\":14.5,\"4+\":8.7},\"ambas_marcam\":20.7},\"finalizacoes\":null,\"finalizacoes_no_alvo\":null,\"finalizacoes_na_trave\":null,\"desarmes_efetivos\":null,\"escanteios\":null,\"faltas\":null,\"defesas\":null,\"laterais\":null,\"cartoes_amarelos\":null,\"cartoes_vermelhos\":null,\"impedimentos\":null,\"tiros_de_meta\":null,\"passes_certos\":null},\"projections\":{\"goals\":{\"home\":0.33,\"away\":1.33,\"total\":1.66,\"sample_home\":6,\"sample_away\":0},\"shots\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"shots_on_target\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"woodwork\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"effectivetackles\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"corners\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"fouls\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"saves\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"player_throws\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"yellow_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"red_cards\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"offsides\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"goal_kicks\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0},\"passes_completed\":{\"home\":null,\"away\":null,\"total\":null,\"sample_home\":0,\"sample_away\":0}}}",
+        "target_home_goals": 0.0,
+        "target_away_goals": 2.0,
+        "target_result": "AWAY",
+        "target_total_goals": 2.0,
+        "target_btts": 0,
         "is_training_ready": 1
       }
     ],
