@@ -1,6 +1,6 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-12T22:58:16.022621+00:00",
+  "created_at": "2026-09-12T22:58:15.894153+00:00",
   "tables": {
     "schema_meta": [
       {
@@ -280,13 +280,6 @@
         "updated_at": "2026-09-12T22:57:09.366468+00:00"
       },
       {
-        "id": "75f564e3d16ab2ec31",
-        "sport": "Futebol",
-        "name": "Athletic Club",
-        "normalized_name": "athletic club",
-        "updated_at": "2026-09-12T22:57:11.169982+00:00"
-      },
-      {
         "id": "fae656c369933673eb",
         "sport": "Futebol",
         "name": "Elche CF",
@@ -446,13 +439,6 @@
         "name": "NEC",
         "normalized_name": "nec",
         "updated_at": "2026-09-12T22:57:09.567059+00:00"
-      },
-      {
-        "id": "cfee4cccf2f07aeae1",
-        "sport": "Futebol",
-        "name": "CA Mineiro",
-        "normalized_name": "mineiro",
-        "updated_at": "2026-09-12T22:57:09.589740+00:00"
       },
       {
         "id": "0b87c3ffb6e9585c89",
@@ -705,13 +691,6 @@
         "name": "SV 07 Elversberg",
         "normalized_name": "sv 07 elversberg",
         "updated_at": "2026-09-12T22:57:10.008032+00:00"
-      },
-      {
-        "id": "2be6218d69d398541a",
-        "sport": "Futebol",
-        "name": "FC Bayern München",
-        "normalized_name": "bayern munchen",
-        "updated_at": "2026-09-12T22:57:11.596894+00:00"
       },
       {
         "id": "e67bc202ea288ba209",
@@ -1532,12 +1511,6 @@
         "updated_at": "2026-09-12T22:57:09.366489+00:00"
       },
       {
-        "team_id": "75f564e3d16ab2ec31",
-        "source": "Football-Data.org",
-        "provider_team_id": "77",
-        "updated_at": "2026-09-12T22:57:09.384802+00:00"
-      },
-      {
         "team_id": "fae656c369933673eb",
         "source": "Football-Data.org",
         "provider_team_id": "285",
@@ -1674,12 +1647,6 @@
         "source": "Football-Data.org",
         "provider_team_id": "1915",
         "updated_at": "2026-09-12T22:57:09.567092+00:00"
-      },
-      {
-        "team_id": "cfee4cccf2f07aeae1",
-        "source": "Football-Data.org",
-        "provider_team_id": "1766",
-        "updated_at": "2026-09-12T22:57:09.589886+00:00"
       },
       {
         "team_id": "0b87c3ffb6e9585c89",
@@ -1896,12 +1863,6 @@
         "source": "Football-Data.org",
         "provider_team_id": "719",
         "updated_at": "2026-09-12T22:57:10.008085+00:00"
-      },
-      {
-        "team_id": "2be6218d69d398541a",
-        "source": "Football-Data.org",
-        "provider_team_id": "5",
-        "updated_at": "2026-09-12T22:57:10.008159+00:00"
       },
       {
         "team_id": "e67bc202ea288ba209",
@@ -4944,206 +4905,6 @@
         "updated_at": "2026-09-12T22:57:19.245826+00:00"
       },
       {
-        "id": "565777",
-        "sport": "Futebol",
-        "competition": "Bundesliga",
-        "season": "2026",
-        "start_time": "2026-08-29T13:30:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "01ec1e8f3a4620b60c",
-        "home_name": "RB Leipzig",
-        "home_short": "RBL",
-        "away_id": "dba1ba25341bde4013",
-        "away_name": "Borussia Mönchengladbach",
-        "away_short": "BMG",
-        "home_score": 3,
-        "away_score": 0,
-        "source": "Football-Data.org",
-        "provider_match_id": "565777",
-        "updated_at": "2026-09-12T22:57:42.224134+00:00"
-      },
-      {
-        "id": "565785",
-        "sport": "Futebol",
-        "competition": "Bundesliga",
-        "season": "2026",
-        "start_time": "2026-09-05T13:30:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "8181209a55f1a2ab46",
-        "home_name": "SV Werder Bremen",
-        "home_short": "SVW",
-        "away_id": "01ec1e8f3a4620b60c",
-        "away_name": "RB Leipzig",
-        "away_short": "RBL",
-        "home_score": 3,
-        "away_score": 1,
-        "source": "Football-Data.org",
-        "provider_match_id": "565785",
-        "updated_at": "2026-09-12T22:57:42.238618+00:00"
-      },
-      {
-        "id": "575339",
-        "sport": "Futebol",
-        "competition": "UEFA Champions League",
-        "season": "2026",
-        "start_time": "2026-09-10T19:00:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "30b7d3c7f0d40041e3",
-        "home_name": "Como 1907",
-        "home_short": "COM",
-        "away_id": "01ec1e8f3a4620b60c",
-        "away_name": "RB Leipzig",
-        "away_short": "RBL",
-        "home_score": 4,
-        "away_score": 1,
-        "source": "Football-Data.org",
-        "provider_match_id": "575339",
-        "updated_at": "2026-09-12T22:57:42.251677+00:00"
-      },
-      {
-        "id": "401873745",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-08-15T13:30Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "036ca2f6c9dd6f89ce",
-        "home_name": "Bayern Munich",
-        "home_short": "MUN",
-        "away_id": "01ec1e8f3a4620b60c",
-        "away_name": "RB Leipzig",
-        "away_short": "RBL",
-        "home_score": 3,
-        "away_score": 1,
-        "source": "ESPN",
-        "provider_match_id": "401873745",
-        "updated_at": "2026-09-12T22:57:43.625141+00:00"
-      },
-      {
-        "id": "401874893",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-08-22T16:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "3c9239685891e5ec79",
-        "home_name": "Eintracht Trier",
-        "home_short": "ET",
-        "away_id": "01ec1e8f3a4620b60c",
-        "away_name": "RB Leipzig",
-        "away_short": "RBL",
-        "home_score": 0,
-        "away_score": 6,
-        "source": "ESPN",
-        "provider_match_id": "401874893",
-        "updated_at": "2026-09-12T22:57:45.029562+00:00"
-      },
-      {
-        "id": "401884815",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-08-29T13:30Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "01ec1e8f3a4620b60c",
-        "home_name": "RB Leipzig",
-        "home_short": "RBL",
-        "away_id": "dba1ba25341bde4013",
-        "away_name": "Borussia Mönchengladbach",
-        "away_short": "BMG",
-        "home_score": 3,
-        "away_score": 0,
-        "source": "ESPN",
-        "provider_match_id": "401884815",
-        "updated_at": "2026-09-12T22:57:46.473199+00:00"
-      },
-      {
-        "id": "401884802",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-09-05T13:30Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "63eee08be3a61af532",
-        "home_name": "Werder Bremen",
-        "home_short": "SVW",
-        "away_id": "01ec1e8f3a4620b60c",
-        "away_name": "RB Leipzig",
-        "away_short": "RBL",
-        "home_score": 3,
-        "away_score": 1,
-        "source": "ESPN",
-        "provider_match_id": "401884802",
-        "updated_at": "2026-09-12T22:57:47.966074+00:00"
-      },
-      {
-        "id": "401915441",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-09-10T19:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "8966524a367256ad11",
-        "home_name": "Como",
-        "home_short": "COMO",
-        "away_id": "01ec1e8f3a4620b60c",
-        "away_name": "RB Leipzig",
-        "away_short": "RBL",
-        "home_score": 4,
-        "away_score": 1,
-        "source": "ESPN",
-        "provider_match_id": "401915441",
-        "updated_at": "2026-09-12T22:57:49.111735+00:00"
-      },
-      {
-        "id": "401884798",
-        "sport": "Futebol",
-        "competition": null,
-        "season": "2026",
-        "start_time": "2026-09-13T13:30Z",
-        "status": "SCHEDULED",
-        "minute": null,
-        "home_id": "01ec1e8f3a4620b60c",
-        "home_name": "RB Leipzig",
-        "home_short": "RBL",
-        "away_id": "15642921829b582067",
-        "away_name": "Hamburg SV",
-        "away_short": "HSV",
-        "home_score": null,
-        "away_score": null,
-        "source": "ESPN",
-        "provider_match_id": "401884798",
-        "updated_at": "2026-09-12T22:57:49.746359+00:00"
-      },
-      {
-        "id": "565781",
-        "sport": "Futebol",
-        "competition": "Bundesliga",
-        "season": "2026",
-        "start_time": "2026-08-29T16:30:00Z",
-        "status": "FINISHED",
-        "minute": null,
-        "home_id": "67ce44e1c93339b287",
-        "home_name": "Borussia Dortmund",
-        "home_short": "BVB",
-        "away_id": "a93d7cd5a504ad3b4f",
-        "away_name": "Hamburger SV",
-        "away_short": "HSV",
-        "home_score": 2,
-        "away_score": 0,
-        "source": "Football-Data.org",
-        "provider_match_id": "565781",
-        "updated_at": "2026-09-12T22:57:50.312290+00:00"
-      },
-      {
         "id": "c527d0be973f6efa99d1",
         "sport": "Futebol",
         "competition": "Bundesliga",
@@ -6124,66 +5885,6 @@
         "source": "ESPN",
         "provider_match_id": "401913072",
         "updated_at": "2026-09-12T22:57:19.246015+00:00"
-      },
-      {
-        "match_id": "565777",
-        "source": "Football-Data.org",
-        "provider_match_id": "565777",
-        "updated_at": "2026-09-12T22:57:42.224254+00:00"
-      },
-      {
-        "match_id": "565785",
-        "source": "Football-Data.org",
-        "provider_match_id": "565785",
-        "updated_at": "2026-09-12T22:57:42.238744+00:00"
-      },
-      {
-        "match_id": "575339",
-        "source": "Football-Data.org",
-        "provider_match_id": "575339",
-        "updated_at": "2026-09-12T22:57:42.251798+00:00"
-      },
-      {
-        "match_id": "401873745",
-        "source": "ESPN",
-        "provider_match_id": "401873745",
-        "updated_at": "2026-09-12T22:57:43.625224+00:00"
-      },
-      {
-        "match_id": "401874893",
-        "source": "ESPN",
-        "provider_match_id": "401874893",
-        "updated_at": "2026-09-12T22:57:45.029699+00:00"
-      },
-      {
-        "match_id": "401884815",
-        "source": "ESPN",
-        "provider_match_id": "401884815",
-        "updated_at": "2026-09-12T22:57:46.473308+00:00"
-      },
-      {
-        "match_id": "401884802",
-        "source": "ESPN",
-        "provider_match_id": "401884802",
-        "updated_at": "2026-09-12T22:57:47.966163+00:00"
-      },
-      {
-        "match_id": "401915441",
-        "source": "ESPN",
-        "provider_match_id": "401915441",
-        "updated_at": "2026-09-12T22:57:49.111816+00:00"
-      },
-      {
-        "match_id": "401884798",
-        "source": "ESPN",
-        "provider_match_id": "401884798",
-        "updated_at": "2026-09-12T22:57:49.746523+00:00"
-      },
-      {
-        "match_id": "565781",
-        "source": "Football-Data.org",
-        "provider_match_id": "565781",
-        "updated_at": "2026-09-12T22:57:50.312373+00:00"
       },
       {
         "match_id": "c527d0be973f6efa99d1",
@@ -36465,6 +36166,10 @@
         "target_btts": 0,
         "is_training_ready": 1
       }
-    ]
+    ],
+    "ai_player_samples": [],
+    "ai_predictions": [],
+    "ai_model_runs": [],
+    "ai_dataset_v1": []
   }
 }
