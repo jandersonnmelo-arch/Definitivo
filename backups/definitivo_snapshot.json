@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-12T23:00:18.110340+00:00",
+  "created_at": "2026-09-12T23:01:10.664858+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-12T23:01:09.713744+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-12T23:00:16.874238+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -151,7 +151,7 @@
         "sport": "Futebol",
         "name": "Hull City AFC",
         "normalized_name": "hull city afc",
-        "updated_at": "2026-09-12T22:57:09.249234+00:00"
+        "updated_at": "2026-09-12T23:01:10.465358+00:00"
       },
       {
         "id": "b34a03c29de23d2aa1",
@@ -697,7 +697,7 @@
         "sport": "Futebol",
         "name": "Manchester United FC",
         "normalized_name": "manchester united",
-        "updated_at": "2026-09-12T22:57:10.016628+00:00"
+        "updated_at": "2026-09-12T23:01:10.465472+00:00"
       },
       {
         "id": "630e0be9d7e0b6d045",
@@ -5807,6 +5807,26 @@
         "source": "ESPN",
         "provider_match_id": "401882519",
         "updated_at": "2026-09-12T22:59:08.440589+00:00"
+      },
+      {
+        "id": "560543",
+        "sport": "Futebol",
+        "competition": "Premier League",
+        "season": "2026",
+        "start_time": "2026-08-22T11:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "2629095d2fea3c5485",
+        "home_name": "Hull City AFC",
+        "home_short": "HUL",
+        "away_id": "e67bc202ea288ba209",
+        "away_name": "Manchester United FC",
+        "away_short": "MUN",
+        "home_score": 2,
+        "away_score": 0,
+        "source": "Football-Data.org",
+        "provider_match_id": "560543",
+        "updated_at": "2026-09-12T23:01:10.465548+00:00"
       }
     ],
     "match_sources": [
@@ -6799,6 +6819,12 @@
         "source": "ESPN",
         "provider_match_id": "401882519",
         "updated_at": "2026-09-12T22:59:08.440723+00:00"
+      },
+      {
+        "match_id": "560543",
+        "source": "Football-Data.org",
+        "provider_match_id": "560543",
+        "updated_at": "2026-09-12T23:01:10.465681+00:00"
       }
     ],
     "match_stats": [
@@ -135880,8 +135906,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-12",
-        "calls": 5,
-        "last_call": "2026-09-12T22:59:02.315355+00:00",
+        "calls": 6,
+        "last_call": "2026-09-12T23:01:10.454074+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -136697,6 +136723,11 @@
         "id": 159,
         "provider": "FotMob",
         "created_at": "2026-09-12T23:00:14.324122+00:00"
+      },
+      {
+        "id": 160,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-12T23:01:10.454074+00:00"
       }
     ],
     "ai_match_samples": [
