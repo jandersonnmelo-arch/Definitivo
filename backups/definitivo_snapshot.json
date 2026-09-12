@@ -1,15 +1,15 @@
 {
   "format": "definitivo-db-snapshot-v5",
-  "created_at": "2026-09-12T23:02:50.495826+00:00",
+  "created_at": "2026-09-12T23:03:31.812125+00:00",
   "tables": {
     "schema_meta": [
       {
-        "key": "schema",
-        "value": "15"
+        "key": "data_quality_v4",
+        "value": "2026-09-12T23:03:30.814834+00:00"
       },
       {
-        "key": "data_quality_v4",
-        "value": "2026-09-12T23:02:45.909391+00:00"
+        "key": "schema",
+        "value": "15"
       }
     ],
     "teams": [
@@ -480,7 +480,7 @@
         "sport": "Futebol",
         "name": "Académico de Viseu FC",
         "normalized_name": "academico de viseu",
-        "updated_at": "2026-09-12T22:57:09.655994+00:00"
+        "updated_at": "2026-09-12T23:03:31.498169+00:00"
       },
       {
         "id": "5220b1187a985dca02",
@@ -739,7 +739,7 @@
         "sport": "Futebol",
         "name": "Sport Lisboa e Benfica",
         "normalized_name": "sport lisboa e benfica",
-        "updated_at": "2026-09-12T22:57:10.257899+00:00"
+        "updated_at": "2026-09-12T23:03:31.497970+00:00"
       },
       {
         "id": "6cf03bde613d291b40",
@@ -6375,6 +6375,26 @@
         "source": "ESPN",
         "provider_match_id": "401902915",
         "updated_at": "2026-09-12T23:01:19.197480+00:00"
+      },
+      {
+        "id": "567262",
+        "sport": "Futebol",
+        "competition": "Primeira Liga",
+        "season": "2026",
+        "start_time": "2026-08-09T19:30:00Z",
+        "status": "FINISHED",
+        "minute": null,
+        "home_id": "6514e9ded380962790",
+        "home_name": "Sport Lisboa e Benfica",
+        "home_short": "BEN",
+        "away_id": "834f5eae52ed1571cb",
+        "away_name": "Académico de Viseu FC",
+        "away_short": "ACV",
+        "home_score": 2,
+        "away_score": 2,
+        "source": "Football-Data.org",
+        "provider_match_id": "567262",
+        "updated_at": "2026-09-12T23:03:31.498238+00:00"
       }
     ],
     "match_sources": [
@@ -7481,6 +7501,12 @@
         "source": "ESPN",
         "provider_match_id": "401902915",
         "updated_at": "2026-09-12T23:01:19.197659+00:00"
+      },
+      {
+        "match_id": "567262",
+        "source": "Football-Data.org",
+        "provider_match_id": "567262",
+        "updated_at": "2026-09-12T23:03:31.498389+00:00"
       }
     ],
     "match_stats": [
@@ -228195,8 +228221,8 @@
       {
         "provider": "Football-Data.org",
         "day_utc": "2026-09-12",
-        "calls": 7,
-        "last_call": "2026-09-12T23:01:16.226063+00:00",
+        "calls": 8,
+        "last_call": "2026-09-12T23:03:31.483727+00:00",
         "remaining_day": null,
         "remaining_minute": null
       },
@@ -229312,6 +229338,11 @@
         "id": 219,
         "provider": "FotMob",
         "created_at": "2026-09-12T23:02:42.685724+00:00"
+      },
+      {
+        "id": 220,
+        "provider": "Football-Data.org",
+        "created_at": "2026-09-12T23:03:31.483727+00:00"
       }
     ],
     "ai_match_samples": [
